@@ -1,0 +1,19 @@
+{
+ "variants": {
+  "facing=north": {
+   "model": "guerramod:block/cuadro_abstracto"
+  },
+  "facing=east": {
+   "model": "guerramod:block/cuadro_abstracto",
+   "y": 90
+  },
+  "facing=south": {
+   "model": "guerramod:block/cuadro_abstracto",
+   "y": 180
+  },
+  "facing=west": {
+   "model": "guerramod:block/cuadro_abstracto",
+   "y": 270
+  }
+ }
+}

@@ -1,0 +1,19 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "building",
+ "ingredients": [
+  {
+   "item": "minecraft:iron_ingot"
+  },
+  {
+   "item": "minecraft:stick"
+  },
+  {
+   "item": "minecraft:stick"
+  }
+ ],
+ "result": {
+  "item": "guerramod:poste_senal",
+  "count": 4
+ }
+}

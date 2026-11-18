@@ -1,0 +1,19 @@
+{
+ "variants": {
+  "facing=north": {
+   "model": "guerramod:block/asfalto_doble_continua"
+  },
+  "facing=east": {
+   "model": "guerramod:block/asfalto_doble_continua",
+   "y": 90
+  },
+  "facing=south": {
+   "model": "guerramod:block/asfalto_doble_continua",
+   "y": 180
+  },
+  "facing=west": {
+   "model": "guerramod:block/asfalto_doble_continua",
+   "y": 270
+  }
+ }
+}

@@ -104,27 +104,49 @@ public class AvionEntity extends AeronaveBase {
         }
         fallDistance = 0;
 
+        if (level().isClientSide) {
+            alabeoO = alabeo;
+            float giro = Mth.wrapDegrees(getYRot() - yRotO);
+            alabeo += (Mth.clamp(-giro * 14.0f, -60.0f, 60.0f) - alabeo) * 0.15f;
+        }
         if (level().isClientSide && getSalud() < saludMaxima() * 0.4f && random.nextInt(2) == 0) {
             level().addParticle(ParticleTypes.LARGE_SMOKE, getX(), getY() + 0.8, getZ(), 0, 0.05, 0);
         }
     }
 
+    /** Alabeo visual (solo cliente): el avión se inclina al girar. */
+    public float alabeo, alabeoO;
+
     private void volar(Player p) {
-        setYRot(p.getYRot());
-        setXRot(Mth.clamp(p.getXRot(), -60.0f, 60.0f));
-        if (p.zza > 0) velocidad = Math.min(VEL_MAX, velocidad + 0.025f);
-        else if (p.zza < 0) velocidad = Math.max(0, velocidad - 0.05f);
-        else velocidad = Math.max(0, velocidad - 0.002f);
+        // el avión sigue la mirada del piloto con un giro máximo que depende de la velocidad
+        float eficacia = Mth.clamp(velocidad / VEL_MAX, 0.0f, 1.0f);
+        float maxGiro = onGround() ? 2.5f : 0.6f + 3.2f * eficacia;
+        float dy = Mth.clamp(Mth.wrapDegrees(p.getYRot() - getYRot()), -maxGiro, maxGiro);
+        float objPitch = Mth.clamp(p.getXRot(), -55.0f, 55.0f);
+        if (onGround() && velocidad < VEL_SUSTENTACION) objPitch = Math.min(objPitch, 0.0f) * 0.3f;
+        float dp = Mth.clamp(objPitch - getXRot(), -2.2f * Math.max(0.3f, eficacia), 2.2f * Math.max(0.3f, eficacia));
+        setYRot(getYRot() + dy);
+        setXRot(getXRot() + dp);
+
+        // motor: W acelera, S frena; picar acelera y subir frena (energía)
+        if (p.zza > 0) velocidad += 0.022f;
+        else if (p.zza < 0) velocidad -= 0.045f;
+        else velocidad -= 0.003f;
+        velocidad += (float) (Math.sin(Math.toRadians(getXRot())) * 0.012);
+        if (onGround()) velocidad -= 0.004f; // rozamiento de las ruedas
+        velocidad = Mth.clamp(velocidad, 0.0f, VEL_MAX);
 
         Vec3 dir = Vec3.directionFromRotation(getXRot(), getYRot());
-        Vec3 dm = dir.scale(velocidad);
+        Vec3 objetivo = dir.scale(velocidad);
+        // inercia: la velocidad real se acerca poco a poco a la dirección del morro
+        Vec3 dm = getDeltaMovement().lerp(objetivo, onGround() ? 0.3 : 0.12);
         if (velocidad < VEL_SUSTENTACION) {
-            // pérdida: sin velocidad no vuela
-            double caida = 0.4 * (1.0 - velocidad / VEL_SUSTENTACION);
-            dm = new Vec3(dm.x, Math.min(dm.y, 0) - caida, dm.z);
+            // por debajo de la velocidad de sustentación pierde altura
+            double caida = 0.08 * (1.0 - velocidad / VEL_SUSTENTACION);
+            dm = dm.add(0, -caida, 0);
         }
         if (onGround() && dm.y < 0) dm = new Vec3(dm.x, 0, dm.z);
-        if (horizontalCollision) velocidad *= 0.5f;
+        if (horizontalCollision) velocidad *= 0.4f;
         setDeltaMovement(dm);
     }
 
@@ -138,7 +160,7 @@ public class AvionEntity extends AeronaveBase {
         lado = lado.normalize();
         for (int s = -1; s <= 1; s += 2) {
             Vec3 o = position().add(0, 0.5, 0).add(dir.scale(2.4)).add(lado.scale(1.4 * s));
-            BalaEntity b = new BalaEntity(level(), p, 7.0f, 1.2f);
+            BalaEntity b = new BalaEntity(level(), p, 7.0f, 80f);
             b.setPos(o.x, o.y, o.z);
             b.shoot(dir.x, dir.y, dir.z, 7.0f, 1.0f);
             level().addFreshEntity(b);

@@ -1,0 +1,19 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "building",
+ "ingredients": [
+  {
+   "item": "minecraft:oak_slab"
+  },
+  {
+   "item": "minecraft:oak_slab"
+  },
+  {
+   "item": "minecraft:iron_ingot"
+  }
+ ],
+ "result": {
+  "item": "guerramod:banco_publico",
+  "count": 1
+ }
+}

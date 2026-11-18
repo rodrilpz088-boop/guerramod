@@ -1,0 +1,19 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "building",
+ "ingredients": [
+  {
+   "item": "minecraft:green_wool"
+  },
+  {
+   "item": "minecraft:dirt"
+  },
+  {
+   "item": "minecraft:lime_dye"
+  }
+ ],
+ "result": {
+  "item": "guerramod:cesped_artificial",
+  "count": 4
+ }
+}

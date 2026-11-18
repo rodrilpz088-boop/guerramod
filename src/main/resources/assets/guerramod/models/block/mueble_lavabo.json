@@ -1,0 +1,142 @@
+{
+ "parent": "minecraft:block/block",
+ "textures": {
+  "t0": "guerramod:block/frente_cajones_roble",
+  "t1": "guerramod:block/mat_roble",
+  "t2": "guerramod:block/mat_ceramica",
+  "t3": "guerramod:block/lavabo_top",
+  "t4": "guerramod:block/mat_cromo",
+  "particle": "guerramod:block/frente_cajones_roble"
+ },
+ "elements": [
+  {
+   "from": [
+    1,
+    0,
+    6
+   ],
+   "to": [
+    15,
+    11,
+    16
+   ],
+   "faces": {
+    "north": {
+     "texture": "#t0"
+    },
+    "south": {
+     "texture": "#t1"
+    },
+    "east": {
+     "texture": "#t1"
+    },
+    "west": {
+     "texture": "#t1"
+    },
+    "up": {
+     "texture": "#t1"
+    },
+    "down": {
+     "texture": "#t1"
+    }
+   }
+  },
+  {
+   "from": [
+    0.5,
+    11,
+    5
+   ],
+   "to": [
+    15.5,
+    13,
+    16
+   ],
+   "faces": {
+    "north": {
+     "texture": "#t2"
+    },
+    "south": {
+     "texture": "#t2"
+    },
+    "east": {
+     "texture": "#t2"
+    },
+    "west": {
+     "texture": "#t2"
+    },
+    "up": {
+     "texture": "#t3"
+    },
+    "down": {
+     "texture": "#t2"
+    }
+   }
+  },
+  {
+   "from": [
+    7.5,
+    13,
+    14
+   ],
+   "to": [
+    8.5,
+    15.5,
+    15
+   ],
+   "faces": {
+    "north": {
+     "texture": "#t4"
+    },
+    "south": {
+     "texture": "#t4"
+    },
+    "east": {
+     "texture": "#t4"
+    },
+    "west": {
+     "texture": "#t4"
+    },
+    "up": {
+     "texture": "#t4"
+    },
+    "down": {
+     "texture": "#t4"
+    }
+   }
+  },
+  {
+   "from": [
+    7.5,
+    14.5,
+    12
+   ],
+   "to": [
+    8.5,
+    15.5,
+    14
+   ],
+   "faces": {
+    "north": {
+     "texture": "#t4"
+    },
+    "south": {
+     "texture": "#t4"
+    },
+    "east": {
+     "texture": "#t4"
+    },
+    "west": {
+     "texture": "#t4"
+    },
+    "up": {
+     "texture": "#t4"
+    },
+    "down": {
+     "texture": "#t4"
+    }
+   }
+  }
+ ],
+ "render_type": "minecraft:cutout"
+}

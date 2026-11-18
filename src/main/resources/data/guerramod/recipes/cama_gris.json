@@ -1,0 +1,19 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "building",
+ "ingredients": [
+  {
+   "item": "minecraft:gray_bed"
+  },
+  {
+   "tag": "minecraft:planks"
+  },
+  {
+   "item": "minecraft:white_wool"
+  }
+ ],
+ "result": {
+  "item": "guerramod:cama_gris",
+  "count": 1
+ }
+}

@@ -1,0 +1,19 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "building",
+ "ingredients": [
+  {
+   "item": "minecraft:gray_concrete"
+  },
+  {
+   "item": "minecraft:gray_concrete"
+  },
+  {
+   "item": "minecraft:iron_nugget"
+  }
+ ],
+ "result": {
+  "item": "guerramod:barrera_new_jersey",
+  "count": 4
+ }
+}

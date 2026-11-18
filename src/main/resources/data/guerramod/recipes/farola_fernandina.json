@@ -1,0 +1,19 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "building",
+ "ingredients": [
+  {
+   "item": "minecraft:lantern"
+  },
+  {
+   "item": "minecraft:iron_ingot"
+  },
+  {
+   "item": "minecraft:black_dye"
+  }
+ ],
+ "result": {
+  "item": "guerramod:farola_fernandina",
+  "count": 1
+ }
+}

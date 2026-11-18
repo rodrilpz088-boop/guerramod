@@ -1,0 +1,19 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "building",
+ "ingredients": [
+  {
+   "item": "minecraft:cauldron"
+  },
+  {
+   "item": "minecraft:smooth_stone_slab"
+  },
+  {
+   "item": "minecraft:white_dye"
+  }
+ ],
+ "result": {
+  "item": "guerramod:fregadero",
+  "count": 1
+ }
+}

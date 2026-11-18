@@ -1,0 +1,19 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "building",
+ "ingredients": [
+  {
+   "item": "minecraft:glowstone_dust"
+  },
+  {
+   "item": "minecraft:string"
+  },
+  {
+   "item": "minecraft:redstone"
+  }
+ ],
+ "result": {
+  "item": "guerramod:tira_led",
+  "count": 8
+ }
+}

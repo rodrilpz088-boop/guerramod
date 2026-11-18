@@ -1,0 +1,19 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "building",
+ "ingredients": [
+  {
+   "item": "minecraft:quartz_block"
+  },
+  {
+   "item": "minecraft:cauldron"
+  },
+  {
+   "item": "minecraft:iron_ingot"
+  }
+ ],
+ "result": {
+  "item": "guerramod:lavabo",
+  "count": 1
+ }
+}

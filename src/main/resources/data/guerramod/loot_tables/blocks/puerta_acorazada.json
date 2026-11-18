@@ -1,0 +1,28 @@
+{
+ "type": "minecraft:block",
+ "pools": [
+  {
+   "rolls": 1,
+   "entries": [
+    {
+     "type": "minecraft:item",
+     "name": "guerramod:puerta_acorazada",
+     "conditions": [
+      {
+       "condition": "minecraft:block_state_property",
+       "block": "guerramod:puerta_acorazada",
+       "properties": {
+        "half": "lower"
+       }
+      }
+     ]
+    }
+   ],
+   "conditions": [
+    {
+     "condition": "minecraft:survives_explosion"
+    }
+   ]
+  }
+ ]
+}

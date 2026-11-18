@@ -1,0 +1,19 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "building",
+ "ingredients": [
+  {
+   "item": "guerramod:gres_gris"
+  },
+  {
+   "item": "guerramod:gres_gris"
+  },
+  {
+   "item": "guerramod:gres_gris"
+  }
+ ],
+ "result": {
+  "item": "guerramod:gres_gris_losa",
+  "count": 6
+ }
+}

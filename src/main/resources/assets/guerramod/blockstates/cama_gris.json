@@ -1,0 +1,34 @@
+{
+ "variants": {
+  "facing=north,part=head": {
+   "model": "guerramod:block/cama_gris_cabeza"
+  },
+  "facing=north,part=foot": {
+   "model": "guerramod:block/cama_gris_pies"
+  },
+  "facing=east,part=head": {
+   "model": "guerramod:block/cama_gris_cabeza",
+   "y": 90
+  },
+  "facing=east,part=foot": {
+   "model": "guerramod:block/cama_gris_pies",
+   "y": 90
+  },
+  "facing=south,part=head": {
+   "model": "guerramod:block/cama_gris_cabeza",
+   "y": 180
+  },
+  "facing=south,part=foot": {
+   "model": "guerramod:block/cama_gris_pies",
+   "y": 180
+  },
+  "facing=west,part=head": {
+   "model": "guerramod:block/cama_gris_cabeza",
+   "y": 270
+  },
+  "facing=west,part=foot": {
+   "model": "guerramod:block/cama_gris_pies",
+   "y": 270
+  }
+ }
+}

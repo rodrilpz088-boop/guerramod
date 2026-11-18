@@ -1,0 +1,19 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "building",
+ "ingredients": [
+  {
+   "item": "minecraft:bookshelf"
+  },
+  {
+   "item": "minecraft:bookshelf"
+  },
+  {
+   "tag": "minecraft:planks"
+  }
+ ],
+ "result": {
+  "item": "guerramod:estanteria",
+  "count": 1
+ }
+}

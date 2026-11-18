@@ -1,0 +1,8 @@
+{
+ "parent": "minecraft:block/template_glass_pane_post",
+ "render_type": "minecraft:translucent",
+ "textures": {
+  "pane": "guerramod:block/ventana_madera",
+  "edge": "guerramod:block/ventana_madera_canto"
+ }
+}

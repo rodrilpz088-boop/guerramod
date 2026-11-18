@@ -1,0 +1,19 @@
+{
+ "variants": {
+  "facing=north": {
+   "model": "guerramod:block/escritorio"
+  },
+  "facing=east": {
+   "model": "guerramod:block/escritorio",
+   "y": 90
+  },
+  "facing=south": {
+   "model": "guerramod:block/escritorio",
+   "y": 180
+  },
+  "facing=west": {
+   "model": "guerramod:block/escritorio",
+   "y": 270
+  }
+ }
+}

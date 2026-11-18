@@ -1,0 +1,24 @@
+{
+ "type": "minecraft:crafting_shaped",
+ "category": "equipment",
+ "pattern": [
+  "PPP",
+  " CW",
+  "  P"
+ ],
+ "key": {
+  "P": {
+   "item": "guerramod:placa_acero"
+  },
+  "C": {
+   "item": "guerramod:circuito"
+  },
+  "W": {
+   "item": "minecraft:iron_ingot"
+  }
+ },
+ "result": {
+  "item": "guerramod:subfusil",
+  "count": 1
+ }
+}

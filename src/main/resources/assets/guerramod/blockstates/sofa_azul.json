@@ -1,0 +1,117 @@
+{
+ "multipart": [
+  {
+   "when": {
+    "facing": "north"
+   },
+   "apply": {
+    "model": "guerramod:block/sofa_azul"
+   }
+  },
+  {
+   "when": {
+    "facing": "north",
+    "izq": "false"
+   },
+   "apply": {
+    "model": "guerramod:block/sofa_azul_brazo_izq"
+   }
+  },
+  {
+   "when": {
+    "facing": "north",
+    "der": "false"
+   },
+   "apply": {
+    "model": "guerramod:block/sofa_azul_brazo_der"
+   }
+  },
+  {
+   "when": {
+    "facing": "east"
+   },
+   "apply": {
+    "model": "guerramod:block/sofa_azul",
+    "y": 90
+   }
+  },
+  {
+   "when": {
+    "facing": "east",
+    "izq": "false"
+   },
+   "apply": {
+    "model": "guerramod:block/sofa_azul_brazo_izq",
+    "y": 90
+   }
+  },
+  {
+   "when": {
+    "facing": "east",
+    "der": "false"
+   },
+   "apply": {
+    "model": "guerramod:block/sofa_azul_brazo_der",
+    "y": 90
+   }
+  },
+  {
+   "when": {
+    "facing": "south"
+   },
+   "apply": {
+    "model": "guerramod:block/sofa_azul",
+    "y": 180
+   }
+  },
+  {
+   "when": {
+    "facing": "south",
+    "izq": "false"
+   },
+   "apply": {
+    "model": "guerramod:block/sofa_azul_brazo_izq",
+    "y": 180
+   }
+  },
+  {
+   "when": {
+    "facing": "south",
+    "der": "false"
+   },
+   "apply": {
+    "model": "guerramod:block/sofa_azul_brazo_der",
+    "y": 180
+   }
+  },
+  {
+   "when": {
+    "facing": "west"
+   },
+   "apply": {
+    "model": "guerramod:block/sofa_azul",
+    "y": 270
+   }
+  },
+  {
+   "when": {
+    "facing": "west",
+    "izq": "false"
+   },
+   "apply": {
+    "model": "guerramod:block/sofa_azul_brazo_izq",
+    "y": 270
+   }
+  },
+  {
+   "when": {
+    "facing": "west",
+    "der": "false"
+   },
+   "apply": {
+    "model": "guerramod:block/sofa_azul_brazo_der",
+    "y": 270
+   }
+  }
+ ]
+}

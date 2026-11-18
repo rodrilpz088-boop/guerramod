@@ -1,0 +1,19 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "building",
+ "ingredients": [
+  {
+   "item": "guerramod:asfalto"
+  },
+  {
+   "item": "minecraft:white_dye"
+  },
+  {
+   "item": "minecraft:arrow"
+  }
+ ],
+ "result": {
+  "item": "guerramod:asfalto_flecha_recto",
+  "count": 1
+ }
+}

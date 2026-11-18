@@ -1,0 +1,19 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "building",
+ "ingredients": [
+  {
+   "item": "minecraft:glass_pane"
+  },
+  {
+   "item": "minecraft:iron_nugget"
+  },
+  {
+   "item": "minecraft:quartz"
+  }
+ ],
+ "result": {
+  "item": "guerramod:espejo_bano",
+  "count": 1
+ }
+}

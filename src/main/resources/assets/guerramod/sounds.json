@@ -1,42 +1,195 @@
 {
-  "disparo": {
-    "subtitle": "subtitles.guerramod.disparo",
-    "sounds": [
-      {
-        "name": "guerramod:disparo"
-      }
-    ]
-  },
-  "disparo_fuerte": {
-    "subtitle": "subtitles.guerramod.disparo_fuerte",
-    "sounds": [
-      {
-        "name": "guerramod:disparo_fuerte"
-      }
-    ]
-  },
-  "sirena": {
-    "subtitle": "subtitles.guerramod.sirena",
-    "sounds": [
-      {
-        "name": "guerramod:sirena"
-      }
-    ]
-  },
-  "geiger": {
-    "subtitle": "subtitles.guerramod.geiger",
-    "sounds": [
-      {
-        "name": "guerramod:geiger"
-      }
-    ]
-  },
-  "alarma": {
-    "subtitle": "subtitles.guerramod.alarma",
-    "sounds": [
-      {
-        "name": "guerramod:alarma"
-      }
-    ]
-  }
+ "disparo": {
+  "subtitle": "subtitles.guerramod.disparo",
+  "sounds": [
+   {
+    "name": "guerramod:disparo"
+   }
+  ]
+ },
+ "disparo_fuerte": {
+  "subtitle": "subtitles.guerramod.disparo_fuerte",
+  "sounds": [
+   {
+    "name": "guerramod:disparo_fuerte"
+   }
+  ]
+ },
+ "sirena": {
+  "subtitle": "subtitles.guerramod.sirena",
+  "sounds": [
+   {
+    "name": "guerramod:sirena"
+   }
+  ]
+ },
+ "geiger": {
+  "subtitle": "subtitles.guerramod.geiger",
+  "sounds": [
+   {
+    "name": "guerramod:geiger"
+   }
+  ]
+ },
+ "alarma": {
+  "subtitle": "subtitles.guerramod.alarma",
+  "sounds": [
+   {
+    "name": "guerramod:alarma"
+   }
+  ]
+ },
+ "disparo_pistola": {
+  "subtitle": "subtitles.guerramod.disparo_pistola",
+  "sounds": [
+   {
+    "name": "guerramod:disparo_pistola",
+    "attenuation_distance": 16
+   }
+  ]
+ },
+ "disparo_subfusil": {
+  "subtitle": "subtitles.guerramod.disparo_subfusil",
+  "sounds": [
+   {
+    "name": "guerramod:disparo_subfusil",
+    "attenuation_distance": 16
+   }
+  ]
+ },
+ "disparo_fusil": {
+  "subtitle": "subtitles.guerramod.disparo_fusil",
+  "sounds": [
+   {
+    "name": "guerramod:disparo_fusil",
+    "attenuation_distance": 16
+   }
+  ]
+ },
+ "disparo_escopeta": {
+  "subtitle": "subtitles.guerramod.disparo_escopeta",
+  "sounds": [
+   {
+    "name": "guerramod:disparo_escopeta",
+    "attenuation_distance": 16
+   }
+  ]
+ },
+ "disparo_francotirador": {
+  "subtitle": "subtitles.guerramod.disparo_francotirador",
+  "sounds": [
+   {
+    "name": "guerramod:disparo_francotirador",
+    "attenuation_distance": 16
+   }
+  ]
+ },
+ "disparo_ametralladora": {
+  "subtitle": "subtitles.guerramod.disparo_ametralladora",
+  "sounds": [
+   {
+    "name": "guerramod:disparo_ametralladora",
+    "attenuation_distance": 16
+   }
+  ]
+ },
+ "cargador_fuera": {
+  "subtitle": "subtitles.guerramod.cargador_fuera",
+  "sounds": [
+   {
+    "name": "guerramod:cargador_fuera",
+    "attenuation_distance": 16
+   }
+  ]
+ },
+ "cargador_dentro": {
+  "subtitle": "subtitles.guerramod.cargador_dentro",
+  "sounds": [
+   {
+    "name": "guerramod:cargador_dentro",
+    "attenuation_distance": 16
+   }
+  ]
+ },
+ "montar": {
+  "subtitle": "subtitles.guerramod.montar",
+  "sounds": [
+   {
+    "name": "guerramod:montar",
+    "attenuation_distance": 16
+   }
+  ]
+ },
+ "cerrojo": {
+  "subtitle": "subtitles.guerramod.cerrojo",
+  "sounds": [
+   {
+    "name": "guerramod:cerrojo",
+    "attenuation_distance": 16
+   }
+  ]
+ },
+ "corredera": {
+  "subtitle": "subtitles.guerramod.corredera",
+  "sounds": [
+   {
+    "name": "guerramod:corredera",
+    "attenuation_distance": 16
+   }
+  ]
+ },
+ "cartucho": {
+  "subtitle": "subtitles.guerramod.cartucho",
+  "sounds": [
+   {
+    "name": "guerramod:cartucho",
+    "attenuation_distance": 16
+   }
+  ]
+ },
+ "vacio": {
+  "subtitle": "subtitles.guerramod.vacio",
+  "sounds": [
+   {
+    "name": "guerramod:vacio",
+    "attenuation_distance": 16
+   }
+  ]
+ },
+ "modo": {
+  "subtitle": "subtitles.guerramod.modo",
+  "sounds": [
+   {
+    "name": "guerramod:modo",
+    "attenuation_distance": 16
+   }
+  ]
+ },
+ "rebote": {
+  "subtitle": "subtitles.guerramod.rebote",
+  "sounds": [
+   {
+    "name": "guerramod:rebote",
+    "attenuation_distance": 16
+   }
+  ]
+ },
+ "casquillo": {
+  "subtitle": "subtitles.guerramod.casquillo",
+  "sounds": [
+   {
+    "name": "guerramod:casquillo",
+    "attenuation_distance": 16
+   }
+  ]
+ },
+ "clic": {
+  "subtitle": "subtitles.guerramod.clic",
+  "sounds": [
+   {
+    "name": "guerramod:clic",
+    "attenuation_distance": 16
+   }
+  ]
+ }
 }

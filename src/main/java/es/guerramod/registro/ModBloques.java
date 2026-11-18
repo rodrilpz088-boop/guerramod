@@ -2,6 +2,7 @@ package es.guerramod.registro;
 
 import es.guerramod.GuerraMod;
 import es.guerramod.bloques.*;
+import net.minecraft.world.item.BedItem;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.DoubleHighBlockItem;
 import net.minecraft.world.item.Item;
@@ -23,10 +24,14 @@ import java.util.function.Supplier;
 public final class ModBloques {
     public static final DeferredRegister<Block> BLOQUES = DeferredRegister.create(ForgeRegistries.BLOCKS, GuerraMod.MODID);
 
-    /** Listas para las pestañas del modo creativo. */
-    public static final List<RegistryObject<? extends Block>> FRONTERAS = new ArrayList<>();
-    public static final List<RegistryObject<? extends Block>> GUERRA = new ArrayList<>();
-    public static final List<RegistryObject<? extends Block>> GOBIERNO = new ArrayList<>();
+    /** Bloques con inventario (para el tipo de block entity) y luces LED (para el color). */
+    public static final List<RegistryObject<? extends Block>> ALMACENES = new ArrayList<>();
+    public static final List<RegistryObject<? extends Block>> LEDS = new ArrayList<>();
+
+    private static final Categoria FRONTERAS = Categoria.NACIONES;
+    private static final Categoria CARRETERAS = Categoria.CARRETERAS;
+    private static final Categoria GUERRA = Categoria.MILITAR;
+    private static final Categoria GOBIERNO = Categoria.NACIONES;
 
     private static BlockBehaviour.Properties hormigon() {
         return BlockBehaviour.Properties.of().mapColor(MapColor.STONE).strength(6.0f, 9.0f).sound(SoundType.STONE);
@@ -52,15 +57,15 @@ public final class ModBloques {
     public static final RegistryObject<Block> ALAMBRE_ESPINO = registrar("alambre_espino", FRONTERAS,
             () -> new BloquesVarios.AlambreEspino(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).strength(3.0f, 4.0f)
                     .sound(SoundType.CHAIN).noCollission().noOcclusion()));
-    public static final RegistryObject<Block> ASFALTO = registrar("asfalto", FRONTERAS, () -> new Block(asfalto()));
-    public static final RegistryObject<Block> ASFALTO_LOSA = registrar("asfalto_losa", FRONTERAS, () -> new SlabBlock(asfalto()));
-    public static final RegistryObject<Block> ASFALTO_LINEA = registrar("asfalto_linea", FRONTERAS,
+    public static final RegistryObject<Block> ASFALTO = registrar("asfalto", CARRETERAS, () -> new Block(asfalto()));
+    public static final RegistryObject<Block> ASFALTO_LOSA = registrar("asfalto_losa", CARRETERAS, () -> new SlabBlock(asfalto()));
+    public static final RegistryObject<Block> ASFALTO_LINEA = registrar("asfalto_linea", CARRETERAS,
             () -> new BloquesVarios.BloqueOrientable(asfalto(), false));
-    public static final RegistryObject<Block> ASFALTO_LINEA_CONTINUA = registrar("asfalto_linea_continua", FRONTERAS,
+    public static final RegistryObject<Block> ASFALTO_LINEA_CONTINUA = registrar("asfalto_linea_continua", CARRETERAS,
             () -> new BloquesVarios.BloqueOrientable(asfalto(), false));
-    public static final RegistryObject<Block> PASO_CEBRA = registrar("paso_cebra", FRONTERAS,
+    public static final RegistryObject<Block> PASO_CEBRA = registrar("paso_cebra", CARRETERAS,
             () -> new BloquesVarios.BloqueOrientable(asfalto(), false));
-    public static final RegistryObject<Block> FAROLA = registrar("farola", FRONTERAS,
+    public static final RegistryObject<Block> FAROLA = registrar("farola", CARRETERAS,
             () -> new BloquesVarios.BloqueForma(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).strength(3.0f, 6.0f)
                     .sound(SoundType.METAL).noOcclusion().lightLevel(s -> 15), 6, 0, 6, 10, 16, 10));
 
@@ -123,21 +128,40 @@ public final class ModBloques {
                     () -> new BanderaBlock(BlockBehaviour.Properties.of().mapColor(MapColor.WOOL).strength(1.0f)
                             .sound(SoundType.WOOL).noOcclusion())));
         }
+        CatalogoGenerado.registrar();
     }
 
     private ModBloques() {}
 
-    private static <T extends Block> RegistryObject<T> registrar(String nombre, List<RegistryObject<? extends Block>> lista, Supplier<T> s) {
-        RegistryObject<T> bloque = BLOQUES.register(nombre, s);
-        ModItems.ITEMS.register(nombre, () -> new BlockItem(bloque.get(), new Item.Properties()));
-        lista.add(bloque);
-        return bloque;
+    private static <T extends Block> RegistryObject<T> registrar(String nombre, Categoria cat, Supplier<T> s) {
+        return reg(nombre, cat, s);
     }
 
     private static <T extends Block> RegistryObject<T> registrarPuerta(String nombre, Supplier<T> s) {
+        return regAlto(nombre, GUERRA, s);
+    }
+
+    /** Bloque normal con su item. */
+    public static <T extends Block> RegistryObject<T> reg(String nombre, Categoria cat, Supplier<T> s) {
+        RegistryObject<T> bloque = BLOQUES.register(nombre, s);
+        ModItems.ITEMS.register(nombre, () -> new BlockItem(bloque.get(), new Item.Properties()));
+        cat.lista.add(bloque);
+        return bloque;
+    }
+
+    /** Bloque de dos alturas (puertas, frigoríficos, armarios). */
+    public static <T extends Block> RegistryObject<T> regAlto(String nombre, Categoria cat, Supplier<T> s) {
         RegistryObject<T> bloque = BLOQUES.register(nombre, s);
         ModItems.ITEMS.register(nombre, () -> new DoubleHighBlockItem(bloque.get(), new Item.Properties()));
-        GUERRA.add(bloque);
+        cat.lista.add(bloque);
+        return bloque;
+    }
+
+    /** Camas. */
+    public static <T extends Block> RegistryObject<T> regCama(String nombre, Categoria cat, Supplier<T> s) {
+        RegistryObject<T> bloque = BLOQUES.register(nombre, s);
+        ModItems.ITEMS.register(nombre, () -> new BedItem(bloque.get(), new Item.Properties().stacksTo(1)));
+        cat.lista.add(bloque);
         return bloque;
     }
 }

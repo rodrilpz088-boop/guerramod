@@ -1,0 +1,16 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "building",
+ "ingredients": [
+  {
+   "item": "minecraft:iron_trapdoor"
+  },
+  {
+   "item": "minecraft:gray_dye"
+  }
+ ],
+ "result": {
+  "item": "guerramod:persiana_gris",
+  "count": 2
+ }
+}

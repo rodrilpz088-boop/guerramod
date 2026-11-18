@@ -1,6 +1,7 @@
 package es.guerramod.red;
 
 import es.guerramod.GuerraMod;
+import es.guerramod.armas.Disparos;
 import es.guerramod.entidades.AvionEntity;
 import es.guerramod.pais.DatosPaises;
 import es.guerramod.pais.RegistroPaises;
@@ -31,6 +32,8 @@ public final class Red {
                 .encoder(SyncPaises::encode).decoder(SyncPaises::decode).consumerMainThread(SyncPaises::handle).add();
         CANAL.messageBuilder(AccionAvion.class, id++, NetworkDirection.PLAY_TO_SERVER)
                 .encoder(AccionAvion::encode).decoder(AccionAvion::decode).consumerMainThread(AccionAvion::handle).add();
+        CANAL.messageBuilder(AccionArma.class, id++, NetworkDirection.PLAY_TO_SERVER)
+                .encoder(AccionArma::encode).decoder(AccionArma::decode).consumerMainThread(AccionArma::handle).add();
     }
 
     public static void sincronizarTodos(MinecraftServer server) {
@@ -73,6 +76,33 @@ public final class Red {
             if (p != null && p.getVehicle() instanceof AvionEntity avion) {
                 if (m.accion == 0) avion.disparar(p);
                 else if (m.accion == 1) avion.soltarBomba(p);
+            }
+            ctx.get().setPacketHandled(true);
+        }
+    }
+
+    /** Cliente -> servidor: 0 = disparar, 1 = recargar, 2 = cambiar modo de fuego. */
+    public record AccionArma(int accion, boolean moviendose) {
+        public static final int DISPARAR = 0, RECARGAR = 1, MODO = 2;
+
+        public static void encode(AccionArma m, FriendlyByteBuf b) {
+            b.writeVarInt(m.accion);
+            b.writeBoolean(m.moviendose);
+        }
+
+        public static AccionArma decode(FriendlyByteBuf b) {
+            return new AccionArma(b.readVarInt(), b.readBoolean());
+        }
+
+        public static void handle(AccionArma m, Supplier<NetworkEvent.Context> ctx) {
+            ServerPlayer p = ctx.get().getSender();
+            if (p != null && p.isAlive()) {
+                switch (m.accion) {
+                    case DISPARAR -> Disparos.disparar(p, m.moviendose);
+                    case RECARGAR -> Disparos.recargar(p);
+                    case MODO -> Disparos.cambiarModo(p);
+                    default -> { }
+                }
             }
             ctx.get().setPacketHandled(true);
         }

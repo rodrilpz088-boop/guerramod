@@ -1,0 +1,13 @@
+{
+ "variants": {
+  "type=bottom": {
+   "model": "guerramod:block/gres_gris_losa"
+  },
+  "type=top": {
+   "model": "guerramod:block/gres_gris_losa_top"
+  },
+  "type=double": {
+   "model": "guerramod:block/gres_gris_losa_doble"
+  }
+ }
+}

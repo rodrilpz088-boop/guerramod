@@ -1,0 +1,34 @@
+{
+ "variants": {
+  "facing=north,open=false": {
+   "model": "guerramod:block/persiana_blanca_bajada"
+  },
+  "facing=north,open=true": {
+   "model": "guerramod:block/persiana_blanca_subida"
+  },
+  "facing=east,open=false": {
+   "model": "guerramod:block/persiana_blanca_bajada",
+   "y": 90
+  },
+  "facing=east,open=true": {
+   "model": "guerramod:block/persiana_blanca_subida",
+   "y": 90
+  },
+  "facing=south,open=false": {
+   "model": "guerramod:block/persiana_blanca_bajada",
+   "y": 180
+  },
+  "facing=south,open=true": {
+   "model": "guerramod:block/persiana_blanca_subida",
+   "y": 180
+  },
+  "facing=west,open=false": {
+   "model": "guerramod:block/persiana_blanca_bajada",
+   "y": 270
+  },
+  "facing=west,open=true": {
+   "model": "guerramod:block/persiana_blanca_subida",
+   "y": 270
+  }
+ }
+}

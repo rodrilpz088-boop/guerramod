@@ -1,0 +1,22 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "building",
+ "ingredients": [
+  {
+   "tag": "minecraft:planks"
+  },
+  {
+   "tag": "minecraft:planks"
+  },
+  {
+   "item": "minecraft:oak_slab"
+  },
+  {
+   "item": "minecraft:white_dye"
+  }
+ ],
+ "result": {
+  "item": "guerramod:escritorio",
+  "count": 1
+ }
+}

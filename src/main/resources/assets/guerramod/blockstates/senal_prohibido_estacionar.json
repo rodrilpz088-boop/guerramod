@@ -1,0 +1,19 @@
+{
+ "variants": {
+  "facing=north": {
+   "model": "guerramod:block/senal_prohibido_estacionar"
+  },
+  "facing=east": {
+   "model": "guerramod:block/senal_prohibido_estacionar",
+   "y": 90
+  },
+  "facing=south": {
+   "model": "guerramod:block/senal_prohibido_estacionar",
+   "y": 180
+  },
+  "facing=west": {
+   "model": "guerramod:block/senal_prohibido_estacionar",
+   "y": 270
+  }
+ }
+}

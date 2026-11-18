@@ -1,0 +1,22 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "building",
+ "ingredients": [
+  {
+   "item": "minecraft:campfire"
+  },
+  {
+   "item": "minecraft:stone_bricks"
+  },
+  {
+   "item": "minecraft:stone_bricks"
+  },
+  {
+   "item": "minecraft:stone_bricks"
+  }
+ ],
+ "result": {
+  "item": "guerramod:chimenea",
+  "count": 1
+ }
+}

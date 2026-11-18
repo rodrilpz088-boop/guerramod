@@ -1,0 +1,19 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "building",
+ "ingredients": [
+  {
+   "item": "guerramod:asfalto"
+  },
+  {
+   "item": "minecraft:bone_meal"
+  },
+  {
+   "item": "minecraft:bone_meal"
+  }
+ ],
+ "result": {
+  "item": "guerramod:asfalto_borde_discontinua",
+  "count": 1
+ }
+}

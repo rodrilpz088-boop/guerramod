@@ -1,0 +1,19 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "building",
+ "ingredients": [
+  {
+   "item": "minecraft:lantern"
+  },
+  {
+   "item": "minecraft:chain"
+  },
+  {
+   "item": "minecraft:black_dye"
+  }
+ ],
+ "result": {
+  "item": "guerramod:lampara_colgante",
+  "count": 1
+ }
+}

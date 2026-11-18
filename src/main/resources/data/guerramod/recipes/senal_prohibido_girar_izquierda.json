@@ -1,0 +1,19 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "building",
+ "ingredients": [
+  {
+   "item": "guerramod:poste_senal"
+  },
+  {
+   "item": "minecraft:iron_ingot"
+  },
+  {
+   "item": "minecraft:green_dye"
+  }
+ ],
+ "result": {
+  "item": "guerramod:senal_prohibido_girar_izquierda",
+  "count": 1
+ }
+}

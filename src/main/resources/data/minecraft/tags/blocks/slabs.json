@@ -1,0 +1,10 @@
+{
+ "replace": false,
+ "values": [
+  "guerramod:borde_piscina",
+  "guerramod:gres_gris_losa",
+  "guerramod:marmol_blanco_losa",
+  "guerramod:parquet_roble_losa",
+  "guerramod:granito_avila_losa"
+ ]
+}

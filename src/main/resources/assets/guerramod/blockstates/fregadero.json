@@ -1,0 +1,19 @@
+{
+ "variants": {
+  "facing=north": {
+   "model": "guerramod:block/fregadero"
+  },
+  "facing=east": {
+   "model": "guerramod:block/fregadero",
+   "y": 90
+  },
+  "facing=south": {
+   "model": "guerramod:block/fregadero",
+   "y": 180
+  },
+  "facing=west": {
+   "model": "guerramod:block/fregadero",
+   "y": 270
+  }
+ }
+}

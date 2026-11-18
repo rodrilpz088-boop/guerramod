@@ -1,0 +1,19 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "building",
+ "ingredients": [
+  {
+   "item": "minecraft:iron_bars"
+  },
+  {
+   "item": "minecraft:iron_bars"
+  },
+  {
+   "item": "minecraft:black_dye"
+  }
+ ],
+ "result": {
+  "item": "guerramod:verja_forja",
+  "count": 4
+ }
+}

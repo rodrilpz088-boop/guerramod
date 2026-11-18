@@ -1,0 +1,19 @@
+{
+ "variants": {
+  "facing=north": {
+   "model": "guerramod:block/tumbona"
+  },
+  "facing=east": {
+   "model": "guerramod:block/tumbona",
+   "y": 90
+  },
+  "facing=south": {
+   "model": "guerramod:block/tumbona",
+   "y": 180
+  },
+  "facing=west": {
+   "model": "guerramod:block/tumbona",
+   "y": 270
+  }
+ }
+}

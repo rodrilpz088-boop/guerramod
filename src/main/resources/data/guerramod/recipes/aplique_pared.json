@@ -1,0 +1,19 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "building",
+ "ingredients": [
+  {
+   "item": "minecraft:torch"
+  },
+  {
+   "item": "minecraft:iron_nugget"
+  },
+  {
+   "item": "minecraft:white_carpet"
+  }
+ ],
+ "result": {
+  "item": "guerramod:aplique_pared",
+  "count": 1
+ }
+}

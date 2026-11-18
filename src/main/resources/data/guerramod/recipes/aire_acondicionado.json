@@ -1,0 +1,19 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "building",
+ "ingredients": [
+  {
+   "item": "minecraft:white_concrete"
+  },
+  {
+   "item": "minecraft:redstone"
+  },
+  {
+   "item": "minecraft:blue_ice"
+  }
+ ],
+ "result": {
+  "item": "guerramod:aire_acondicionado",
+  "count": 1
+ }
+}

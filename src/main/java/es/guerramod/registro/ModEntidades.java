@@ -33,5 +33,9 @@ public final class ModEntidades {
             () -> EntityType.Builder.<BombarderoEntity>of(BombarderoEntity::new, MobCategory.MISC).sized(3.0f, 1.3f)
                     .clientTrackingRange(16).updateInterval(1).build("bombardero"));
 
+    public static final RegistryObject<EntityType<AsientoEntity>> ASIENTO = ENTIDADES.register("asiento",
+            () -> EntityType.Builder.<AsientoEntity>of(AsientoEntity::new, MobCategory.MISC).sized(0.001f, 0.001f)
+                    .clientTrackingRange(10).updateInterval(20).noSummon().build("asiento"));
+
     private ModEntidades() {}
 }

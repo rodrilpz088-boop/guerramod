@@ -1,0 +1,16 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "building",
+ "ingredients": [
+  {
+   "item": "guerramod:asfalto"
+  },
+  {
+   "item": "minecraft:iron_trapdoor"
+  }
+ ],
+ "result": {
+  "item": "guerramod:asfalto_tapa",
+  "count": 1
+ }
+}

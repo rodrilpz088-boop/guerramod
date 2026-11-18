@@ -1,0 +1,19 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "building",
+ "ingredients": [
+  {
+   "item": "minecraft:chest"
+  },
+  {
+   "item": "minecraft:quartz_slab"
+  },
+  {
+   "item": "minecraft:oak_planks"
+  }
+ ],
+ "result": {
+  "item": "guerramod:encimera_roble",
+  "count": 1
+ }
+}

@@ -1,0 +1,19 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "building",
+ "ingredients": [
+  {
+   "item": "minecraft:furnace"
+  },
+  {
+   "item": "minecraft:smooth_stone_slab"
+  },
+  {
+   "item": "minecraft:black_dye"
+  }
+ ],
+ "result": {
+  "item": "guerramod:vitroceramica",
+  "count": 1
+ }
+}

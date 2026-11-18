@@ -1,0 +1,8 @@
+{
+ "parent": "minecraft:block/door_top_right_open",
+ "render_type": "minecraft:translucent",
+ "textures": {
+  "bottom": "guerramod:block/puerta_cristal_abajo",
+  "top": "guerramod:block/puerta_cristal_arriba"
+ }
+}

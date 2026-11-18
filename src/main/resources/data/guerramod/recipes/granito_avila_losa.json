@@ -1,0 +1,19 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "building",
+ "ingredients": [
+  {
+   "item": "guerramod:granito_avila"
+  },
+  {
+   "item": "guerramod:granito_avila"
+  },
+  {
+   "item": "guerramod:granito_avila"
+  }
+ ],
+ "result": {
+  "item": "guerramod:granito_avila_losa",
+  "count": 6
+ }
+}

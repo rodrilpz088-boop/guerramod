@@ -1,0 +1,19 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "building",
+ "ingredients": [
+  {
+   "item": "minecraft:quartz_block"
+  },
+  {
+   "item": "minecraft:quartz_block"
+  },
+  {
+   "item": "minecraft:cauldron"
+  }
+ ],
+ "result": {
+  "item": "guerramod:banera",
+  "count": 1
+ }
+}

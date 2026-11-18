@@ -1,0 +1,22 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "building",
+ "ingredients": [
+  {
+   "item": "guerramod:poste_senal"
+  },
+  {
+   "item": "minecraft:iron_ingot"
+  },
+  {
+   "item": "minecraft:blue_dye"
+  },
+  {
+   "item": "minecraft:feather"
+  }
+ ],
+ "result": {
+  "item": "guerramod:senal_peligro_semaforo",
+  "count": 1
+ }
+}

@@ -1,0 +1,19 @@
+{
+ "variants": {
+  "facing=north": {
+   "model": "guerramod:block/senal_calle_residencial"
+  },
+  "facing=east": {
+   "model": "guerramod:block/senal_calle_residencial",
+   "y": 90
+  },
+  "facing=south": {
+   "model": "guerramod:block/senal_calle_residencial",
+   "y": 180
+  },
+  "facing=west": {
+   "model": "guerramod:block/senal_calle_residencial",
+   "y": 270
+  }
+ }
+}

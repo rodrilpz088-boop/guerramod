@@ -1,0 +1,19 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "building",
+ "ingredients": [
+  {
+   "item": "minecraft:barrel"
+  },
+  {
+   "item": "minecraft:white_dye"
+  },
+  {
+   "item": "minecraft:oak_slab"
+  }
+ ],
+ "result": {
+  "item": "guerramod:mesita_noche",
+  "count": 1
+ }
+}

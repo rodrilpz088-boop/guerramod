@@ -1,0 +1,16 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "building",
+ "ingredients": [
+  {
+   "item": "guerramod:asfalto"
+  },
+  {
+   "item": "minecraft:gravel"
+  }
+ ],
+ "result": {
+  "item": "guerramod:asfalto_desgastado",
+  "count": 1
+ }
+}

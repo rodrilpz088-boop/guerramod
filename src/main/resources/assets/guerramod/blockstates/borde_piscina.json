@@ -1,0 +1,13 @@
+{
+ "variants": {
+  "type=bottom": {
+   "model": "guerramod:block/borde_piscina"
+  },
+  "type=top": {
+   "model": "guerramod:block/borde_piscina_top"
+  },
+  "type=double": {
+   "model": "guerramod:block/borde_piscina_doble"
+  }
+ }
+}

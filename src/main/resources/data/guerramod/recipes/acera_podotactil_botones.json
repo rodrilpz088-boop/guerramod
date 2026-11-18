@@ -1,0 +1,19 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "building",
+ "ingredients": [
+  {
+   "item": "minecraft:smooth_stone"
+  },
+  {
+   "item": "minecraft:yellow_dye"
+  },
+  {
+   "item": "minecraft:stone_button"
+  }
+ ],
+ "result": {
+  "item": "guerramod:acera_podotactil_botones",
+  "count": 4
+ }
+}

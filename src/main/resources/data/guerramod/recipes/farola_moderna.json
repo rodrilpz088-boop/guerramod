@@ -1,0 +1,19 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "building",
+ "ingredients": [
+  {
+   "item": "minecraft:glowstone"
+  },
+  {
+   "item": "minecraft:iron_ingot"
+  },
+  {
+   "item": "guerramod:poste_senal"
+  }
+ ],
+ "result": {
+  "item": "guerramod:farola_moderna",
+  "count": 1
+ }
+}

@@ -36,6 +36,9 @@ public class AvionRenderer<T extends AeronaveBase> extends EntityRenderer<T> {
         float cabeceo = Mth.lerp(pt, e.xRotO, e.getXRot());
         ps.mulPose(Axis.YP.rotationDegrees(180.0f - giro));
         ps.mulPose(Axis.XP.rotationDegrees(-cabeceo));
+        if (e instanceof es.guerramod.entidades.AvionEntity av) {
+            ps.mulPose(Axis.ZP.rotationDegrees(Mth.lerp(pt, av.alabeoO, av.alabeo)));
+        }
         ps.scale(-escala, -escala, escala);
         modelo.setupAnim(e, 0, 0, e.tickCount + pt, 0, 0);
         int c = e.getColor();

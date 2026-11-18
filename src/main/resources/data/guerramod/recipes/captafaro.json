@@ -1,0 +1,19 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "building",
+ "ingredients": [
+  {
+   "item": "minecraft:glowstone_dust"
+  },
+  {
+   "item": "minecraft:orange_dye"
+  },
+  {
+   "item": "minecraft:stone_button"
+  }
+ ],
+ "result": {
+  "item": "guerramod:captafaro",
+  "count": 8
+ }
+}

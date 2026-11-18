@@ -1,0 +1,19 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "building",
+ "ingredients": [
+  {
+   "item": "minecraft:chest"
+  },
+  {
+   "item": "minecraft:white_dye"
+  },
+  {
+   "item": "minecraft:oak_slab"
+  }
+ ],
+ "result": {
+  "item": "guerramod:mueble_tv",
+  "count": 1
+ }
+}

@@ -1,0 +1,19 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "building",
+ "ingredients": [
+  {
+   "item": "minecraft:chest"
+  },
+  {
+   "item": "minecraft:iron_ingot"
+  },
+  {
+   "item": "minecraft:water_bucket"
+  }
+ ],
+ "result": {
+  "item": "guerramod:lavavajillas",
+  "count": 1
+ }
+}

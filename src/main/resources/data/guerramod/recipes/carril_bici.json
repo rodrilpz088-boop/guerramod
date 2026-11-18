@@ -1,0 +1,16 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "building",
+ "ingredients": [
+  {
+   "item": "guerramod:asfalto"
+  },
+  {
+   "item": "minecraft:red_dye"
+  }
+ ],
+ "result": {
+  "item": "guerramod:carril_bici",
+  "count": 1
+ }
+}

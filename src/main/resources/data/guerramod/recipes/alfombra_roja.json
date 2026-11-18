@@ -1,0 +1,19 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "building",
+ "ingredients": [
+  {
+   "item": "minecraft:red_carpet"
+  },
+  {
+   "item": "minecraft:red_carpet"
+  },
+  {
+   "item": "minecraft:string"
+  }
+ ],
+ "result": {
+  "item": "guerramod:alfombra_roja",
+  "count": 1
+ }
+}

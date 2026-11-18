@@ -1,6 +1,7 @@
 {
-  "replace": false,
-  "values": [
-    "guerramod:valla_fronteriza"
-  ]
+ "replace": false,
+ "values": [
+  "guerramod:valla_fronteriza",
+  "guerramod:valla_madera_blanca"
+ ]
 }

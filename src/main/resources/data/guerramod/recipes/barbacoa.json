@@ -1,0 +1,19 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "building",
+ "ingredients": [
+  {
+   "item": "minecraft:campfire"
+  },
+  {
+   "item": "minecraft:iron_bars"
+  },
+  {
+   "item": "minecraft:iron_ingot"
+  }
+ ],
+ "result": {
+  "item": "guerramod:barbacoa",
+  "count": 1
+ }
+}

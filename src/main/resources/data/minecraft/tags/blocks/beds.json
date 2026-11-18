@@ -1,0 +1,8 @@
+{
+ "replace": false,
+ "values": [
+  "guerramod:cama_blanca",
+  "guerramod:cama_gris",
+  "guerramod:cama_azul"
+ ]
+}

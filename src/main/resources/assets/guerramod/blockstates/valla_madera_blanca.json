@@ -1,0 +1,48 @@
+{
+ "multipart": [
+  {
+   "apply": {
+    "model": "guerramod:block/valla_madera_blanca_poste"
+   }
+  },
+  {
+   "when": {
+    "north": "true"
+   },
+   "apply": {
+    "model": "guerramod:block/valla_madera_blanca_lado",
+    "uvlock": true
+   }
+  },
+  {
+   "when": {
+    "east": "true"
+   },
+   "apply": {
+    "model": "guerramod:block/valla_madera_blanca_lado",
+    "uvlock": true,
+    "y": 90
+   }
+  },
+  {
+   "when": {
+    "south": "true"
+   },
+   "apply": {
+    "model": "guerramod:block/valla_madera_blanca_lado",
+    "uvlock": true,
+    "y": 180
+   }
+  },
+  {
+   "when": {
+    "west": "true"
+   },
+   "apply": {
+    "model": "guerramod:block/valla_madera_blanca_lado",
+    "uvlock": true,
+    "y": 270
+   }
+  }
+ ]
+}

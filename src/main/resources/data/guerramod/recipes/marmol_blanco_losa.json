@@ -1,0 +1,19 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "building",
+ "ingredients": [
+  {
+   "item": "guerramod:marmol_blanco"
+  },
+  {
+   "item": "guerramod:marmol_blanco"
+  },
+  {
+   "item": "guerramod:marmol_blanco"
+  }
+ ],
+ "result": {
+  "item": "guerramod:marmol_blanco_losa",
+  "count": 6
+ }
+}

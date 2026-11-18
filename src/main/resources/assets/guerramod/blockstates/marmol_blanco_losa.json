@@ -1,0 +1,13 @@
+{
+ "variants": {
+  "type=bottom": {
+   "model": "guerramod:block/marmol_blanco_losa"
+  },
+  "type=top": {
+   "model": "guerramod:block/marmol_blanco_losa_top"
+  },
+  "type=double": {
+   "model": "guerramod:block/marmol_blanco_losa_doble"
+  }
+ }
+}

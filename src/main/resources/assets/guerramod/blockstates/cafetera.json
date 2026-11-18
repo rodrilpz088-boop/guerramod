@@ -1,0 +1,19 @@
+{
+ "variants": {
+  "facing=north": {
+   "model": "guerramod:block/cafetera"
+  },
+  "facing=east": {
+   "model": "guerramod:block/cafetera",
+   "y": 90
+  },
+  "facing=south": {
+   "model": "guerramod:block/cafetera",
+   "y": 180
+  },
+  "facing=west": {
+   "model": "guerramod:block/cafetera",
+   "y": 270
+  }
+ }
+}

@@ -1,0 +1,19 @@
+{
+ "variants": {
+  "facing=north": {
+   "model": "guerramod:block/plato_ducha"
+  },
+  "facing=east": {
+   "model": "guerramod:block/plato_ducha",
+   "y": 90
+  },
+  "facing=south": {
+   "model": "guerramod:block/plato_ducha",
+   "y": 180
+  },
+  "facing=west": {
+   "model": "guerramod:block/plato_ducha",
+   "y": 270
+  }
+ }
+}

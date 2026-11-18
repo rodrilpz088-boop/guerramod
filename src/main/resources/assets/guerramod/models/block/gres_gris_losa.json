@@ -1,0 +1,8 @@
+{
+ "parent": "minecraft:block/slab",
+ "textures": {
+  "bottom": "guerramod:block/gres_gris",
+  "top": "guerramod:block/gres_gris",
+  "side": "guerramod:block/gres_gris"
+ }
+}

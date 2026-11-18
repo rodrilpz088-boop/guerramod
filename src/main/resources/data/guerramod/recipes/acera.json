@@ -1,0 +1,16 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "building",
+ "ingredients": [
+  {
+   "item": "minecraft:smooth_stone"
+  },
+  {
+   "item": "minecraft:stone_button"
+  }
+ ],
+ "result": {
+  "item": "guerramod:acera",
+  "count": 4
+ }
+}

@@ -1,0 +1,19 @@
+{
+ "variants": {
+  "facing=north": {
+   "model": "guerramod:block/bolardo"
+  },
+  "facing=east": {
+   "model": "guerramod:block/bolardo",
+   "y": 90
+  },
+  "facing=south": {
+   "model": "guerramod:block/bolardo",
+   "y": 180
+  },
+  "facing=west": {
+   "model": "guerramod:block/bolardo",
+   "y": 270
+  }
+ }
+}

@@ -1,0 +1,16 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "building",
+ "ingredients": [
+  {
+   "item": "minecraft:white_concrete_powder"
+  },
+  {
+   "item": "minecraft:clay_ball"
+  }
+ ],
+ "result": {
+  "item": "guerramod:gotele_blanco",
+  "count": 4
+ }
+}

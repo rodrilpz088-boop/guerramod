@@ -1,0 +1,13 @@
+{
+ "variants": {
+  "type=bottom": {
+   "model": "guerramod:block/parquet_roble_losa"
+  },
+  "type=top": {
+   "model": "guerramod:block/parquet_roble_losa_top"
+  },
+  "type=double": {
+   "model": "guerramod:block/parquet_roble_losa_doble"
+  }
+ }
+}

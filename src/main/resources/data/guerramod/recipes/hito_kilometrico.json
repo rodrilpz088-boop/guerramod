@@ -1,0 +1,19 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "building",
+ "ingredients": [
+  {
+   "item": "minecraft:white_concrete"
+  },
+  {
+   "item": "minecraft:red_dye"
+  },
+  {
+   "item": "minecraft:oak_sign"
+  }
+ ],
+ "result": {
+  "item": "guerramod:hito_kilometrico",
+  "count": 1
+ }
+}

@@ -1,0 +1,25 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "building",
+ "ingredients": [
+  {
+   "item": "minecraft:white_wool"
+  },
+  {
+   "item": "minecraft:white_wool"
+  },
+  {
+   "item": "minecraft:white_wool"
+  },
+  {
+   "tag": "minecraft:planks"
+  },
+  {
+   "tag": "minecraft:planks"
+  }
+ ],
+ "result": {
+  "item": "guerramod:sofa_beige",
+  "count": 1
+ }
+}

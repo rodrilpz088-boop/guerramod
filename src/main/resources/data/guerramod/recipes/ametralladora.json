@@ -1,0 +1,24 @@
+{
+ "type": "minecraft:crafting_shaped",
+ "category": "equipment",
+ "pattern": [
+  "PPP",
+  "PCP",
+  "WW "
+ ],
+ "key": {
+  "P": {
+   "item": "guerramod:placa_acero"
+  },
+  "C": {
+   "item": "guerramod:circuito"
+  },
+  "W": {
+   "item": "minecraft:iron_block"
+  }
+ },
+ "result": {
+  "item": "guerramod:ametralladora",
+  "count": 1
+ }
+}

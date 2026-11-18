@@ -1,0 +1,19 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "building",
+ "ingredients": [
+  {
+   "item": "minecraft:chest"
+  },
+  {
+   "item": "minecraft:blue_dye"
+  },
+  {
+   "item": "minecraft:iron_ingot"
+  }
+ ],
+ "result": {
+  "item": "guerramod:contenedor_azul",
+  "count": 1
+ }
+}

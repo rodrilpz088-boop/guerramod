@@ -1,0 +1,19 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "building",
+ "ingredients": [
+  {
+   "item": "minecraft:cauldron"
+  },
+  {
+   "item": "minecraft:green_dye"
+  },
+  {
+   "item": "minecraft:lava_bucket"
+  }
+ ],
+ "result": {
+  "item": "guerramod:papelera",
+  "count": 1
+ }
+}

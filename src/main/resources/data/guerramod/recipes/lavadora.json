@@ -1,0 +1,19 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "building",
+ "ingredients": [
+  {
+   "item": "minecraft:iron_block"
+  },
+  {
+   "item": "minecraft:glass_pane"
+  },
+  {
+   "item": "minecraft:water_bucket"
+  }
+ ],
+ "result": {
+  "item": "guerramod:lavadora",
+  "count": 1
+ }
+}

@@ -1,8 +1,9 @@
 {
-  "replace": false,
-  "values": [
-    "guerramod:hormigon_reforzado",
-    "guerramod:bloque_plomo",
-    "guerramod:puerta_bunker"
-  ]
+ "replace": false,
+ "values": [
+  "guerramod:hormigon_reforzado",
+  "guerramod:bloque_plomo",
+  "guerramod:puerta_bunker",
+  "guerramod:hormigon_pulido"
+ ]
 }

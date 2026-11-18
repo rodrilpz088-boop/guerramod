@@ -1,0 +1,19 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "building",
+ "ingredients": [
+  {
+   "item": "minecraft:iron_nugget"
+  },
+  {
+   "item": "minecraft:blue_wool"
+  },
+  {
+   "item": "minecraft:white_wool"
+  }
+ ],
+ "result": {
+  "item": "guerramod:tumbona",
+  "count": 1
+ }
+}

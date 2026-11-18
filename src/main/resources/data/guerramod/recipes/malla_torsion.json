@@ -1,0 +1,19 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "building",
+ "ingredients": [
+  {
+   "item": "minecraft:iron_bars"
+  },
+  {
+   "item": "minecraft:string"
+  },
+  {
+   "item": "minecraft:green_dye"
+  }
+ ],
+ "result": {
+  "item": "guerramod:malla_torsion",
+  "count": 8
+ }
+}

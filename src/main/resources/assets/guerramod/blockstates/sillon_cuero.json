@@ -1,0 +1,19 @@
+{
+ "variants": {
+  "facing=north": {
+   "model": "guerramod:block/sillon_cuero"
+  },
+  "facing=east": {
+   "model": "guerramod:block/sillon_cuero",
+   "y": 90
+  },
+  "facing=south": {
+   "model": "guerramod:block/sillon_cuero",
+   "y": 180
+  },
+  "facing=west": {
+   "model": "guerramod:block/sillon_cuero",
+   "y": 270
+  }
+ }
+}

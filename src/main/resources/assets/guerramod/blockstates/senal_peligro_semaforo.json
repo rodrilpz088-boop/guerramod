@@ -1,0 +1,19 @@
+{
+ "variants": {
+  "facing=north": {
+   "model": "guerramod:block/senal_peligro_semaforo"
+  },
+  "facing=east": {
+   "model": "guerramod:block/senal_peligro_semaforo",
+   "y": 90
+  },
+  "facing=south": {
+   "model": "guerramod:block/senal_peligro_semaforo",
+   "y": 180
+  },
+  "facing=west": {
+   "model": "guerramod:block/senal_peligro_semaforo",
+   "y": 270
+  }
+ }
+}

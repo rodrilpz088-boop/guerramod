@@ -1,0 +1,19 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "building",
+ "ingredients": [
+  {
+   "item": "minecraft:gray_wool"
+  },
+  {
+   "item": "minecraft:gray_wool"
+  },
+  {
+   "tag": "minecraft:planks"
+  }
+ ],
+ "result": {
+  "item": "guerramod:sillon_gris",
+  "count": 1
+ }
+}

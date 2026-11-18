@@ -1,0 +1,19 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "building",
+ "ingredients": [
+  {
+   "item": "minecraft:lantern"
+  },
+  {
+   "item": "minecraft:black_dye"
+  },
+  {
+   "item": "minecraft:stone_slab"
+  }
+ ],
+ "result": {
+  "item": "guerramod:farolillo_jardin",
+  "count": 1
+ }
+}

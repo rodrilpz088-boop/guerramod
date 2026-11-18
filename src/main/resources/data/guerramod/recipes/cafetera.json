@@ -1,0 +1,19 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "building",
+ "ingredients": [
+  {
+   "item": "minecraft:cauldron"
+  },
+  {
+   "item": "minecraft:cocoa_beans"
+  },
+  {
+   "item": "minecraft:redstone"
+  }
+ ],
+ "result": {
+  "item": "guerramod:cafetera",
+  "count": 1
+ }
+}

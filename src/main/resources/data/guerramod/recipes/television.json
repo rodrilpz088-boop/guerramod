@@ -1,0 +1,22 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "building",
+ "ingredients": [
+  {
+   "item": "minecraft:black_concrete"
+  },
+  {
+   "item": "minecraft:glass_pane"
+  },
+  {
+   "item": "minecraft:redstone"
+  },
+  {
+   "item": "minecraft:iron_ingot"
+  }
+ ],
+ "result": {
+  "item": "guerramod:television",
+  "count": 1
+ }
+}

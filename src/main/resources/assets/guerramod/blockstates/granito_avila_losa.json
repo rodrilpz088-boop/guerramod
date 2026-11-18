@@ -1,0 +1,13 @@
+{
+ "variants": {
+  "type=bottom": {
+   "model": "guerramod:block/granito_avila_losa"
+  },
+  "type=top": {
+   "model": "guerramod:block/granito_avila_losa_top"
+  },
+  "type=double": {
+   "model": "guerramod:block/granito_avila_losa_doble"
+  }
+ }
+}

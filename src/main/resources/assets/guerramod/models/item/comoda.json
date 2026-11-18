@@ -1,0 +1,251 @@
+{
+ "parent": "minecraft:block/block",
+ "textures": {
+  "t0": "guerramod:block/frente_comoda",
+  "t1": "guerramod:block/mat_roble",
+  "particle": "guerramod:block/frente_comoda"
+ },
+ "elements": [
+  {
+   "from": [
+    0,
+    0,
+    3
+   ],
+   "to": [
+    16,
+    13,
+    16
+   ],
+   "faces": {
+    "north": {
+     "texture": "#t0",
+     "uv": [
+      0,
+      3,
+      16,
+      16
+     ]
+    },
+    "south": {
+     "texture": "#t1",
+     "uv": [
+      0,
+      3,
+      16,
+      16
+     ]
+    },
+    "east": {
+     "texture": "#t1",
+     "uv": [
+      0,
+      3,
+      13,
+      16
+     ]
+    },
+    "west": {
+     "texture": "#t1",
+     "uv": [
+      3,
+      3,
+      16,
+      16
+     ]
+    },
+    "up": {
+     "texture": "#t1",
+     "uv": [
+      0,
+      3,
+      16,
+      16
+     ]
+    },
+    "down": {
+     "texture": "#t1",
+     "uv": [
+      0,
+      0,
+      16,
+      13
+     ]
+    }
+   }
+  },
+  {
+   "from": [
+    0,
+    13,
+    2.5
+   ],
+   "to": [
+    16,
+    14,
+    16
+   ],
+   "faces": {
+    "north": {
+     "texture": "#t1",
+     "uv": [
+      0,
+      2,
+      16,
+      3
+     ]
+    },
+    "south": {
+     "texture": "#t1",
+     "uv": [
+      0,
+      2,
+      16,
+      3
+     ]
+    },
+    "east": {
+     "texture": "#t1",
+     "uv": [
+      0,
+      2,
+      13.5,
+      3
+     ]
+    },
+    "west": {
+     "texture": "#t1",
+     "uv": [
+      2.5,
+      2,
+      16,
+      3
+     ]
+    },
+    "up": {
+     "texture": "#t1",
+     "uv": [
+      0,
+      2.5,
+      16,
+      16
+     ]
+    },
+    "down": {
+     "texture": "#t1",
+     "uv": [
+      0,
+      0,
+      16,
+      13.5
+     ]
+    }
+   }
+  }
+ ],
+ "render_type": "minecraft:cutout",
+ "display": {
+  "gui": {
+   "rotation": [
+    30,
+    225,
+    0
+   ],
+   "translation": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    0.625,
+    0.625,
+    0.625
+   ]
+  },
+  "ground": {
+   "rotation": [
+    0,
+    0,
+    0
+   ],
+   "translation": [
+    0,
+    3,
+    0
+   ],
+   "scale": [
+    0.25,
+    0.25,
+    0.25
+   ]
+  },
+  "fixed": {
+   "rotation": [
+    0,
+    0,
+    0
+   ],
+   "translation": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    0.5,
+    0.5,
+    0.5
+   ]
+  },
+  "thirdperson_righthand": {
+   "rotation": [
+    75,
+    45,
+    0
+   ],
+   "translation": [
+    0,
+    2.5,
+    0
+   ],
+   "scale": [
+    0.375,
+    0.375,
+    0.375
+   ]
+  },
+  "firstperson_righthand": {
+   "rotation": [
+    0,
+    45,
+    0
+   ],
+   "translation": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    0.4,
+    0.4,
+    0.4
+   ]
+  },
+  "firstperson_lefthand": {
+   "rotation": [
+    0,
+    225,
+    0
+   ],
+   "translation": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    0.4,
+    0.4,
+    0.4
+   ]
+  }
+ }
+}

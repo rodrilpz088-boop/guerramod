@@ -1,0 +1,25 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "building",
+ "ingredients": [
+  {
+   "item": "minecraft:redstone_lamp"
+  },
+  {
+   "item": "minecraft:red_dye"
+  },
+  {
+   "item": "minecraft:yellow_dye"
+  },
+  {
+   "item": "minecraft:lime_dye"
+  },
+  {
+   "item": "guerramod:poste_senal"
+  }
+ ],
+ "result": {
+  "item": "guerramod:semaforo",
+  "count": 1
+ }
+}

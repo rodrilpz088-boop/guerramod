@@ -1,0 +1,19 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "building",
+ "ingredients": [
+  {
+   "item": "minecraft:smooth_stone"
+  },
+  {
+   "item": "minecraft:diorite"
+  },
+  {
+   "item": "minecraft:stone_slab"
+  }
+ ],
+ "result": {
+  "item": "guerramod:bordillo",
+  "count": 4
+ }
+}

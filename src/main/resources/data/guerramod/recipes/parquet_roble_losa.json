@@ -1,0 +1,19 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "building",
+ "ingredients": [
+  {
+   "item": "guerramod:parquet_roble"
+  },
+  {
+   "item": "guerramod:parquet_roble"
+  },
+  {
+   "item": "guerramod:parquet_roble"
+  }
+ ],
+ "result": {
+  "item": "guerramod:parquet_roble_losa",
+  "count": 6
+ }
+}

@@ -7,7 +7,6 @@ import es.guerramod.red.Red;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.ComputeFovModifierEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -35,18 +34,18 @@ public final class ClienteForge {
             Red.CANAL.sendToServer(new Red.AccionAvion(0));
             cdDisparo = 3;
         }
+        boolean conArma = mc.player.getMainHandItem().getItem() instanceof ArmaItem;
         while (Teclas.DISPARAR.consumeClick()) {
-            // se gestiona arriba con isDown
+            // en el avión dispara (arriba, con isDown); con un arma en la mano, recarga
+            if (!enAvion && conArma && mc.screen == null) {
+                Red.CANAL.sendToServer(new Red.AccionArma(Red.AccionArma.RECARGAR, false));
+            }
+        }
+        while (Teclas.MODO.consumeClick()) {
+            if (conArma) Red.CANAL.sendToServer(new Red.AccionArma(Red.AccionArma.MODO, false));
         }
         while (Teclas.BOMBA.consumeClick()) {
             if (enAvion) Red.CANAL.sendToServer(new Red.AccionAvion(1));
-        }
-    }
-
-    @SubscribeEvent
-    public static void mira(ComputeFovModifierEvent e) {
-        if (e.getPlayer().isShiftKeyDown() && e.getPlayer().getMainHandItem().getItem() instanceof ArmaItem arma && arma.esFrancotirador()) {
-            e.setNewFovModifier(0.2f);
         }
     }
 }

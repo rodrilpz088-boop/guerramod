@@ -1,0 +1,19 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "building",
+ "ingredients": [
+  {
+   "item": "minecraft:orange_dye"
+  },
+  {
+   "item": "minecraft:white_dye"
+  },
+  {
+   "item": "minecraft:slime_ball"
+  }
+ ],
+ "result": {
+  "item": "guerramod:cono",
+  "count": 4
+ }
+}

@@ -1,0 +1,7 @@
+{
+ "parent": "minecraft:block/cube_all",
+ "textures": {
+  "all": "guerramod:block/seto"
+ },
+ "render_type": "minecraft:cutout_mipped"
+}

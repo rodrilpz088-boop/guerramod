@@ -1,0 +1,22 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "building",
+ "ingredients": [
+  {
+   "item": "minecraft:torch"
+  },
+  {
+   "item": "minecraft:iron_ingot"
+  },
+  {
+   "item": "minecraft:white_wool"
+  },
+  {
+   "item": "minecraft:stick"
+  }
+ ],
+ "result": {
+  "item": "guerramod:lampara_pie",
+  "count": 1
+ }
+}

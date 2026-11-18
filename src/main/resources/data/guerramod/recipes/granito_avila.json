@@ -1,0 +1,16 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "building",
+ "ingredients": [
+  {
+   "item": "minecraft:diorite"
+  },
+  {
+   "item": "minecraft:andesite"
+  }
+ ],
+ "result": {
+  "item": "guerramod:granito_avila",
+  "count": 4
+ }
+}

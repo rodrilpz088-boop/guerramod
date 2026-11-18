@@ -1,0 +1,19 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "building",
+ "ingredients": [
+  {
+   "item": "minecraft:blue_bed"
+  },
+  {
+   "tag": "minecraft:planks"
+  },
+  {
+   "item": "minecraft:white_wool"
+  }
+ ],
+ "result": {
+  "item": "guerramod:cama_azul",
+  "count": 1
+ }
+}

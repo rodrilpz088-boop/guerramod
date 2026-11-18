@@ -1,0 +1,44 @@
+{
+ "parent": "minecraft:block/block",
+ "textures": {
+  "t0": "guerramod:block/hito_km",
+  "t1": "guerramod:block/reflectante",
+  "t2": "guerramod:block/cono",
+  "particle": "guerramod:block/hito_km"
+ },
+ "elements": [
+  {
+   "from": [
+    4,
+    0,
+    6
+   ],
+   "to": [
+    12,
+    14,
+    10
+   ],
+   "faces": {
+    "north": {
+     "texture": "#t0"
+    },
+    "south": {
+     "texture": "#t0"
+    },
+    "east": {
+     "texture": "#t1"
+    },
+    "west": {
+     "texture": "#t1"
+    },
+    "up": {
+     "texture": "#t2"
+    },
+    "down": {
+     "texture": "#t1"
+    }
+   }
+  }
+ ],
+ "render_type": "minecraft:cutout"
+}

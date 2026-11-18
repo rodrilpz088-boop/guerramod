@@ -1,6 +1,7 @@
 package es.guerramod.eventos;
 
 import es.guerramod.GuerraMod;
+import es.guerramod.armas.Disparos;
 import es.guerramod.entidades.BalaEntity;
 import es.guerramod.pais.ComandoPais;
 import es.guerramod.pais.DatosPaises;
@@ -71,6 +72,7 @@ public final class EventosServidor {
     @SubscribeEvent
     public static void salir(PlayerEvent.PlayerLoggedOutEvent e) {
         ULTIMO_TERRITORIO.remove(e.getEntity().getUUID());
+        Disparos.olvidar(e.getEntity().getUUID());
     }
 
     // ---------------- Protección de territorio ----------------
@@ -196,7 +198,9 @@ public final class EventosServidor {
     public static void tickServidor(TickEvent.ServerTickEvent e) {
         if (e.phase != TickEvent.Phase.END) return;
         MinecraftServer server = ServerLifecycleHooks.getCurrentServer();
-        if (server == null || server.getTickCount() % 20 != 0) return;
+        if (server == null) return;
+        Disparos.tick(server);
+        if (server.getTickCount() % 20 != 0) return;
         DatosRadiacion.get(server).tick(server);
     }
 }

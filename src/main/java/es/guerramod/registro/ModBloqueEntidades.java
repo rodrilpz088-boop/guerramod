@@ -2,6 +2,8 @@ package es.guerramod.registro;
 
 import es.guerramod.GuerraMod;
 import es.guerramod.bloques.BombaNuclearBlockEntity;
+import es.guerramod.bloques.hogar.AlmacenBlockEntity;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -14,6 +16,11 @@ public final class ModBloqueEntidades {
     @SuppressWarnings("ConstantConditions")
     public static final RegistryObject<BlockEntityType<BombaNuclearBlockEntity>> BOMBA_NUCLEAR = TIPOS.register("bomba_nuclear",
             () -> BlockEntityType.Builder.of(BombaNuclearBlockEntity::new, ModBloques.BOMBA_NUCLEAR.get()).build(null));
+
+    @SuppressWarnings("ConstantConditions")
+    public static final RegistryObject<BlockEntityType<AlmacenBlockEntity>> ALMACEN = TIPOS.register("almacen",
+            () -> BlockEntityType.Builder.of(AlmacenBlockEntity::new,
+                    ModBloques.ALMACENES.stream().map(RegistryObject::get).toArray(Block[]::new)).build(null));
 
     private ModBloqueEntidades() {}
 }

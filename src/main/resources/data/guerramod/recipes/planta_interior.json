@@ -1,0 +1,19 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "building",
+ "ingredients": [
+  {
+   "item": "minecraft:flower_pot"
+  },
+  {
+   "item": "minecraft:oak_sapling"
+  },
+  {
+   "item": "minecraft:bone_meal"
+  }
+ ],
+ "result": {
+  "item": "guerramod:planta_interior",
+  "count": 1
+ }
+}

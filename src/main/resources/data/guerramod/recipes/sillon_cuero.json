@@ -1,0 +1,22 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "building",
+ "ingredients": [
+  {
+   "item": "minecraft:leather"
+  },
+  {
+   "item": "minecraft:leather"
+  },
+  {
+   "item": "minecraft:leather"
+  },
+  {
+   "tag": "minecraft:planks"
+  }
+ ],
+ "result": {
+  "item": "guerramod:sillon_cuero",
+  "count": 1
+ }
+}

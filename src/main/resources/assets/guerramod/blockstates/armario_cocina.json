@@ -1,0 +1,19 @@
+{
+ "variants": {
+  "facing=north": {
+   "model": "guerramod:block/armario_cocina"
+  },
+  "facing=east": {
+   "model": "guerramod:block/armario_cocina",
+   "y": 90
+  },
+  "facing=south": {
+   "model": "guerramod:block/armario_cocina",
+   "y": 180
+  },
+  "facing=west": {
+   "model": "guerramod:block/armario_cocina",
+   "y": 270
+  }
+ }
+}

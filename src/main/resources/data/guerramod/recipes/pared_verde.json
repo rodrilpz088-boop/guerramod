@@ -1,0 +1,16 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "building",
+ "ingredients": [
+  {
+   "item": "minecraft:white_concrete_powder"
+  },
+  {
+   "item": "minecraft:lime_dye"
+  }
+ ],
+ "result": {
+  "item": "guerramod:pared_verde",
+  "count": 4
+ }
+}

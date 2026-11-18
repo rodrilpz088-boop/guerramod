@@ -1,0 +1,19 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "building",
+ "ingredients": [
+  {
+   "item": "guerramod:asfalto"
+  },
+  {
+   "item": "minecraft:white_dye"
+  },
+  {
+   "item": "minecraft:minecart"
+  }
+ ],
+ "result": {
+  "item": "guerramod:asfalto_aparcamiento",
+  "count": 1
+ }
+}

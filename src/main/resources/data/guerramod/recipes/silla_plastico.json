@@ -1,0 +1,19 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "building",
+ "ingredients": [
+  {
+   "item": "minecraft:white_concrete"
+  },
+  {
+   "item": "minecraft:white_concrete"
+  },
+  {
+   "item": "minecraft:bone_meal"
+  }
+ ],
+ "result": {
+  "item": "guerramod:silla_plastico",
+  "count": 1
+ }
+}

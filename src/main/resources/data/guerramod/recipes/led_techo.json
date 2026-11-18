@@ -1,0 +1,19 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "building",
+ "ingredients": [
+  {
+   "item": "minecraft:glowstone"
+  },
+  {
+   "item": "minecraft:iron_ingot"
+  },
+  {
+   "item": "minecraft:white_stained_glass_pane"
+  }
+ ],
+ "result": {
+  "item": "guerramod:led_techo",
+  "count": 4
+ }
+}

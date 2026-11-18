@@ -1,0 +1,19 @@
+{
+ "variants": {
+  "facing=north": {
+   "model": "guerramod:block/campana"
+  },
+  "facing=east": {
+   "model": "guerramod:block/campana",
+   "y": 90
+  },
+  "facing=south": {
+   "model": "guerramod:block/campana",
+   "y": 180
+  },
+  "facing=west": {
+   "model": "guerramod:block/campana",
+   "y": 270
+  }
+ }
+}

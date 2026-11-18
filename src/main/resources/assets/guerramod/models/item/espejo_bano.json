@@ -1,0 +1,183 @@
+{
+ "parent": "minecraft:block/block",
+ "textures": {
+  "t0": "guerramod:block/espejo",
+  "t1": "guerramod:block/mat_aluminio",
+  "particle": "guerramod:block/espejo"
+ },
+ "elements": [
+  {
+   "from": [
+    1,
+    4,
+    15.4
+   ],
+   "to": [
+    15,
+    15,
+    16
+   ],
+   "faces": {
+    "north": {
+     "texture": "#t0",
+     "uv": [
+      1,
+      1,
+      15,
+      12
+     ]
+    },
+    "south": {
+     "texture": "#t1",
+     "uv": [
+      1,
+      1,
+      15,
+      12
+     ]
+    },
+    "east": {
+     "texture": "#t1",
+     "uv": [
+      0,
+      1,
+      0.6,
+      12
+     ]
+    },
+    "west": {
+     "texture": "#t1",
+     "uv": [
+      15.4,
+      1,
+      16,
+      12
+     ]
+    },
+    "up": {
+     "texture": "#t1",
+     "uv": [
+      1,
+      15.4,
+      15,
+      16
+     ]
+    },
+    "down": {
+     "texture": "#t1",
+     "uv": [
+      1,
+      0,
+      15,
+      0.6
+     ]
+    }
+   }
+  }
+ ],
+ "render_type": "minecraft:cutout",
+ "display": {
+  "gui": {
+   "rotation": [
+    30,
+    225,
+    0
+   ],
+   "translation": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    0.625,
+    0.625,
+    0.625
+   ]
+  },
+  "ground": {
+   "rotation": [
+    0,
+    0,
+    0
+   ],
+   "translation": [
+    0,
+    3,
+    0
+   ],
+   "scale": [
+    0.25,
+    0.25,
+    0.25
+   ]
+  },
+  "fixed": {
+   "rotation": [
+    0,
+    0,
+    0
+   ],
+   "translation": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    0.5,
+    0.5,
+    0.5
+   ]
+  },
+  "thirdperson_righthand": {
+   "rotation": [
+    75,
+    45,
+    0
+   ],
+   "translation": [
+    0,
+    2.5,
+    0
+   ],
+   "scale": [
+    0.375,
+    0.375,
+    0.375
+   ]
+  },
+  "firstperson_righthand": {
+   "rotation": [
+    0,
+    45,
+    0
+   ],
+   "translation": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    0.4,
+    0.4,
+    0.4
+   ]
+  },
+  "firstperson_lefthand": {
+   "rotation": [
+    0,
+    225,
+    0
+   ],
+   "translation": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    0.4,
+    0.4,
+    0.4
+   ]
+  }
+ }
+}

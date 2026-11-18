@@ -1,0 +1,22 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "building",
+ "ingredients": [
+  {
+   "tag": "minecraft:planks"
+  },
+  {
+   "tag": "minecraft:planks"
+  },
+  {
+   "item": "minecraft:stick"
+  },
+  {
+   "item": "minecraft:white_wool"
+  }
+ ],
+ "result": {
+  "item": "guerramod:silla_comedor",
+  "count": 1
+ }
+}

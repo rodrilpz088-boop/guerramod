@@ -1,0 +1,30 @@
+{
+ "variants": {
+  "facing=up": {
+   "model": "guerramod:block/tira_led"
+  },
+  "facing=down": {
+   "model": "guerramod:block/tira_led",
+   "x": 180
+  },
+  "facing=north": {
+   "model": "guerramod:block/tira_led",
+   "x": 90
+  },
+  "facing=south": {
+   "model": "guerramod:block/tira_led",
+   "x": 90,
+   "y": 180
+  },
+  "facing=east": {
+   "model": "guerramod:block/tira_led",
+   "x": 90,
+   "y": 90
+  },
+  "facing=west": {
+   "model": "guerramod:block/tira_led",
+   "x": 90,
+   "y": 270
+  }
+ }
+}

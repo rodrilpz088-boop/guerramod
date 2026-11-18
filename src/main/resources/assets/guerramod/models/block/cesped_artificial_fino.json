@@ -1,0 +1,6 @@
+{
+ "parent": "minecraft:block/carpet",
+ "textures": {
+  "wool": "guerramod:block/cesped_artificial"
+ }
+}

@@ -1,0 +1,22 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "building",
+ "ingredients": [
+  {
+   "item": "guerramod:poste_senal"
+  },
+  {
+   "item": "minecraft:iron_ingot"
+  },
+  {
+   "item": "minecraft:black_dye"
+  },
+  {
+   "item": "minecraft:paper"
+  }
+ ],
+ "result": {
+  "item": "guerramod:senal_rotonda",
+  "count": 1
+ }
+}

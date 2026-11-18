@@ -1,0 +1,19 @@
+{
+ "variants": {
+  "facing=north": {
+   "model": "guerramod:block/banera"
+  },
+  "facing=east": {
+   "model": "guerramod:block/banera",
+   "y": 90
+  },
+  "facing=south": {
+   "model": "guerramod:block/banera",
+   "y": 180
+  },
+  "facing=west": {
+   "model": "guerramod:block/banera",
+   "y": 270
+  }
+ }
+}

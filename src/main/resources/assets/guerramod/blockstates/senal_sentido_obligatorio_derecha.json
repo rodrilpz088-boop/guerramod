@@ -1,0 +1,19 @@
+{
+ "variants": {
+  "facing=north": {
+   "model": "guerramod:block/senal_sentido_obligatorio_derecha"
+  },
+  "facing=east": {
+   "model": "guerramod:block/senal_sentido_obligatorio_derecha",
+   "y": 90
+  },
+  "facing=south": {
+   "model": "guerramod:block/senal_sentido_obligatorio_derecha",
+   "y": 180
+  },
+  "facing=west": {
+   "model": "guerramod:block/senal_sentido_obligatorio_derecha",
+   "y": 270
+  }
+ }
+}

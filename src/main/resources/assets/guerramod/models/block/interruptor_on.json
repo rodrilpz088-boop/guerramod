@@ -1,0 +1,83 @@
+{
+ "parent": "minecraft:block/block",
+ "textures": {
+  "t0": "guerramod:block/mat_plastico_blanco",
+  "particle": "guerramod:block/mat_plastico_blanco"
+ },
+ "elements": [
+  {
+   "from": [
+    5.5,
+    4.5,
+    15
+   ],
+   "to": [
+    10.5,
+    11.5,
+    16
+   ],
+   "faces": {
+    "north": {
+     "texture": "#t0"
+    },
+    "south": {
+     "texture": "#t0"
+    },
+    "east": {
+     "texture": "#t0"
+    },
+    "west": {
+     "texture": "#t0"
+    },
+    "up": {
+     "texture": "#t0"
+    },
+    "down": {
+     "texture": "#t0"
+    }
+   }
+  },
+  {
+   "from": [
+    6.5,
+    5.5,
+    14.4
+   ],
+   "to": [
+    9.5,
+    10.5,
+    15
+   ],
+   "faces": {
+    "north": {
+     "texture": "#t0"
+    },
+    "south": {
+     "texture": "#t0"
+    },
+    "east": {
+     "texture": "#t0"
+    },
+    "west": {
+     "texture": "#t0"
+    },
+    "up": {
+     "texture": "#t0"
+    },
+    "down": {
+     "texture": "#t0"
+    }
+   },
+   "rotation": {
+    "origin": [
+     8,
+     8,
+     15
+    ],
+    "axis": "x",
+    "angle": 22.5
+   }
+  }
+ ],
+ "render_type": "minecraft:cutout"
+}

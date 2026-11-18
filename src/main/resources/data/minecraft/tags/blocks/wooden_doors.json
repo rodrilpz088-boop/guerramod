@@ -1,0 +1,9 @@
+{
+ "replace": false,
+ "values": [
+  "guerramod:puerta_blanca",
+  "guerramod:puerta_roble",
+  "guerramod:puerta_nogal",
+  "guerramod:puerta_acorazada"
+ ]
+}

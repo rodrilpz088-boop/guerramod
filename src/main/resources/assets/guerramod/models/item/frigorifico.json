@@ -1,0 +1,252 @@
+{
+ "parent": "minecraft:block/block",
+ "textures": {
+  "t0": "guerramod:block/frigo_abajo",
+  "t1": "guerramod:block/mat_inox",
+  "t2": "guerramod:block/frigo_arriba",
+  "particle": "guerramod:block/frigo_abajo"
+ },
+ "elements": [
+  {
+   "from": [
+    0,
+    0,
+    1
+   ],
+   "to": [
+    16,
+    16,
+    16
+   ],
+   "faces": {
+    "north": {
+     "texture": "#t0",
+     "uv": [
+      0,
+      0,
+      16,
+      16
+     ]
+    },
+    "south": {
+     "texture": "#t1",
+     "uv": [
+      0,
+      0,
+      16,
+      16
+     ]
+    },
+    "east": {
+     "texture": "#t1",
+     "uv": [
+      0,
+      0,
+      15,
+      16
+     ]
+    },
+    "west": {
+     "texture": "#t1",
+     "uv": [
+      1,
+      0,
+      16,
+      16
+     ]
+    },
+    "up": {
+     "texture": "#t1",
+     "uv": [
+      0,
+      1,
+      16,
+      16
+     ]
+    },
+    "down": {
+     "texture": "#t1",
+     "uv": [
+      0,
+      0,
+      16,
+      15
+     ]
+    }
+   }
+  },
+  {
+   "from": [
+    0,
+    16,
+    1
+   ],
+   "to": [
+    16,
+    30,
+    16
+   ],
+   "faces": {
+    "north": {
+     "texture": "#t2",
+     "uv": [
+      0,
+      2,
+      16,
+      16
+     ]
+    },
+    "south": {
+     "texture": "#t1",
+     "uv": [
+      0,
+      2,
+      16,
+      16
+     ]
+    },
+    "east": {
+     "texture": "#t1",
+     "uv": [
+      0,
+      2,
+      15,
+      16
+     ]
+    },
+    "west": {
+     "texture": "#t1",
+     "uv": [
+      1,
+      2,
+      16,
+      16
+     ]
+    },
+    "up": {
+     "texture": "#t1",
+     "uv": [
+      0,
+      1,
+      16,
+      16
+     ]
+    },
+    "down": {
+     "texture": "#t1",
+     "uv": [
+      0,
+      0,
+      16,
+      15
+     ]
+    }
+   }
+  }
+ ],
+ "render_type": "minecraft:cutout",
+ "display": {
+  "gui": {
+   "rotation": [
+    30,
+    225,
+    0
+   ],
+   "translation": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    0.375,
+    0.375,
+    0.375
+   ]
+  },
+  "ground": {
+   "rotation": [
+    0,
+    0,
+    0
+   ],
+   "translation": [
+    0,
+    3,
+    0
+   ],
+   "scale": [
+    0.15,
+    0.15,
+    0.15
+   ]
+  },
+  "fixed": {
+   "rotation": [
+    0,
+    0,
+    0
+   ],
+   "translation": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    0.3,
+    0.3,
+    0.3
+   ]
+  },
+  "thirdperson_righthand": {
+   "rotation": [
+    75,
+    45,
+    0
+   ],
+   "translation": [
+    0,
+    2.5,
+    0
+   ],
+   "scale": [
+    0.22499999999999998,
+    0.22499999999999998,
+    0.22499999999999998
+   ]
+  },
+  "firstperson_righthand": {
+   "rotation": [
+    0,
+    45,
+    0
+   ],
+   "translation": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    0.24,
+    0.24,
+    0.24
+   ]
+  },
+  "firstperson_lefthand": {
+   "rotation": [
+    0,
+    225,
+    0
+   ],
+   "translation": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    0.24,
+    0.24,
+    0.24
+   ]
+  }
+ }
+}

@@ -1,0 +1,80 @@
+{
+ "variants": {
+  "facing=south,in_wall=false,open=false": {
+   "model": "guerramod:block/puerta_verja_forja",
+   "uvlock": true
+  },
+  "facing=south,in_wall=false,open=true": {
+   "model": "guerramod:block/puerta_verja_forja_abierta",
+   "uvlock": true
+  },
+  "facing=south,in_wall=true,open=false": {
+   "model": "guerramod:block/puerta_verja_forja_muro",
+   "uvlock": true
+  },
+  "facing=south,in_wall=true,open=true": {
+   "model": "guerramod:block/puerta_verja_forja_muro_abierta",
+   "uvlock": true
+  },
+  "facing=west,in_wall=false,open=false": {
+   "model": "guerramod:block/puerta_verja_forja",
+   "uvlock": true,
+   "y": 90
+  },
+  "facing=west,in_wall=false,open=true": {
+   "model": "guerramod:block/puerta_verja_forja_abierta",
+   "uvlock": true,
+   "y": 90
+  },
+  "facing=west,in_wall=true,open=false": {
+   "model": "guerramod:block/puerta_verja_forja_muro",
+   "uvlock": true,
+   "y": 90
+  },
+  "facing=west,in_wall=true,open=true": {
+   "model": "guerramod:block/puerta_verja_forja_muro_abierta",
+   "uvlock": true,
+   "y": 90
+  },
+  "facing=north,in_wall=false,open=false": {
+   "model": "guerramod:block/puerta_verja_forja",
+   "uvlock": true,
+   "y": 180
+  },
+  "facing=north,in_wall=false,open=true": {
+   "model": "guerramod:block/puerta_verja_forja_abierta",
+   "uvlock": true,
+   "y": 180
+  },
+  "facing=north,in_wall=true,open=false": {
+   "model": "guerramod:block/puerta_verja_forja_muro",
+   "uvlock": true,
+   "y": 180
+  },
+  "facing=north,in_wall=true,open=true": {
+   "model": "guerramod:block/puerta_verja_forja_muro_abierta",
+   "uvlock": true,
+   "y": 180
+  },
+  "facing=east,in_wall=false,open=false": {
+   "model": "guerramod:block/puerta_verja_forja",
+   "uvlock": true,
+   "y": 270
+  },
+  "facing=east,in_wall=false,open=true": {
+   "model": "guerramod:block/puerta_verja_forja_abierta",
+   "uvlock": true,
+   "y": 270
+  },
+  "facing=east,in_wall=true,open=false": {
+   "model": "guerramod:block/puerta_verja_forja_muro",
+   "uvlock": true,
+   "y": 270
+  },
+  "facing=east,in_wall=true,open=true": {
+   "model": "guerramod:block/puerta_verja_forja_muro_abierta",
+   "uvlock": true,
+   "y": 270
+  }
+ }
+}

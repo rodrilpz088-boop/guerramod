@@ -1,0 +1,19 @@
+{
+ "variants": {
+  "facing=north": {
+   "model": "guerramod:block/senal_ceda"
+  },
+  "facing=east": {
+   "model": "guerramod:block/senal_ceda",
+   "y": 90
+  },
+  "facing=south": {
+   "model": "guerramod:block/senal_ceda",
+   "y": 180
+  },
+  "facing=west": {
+   "model": "guerramod:block/senal_ceda",
+   "y": 270
+  }
+ }
+}

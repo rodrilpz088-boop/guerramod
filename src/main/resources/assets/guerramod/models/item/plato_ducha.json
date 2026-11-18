@@ -1,0 +1,457 @@
+{
+ "parent": "minecraft:block/block",
+ "textures": {
+  "t0": "guerramod:block/mat_ceramica",
+  "t1": "guerramod:block/plato_ducha",
+  "t2": "guerramod:block/mat_cristal",
+  "t3": "guerramod:block/mat_aluminio",
+  "particle": "guerramod:block/mat_ceramica"
+ },
+ "elements": [
+  {
+   "from": [
+    0,
+    0,
+    0
+   ],
+   "to": [
+    16,
+    1,
+    16
+   ],
+   "faces": {
+    "north": {
+     "texture": "#t0",
+     "uv": [
+      0,
+      15,
+      16,
+      16
+     ]
+    },
+    "south": {
+     "texture": "#t0",
+     "uv": [
+      0,
+      15,
+      16,
+      16
+     ]
+    },
+    "east": {
+     "texture": "#t0",
+     "uv": [
+      0,
+      15,
+      16,
+      16
+     ]
+    },
+    "west": {
+     "texture": "#t0",
+     "uv": [
+      0,
+      15,
+      16,
+      16
+     ]
+    },
+    "up": {
+     "texture": "#t1",
+     "uv": [
+      0,
+      0,
+      16,
+      16
+     ]
+    },
+    "down": {
+     "texture": "#t0",
+     "uv": [
+      0,
+      0,
+      16,
+      16
+     ]
+    }
+   }
+  },
+  {
+   "from": [
+    0,
+    1,
+    0
+   ],
+   "to": [
+    0.4,
+    16,
+    16
+   ],
+   "faces": {
+    "north": {
+     "texture": "#t2",
+     "uv": [
+      15.6,
+      0,
+      16,
+      15
+     ]
+    },
+    "south": {
+     "texture": "#t2",
+     "uv": [
+      0,
+      0,
+      0.4,
+      15
+     ]
+    },
+    "east": {
+     "texture": "#t2",
+     "uv": [
+      0,
+      0,
+      16,
+      15
+     ]
+    },
+    "west": {
+     "texture": "#t2",
+     "uv": [
+      0,
+      0,
+      16,
+      15
+     ]
+    },
+    "up": {
+     "texture": "#t2",
+     "uv": [
+      0,
+      0,
+      0.4,
+      16
+     ]
+    },
+    "down": {
+     "texture": "#t2",
+     "uv": [
+      0,
+      0,
+      0.4,
+      16
+     ]
+    }
+   }
+  },
+  {
+   "from": [
+    0.4,
+    1,
+    15.6
+   ],
+   "to": [
+    16,
+    16,
+    16
+   ],
+   "faces": {
+    "north": {
+     "texture": "#t2",
+     "uv": [
+      0,
+      0,
+      15.6,
+      15
+     ]
+    },
+    "south": {
+     "texture": "#t2",
+     "uv": [
+      0.4,
+      0,
+      16,
+      15
+     ]
+    },
+    "east": {
+     "texture": "#t2",
+     "uv": [
+      0,
+      0,
+      0.4,
+      15
+     ]
+    },
+    "west": {
+     "texture": "#t2",
+     "uv": [
+      15.6,
+      0,
+      16,
+      15
+     ]
+    },
+    "up": {
+     "texture": "#t2",
+     "uv": [
+      0.4,
+      15.6,
+      16,
+      16
+     ]
+    },
+    "down": {
+     "texture": "#t2",
+     "uv": [
+      0.4,
+      0,
+      16,
+      0.4
+     ]
+    }
+   }
+  },
+  {
+   "from": [
+    0,
+    1,
+    0
+   ],
+   "to": [
+    8,
+    16,
+    0.4
+   ],
+   "faces": {
+    "north": {
+     "texture": "#t2",
+     "uv": [
+      8,
+      0,
+      16,
+      15
+     ]
+    },
+    "south": {
+     "texture": "#t2",
+     "uv": [
+      0,
+      0,
+      8,
+      15
+     ]
+    },
+    "east": {
+     "texture": "#t2",
+     "uv": [
+      15.6,
+      0,
+      16,
+      15
+     ]
+    },
+    "west": {
+     "texture": "#t2",
+     "uv": [
+      0,
+      0,
+      0.4,
+      15
+     ]
+    },
+    "up": {
+     "texture": "#t2",
+     "uv": [
+      0,
+      0,
+      8,
+      0.4
+     ]
+    },
+    "down": {
+     "texture": "#t2",
+     "uv": [
+      0,
+      15.6,
+      8,
+      16
+     ]
+    }
+   }
+  },
+  {
+   "from": [
+    0,
+    15.6,
+    0
+   ],
+   "to": [
+    8,
+    16,
+    0.6
+   ],
+   "faces": {
+    "north": {
+     "texture": "#t3",
+     "uv": [
+      8,
+      0,
+      16,
+      0.4
+     ]
+    },
+    "south": {
+     "texture": "#t3",
+     "uv": [
+      0,
+      0,
+      8,
+      0.4
+     ]
+    },
+    "east": {
+     "texture": "#t3",
+     "uv": [
+      15.4,
+      0,
+      16,
+      0.4
+     ]
+    },
+    "west": {
+     "texture": "#t3",
+     "uv": [
+      0,
+      0,
+      0.6,
+      0.4
+     ]
+    },
+    "up": {
+     "texture": "#t3",
+     "uv": [
+      0,
+      0,
+      8,
+      0.6
+     ]
+    },
+    "down": {
+     "texture": "#t3",
+     "uv": [
+      0,
+      15.4,
+      8,
+      16
+     ]
+    }
+   }
+  }
+ ],
+ "render_type": "minecraft:translucent",
+ "display": {
+  "gui": {
+   "rotation": [
+    30,
+    225,
+    0
+   ],
+   "translation": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    0.625,
+    0.625,
+    0.625
+   ]
+  },
+  "ground": {
+   "rotation": [
+    0,
+    0,
+    0
+   ],
+   "translation": [
+    0,
+    3,
+    0
+   ],
+   "scale": [
+    0.25,
+    0.25,
+    0.25
+   ]
+  },
+  "fixed": {
+   "rotation": [
+    0,
+    0,
+    0
+   ],
+   "translation": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    0.5,
+    0.5,
+    0.5
+   ]
+  },
+  "thirdperson_righthand": {
+   "rotation": [
+    75,
+    45,
+    0
+   ],
+   "translation": [
+    0,
+    2.5,
+    0
+   ],
+   "scale": [
+    0.375,
+    0.375,
+    0.375
+   ]
+  },
+  "firstperson_righthand": {
+   "rotation": [
+    0,
+    45,
+    0
+   ],
+   "translation": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    0.4,
+    0.4,
+    0.4
+   ]
+  },
+  "firstperson_lefthand": {
+   "rotation": [
+    0,
+    225,
+    0
+   ],
+   "translation": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    0.4,
+    0.4,
+    0.4
+   ]
+  }
+ }
+}

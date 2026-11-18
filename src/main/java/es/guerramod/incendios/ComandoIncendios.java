@@ -102,10 +102,10 @@ public final class ComandoIncendios {
                 .then(Commands.literal("sequia").requires(s -> s.hasPermission(2))
                         .then(Commands.argument("dias", FloatArgumentType.floatArg(0, 365)).executes(c -> {
                             Clima cl = Clima.get(c.getSource().getServer());
-                            float d = FloatArgumentType.getFloat(c, "dias");
-                            cl.ponerSequia(c.getSource().getServer().overworld(), d);
+                            float dias = FloatArgumentType.getFloat(c, "dias");
+                            cl.ponerSequia(c.getSource().getServer().overworld(), dias);
                             cl.cambiado(c.getSource().getServer());
-                            return ok(c, String.format("La hierba lleva %.0f días sin lluvia", d));
+                            return ok(c, String.format("La hierba lleva %.0f días sin lluvia", dias));
                         })))
                 .then(Commands.literal("oladecalor").requires(s -> s.hasPermission(2)).executes(c -> {
                     var srv = c.getSource().getServer();

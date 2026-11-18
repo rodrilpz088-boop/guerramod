@@ -74,10 +74,12 @@ public final class ComandoIncendios {
         Clima cl = Clima.get(c.getSource().getServer());
         ServerLevel l = c.getSource().getLevel();
         BlockPos pos = BlockPos.containing(c.getSource().getPosition());
-        int rg = cl.riesgo(l, pos);
-        c.getSource().sendSuccess(() -> Component.literal(String.format("Viento del %s a %d km/h · %.1f días sin llover · Riesgo: %s · Rayos: %s",
-                Clima.procedencia(cl.angulo), Math.round(cl.velocidad), cl.diasSinLluvia(l), Clima.nombreRiesgo(rg),
-                cl.naturales ? "sí" : "no")), false);
+        Meteo m = Meteo.en(l, pos);
+        c.getSource().sendSuccess(() -> Component.literal(String.format(
+                "%.0f °C · %.0f %% humedad · viento del %s a %.0f km/h · %.1f días sin llover · hierba seca %.0f %% · "
+                        + "avance en pasto %.1f m/min · riesgo %s · rayos: %s",
+                m.temperatura(), m.humedad(), Clima.procedencia(cl.angulo), m.viento(), cl.diasSinLluvia(l), m.curado(),
+                m.rosCabeza() * 60, Clima.nombreRiesgo(m.riesgo()), cl.naturales ? "sí" : "no")), false);
         return 1;
     }
 

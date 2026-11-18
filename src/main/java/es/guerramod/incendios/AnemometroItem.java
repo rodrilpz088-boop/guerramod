@@ -32,9 +32,15 @@ public class AnemometroItem extends Item {
             BlockPos pos = p.blockPosition();
             int riesgo = c.riesgo(level, pos);
             p.sendSystemMessage(Component.literal("━━ Estación meteorológica ━━").withStyle(ChatFormatting.AQUA));
-            p.sendSystemMessage(Component.literal("Viento del " + Clima.procedencia(c.angulo) + " a " + Math.round(c.velocidad) + " km/h"));
-            p.sendSystemMessage(Component.literal(String.format("Días sin llover: %.1f · Sequedad: %d %%", c.diasSinLluvia(level),
-                    Math.round(c.sequedad(level, pos) * 100))));
+            Meteo m = Meteo.en((net.minecraft.server.level.ServerLevel) level, pos);
+            p.sendSystemMessage(Component.literal(String.format("Temperatura %.0f °C · Humedad %.0f %% · Viento del %s a %.0f km/h",
+                    m.temperatura(), m.humedad(), Clima.procedencia(c.angulo), m.viento())));
+            p.sendSystemMessage(Component.literal(String.format("Días sin llover: %.1f · Hierba seca: %.0f %% · Humedad de la hierba: %.0f %%",
+                    c.diasSinLluvia(level), m.curado(), m.humedadCombustible())));
+            double ros = m.rosCabeza();
+            p.sendSystemMessage(Component.literal(String.format("Avance previsto en pasto: %.1f m/min a favor del viento, %.1f m/min en contra",
+                    ros * 60, m.rosDireccion(-1) * 60)).withStyle(ChatFormatting.GOLD));
+            p.sendSystemMessage(Component.literal(String.format("Índice de peligro (GFDI): %.1f", m.indice())).withStyle(ChatFormatting.GRAY));
             p.sendSystemMessage(Component.literal("Riesgo de incendio: ").append(Component.literal(Clima.nombreRiesgo(riesgo))
                     .withStyle(Style.EMPTY.withColor(TextColor.fromRgb(Clima.colorRiesgo(riesgo))).withBold(true))));
             // buscar fuego en 48 bloques

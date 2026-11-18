@@ -107,6 +107,7 @@ public class Clima extends SavedData {
 
     /** 0 bajo, 1 moderado, 2 alto, 3 muy alto, 4 extremo. */
     public int riesgo(Level level, BlockPos pos) {
+        if (level instanceof net.minecraft.server.level.ServerLevel sl) return Meteo.en(sl, pos).riesgo();
         if (level.isRaining()) return 0;
         double v = sequedad(level, pos) * (0.7 + fuerza() * 0.9);
         if (v < 0.6) return 0;

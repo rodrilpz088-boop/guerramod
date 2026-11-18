@@ -54,7 +54,7 @@ public class LlamaBlock extends Block {
     @Override
     @SuppressWarnings("deprecation")
     public void onPlace(BlockState st, Level level, BlockPos pos, BlockState viejo, boolean moviendo) {
-        if (!level.isClientSide && !viejo.is(this)) level.scheduleTick(pos, this, 2 + level.random.nextInt(4));
+        if (!level.isClientSide && !viejo.is(this)) level.scheduleTick(pos, this, 6 + level.random.nextInt(6));
     }
 
     @Override
@@ -71,24 +71,32 @@ public class LlamaBlock extends Block {
             level.setBlock(pos, Blocks.AIR.defaultBlockState(), Block.UPDATE_ALL);
             return;
         }
-        Clima c = Clima.get(level.getServer());
+        final double dt = 0.5; // la llama se revisa cada medio segundo
         boolean grande = st.getValue(GRANDE);
-        int intentos = 3 + (comb > 0.6 ? 2 : 0) + (grande ? 2 : 0) + (int) Math.round(c.fuerza() * 3);
-        Fuego.propagar(level, pos, r, Math.min(1.5, comb + 0.35 + (grande ? 0.3 : 0)), intentos);
-        if (r.nextFloat() < 0.05f * c.fuerza() * (copa ? 3 : 1)) Fuego.pavesa(level, pos, r);
-        if (r.nextFloat() < (copa ? 0.35f : 0.08f)) Fuego.columnaHumo(level, pos, r, copa || grande);
+        double rosCabeza = Fuego.extender(level, pos, r, dt, copa, grande ? 1.15 : 1.0);
+        Meteo m = Meteo.en(level, pos);
 
-        int edad = st.getValue(EDAD) + 1 + (comb < 0.4 ? 1 : 0);
+        // pavesas: con viento fuerte y llamas altas (y mucho más desde las copas)
+        if ((grande || copa) && m.viento() > 15) {
+            double pav = dt * 0.012 * Math.pow((m.viento() - 15) / 20.0, 2) * (copa ? 4 : 1);
+            if (r.nextDouble() < pav) Fuego.pavesa(level, pos, r);
+        }
+        if (r.nextFloat() < (copa ? 0.3f : grande ? 0.12f : 0.05f)) Fuego.columnaHumo(level, pos, r, copa || grande);
+
+        // tiempo de residencia: la hierba arde unos segundos; si el fuego avanza muy despacio (sin viento, húmedo)
+        // la llama se queda más tiempo "reptando"; las copas arden medio minuto
+        double tRes = copa ? 30 : 4 + comb * 4;
+        if (!copa) tRes = Math.max(tRes, Math.min(240, 1.5 / Math.max(0.006, rosCabeza)));
+        int edad = st.getValue(EDAD);
+        if (r.nextDouble() < 8 * dt / tRes) edad++;
         if (edad >= 7) {
             consumir(level, pos, copa, r);
-        } else {
-            // con mucho combustible al lado (troncos, hojas) la llama crece
-            BlockState nuevo = st.setValue(EDAD, edad).setValue(GRANDE, grande || comb > 1.05);
-            level.setBlock(pos, nuevo, Block.UPDATE_CLIENTS);
-            // el césped arde en un suspiro; las copas y lo que tiene mucho combustible, más
-            int espera = copa ? 12 + r.nextInt(12) : 2 + r.nextInt(4) + (int) (comb * 3);
-            level.scheduleTick(pos, this, espera);
+            return;
         }
+        boolean nuevaGrande = copa || m.alturaLlama(rosCabeza * Math.min(1.25, comb / 1.4)) > 1.6;
+        BlockState nuevo = st.setValue(EDAD, edad).setValue(GRANDE, nuevaGrande);
+        if (nuevo != st) level.setBlock(pos, nuevo, Block.UPDATE_CLIENTS);
+        level.scheduleTick(pos, this, 9 + r.nextInt(3));
     }
 
     private void consumir(ServerLevel level, BlockPos pos, boolean copa, RandomSource r) {

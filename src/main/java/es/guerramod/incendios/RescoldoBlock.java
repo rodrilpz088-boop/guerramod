@@ -65,7 +65,7 @@ public class RescoldoBlock extends Block {
             return;
         }
         // reavivar: poco probable, pero con viento y sequía es como empiezan los rebrotes
-        Fuego.propagar(level, pos, r, 0.3, 1);
+        Fuego.extender(level, pos, r, 5.0, false, 0.12);
         if (r.nextFloat() < 0.4f) Fuego.columnaHumo(level, pos, r, false);
         int edad = st.getValue(EDAD) + 1;
         if (edad >= 7) {

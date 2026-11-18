@@ -155,7 +155,12 @@ En los asientos (sillas, sofás, inodoro, bancos…) te sientas con clic derecho
 * Al pasar el fuego queda **tierra quemada** negra, **ceniza**, **troncos carbonizados**, **ramas quemadas** y
   **rescoldos** que humean durante minutos, queman al pisarlos y **pueden reavivar el incendio** (hay que mojarlos o
   removerlos con el rastrillo). Con el tiempo la hierba vuelve a crecer en la tierra quemada.
-* **El césped arde a toda velocidad** (el fuego avanza varios bloques por segundo, más con viento).
+* **Velocidad realista** con los modelos de los servicios forestales (CSIRO/McArthur): la velocidad en la hierba depende
+  de la **temperatura**, la **humedad del aire**, la **humedad de la hierba**, lo **seca (curada)** que esté, el **viento**
+  y la **pendiente**. Ejemplos: llanura a mediodía con 20 km/h de viento ≈ 75 m/min; sabana a 38 °C con 30 km/h ≈ 175
+  m/min; sin viento apenas avanza (repta medio metro por minuto); de noche, con frío o recién llovido casi se para.
+  El incendio toma forma alargada a favor del viento y avanza muy despacio en contra. La **estación meteorológica** te dice
+  temperatura, humedad, la velocidad de avance prevista y el índice de peligro (GFDI).
 * **Los árboles hacen crecer el fuego**: las copas y los troncos ardiendo sacan **llamas altas** de casi dos bloques que
   propagan más y lanzan más pavesas.
 * **Recuperación**: la tierra quemada pasa por 4 fases (negra → brotes → verdea → césped) y al final sale hierba y a

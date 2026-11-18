@@ -13,7 +13,8 @@ import java.util.function.Supplier;
 /** Materiales de armadura: militar (camuflaje, resistente) y NBQ (protege de la radiación). */
 public enum MaterialArmadura implements ArmorMaterial {
     MILITAR("militar", 30, new int[]{3, 6, 8, 3}, 10, 1.5f, 0.1f, () -> Ingredient.of(ModItems.PLACA_ACERO.get())),
-    NBQ("nbq", 18, new int[]{1, 3, 4, 1}, 8, 0.0f, 0.0f, () -> Ingredient.of(net.minecraft.world.item.Items.LEATHER));
+    NBQ("nbq", 18, new int[]{1, 3, 4, 1}, 8, 0.0f, 0.0f, () -> Ingredient.of(net.minecraft.world.item.Items.LEATHER)),
+    BOMBERO("bombero", 25, new int[]{2, 5, 6, 2}, 10, 1.0f, 0.0f, () -> Ingredient.of(net.minecraft.world.item.Items.LEATHER));
 
     // orden de defensa: botas, pantalón, pecho, casco
     private static final int[] DURABILIDAD_BASE = {13, 15, 16, 11};

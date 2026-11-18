@@ -1,0 +1,19 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "equipment",
+ "ingredients": [
+  {
+   "item": "guerramod:circuito"
+  },
+  {
+   "item": "minecraft:water_bucket"
+  },
+  {
+   "item": "minecraft:lightning_rod"
+  }
+ ],
+ "result": {
+  "item": "guerramod:radio_hidroavion",
+  "count": 1
+ }
+}

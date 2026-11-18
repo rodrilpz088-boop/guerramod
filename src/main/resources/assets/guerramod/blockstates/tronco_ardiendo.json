@@ -1,0 +1,16 @@
+{
+ "variants": {
+  "axis=y": {
+   "model": "guerramod:block/tronco_ardiendo"
+  },
+  "axis=z": {
+   "model": "guerramod:block/tronco_ardiendo",
+   "x": 90
+  },
+  "axis=x": {
+   "model": "guerramod:block/tronco_ardiendo",
+   "x": 90,
+   "y": 90
+  }
+ }
+}

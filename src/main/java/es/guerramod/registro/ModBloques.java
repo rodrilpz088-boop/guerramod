@@ -129,6 +129,7 @@ public final class ModBloques {
                             .sound(SoundType.WOOL).noOcclusion())));
         }
         CatalogoGenerado.registrar();
+        es.guerramod.incendios.BloquesIncendio.iniciar();
     }
 
     private ModBloques() {}

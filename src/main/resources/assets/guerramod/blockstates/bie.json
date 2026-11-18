@@ -1,0 +1,19 @@
+{
+ "variants": {
+  "facing=north": {
+   "model": "guerramod:block/bie"
+  },
+  "facing=east": {
+   "model": "guerramod:block/bie",
+   "y": 90
+  },
+  "facing=south": {
+   "model": "guerramod:block/bie",
+   "y": 180
+  },
+  "facing=west": {
+   "model": "guerramod:block/bie",
+   "y": 270
+  }
+ }
+}

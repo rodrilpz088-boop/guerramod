@@ -1,0 +1,46 @@
+{
+ "parent": "minecraft:block/block",
+ "render_type": "minecraft:cutout",
+ "textures": {
+  "r": "guerramod:block/rojo_bombero",
+  "c": "guerramod:block/mat_cromo",
+  "n": "guerramod:block/mat_metal_negro",
+  "a": "guerramod:block/amarillo_bombero",
+  "f": "guerramod:block/bie_frente",
+  "particle": "guerramod:block/rojo_bombero"
+ },
+ "elements": [
+  {
+   "from": [
+    1,
+    1,
+    11
+   ],
+   "to": [
+    15,
+    15,
+    16
+   ],
+   "faces": {
+    "north": {
+     "texture": "#f"
+    },
+    "south": {
+     "texture": "#r"
+    },
+    "east": {
+     "texture": "#r"
+    },
+    "west": {
+     "texture": "#r"
+    },
+    "up": {
+     "texture": "#r"
+    },
+    "down": {
+     "texture": "#r"
+    }
+   }
+  }
+ ]
+}

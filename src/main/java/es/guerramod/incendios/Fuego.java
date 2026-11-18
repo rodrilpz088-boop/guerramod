@@ -1,0 +1,334 @@
+package es.guerramod.incendios;
+
+import it.unimi.dsi.fastutil.longs.Long2LongOpenHashMap;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.CampfireBlock;
+import net.minecraft.world.level.block.RotatedPillarBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.Heightmap;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
+
+import java.util.*;
+
+/**
+ * El "motor" del fuego: qué arde, con qué facilidad se propaga (combustible, viento, pendiente, sequía, lluvia),
+ * cómo queda el terreno al quemarse y cómo se apaga.
+ */
+public final class Fuego {
+    private Fuego() {}
+
+    // ================================================================== suelo mojado (agua reciente)
+
+    private static final Map<ResourceKey<Level>, Long2LongOpenHashMap> MOJADO = new HashMap<>();
+
+    public static void mojar(Level level, BlockPos centro, int radio, int ticks) {
+        Long2LongOpenHashMap m = MOJADO.computeIfAbsent(level.dimension(), k -> new Long2LongOpenHashMap());
+        long hasta = level.getGameTime() + ticks;
+        for (int x = -radio; x <= radio; x++)
+            for (int z = -radio; z <= radio; z++)
+                for (int y = -2; y <= 2; y++) {
+                    if (x * x + z * z > radio * radio + 1) continue;
+                    m.put(BlockPos.asLong(centro.getX() + x, centro.getY() + y, centro.getZ() + z), hasta);
+                }
+        if (m.size() > 200_000) m.clear();
+    }
+
+    public static boolean mojado(Level level, BlockPos p) {
+        Long2LongOpenHashMap m = MOJADO.get(level.dimension());
+        if (m == null) return false;
+        long hasta = m.get(p.asLong());
+        if (hasta == 0) return false;
+        if (hasta < level.getGameTime()) {
+            m.remove(p.asLong());
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean llueve(Level level, BlockPos p) {
+        return level.isRainingAt(p) || level.isRainingAt(p.above());
+    }
+
+    // ================================================================== combustible
+
+    public static boolean esPasto(BlockState s) {
+        return s.is(Blocks.GRASS) || s.is(Blocks.TALL_GRASS) || s.is(Blocks.FERN) || s.is(Blocks.LARGE_FERN)
+                || s.is(Blocks.DEAD_BUSH) || s.is(BlockTags.FLOWERS) || s.is(Blocks.SWEET_BERRY_BUSH) || s.is(BlockTags.CROPS)
+                || s.is(BloquesIncendio.PASTO_SECO.get()) || s.is(BlockTags.SAPLINGS);
+    }
+
+    /** Suelo que arde (la hierba de encima, la paja...). */
+    public static double sueloQuemable(BlockState abajo) {
+        if (abajo.is(Blocks.GRASS_BLOCK) || abajo.is(Blocks.PODZOL) || abajo.is(Blocks.MYCELIUM)) return 0.5;
+        if (abajo.is(Blocks.MOSS_BLOCK) || abajo.is(Blocks.MOSS_CARPET)) return 0.6;
+        if (abajo.is(Blocks.HAY_BLOCK)) return 0.95;
+        if (abajo.is(BlockTags.LEAVES)) return 0.6;
+        if (abajo.is(Blocks.FARMLAND)) return 0.15;
+        return 0.0;
+    }
+
+    public static boolean cabeLlama(BlockState s) {
+        if (s.isAir()) return true;
+        if (!s.getFluidState().isEmpty()) return false;
+        return esPasto(s) || (s.canBeReplaced() && !(s.getBlock() instanceof LlamaBlock));
+    }
+
+    /** Cuánto combustible hay para una llama en esta posición (0 = nada, 1 = mucho). */
+    public static double combustible(Level level, BlockPos pos) {
+        BlockState aqui = level.getBlockState(pos);
+        double f = sueloQuemable(level.getBlockState(pos.below()));
+        if (aqui.is(BloquesIncendio.PASTO_SECO.get())) f += 0.75;
+        else if (aqui.is(Blocks.DEAD_BUSH)) f += 0.6;
+        else if (esPasto(aqui)) f += 0.35;
+        for (Direction d : Direction.values()) {
+            if (d == Direction.DOWN) continue;
+            BlockPos np = pos.relative(d);
+            BlockState n = level.getBlockState(np);
+            if (n.isAir() || n.getBlock() instanceof LlamaBlock) continue;
+            int inflam = n.getFlammability(level, np, d.getOpposite());
+            if (inflam > 0) f += inflam / 260.0;
+        }
+        return Math.min(1.6, f);
+    }
+
+    /** Factor del entorno al pasar el fuego de "desde" a "hasta". 0 = imposible. */
+    public static double clima(ServerLevel level, BlockPos desde, BlockPos hasta) {
+        if (llueve(level, hasta) || mojado(level, hasta) || mojado(level, hasta.below())) return 0.0;
+        Clima c = Clima.get(level.getServer());
+        double s = c.sequedad(level, hasta);
+        double dx = hasta.getX() - desde.getX(), dz = hasta.getZ() - desde.getZ();
+        double len = Math.sqrt(dx * dx + dz * dz);
+        double viento = 1.0;
+        if (len > 0) {
+            double dot = (dx * c.vx() + dz * c.vz()) / len;
+            viento = Math.max(0.12, 1.0 + 2.3 * c.fuerza() * dot);
+        }
+        int dy = hasta.getY() - desde.getY();
+        double pendiente = dy > 0 ? 1.8 : dy < 0 ? 0.55 : 1.0; // el fuego sube las laderas mucho más rápido
+        double humedadAire = level.isRaining() ? 0.25 : 1.0;
+        return s * viento * pendiente * humedadAire;
+    }
+
+    // ================================================================== prender
+
+    /** Intenta prender lo que haya en pos. Devuelve true si empezó a arder. */
+    public static boolean prender(ServerLevel level, BlockPos pos, RandomSource r, double probBase, BlockPos desde) {
+        if (!level.isLoaded(pos)) return false;
+        BlockState st = level.getBlockState(pos);
+        if (st.getBlock() instanceof LlamaBlock || st.getBlock() instanceof TroncoArdiendoBlock) return false;
+        double clima = clima(level, desde, pos);
+        if (clima <= 0) return false;
+        if (st.is(BlockTags.LEAVES)) {
+            if (r.nextDouble() < probBase * 0.75 * clima) {
+                level.setBlock(pos, BloquesIncendio.LLAMA.get().defaultBlockState().setValue(LlamaBlock.COPA, true), Block.UPDATE_ALL);
+                return true;
+            }
+            return false;
+        }
+        if (st.is(BlockTags.LOGS_THAT_BURN)) {
+            if (r.nextDouble() < probBase * 0.22 * clima) {
+                BlockState t = BloquesIncendio.TRONCO_ARDIENDO.get().defaultBlockState();
+                if (st.hasProperty(RotatedPillarBlock.AXIS)) t = t.setValue(RotatedPillarBlock.AXIS, st.getValue(RotatedPillarBlock.AXIS));
+                level.setBlock(pos, t, Block.UPDATE_ALL);
+                return true;
+            }
+            return false;
+        }
+        if (!cabeLlama(st)) return false;
+        double comb = combustible(level, pos);
+        if (comb < 0.05) return false;
+        if (r.nextDouble() < probBase * comb * clima) {
+            level.setBlock(pos, BloquesIncendio.LLAMA.get().defaultBlockState(), Block.UPDATE_ALL);
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Propaga desde un foco: prueba varias posiciones cercanas (a favor del viento llega más lejos),
+     * incluidas copas de árboles y troncos.
+     */
+    public static void propagar(ServerLevel level, BlockPos origen, RandomSource r, double intensidad, int intentos) {
+        Clima c = Clima.get(level.getServer());
+        double alcance = 1.0 + c.fuerza() * 1.6;
+        for (int i = 0; i < intentos; i++) {
+            int dx = r.nextInt(3) - 1, dz = r.nextInt(3) - 1;
+            // a favor del viento salta más lejos
+            if (r.nextDouble() < c.fuerza() * 0.7) {
+                dx += (int) Math.round(c.vx() * r.nextDouble() * alcance);
+                dz += (int) Math.round(c.vz() * r.nextDouble() * alcance);
+            }
+            int dy = r.nextInt(4) - 1; // -1..2 (el fuego trepa)
+            if (dx == 0 && dz == 0 && dy == 0) dy = 1;
+            BlockPos p = origen.offset(dx, dy, dz);
+            if (prender(level, p, r, 0.42 * intensidad, origen)) continue;
+            // si ahí no hay nada, prueba el hueco de encima (la hierba sobre el bloque de al lado)
+            BlockState s = level.getBlockState(p);
+            if (!s.isAir() && !cabeLlama(s) && !s.is(BlockTags.LEAVES)) prender(level, p.above(), r, 0.42 * intensidad, origen);
+        }
+    }
+
+    /** Pavesas: brasas que el viento lleva lejos y pueden empezar focos nuevos. */
+    public static void pavesa(ServerLevel level, BlockPos origen, RandomSource r) {
+        Clima c = Clima.get(level.getServer());
+        if (c.velocidad < 12) return;
+        double dist = 4 + r.nextDouble() * (6 + c.velocidad * 0.35);
+        double ang = Math.toRadians(c.angulo + r.nextGaussian() * 18);
+        int x = origen.getX() + (int) Math.round(Math.cos(ang) * dist);
+        int z = origen.getZ() + (int) Math.round(Math.sin(ang) * dist);
+        if (!level.isLoaded(new BlockPos(x, origen.getY(), z))) return;
+        int y = level.getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, x, z);
+        BlockPos destino = new BlockPos(x, y, z);
+        // la pavesa vuela (partículas a lo largo del camino)
+        Vec3 a = Vec3.atCenterOf(origen).add(0, 1.5, 0), b = Vec3.atCenterOf(destino);
+        for (int i = 0; i <= 6; i++) {
+            Vec3 p = a.lerp(b, i / 6.0).add(0, Math.sin(Math.PI * i / 6.0) * 3, 0);
+            level.sendParticles(ParticleTypes.LAVA, p.x, p.y, p.z, 1, 0.1, 0.1, 0.1, 0);
+        }
+        prender(level, destino, r, 0.55, origen);
+        // en copa de árbol
+        BlockState arriba = level.getBlockState(level.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING, destino).below());
+        if (arriba.is(BlockTags.LEAVES)) prender(level, level.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING, destino).below(), r, 0.5, origen);
+    }
+
+    // ================================================================== consumir (cuando la llama termina)
+
+    public static void quemarSuelo(ServerLevel level, BlockPos llama) {
+        BlockPos b = llama.below();
+        BlockState s = level.getBlockState(b);
+        if (s.is(Blocks.GRASS_BLOCK) || s.is(Blocks.PODZOL) || s.is(Blocks.MYCELIUM) || s.is(Blocks.MOSS_BLOCK)
+                || s.is(Blocks.FARMLAND) || s.is(Blocks.DIRT_PATH) || s.is(Blocks.ROOTED_DIRT)) {
+            level.setBlock(b, BloquesIncendio.TIERRA_QUEMADA.get().defaultBlockState(), Block.UPDATE_ALL);
+        } else if (s.is(Blocks.HAY_BLOCK) || s.is(Blocks.MOSS_CARPET)) {
+            level.setBlock(b, Blocks.AIR.defaultBlockState(), Block.UPDATE_ALL);
+        }
+    }
+
+    /** Quema lo de alrededor de una llama que se apaga sola (madera, lana...). */
+    public static void carbonizarVecinos(ServerLevel level, BlockPos pos, RandomSource r) {
+        for (Direction d : Direction.values()) {
+            BlockPos np = pos.relative(d);
+            BlockState n = level.getBlockState(np);
+            if (n.isAir() || n.is(BlockTags.LEAVES) || n.is(BlockTags.LOGS) || n.getBlock() instanceof LlamaBlock) continue;
+            int inflam = n.getFlammability(level, np, d.getOpposite());
+            if (inflam <= 0 || r.nextFloat() > 0.35f) continue;
+            if (n.is(BlockTags.PLANKS) || n.is(BlockTags.WOODEN_STAIRS) || n.is(BlockTags.WOODEN_SLABS)) {
+                level.setBlock(np, r.nextFloat() < 0.7f ? BloquesIncendio.MADERA_QUEMADA.get().defaultBlockState()
+                        : Blocks.AIR.defaultBlockState(), Block.UPDATE_ALL);
+            } else if (n.isCollisionShapeFullBlock(level, np) && inflam < 30) {
+                level.setBlock(np, BloquesIncendio.MADERA_QUEMADA.get().defaultBlockState(), Block.UPDATE_ALL);
+            } else {
+                level.setBlock(np, Blocks.AIR.defaultBlockState(), Block.UPDATE_ALL);
+            }
+        }
+    }
+
+    // ================================================================== apagar
+
+    public static boolean esFuego(BlockState s) {
+        return s.getBlock() instanceof LlamaBlock || s.getBlock() instanceof TroncoArdiendoBlock || s.getBlock() instanceof RescoldoBlock
+                || s.is(Blocks.FIRE) || s.is(Blocks.SOUL_FIRE) || (s.getBlock() instanceof CampfireBlock && s.getValue(CampfireBlock.LIT));
+    }
+
+    /** Apaga un bloque. Devuelve true si había fuego. */
+    public static boolean apagar(ServerLevel level, BlockPos p) {
+        BlockState s = level.getBlockState(p);
+        if (s.getBlock() instanceof LlamaBlock) {
+            if (!s.getValue(LlamaBlock.COPA) && s.getValue(LlamaBlock.EDAD) >= 3) quemarSuelo(level, p);
+            level.setBlock(p, Blocks.AIR.defaultBlockState(), Block.UPDATE_ALL);
+        } else if (s.getBlock() instanceof TroncoArdiendoBlock) {
+            level.setBlock(p, BloquesIncendio.TRONCO_QUEMADO.get().defaultBlockState()
+                    .setValue(RotatedPillarBlock.AXIS, s.getValue(RotatedPillarBlock.AXIS)), Block.UPDATE_ALL);
+        } else if (s.getBlock() instanceof RescoldoBlock) {
+            level.setBlock(p, BloquesIncendio.CENIZA.get().defaultBlockState(), Block.UPDATE_ALL);
+        } else if (s.is(Blocks.FIRE) || s.is(Blocks.SOUL_FIRE)) {
+            level.setBlock(p, Blocks.AIR.defaultBlockState(), Block.UPDATE_ALL);
+        } else if (s.getBlock() instanceof CampfireBlock && s.getValue(CampfireBlock.LIT)) {
+            CampfireBlock.dowse(null, level, p, s);
+            level.setBlock(p, s.setValue(CampfireBlock.LIT, false), Block.UPDATE_ALL);
+        } else {
+            return false;
+        }
+        level.sendParticles(ParticleTypes.CLOUD, p.getX() + 0.5, p.getY() + 0.5, p.getZ() + 0.5, 2, 0.25, 0.2, 0.25, 0.02);
+        return true;
+    }
+
+    /** Apaga todo el fuego en una esfera, apaga a los que arden y deja el suelo mojado un rato. */
+    public static int apagarZona(ServerLevel level, Vec3 centro, double radio, int ticksMojado) {
+        int n = 0;
+        int ri = (int) Math.ceil(radio);
+        BlockPos c = BlockPos.containing(centro);
+        for (BlockPos p : BlockPos.betweenClosed(c.offset(-ri, -ri, -ri), c.offset(ri, ri, ri))) {
+            if (p.distToCenterSqr(centro) > radio * radio) continue;
+            if (apagar(level, p)) n++;
+        }
+        for (Entity e : level.getEntities((Entity) null, new AABB(centro, centro).inflate(radio), Entity::isOnFire)) e.clearFire();
+        if (ticksMojado > 0) mojar(level, c, Math.max(1, ri), ticksMojado);
+        if (n > 0 && level.random.nextInt(3) == 0) {
+            level.playSound(null, c, SoundEvents.FIRE_EXTINGUISH, SoundSource.BLOCKS, 0.5f, 1.4f + level.random.nextFloat() * 0.4f);
+        }
+        return n;
+    }
+
+    // ================================================================== humo visible desde lejos
+
+    public static void columnaHumo(ServerLevel level, BlockPos p, RandomSource r, boolean grande) {
+        Clima c = Clima.get(level.getServer());
+        double vx = c.vx() * c.fuerza() * 0.06, vz = c.vz() * c.fuerza() * 0.06;
+        for (ServerPlayer jugador : level.players()) {
+            if (jugador.blockPosition().distSqr(p) > 200 * 200) continue;
+            level.sendParticles(jugador, grande ? ParticleTypes.CAMPFIRE_SIGNAL_SMOKE : ParticleTypes.CAMPFIRE_COSY_SMOKE, true,
+                    p.getX() + 0.5 + r.nextGaussian() * 0.3, p.getY() + 0.8, p.getZ() + 0.5 + r.nextGaussian() * 0.3,
+                    0, vx, 0.07, vz, 1.0);
+        }
+    }
+
+    // ================================================================== fuego normal de Minecraft -> fuego realista
+
+    private static final List<Object[]> COLA = new ArrayList<>();
+
+    public static void encolarConversion(Level level, BlockPos pos) {
+        synchronized (COLA) {
+            if (COLA.size() < 5000) COLA.add(new Object[]{level.dimension(), pos.immutable()});
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    public static void procesarCola(net.minecraft.server.MinecraftServer server) {
+        List<Object[]> copia;
+        synchronized (COLA) {
+            if (COLA.isEmpty()) return;
+            copia = new ArrayList<>(COLA);
+            COLA.clear();
+        }
+        for (Object[] o : copia) {
+            ServerLevel level = server.getLevel((ResourceKey<Level>) o[0]);
+            BlockPos p = (BlockPos) o[1];
+            if (level == null || !level.isLoaded(p)) continue;
+            BlockState s = level.getBlockState(p);
+            if (!s.is(Blocks.FIRE)) continue;
+            BlockState abajo = level.getBlockState(p.below());
+            boolean natural = sueloQuemable(abajo) > 0 || abajo.is(Blocks.DIRT) || abajo.is(Blocks.COARSE_DIRT);
+            boolean arbol = false;
+            for (Direction d : Direction.values()) {
+                BlockState n = level.getBlockState(p.relative(d));
+                if (n.is(BlockTags.LEAVES) || n.is(BlockTags.LOGS_THAT_BURN)) arbol = true;
+            }
+            if (natural || arbol) level.setBlock(p, BloquesIncendio.LLAMA.get().defaultBlockState(), Block.UPDATE_ALL);
+        }
+    }
+}

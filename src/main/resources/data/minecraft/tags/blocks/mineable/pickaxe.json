@@ -168,6 +168,11 @@
   "guerramod:contenedor_marron",
   "guerramod:buzon",
   "guerramod:farola_moderna",
-  "guerramod:farola_fernandina"
+  "guerramod:farola_fernandina",
+  "guerramod:boca_incendio",
+  "guerramod:bie",
+  "guerramod:extintor_pared",
+  "guerramod:detector_humo",
+  "guerramod:rociador"
  ]
 }

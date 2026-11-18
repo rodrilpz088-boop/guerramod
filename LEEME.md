@@ -142,6 +142,36 @@ tiras), contenedores de reciclaje, banco, buzón y farolas. Las señales van sob
 
 En los asientos (sillas, sofás, inodoro, bancos…) te sientas con clic derecho con la mano vacía.
 
+## Novedades de la versión 3: Incendios y bomberos
+
+### Fuego realista
+* El fuego de los incendios forestales es distinto al de Minecraft: **la hierba y el pasto arden en segundos** y el fuego
+  avanza muy rápido; los árboles arden por las copas (las hojas) y los troncos se quedan **ardiendo** durante minutos.
+* **Viento**: cambia de dirección y fuerza poco a poco. El fuego corre a favor del viento y lanza **pavesas** que crean
+  focos nuevos a varios metros. En el minimapa ves la flecha del viento y el **riesgo de incendio**.
+* **Pendiente**: el fuego sube las laderas mucho más rápido de lo que baja.
+* **Sequía**: cuantos más días sin llover y más caluroso el bioma (sabana, desierto, badlands), peor.
+* **Lluvia**: apaga las llamas y casi no deja propagar. Donde has echado agua, no prende durante un rato.
+* Al pasar el fuego queda **tierra quemada** negra, **ceniza**, **troncos carbonizados**, **ramas quemadas** y
+  **rescoldos** que humean durante minutos, queman al pisarlos y **pueden reavivar el incendio** (hay que mojarlos o
+  removerlos con el rastrillo). Con el tiempo la hierba vuelve a crecer en la tierra quemada.
+* Columnas de humo que se ven desde lejos. El fuego normal (rayos, mecheros, lava) sobre hierba o árboles se convierte
+  en fuego forestal.
+
+### Material de bomberos
+* **Manguera**: conéctala a una **boca de incendio** o a una **BIE** (clic con ella en la boca) y mantén clic derecho para
+  lanzar un chorro de 16 m. Funciona hasta 45 m de la boca. Sin boca, usa el agua de la **mochila extintora** (en el pecho;
+  se rellena metiéndote en agua con Shift + clic derecho con la manguera).
+* **Extintor de polvo** (y extintor de pared, que se coge con la mano vacía): descarga corta, apaga a personas ardiendo.
+* **Batefuegos**: sofoca las llamas a golpes.
+* **Rastrillo forestal**: raspa una franja de 3 bloques hasta la tierra: **cortafuegos** que el fuego no puede cruzar.
+* **Antorcha de goteo**: para hacer contrafuegos (¡ojo con el viento!).
+* **Estación meteorológica**: viento, días sin llover, riesgo de incendio y fuegos activos cerca.
+* **Radio de hidroavión**: llama a un hidroavión (tipo Canadair) que suelta agua sobre el incendio.
+* **Detector de humo** (pita y da señal de redstone) y **rociador automático** (apaga solo el fuego de debajo).
+* **Equipo de bombero**: cada pieza quita un 20 % del daño por fuego; con el equipo completo no te quemas.
+* **Pasto seco**: hierba agostada que arde muchísimo.
+
 ## Estructura del proyecto
 * `src/main/java/es/guerramod/` — código (pais, bloques, items, entidades, radiacion, cliente, red, eventos)
 * `src/main/resources/` — texturas, modelos, recetas, idioma

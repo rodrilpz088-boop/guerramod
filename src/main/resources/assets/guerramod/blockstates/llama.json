@@ -1,0 +1,60 @@
+{
+ "multipart": [
+  {
+   "apply": [
+    {
+     "model": "guerramod:block/llama_suelo0"
+    },
+    {
+     "model": "guerramod:block/llama_suelo1"
+    }
+   ]
+  },
+  {
+   "apply": [
+    {
+     "model": "guerramod:block/llama_lado0"
+    },
+    {
+     "model": "guerramod:block/llama_lado1"
+    }
+   ]
+  },
+  {
+   "apply": [
+    {
+     "model": "guerramod:block/llama_lado0",
+     "y": 90
+    },
+    {
+     "model": "guerramod:block/llama_lado1",
+     "y": 90
+    }
+   ]
+  },
+  {
+   "apply": [
+    {
+     "model": "guerramod:block/llama_lado0",
+     "y": 180
+    },
+    {
+     "model": "guerramod:block/llama_lado1",
+     "y": 180
+    }
+   ]
+  },
+  {
+   "apply": [
+    {
+     "model": "guerramod:block/llama_lado0",
+     "y": 270
+    },
+    {
+     "model": "guerramod:block/llama_lado1",
+     "y": 270
+    }
+   ]
+  }
+ ]
+}

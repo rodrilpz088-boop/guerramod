@@ -3,6 +3,10 @@
  "values": [
   "guerramod:sacos_terreros",
   "guerramod:cesped_artificial",
-  "guerramod:cesped_artificial_fino"
+  "guerramod:cesped_artificial_fino",
+  "guerramod:tierra_quemada",
+  "guerramod:ceniza",
+  "guerramod:tierra_rastrillada",
+  "guerramod:rescoldo"
  ]
 }

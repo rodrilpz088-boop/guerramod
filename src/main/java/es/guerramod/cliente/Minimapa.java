@@ -94,6 +94,22 @@ public class Minimapa implements IGuiOverlay {
             ty += 10;
         }
         g.drawString(f, px + ", " + pz, x0, ty, 0xFFDDDDDD, true);
+        ty += 10;
+        // viento: flecha hacia donde sopla y riesgo de incendio
+        String viento = "Viento " + Math.round(es.guerramod.incendios.Clima.clienteVelocidad) + " km/h";
+        g.drawString(f, viento, x0, ty, 0xFFBFD8FF, true);
+        int ax = x0 + f.width(viento) + 8, ay = ty + 4;
+        double ang = Math.toRadians(es.guerramod.incendios.Clima.clienteAngulo);
+        for (int i = -4; i <= 4; i++) {
+            int qx = ax + (int) Math.round(Math.cos(ang) * i), qy = ay + (int) Math.round(Math.sin(ang) * i);
+            g.fill(qx, qy, qx + 1, qy + 1, 0xFFBFD8FF);
+        }
+        int hx = ax + (int) Math.round(Math.cos(ang) * 4), hy = ay + (int) Math.round(Math.sin(ang) * 4);
+        g.fill(hx - 1, hy - 1, hx + 2, hy + 2, 0xFFFFFFFF);
+        ty += 10;
+        int riesgo = es.guerramod.incendios.Clima.clienteRiesgo;
+        g.drawString(f, "Riesgo incendio: " + es.guerramod.incendios.Clima.nombreRiesgo(riesgo), x0, ty,
+                0xFF000000 | es.guerramod.incendios.Clima.colorRiesgo(riesgo), true);
     }
 
     private static void punto(GuiGraphics g, int x0, int y0, int dx, int dz, int color, int r) {

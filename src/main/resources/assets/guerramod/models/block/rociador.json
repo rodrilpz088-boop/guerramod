@@ -1,0 +1,107 @@
+{
+ "parent": "minecraft:block/block",
+ "render_type": "minecraft:cutout",
+ "textures": {
+  "c": "guerramod:block/mat_cromo",
+  "x": "guerramod:block/rociador",
+  "particle": "guerramod:block/mat_cromo"
+ },
+ "elements": [
+  {
+   "from": [
+    7,
+    14,
+    7
+   ],
+   "to": [
+    9,
+    16,
+    9
+   ],
+   "faces": {
+    "north": {
+     "texture": "#c"
+    },
+    "south": {
+     "texture": "#c"
+    },
+    "east": {
+     "texture": "#c"
+    },
+    "west": {
+     "texture": "#c"
+    },
+    "up": {
+     "texture": "#c"
+    },
+    "down": {
+     "texture": "#c"
+    }
+   }
+  },
+  {
+   "from": [
+    7.5,
+    13,
+    7.5
+   ],
+   "to": [
+    8.5,
+    14,
+    8.5
+   ],
+   "faces": {
+    "north": {
+     "texture": "#c"
+    },
+    "south": {
+     "texture": "#c"
+    },
+    "east": {
+     "texture": "#c"
+    },
+    "west": {
+     "texture": "#c"
+    },
+    "up": {
+     "texture": "#c"
+    },
+    "down": {
+     "texture": "#c"
+    }
+   }
+  },
+  {
+   "from": [
+    5.5,
+    12.6,
+    5.5
+   ],
+   "to": [
+    10.5,
+    13,
+    10.5
+   ],
+   "faces": {
+    "north": {
+     "texture": "#x"
+    },
+    "south": {
+     "texture": "#x"
+    },
+    "east": {
+     "texture": "#x"
+    },
+    "west": {
+     "texture": "#x"
+    },
+    "up": {
+     "texture": "#x"
+    },
+    "down": {
+     "texture": "#x"
+    }
+   }
+  }
+ ]
+}

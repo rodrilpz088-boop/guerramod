@@ -32,12 +32,23 @@ public final class Red {
                 .encoder(SyncPaises::encode).decoder(SyncPaises::decode).consumerMainThread(SyncPaises::handle).add();
         CANAL.messageBuilder(AccionAvion.class, id++, NetworkDirection.PLAY_TO_SERVER)
                 .encoder(AccionAvion::encode).decoder(AccionAvion::decode).consumerMainThread(AccionAvion::handle).add();
+        CANAL.messageBuilder(SyncClima.class, id++, NetworkDirection.PLAY_TO_CLIENT)
+                .encoder(SyncClima::encode).decoder(SyncClima::decode).consumerMainThread(SyncClima::handle).add();
         CANAL.messageBuilder(AccionArma.class, id++, NetworkDirection.PLAY_TO_SERVER)
                 .encoder(AccionArma::encode).decoder(AccionArma::decode).consumerMainThread(AccionArma::handle).add();
     }
 
     public static void sincronizarTodos(MinecraftServer server) {
         CANAL.send(PacketDistributor.ALL.noArg(), new SyncPaises(DatosPaises.get(server).registro.guardar()));
+    }
+
+    public static void sincronizarClima(MinecraftServer server, float angulo, float velocidad, int riesgo) {
+        CANAL.send(PacketDistributor.ALL.noArg(), new SyncClima(angulo, velocidad, riesgo));
+    }
+
+    public static void sincronizarClima(ServerPlayer p) {
+        es.guerramod.incendios.Clima c = es.guerramod.incendios.Clima.get(p.server);
+        CANAL.send(PacketDistributor.PLAYER.with(() -> p), new SyncClima(c.angulo, c.velocidad, c.riesgo(p.level(), p.blockPosition())));
     }
 
     public static void sincronizar(ServerPlayer p) {
@@ -104,6 +115,26 @@ public final class Red {
                     default -> { }
                 }
             }
+            ctx.get().setPacketHandled(true);
+        }
+    }
+
+    /** Servidor -> cliente: viento y riesgo de incendio (para el minimapa). */
+    public record SyncClima(float angulo, float velocidad, int riesgo) {
+        public static void encode(SyncClima m, FriendlyByteBuf b) {
+            b.writeFloat(m.angulo);
+            b.writeFloat(m.velocidad);
+            b.writeVarInt(m.riesgo);
+        }
+
+        public static SyncClima decode(FriendlyByteBuf b) {
+            return new SyncClima(b.readFloat(), b.readFloat(), b.readVarInt());
+        }
+
+        public static void handle(SyncClima m, Supplier<NetworkEvent.Context> ctx) {
+            es.guerramod.incendios.Clima.clienteAngulo = m.angulo;
+            es.guerramod.incendios.Clima.clienteVelocidad = m.velocidad;
+            es.guerramod.incendios.Clima.clienteRiesgo = m.riesgo;
             ctx.get().setPacketHandled(true);
         }
     }

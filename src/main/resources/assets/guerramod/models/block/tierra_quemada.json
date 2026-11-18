@@ -1,0 +1,8 @@
+{
+ "parent": "minecraft:block/cube_bottom_top",
+ "textures": {
+  "top": "guerramod:block/tierra_quemada_top",
+  "side": "guerramod:block/tierra_quemada",
+  "bottom": "minecraft:block/dirt"
+ }
+}

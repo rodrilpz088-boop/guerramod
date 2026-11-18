@@ -1,0 +1,22 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "equipment",
+ "ingredients": [
+  {
+   "item": "minecraft:leather_leggings"
+  },
+  {
+   "item": "minecraft:yellow_dye"
+  },
+  {
+   "item": "minecraft:blue_dye"
+  },
+  {
+   "item": "minecraft:magma_cream"
+  }
+ ],
+ "result": {
+  "item": "guerramod:pantalon_bombero",
+  "count": 1
+ }
+}

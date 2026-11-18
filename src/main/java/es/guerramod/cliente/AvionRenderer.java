@@ -14,6 +14,7 @@ import net.minecraft.util.Mth;
 /** Dibuja aviones y bombarderos con el color del país que los envía. */
 public class AvionRenderer<T extends AeronaveBase> extends EntityRenderer<T> {
     public static final ResourceLocation TEXTURA_CAZA = new ResourceLocation(GuerraMod.MODID, "textures/entity/avion_caza.png");
+    public static final ResourceLocation TEXTURA_HIDROAVION = new ResourceLocation(GuerraMod.MODID, "textures/entity/hidroavion.png");
     public static final ResourceLocation TEXTURA_BOMBARDERO = new ResourceLocation(GuerraMod.MODID, "textures/entity/bombardero.png");
 
     private final AvionModel<T> modelo;

@@ -1,0 +1,19 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "equipment",
+ "ingredients": [
+  {
+   "item": "minecraft:white_concrete"
+  },
+  {
+   "item": "minecraft:redstone"
+  },
+  {
+   "item": "minecraft:note_block"
+  }
+ ],
+ "result": {
+  "item": "guerramod:detector_humo",
+  "count": 1
+ }
+}

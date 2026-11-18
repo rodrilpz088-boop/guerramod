@@ -1,0 +1,21 @@
+{
+ "variants": {
+  "": [
+   {
+    "model": "guerramod:block/tierra_quemada"
+   },
+   {
+    "model": "guerramod:block/tierra_quemada",
+    "y": 90
+   },
+   {
+    "model": "guerramod:block/tierra_quemada",
+    "y": 180
+   },
+   {
+    "model": "guerramod:block/tierra_quemada",
+    "y": 270
+   }
+  ]
+ }
+}

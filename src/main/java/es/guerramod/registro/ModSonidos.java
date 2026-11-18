@@ -32,6 +32,9 @@ public final class ModSonidos {
     public static final RegistryObject<SoundEvent> REBOTE = registrar("rebote");
     public static final RegistryObject<SoundEvent> CASQUILLO = registrar("casquillo");
     public static final RegistryObject<SoundEvent> CLIC = registrar("clic");
+    public static final RegistryObject<SoundEvent> MANGUERA = registrar("manguera");
+    public static final RegistryObject<SoundEvent> EXTINTOR = registrar("extintor");
+    public static final RegistryObject<SoundEvent> ALARMA_INCENDIO = registrar("alarma_incendio");
 
     private ModSonidos() {}
 

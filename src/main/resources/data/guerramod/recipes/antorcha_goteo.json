@@ -1,0 +1,22 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "equipment",
+ "ingredients": [
+  {
+   "item": "minecraft:iron_ingot"
+  },
+  {
+   "item": "minecraft:torch"
+  },
+  {
+   "item": "minecraft:coal"
+  },
+  {
+   "item": "minecraft:bucket"
+  }
+ ],
+ "result": {
+  "item": "guerramod:antorcha_goteo",
+  "count": 1
+ }
+}

@@ -1,0 +1,39 @@
+{
+ "type": "minecraft:block",
+ "pools": [
+  {
+   "rolls": 1,
+   "entries": [
+    {
+     "type": "minecraft:alternatives",
+     "children": [
+      {
+       "type": "minecraft:item",
+       "name": "guerramod:pasto_seco",
+       "conditions": [
+        {
+         "condition": "minecraft:match_tool",
+         "predicate": {
+          "items": [
+           "minecraft:shears"
+          ]
+         }
+        }
+       ]
+      },
+      {
+       "type": "minecraft:item",
+       "name": "minecraft:wheat_seeds",
+       "conditions": [
+        {
+         "condition": "minecraft:random_chance",
+         "chance": 0.125
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

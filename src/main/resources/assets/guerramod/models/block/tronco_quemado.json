@@ -1,0 +1,7 @@
+{
+ "parent": "minecraft:block/cube_column",
+ "textures": {
+  "side": "guerramod:block/tronco_quemado",
+  "end": "guerramod:block/tronco_quemado_top"
+ }
+}

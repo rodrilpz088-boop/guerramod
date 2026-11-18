@@ -7,3 +7,4 @@ python3 herramientas/generar_texturas.py
 python3 herramientas/v2_texturas.py
 python3 herramientas/v2_catalogo.py
 python3 herramientas/v2_sonidos.py
+python3 herramientas/v3_incendios.py

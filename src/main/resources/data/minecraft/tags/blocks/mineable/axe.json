@@ -43,6 +43,9 @@
   "guerramod:parquet_espiga",
   "guerramod:tarima_gris",
   "guerramod:parquet_roble_losa",
-  "guerramod:banco_publico"
+  "guerramod:banco_publico",
+  "guerramod:tronco_quemado",
+  "guerramod:madera_quemada",
+  "guerramod:tronco_ardiendo"
  ]
 }

@@ -37,5 +37,9 @@ public final class ModEntidades {
             () -> EntityType.Builder.<AsientoEntity>of(AsientoEntity::new, MobCategory.MISC).sized(0.001f, 0.001f)
                     .clientTrackingRange(10).updateInterval(20).noSummon().build("asiento"));
 
+    public static final RegistryObject<EntityType<es.guerramod.incendios.HidroavionEntity>> HIDROAVION = ENTIDADES.register("hidroavion",
+            () -> EntityType.Builder.<es.guerramod.incendios.HidroavionEntity>of(es.guerramod.incendios.HidroavionEntity::new, MobCategory.MISC)
+                    .sized(3.0f, 1.3f).clientTrackingRange(16).updateInterval(1).build("hidroavion"));
+
     private ModEntidades() {}
 }

@@ -38,6 +38,7 @@ public final class ClienteMod {
         e.registerEntityRenderer(ModEntidades.BOMBA_AEREA.get(), ctx -> new ThrownItemRenderer<>(ctx, 1.5f, false));
         e.registerEntityRenderer(ModEntidades.MISIL.get(), ctx -> new ThrownItemRenderer<>(ctx, 2.5f, true));
         e.registerEntityRenderer(ModEntidades.ASIENTO.get(), NoopRenderer::new);
+        e.registerEntityRenderer(ModEntidades.HIDROAVION.get(), ctx -> new AvionRenderer<>(ctx, 2.4f, AvionRenderer.TEXTURA_HIDROAVION));
         e.registerEntityRenderer(ModEntidades.AVION.get(), ctx -> new AvionRenderer<>(ctx, 1.6f, AvionRenderer.TEXTURA_CAZA));
         e.registerEntityRenderer(ModEntidades.BOMBARDERO.get(), ctx -> new AvionRenderer<>(ctx, 2.2f, AvionRenderer.TEXTURA_BOMBARDERO));
     }

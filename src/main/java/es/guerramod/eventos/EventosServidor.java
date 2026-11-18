@@ -64,6 +64,7 @@ public final class EventosServidor {
             DatosPaises.get(p.server).setDirty();
         }
         Red.sincronizar(p);
+        Red.sincronizarClima(p);
         p.sendSystemMessage(Component.literal("⚔ Naciones en Guerra: escribe ").withStyle(ChatFormatting.GOLD)
                 .append(Component.literal("/pais").withStyle(ChatFormatting.YELLOW))
                 .append(Component.literal(" para empezar. Tecla M: minimapa.").withStyle(ChatFormatting.GOLD)));
@@ -200,7 +201,36 @@ public final class EventosServidor {
         MinecraftServer server = ServerLifecycleHooks.getCurrentServer();
         if (server == null) return;
         Disparos.tick(server);
+        es.guerramod.incendios.Fuego.procesarCola(server);
+        es.guerramod.incendios.Clima.get(server).tick(server);
         if (server.getTickCount() % 20 != 0) return;
         DatosRadiacion.get(server).tick(server);
+    }
+
+    // ---------------- Incendios ----------------
+
+    /** El fuego normal que cae sobre hierba o árboles (rayos, mecheros, lava...) pasa a ser fuego forestal realista. */
+    @SubscribeEvent
+    public static void fuegoNuevo(BlockEvent.NeighborNotifyEvent e) {
+        if (e.getLevel() instanceof Level level && !level.isClientSide && e.getState().is(net.minecraft.world.level.block.Blocks.FIRE)) {
+            es.guerramod.incendios.Fuego.encolarConversion(level, e.getPos());
+        }
+    }
+
+    /** Equipo de bombero: cada pieza quita un 20 % del daño de fuego; el equipo completo da resistencia al fuego. */
+    @SubscribeEvent
+    public static void danoFuego(LivingHurtEvent e) {
+        if (!e.getSource().is(net.minecraft.tags.DamageTypeTags.IS_FIRE)) return;
+        int n = es.guerramod.incendios.BloquesIncendio.piezasBombero(e.getEntity());
+        if (n > 0) e.setAmount(e.getAmount() * (1.0f - 0.2f * n));
+    }
+
+    @SubscribeEvent
+    public static void equipoBombero(TickEvent.PlayerTickEvent e) {
+        if (e.phase != TickEvent.Phase.END || e.side != LogicalSide.SERVER || e.player.tickCount % 20 != 0) return;
+        if (es.guerramod.incendios.BloquesIncendio.piezasBombero(e.player) >= 4) {
+            e.player.addEffect(new net.minecraft.world.effect.MobEffectInstance(net.minecraft.world.effect.MobEffects.FIRE_RESISTANCE,
+                    50, 0, true, false, true));
+        }
     }
 }

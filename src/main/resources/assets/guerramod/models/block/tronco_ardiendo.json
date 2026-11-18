@@ -1,0 +1,7 @@
+{
+ "parent": "minecraft:block/cube_column",
+ "textures": {
+  "side": "guerramod:block/tronco_ardiendo",
+  "end": "guerramod:block/tronco_ardiendo_top"
+ }
+}

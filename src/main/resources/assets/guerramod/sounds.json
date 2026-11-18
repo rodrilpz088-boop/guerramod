@@ -191,5 +191,32 @@
     "attenuation_distance": 16
    }
   ]
+ },
+ "manguera": {
+  "subtitle": "subtitles.guerramod.manguera",
+  "sounds": [
+   {
+    "name": "guerramod:manguera",
+    "attenuation_distance": 24
+   }
+  ]
+ },
+ "extintor": {
+  "subtitle": "subtitles.guerramod.extintor",
+  "sounds": [
+   {
+    "name": "guerramod:extintor",
+    "attenuation_distance": 24
+   }
+  ]
+ },
+ "alarma_incendio": {
+  "subtitle": "subtitles.guerramod.alarma_incendio",
+  "sounds": [
+   {
+    "name": "guerramod:alarma_incendio",
+    "attenuation_distance": 24
+   }
+  ]
  }
 }

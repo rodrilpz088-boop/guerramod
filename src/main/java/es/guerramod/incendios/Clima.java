@@ -27,6 +27,8 @@ public class Clima extends SavedData {
     public long ultimaLluvia = 0;
     /** Incendios naturales por rayos secos con riesgo muy alto o extremo. */
     public boolean naturales = true;
+    /** Temperatura (°C) y humedad (%) fijadas con /incendios; NaN = automáticas (bioma, hora, lluvia). */
+    public float tempFija = Float.NaN, humFija = Float.NaN;
 
     /** Copia en el cliente (para el minimapa). */
     public static float clienteAngulo = 45, clienteVelocidad = 12;
@@ -42,6 +44,8 @@ public class Clima extends SavedData {
         c.velocidad = t.getFloat("velocidad");
         c.ultimaLluvia = t.getLong("lluvia");
         c.naturales = !t.contains("naturales") || t.getBoolean("naturales");
+        c.tempFija = t.contains("tempFija") ? t.getFloat("tempFija") : Float.NaN;
+        c.humFija = t.contains("humFija") ? t.getFloat("humFija") : Float.NaN;
         return c;
     }
 
@@ -51,6 +55,8 @@ public class Clima extends SavedData {
         t.putFloat("velocidad", velocidad);
         t.putLong("lluvia", ultimaLluvia);
         t.putBoolean("naturales", naturales);
+        if (!Float.isNaN(tempFija)) t.putFloat("tempFija", tempFija);
+        if (!Float.isNaN(humFija)) t.putFloat("humFija", humFija);
         return t;
     }
 
@@ -72,6 +78,18 @@ public class Clima extends SavedData {
                 if (rg >= 3 && r.nextFloat() < (rg == 4 ? 0.10f : 0.04f)) rayoSeco(sl, p.blockPosition(), r);
             }
         }
+    }
+
+    /** Guarda los cambios hechos con comandos y avisa a los jugadores (minimapa). */
+    public void cambiado(MinecraftServer server) {
+        setDirty();
+        net.minecraft.server.level.ServerLevel ow = server.overworld();
+        Red.sincronizarClima(server, angulo, velocidad, Meteo.calcular(ow, ow.getSharedSpawnPos()).riesgo());
+    }
+
+    /** Pone los días que lleva sin llover. */
+    public void ponerSequia(Level level, double dias) {
+        ultimaLluvia = level.getGameTime() - (long) (dias * DIA);
     }
 
     /** Vector unitario hacia donde sopla (x, z). */

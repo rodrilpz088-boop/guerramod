@@ -169,6 +169,9 @@ En los asientos (sillas, sofás, inodoro, bancos…) te sientas con clic derecho
 * **Rayos secos**: con riesgo MUY ALTO o EXTREMO y sin llover, a veces cae un rayo y empieza un incendio forestal.
   Comando `/incendios` (info), y para operadores: `/incendios naturales true|false`, `/incendios provocar`,
   `/incendios rayo`, `/incendios viento <grados> <km/h>`, `/incendios apagar <radio>`.
+* Tiempo a mano (operador): `/incendios temperatura <°C>` o `auto`, `/incendios humedad <%>` o `auto`,
+  `/incendios sequia <días>` (lo seca que está la hierba), `/incendios oladecalor` (42 °C, 10 % de humedad,
+  30 días sin llover, viento fuerte y cielo despejado) y `/incendios normal` para volver al tiempo automático.
 * Columnas de humo que se ven desde lejos. El fuego normal (rayos, mecheros, lava) sobre hierba o árboles se convierte
   en fuego forestal.
 

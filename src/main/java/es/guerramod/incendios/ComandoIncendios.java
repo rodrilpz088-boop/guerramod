@@ -24,6 +24,11 @@ import net.minecraft.world.phys.HitResult;
  * /incendios rayo                     tormenta seca cerca (op)
  * /incendios viento <grados> <km/h>   fija el viento (op)
  * /incendios apagar <radio>           apaga todo en el radio (op)
+ * /incendios temperatura <°C>|auto    fija la temperatura en todo el mundo (op)
+ * /incendios humedad <%>|auto         fija la humedad del aire (op)
+ * /incendios sequia <días>            días sin llover (lo seca que está la hierba) (op)
+ * /incendios oladecalor               42 °C, 10 % de humedad, 30 días de sequía y viento de 35 km/h (op)
+ * /incendios normal                   vuelve al tiempo automático (op)
  */
 public final class ComandoIncendios {
     private ComandoIncendios() {}
@@ -67,7 +72,65 @@ public final class ComandoIncendios {
                             int n = Fuego.apagarZona(l, c.getSource().getPosition(), r, 2400);
                             c.getSource().sendSuccess(() -> Component.literal("Apagados " + n + " focos").withStyle(ChatFormatting.AQUA), true);
                             return n;
-                        }))));
+                        })))
+                .then(Commands.literal("temperatura").requires(s -> s.hasPermission(2))
+                        .then(Commands.literal("auto").executes(c -> {
+                            Clima cl = Clima.get(c.getSource().getServer());
+                            cl.tempFija = Float.NaN;
+                            cl.cambiado(c.getSource().getServer());
+                            return ok(c, "Temperatura automática (según bioma, hora del día, altura y lluvia)");
+                        }))
+                        .then(Commands.argument("grados", FloatArgumentType.floatArg(-30, 60)).executes(c -> {
+                            Clima cl = Clima.get(c.getSource().getServer());
+                            cl.tempFija = FloatArgumentType.getFloat(c, "grados");
+                            cl.cambiado(c.getSource().getServer());
+                            return ok(c, String.format("Temperatura fijada en %.0f °C en todo el mundo", cl.tempFija));
+                        })))
+                .then(Commands.literal("humedad").requires(s -> s.hasPermission(2))
+                        .then(Commands.literal("auto").executes(c -> {
+                            Clima cl = Clima.get(c.getSource().getServer());
+                            cl.humFija = Float.NaN;
+                            cl.cambiado(c.getSource().getServer());
+                            return ok(c, "Humedad automática (según bioma, hora del día y lluvia)");
+                        }))
+                        .then(Commands.argument("porcentaje", FloatArgumentType.floatArg(1, 100)).executes(c -> {
+                            Clima cl = Clima.get(c.getSource().getServer());
+                            cl.humFija = FloatArgumentType.getFloat(c, "porcentaje");
+                            cl.cambiado(c.getSource().getServer());
+                            return ok(c, String.format("Humedad del aire fijada en %.0f %% (si llueve sube igualmente)", cl.humFija));
+                        })))
+                .then(Commands.literal("sequia").requires(s -> s.hasPermission(2))
+                        .then(Commands.argument("dias", FloatArgumentType.floatArg(0, 365)).executes(c -> {
+                            Clima cl = Clima.get(c.getSource().getServer());
+                            float d = FloatArgumentType.getFloat(c, "dias");
+                            cl.ponerSequia(c.getSource().getServer().overworld(), d);
+                            cl.cambiado(c.getSource().getServer());
+                            return ok(c, String.format("La hierba lleva %.0f días sin lluvia", d));
+                        })))
+                .then(Commands.literal("oladecalor").requires(s -> s.hasPermission(2)).executes(c -> {
+                    var srv = c.getSource().getServer();
+                    Clima cl = Clima.get(srv);
+                    cl.tempFija = 42;
+                    cl.humFija = 10;
+                    cl.velocidad = Math.max(cl.velocidad, 35);
+                    cl.ponerSequia(srv.overworld(), 30);
+                    srv.overworld().setWeatherParameters(24000 * 5, 0, false, false);
+                    cl.cambiado(srv);
+                    return ok(c, "Ola de calor: 42 °C, 10 % de humedad, 30 días sin llover y viento de "
+                            + Math.round(cl.velocidad) + " km/h. Peligro extremo de incendio.");
+                }))
+                .then(Commands.literal("normal").requires(s -> s.hasPermission(2)).executes(c -> {
+                    Clima cl = Clima.get(c.getSource().getServer());
+                    cl.tempFija = Float.NaN;
+                    cl.humFija = Float.NaN;
+                    cl.cambiado(c.getSource().getServer());
+                    return ok(c, "Tiempo automático otra vez (temperatura y humedad según bioma, hora y lluvia)");
+                })));
+    }
+
+    private static int ok(CommandContext<CommandSourceStack> c, String texto) {
+        c.getSource().sendSuccess(() -> Component.literal(texto).withStyle(ChatFormatting.GOLD), true);
+        return 1;
     }
 
     private static int info(CommandContext<CommandSourceStack> c) {
@@ -76,9 +139,10 @@ public final class ComandoIncendios {
         BlockPos pos = BlockPos.containing(c.getSource().getPosition());
         Meteo m = Meteo.en(l, pos);
         c.getSource().sendSuccess(() -> Component.literal(String.format(
-                "%.0f °C · %.0f %% humedad · viento del %s a %.0f km/h · %.1f días sin llover · hierba seca %.0f %% · "
+                "%.0f °C%s · %.0f %% humedad%s · viento del %s a %.0f km/h · %.1f días sin llover · hierba seca %.0f %% · "
                         + "avance en pasto %.1f m/min · riesgo %s · rayos: %s",
-                m.temperatura(), m.humedad(), Clima.procedencia(cl.angulo), m.viento(), cl.diasSinLluvia(l), m.curado(),
+                m.temperatura(), Float.isNaN(cl.tempFija) ? "" : " (fijada)", m.humedad(),
+                Float.isNaN(cl.humFija) ? "" : " (fijada)", Clima.procedencia(cl.angulo), m.viento(), cl.diasSinLluvia(l), m.curado(),
                 m.rosCabeza() * 60, Clima.nombreRiesgo(m.riesgo()), cl.naturales ? "sí" : "no")), false);
         return 1;
     }

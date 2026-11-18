@@ -66,6 +66,7 @@ public record Meteo(double temperatura, double humedad, double viento, double cu
         double t = 5 + 13 * bt + 7 * dia - 0.0065 * Math.max(0, pos.getY() - 63);
         if (lluvia) t -= 4;
         if (b.is(Tags.Biomes.IS_HOT)) t += 3;
+        if (!Float.isNaN(c.tempFija)) t = c.tempFija; // fijada con /incendios temperatura
 
         // ---- humedad relativa: el bioma, la hora (de noche sube) y la lluvia reciente
         double h = 45;
@@ -74,8 +75,9 @@ public record Meteo(double temperatura, double humedad, double viento, double cu
         else if (b.is(Tags.Biomes.IS_DRY) || !b.value().hasPrecipitation()) h = 20;
         h -= 18 * dia;
         h += 30 * Math.exp(-dias / 0.8);
+        if (!Float.isNaN(c.humFija)) h = c.humFija; // fijada con /incendios humedad
         if (lluvia) h = 97;
-        h = clamp(h, 5, 100);
+        h = clamp(h, 1, 100);
 
         // ---- curado de la hierba (% seca): crece con los días sin llover y el calor
         double cur = 55 + 18 * dias + 1.2 * (t - 15);

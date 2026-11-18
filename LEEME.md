@@ -96,7 +96,53 @@ y el equipo NBQ amarillo contra la radiación.
 
 Todo tiene receta de crafteo (mira el libro de recetas) y está en dos pestañas del modo creativo.
 
+## Novedades de la versión 2
+
+### Armas realistas
+* **Clic derecho (mantener) = apuntar por la mira** (el arma se centra, se hace zoom y se anda más despacio).
+* **Clic izquierdo = disparar.** Fusil, subfusil y ametralladora disparan en ráfaga manteniendo el clic.
+* **R = recargar** (con cargador real: 15, 30, 100 balas…). La escopeta se recarga cartucho a cartucho.
+* **V = cambiar entre automático y semiautomático.**
+* Física del arma en la mano: tiene peso e inercia (se retrasa al girar), se balancea al andar, se baja al correr,
+  da una patada hacia atrás y hacia arriba al disparar (retroceso de cámara con recuperación), se agacha al recargar
+  y sube al sacarla. Las armas pesadas se mueven más lentas.
+* El francotirador tiene **mira telescópica real** con retícula; la respiración mueve la mira (agáchate para estabilizar).
+* Balas con física: caída por gravedad, pérdida de daño a distancia, **tiros a la cabeza x2**, piernas x0,7, atraviesan
+  cristales y hojas, **rebotan** con ángulo rasante, rompen bloques blandos. Los bloques antibalas las paran.
+* Casquillos que salen despedidos, fogonazo, humo y sonidos nuevos (cada arma suena distinta, eco a lo lejos).
+* Granadas que rebotan y ruedan, y explotan a los 4 segundos.
+* Munición: 9 mm (pistola, subfusil), 5,56 (fusil, ametralladora), 7,62 (francotirador), cartuchos del 12 (escopeta).
+* El avión ahora tiene inercia, gira según la velocidad y se inclina al girar.
+
+### Carreteras de España
+Líneas continua/discontinua/doble, bordes, línea de detención, flechas, STOP y ceda pintados, líneas amarillas,
+zigzag, aparcamiento, zona azul, carril bus y bici, cuadrícula de cruce, sumidero, tapa de alcantarilla, aceras de
+pastillas, baldosas podotáctiles, bordillo de granito, adoquín, **34 señales oficiales** (R, P y S), **semáforos que
+funcionan solos** (todos sincronizados: clic derecho cambia entre fase A y B para montar cruces; el de peatones va al
+revés), guardarraíl, barrera New Jersey, conos, bolardos, hito kilométrico, captafaros, papelera (destruye lo que
+tiras), contenedores de reciclaje, banco, buzón y farolas. Las señales van sobre el **poste de señal** (apílalos).
+
+### Hogar (por apartados)
+* **Salón:** sofás por módulos que se unen, sillones, mesa de centro, mueble de TV, televisiones (se encienden),
+  estantería, alfombras, planta, cuadro, chimenea con fuego, aire acondicionado, radiador, mesa y sillas.
+* **Cocina:** encimeras con cajones (guardan cosas), fregadero (llena botellas y cubos), vitrocerámica con horno,
+  lavavajillas, armario alto, frigorífico de 2 bloques (54 huecos), microondas, campana, lavadora, taburete, cafetera.
+* **Baño:** inodoro, bidé, lavabo, mueble de lavabo, plato de ducha con mampara, alcachofa de ducha (sale agua),
+  bañera, espejo, toallero.
+* **Dormitorio:** camas (se duerme de verdad), armario ropero, cómoda, mesita, escritorio, silla de oficina, ordenador.
+* **Puertas y ventanas:** puertas lacada blanca, roble, nogal, cristal y acorazada (antibalas); ventanas de aluminio,
+  PVC y madera; persianas que suben y bajan (las de la misma ventana se mueven juntas).
+* **Jardín:** césped artificial, seto, valla blanca, verja de forja, malla de simple torsión, tumbona, sombrilla,
+  barbacoa, silla y mesa de plástico, farolillo, gresite y borde de piscina.
+* **Iluminación:** panel LED, foco LED y tira LED que cambian de color con el **mando LED** (clic derecho: siguiente
+  color; Shift + clic: encender/apagar, a 12 bloques), plafón, lámpara colgante, aplique, lámparas de pie y mesa,
+  e **interruptor** de pared (enciende/apaga todas las luces de la habitación).
+* **Construcción:** gotelé, paredes pintadas, azulejo metro, baldosa hidráulica, gres, mármol, parquet, parquet en
+  espiga, tarima, ladrillo caravista, teja árabe, hormigón pulido y granito de Ávila (con losas).
+
+En los asientos (sillas, sofás, inodoro, bancos…) te sientas con clic derecho con la mano vacía.
+
 ## Estructura del proyecto
 * `src/main/java/es/guerramod/` — código (pais, bloques, items, entidades, radiacion, cliente, red, eventos)
 * `src/main/resources/` — texturas, modelos, recetas, idioma
-* `herramientas/` — scripts de Python que generan los modelos, recetas, texturas y sonidos
+* `herramientas/` — scripts de Python que generan los modelos, recetas, texturas y sonidos (`generar_todo.sh` los ejecuta todos)

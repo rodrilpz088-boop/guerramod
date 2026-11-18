@@ -951,7 +951,7 @@ for e in CAT:
             {"when": {"west": "false"}, "apply": {"model": P + "noside", "y": 270}}]})
         icono = f"{MOD}:item/{n}" if os.path.exists(os.path.join(A, "textures", "item", n + ".png")) else tx
         mi(n, {"parent": "minecraft:item/generated", "textures": {"layer0": icono}})
-        java.append(f'ModBloques.reg("{n}", {cat}, () -> new IronBarsBlock({jmueble(e)}));')
+        java.append(f'ModBloques.reg("{n}", {cat}, () -> new PanelBlock({jmueble(e)}));')
     else:
         raise ValueError(t)
 

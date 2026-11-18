@@ -87,9 +87,9 @@ public final class CatalogoGenerado {
         ModBloques.regAlto("puerta_nogal", Categoria.PUERTAS, () -> new DoorBlock(Fabrica.mueble("madera"), BlockSetType.OAK));
         ModBloques.regAlto("puerta_cristal", Categoria.PUERTAS, () -> new DoorBlock(Fabrica.mueble("cristal"), BlockSetType.OAK));
         ModBloques.regAlto("puerta_acorazada", Categoria.PUERTAS, () -> new DoorBlock(Fabrica.mueble("madera").strength(12.0f, 30.0f), BlockSetType.OAK));
-        ModBloques.reg("ventana_aluminio", Categoria.PUERTAS, () -> new IronBarsBlock(Fabrica.mueble("cristal")));
-        ModBloques.reg("ventana_pvc", Categoria.PUERTAS, () -> new IronBarsBlock(Fabrica.mueble("cristal")));
-        ModBloques.reg("ventana_madera", Categoria.PUERTAS, () -> new IronBarsBlock(Fabrica.mueble("cristal")));
+        ModBloques.reg("ventana_aluminio", Categoria.PUERTAS, () -> new PanelBlock(Fabrica.mueble("cristal")));
+        ModBloques.reg("ventana_pvc", Categoria.PUERTAS, () -> new PanelBlock(Fabrica.mueble("cristal")));
+        ModBloques.reg("ventana_madera", Categoria.PUERTAS, () -> new PanelBlock(Fabrica.mueble("cristal")));
         ModBloques.reg("persiana_gris", Categoria.PUERTAS, () -> new PersianaBlock(Fabrica.mueble("metal")));
         ModBloques.reg("persiana_blanca", Categoria.PUERTAS, () -> new PersianaBlock(Fabrica.mueble("metal")));
         ModBloques.reg("cesped_artificial", Categoria.JARDIN, () -> new Block(Fabrica.props("cesped")));
@@ -97,9 +97,9 @@ public final class CatalogoGenerado {
         ModBloques.reg("seto", Categoria.JARDIN, () -> new Block(Fabrica.props("hojas")));
         ModBloques.reg("valla_madera_blanca", Categoria.JARDIN, () -> new FenceBlock(Fabrica.props("madera")));
         ModBloques.reg("puerta_valla_madera", Categoria.JARDIN, () -> new FenceGateBlock(Fabrica.mueble("madera"), WoodType.OAK));
-        ModBloques.reg("verja_forja", Categoria.JARDIN, () -> new IronBarsBlock(Fabrica.mueble("metal")));
+        ModBloques.reg("verja_forja", Categoria.JARDIN, () -> new PanelBlock(Fabrica.mueble("metal")));
         ModBloques.reg("puerta_verja_forja", Categoria.JARDIN, () -> new FenceGateBlock(Fabrica.mueble("metal"), WoodType.OAK));
-        ModBloques.reg("malla_torsion", Categoria.JARDIN, () -> new IronBarsBlock(Fabrica.mueble("metal")));
+        ModBloques.reg("malla_torsion", Categoria.JARDIN, () -> new PanelBlock(Fabrica.mueble("metal")));
         ModBloques.reg("tumbona", Categoria.JARDIN, () -> new MuebleBlock(Fabrica.mueble("plastico"), new double[][]{{2, 0, 1, 3, 3, 2}, {13, 0, 1, 14, 3, 2}, {2, 0, 14, 3, 3, 15}, {13, 0, 14, 14, 3, 15}, {2, 3, 1, 14, 4, 11}, {2, 4, 11, 14, 9, 15}}, 0.3, 0, MuebleBlock.Accion.NINGUNA));
         ModBloques.regAlto("sombrilla", Categoria.JARDIN, () -> new MuebleAltoBlock(Fabrica.mueble("tela"), new double[][]{{7.5, 0, 7.5, 8.5, 16, 8.5}, {5, 0, 5, 11, 1, 11}}, new double[][]{{7.5, 0, 7.5, 8.5, 12, 8.5}, {-6, 10, -6, 22, 11, 22}, {-2, 11, -2, 18, 12, 18}, {3, 12, 3, 13, 13, 13}}, 0));
     }

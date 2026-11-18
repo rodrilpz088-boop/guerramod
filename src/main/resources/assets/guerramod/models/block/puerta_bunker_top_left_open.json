@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/door_top_left_open",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "bottom": "guerramod:block/puerta_bunker_abajo",
+    "top": "guerramod:block/puerta_bunker_arriba"
+  }
+}

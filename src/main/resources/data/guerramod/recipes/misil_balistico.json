@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    " P ",
+    "PTP",
+    "FCF"
+  ],
+  "key": {
+    "P": {
+      "item": "guerramod:placa_acero"
+    },
+    "T": {
+      "item": "minecraft:tnt"
+    },
+    "F": {
+      "item": "minecraft:firework_rocket"
+    },
+    "C": {
+      "item": "guerramod:circuito"
+    }
+  },
+  "result": {
+    "item": "guerramod:misil_balistico",
+    "count": 1
+  }
+}

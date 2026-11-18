@@ -1,0 +1,27 @@
+modLoader="javafml"
+loaderVersion="[47,)"
+license="All Rights Reserved"
+
+[[mods]]
+modId="guerramod"
+version="1.0.0"
+displayName="Naciones en Guerra"
+authors="Rodrigo"
+description='''
+Crea países con fronteras, gobiernos con presidente y ministros, y declara guerras.
+Incluye minimapa, armas, misiles, aviones, bombas, búnkeres, radiación y banderas reales.
+'''
+
+[[dependencies.guerramod]]
+    modId="forge"
+    mandatory=true
+    versionRange="[47,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.guerramod]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.20.1,1.21)"
+    ordering="NONE"
+    side="BOTH"

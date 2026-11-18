@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "top": "guerramod:block/mesa_gobierno_arriba",
+    "side": "guerramod:block/mesa_gobierno_lado",
+    "bottom": "guerramod:block/mesa_gobierno_abajo"
+  }
+}

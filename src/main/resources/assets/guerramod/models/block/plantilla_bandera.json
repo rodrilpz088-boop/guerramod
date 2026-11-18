@@ -1,0 +1,145 @@
+{
+  "parent": "minecraft:block/block",
+  "textures": {
+    "particle": "#bandera",
+    "poste": "minecraft:block/iron_block"
+  },
+  "elements": [
+    {
+      "from": [
+        7.25,
+        0,
+        7.25
+      ],
+      "to": [
+        8.75,
+        30,
+        8.75
+      ],
+      "faces": {
+        "north": {
+          "texture": "#poste",
+          "uv": [
+            7,
+            0,
+            9,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#poste",
+          "uv": [
+            7,
+            0,
+            9,
+            16
+          ]
+        },
+        "east": {
+          "texture": "#poste",
+          "uv": [
+            7,
+            0,
+            9,
+            16
+          ]
+        },
+        "west": {
+          "texture": "#poste",
+          "uv": [
+            7,
+            0,
+            9,
+            16
+          ]
+        },
+        "up": {
+          "texture": "#poste",
+          "uv": [
+            7,
+            0,
+            9,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#poste",
+          "uv": [
+            7,
+            0,
+            9,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "from": [
+        8.75,
+        18,
+        7.75
+      ],
+      "to": [
+        26.75,
+        30,
+        8.25
+      ],
+      "faces": {
+        "north": {
+          "texture": "#bandera",
+          "uv": [
+            16,
+            0,
+            0,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#bandera",
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ]
+        },
+        "east": {
+          "texture": "#bandera",
+          "uv": [
+            0,
+            0,
+            1,
+            16
+          ]
+        },
+        "west": {
+          "texture": "#bandera",
+          "uv": [
+            0,
+            0,
+            1,
+            16
+          ]
+        },
+        "up": {
+          "texture": "#bandera",
+          "uv": [
+            0,
+            0,
+            16,
+            1
+          ]
+        },
+        "down": {
+          "texture": "#bandera",
+          "uv": [
+            0,
+            15,
+            16,
+            16
+          ]
+        }
+      }
+    }
+  ]
+}

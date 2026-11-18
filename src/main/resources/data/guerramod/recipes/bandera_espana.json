@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "SAB",
+    "SCD",
+    "S  "
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:stick"
+    },
+    "A": {
+      "item": "minecraft:red_wool"
+    },
+    "B": {
+      "item": "minecraft:yellow_wool"
+    },
+    "C": {
+      "item": "minecraft:yellow_wool"
+    },
+    "D": {
+      "item": "minecraft:red_wool"
+    }
+  },
+  "result": {
+    "item": "guerramod:bandera_espana",
+    "count": 1
+  }
+}

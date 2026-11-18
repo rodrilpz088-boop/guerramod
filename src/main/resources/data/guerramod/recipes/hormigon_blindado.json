@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "CPC",
+    "PCP",
+    "CPC"
+  ],
+  "key": {
+    "C": {
+      "item": "minecraft:gray_concrete"
+    },
+    "P": {
+      "item": "guerramod:placa_acero"
+    }
+  },
+  "result": {
+    "item": "guerramod:hormigon_blindado",
+    "count": 8
+  }
+}

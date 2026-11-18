@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "WAW"
+  ],
+  "key": {
+    "A": {
+      "item": "guerramod:asfalto"
+    },
+    "W": {
+      "item": "minecraft:white_dye"
+    }
+  },
+  "result": {
+    "item": "guerramod:paso_cebra",
+    "count": 1
+  }
+}

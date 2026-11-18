@@ -1,0 +1,211 @@
+{
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "particle": "guerramod:block/barrera_control",
+    "b": "guerramod:block/barrera_control",
+    "p": "guerramod:block/valla_fronteriza"
+  },
+  "elements": [
+    {
+      "from": [
+        0,
+        0,
+        6.5
+      ],
+      "to": [
+        2,
+        14,
+        9.5
+      ],
+      "faces": {
+        "north": {
+          "texture": "#p"
+        },
+        "south": {
+          "texture": "#p"
+        },
+        "east": {
+          "texture": "#p"
+        },
+        "west": {
+          "texture": "#p"
+        },
+        "up": {
+          "texture": "#p"
+        },
+        "down": {
+          "texture": "#p"
+        }
+      }
+    },
+    {
+      "from": [
+        14,
+        0,
+        6.5
+      ],
+      "to": [
+        16,
+        14,
+        9.5
+      ],
+      "faces": {
+        "north": {
+          "texture": "#p"
+        },
+        "south": {
+          "texture": "#p"
+        },
+        "east": {
+          "texture": "#p"
+        },
+        "west": {
+          "texture": "#p"
+        },
+        "up": {
+          "texture": "#p"
+        },
+        "down": {
+          "texture": "#p"
+        }
+      }
+    },
+    {
+      "from": [
+        0,
+        9,
+        7
+      ],
+      "to": [
+        16,
+        12,
+        9
+      ],
+      "faces": {
+        "north": {
+          "texture": "#b",
+          "uv": [
+            0,
+            0,
+            16,
+            3
+          ]
+        },
+        "south": {
+          "texture": "#b",
+          "uv": [
+            0,
+            0,
+            16,
+            3
+          ]
+        },
+        "east": {
+          "texture": "#b",
+          "uv": [
+            0,
+            0,
+            16,
+            3
+          ]
+        },
+        "west": {
+          "texture": "#b",
+          "uv": [
+            0,
+            0,
+            16,
+            3
+          ]
+        },
+        "up": {
+          "texture": "#b",
+          "uv": [
+            0,
+            0,
+            16,
+            3
+          ]
+        },
+        "down": {
+          "texture": "#b",
+          "uv": [
+            0,
+            0,
+            16,
+            3
+          ]
+        }
+      }
+    },
+    {
+      "from": [
+        0,
+        3,
+        7
+      ],
+      "to": [
+        16,
+        6,
+        9
+      ],
+      "faces": {
+        "north": {
+          "texture": "#b",
+          "uv": [
+            0,
+            8,
+            16,
+            11
+          ]
+        },
+        "south": {
+          "texture": "#b",
+          "uv": [
+            0,
+            8,
+            16,
+            11
+          ]
+        },
+        "east": {
+          "texture": "#b",
+          "uv": [
+            0,
+            8,
+            16,
+            11
+          ]
+        },
+        "west": {
+          "texture": "#b",
+          "uv": [
+            0,
+            8,
+            16,
+            11
+          ]
+        },
+        "up": {
+          "texture": "#b",
+          "uv": [
+            0,
+            8,
+            16,
+            11
+          ]
+        },
+        "down": {
+          "texture": "#b",
+          "uv": [
+            0,
+            8,
+            16,
+            11
+          ]
+        }
+      }
+    }
+  ]
+}

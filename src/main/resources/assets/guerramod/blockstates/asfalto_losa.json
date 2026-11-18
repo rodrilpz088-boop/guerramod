@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "guerramod:block/asfalto_losa"
+    },
+    "type=top": {
+      "model": "guerramod:block/asfalto_losa_top"
+    },
+    "type=double": {
+      "model": "guerramod:block/asfalto"
+    }
+  }
+}

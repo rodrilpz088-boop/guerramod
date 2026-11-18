@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "S",
+    "T"
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:stone_pressure_plate"
+    },
+    "T": {
+      "item": "minecraft:tnt"
+    }
+  },
+  "result": {
+    "item": "guerramod:mina_terrestre",
+    "count": 2
+  }
+}

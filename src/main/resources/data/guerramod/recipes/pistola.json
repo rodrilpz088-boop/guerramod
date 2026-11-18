@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "PPP",
+    "  W"
+  ],
+  "key": {
+    "P": {
+      "item": "guerramod:placa_acero"
+    },
+    "W": {
+      "tag": "minecraft:planks"
+    }
+  },
+  "result": {
+    "item": "guerramod:pistola",
+    "count": 1
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "CCC",
+    "CCC"
+  ],
+  "key": {
+    "C": {
+      "item": "minecraft:gray_concrete"
+    }
+  },
+  "result": {
+    "item": "guerramod:muro_fronterizo",
+    "count": 6
+  }
+}

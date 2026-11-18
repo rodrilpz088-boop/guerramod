@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "L",
+    "C",
+    "P"
+  ],
+  "key": {
+    "L": {
+      "item": "minecraft:lightning_rod"
+    },
+    "C": {
+      "item": "guerramod:circuito"
+    },
+    "P": {
+      "item": "guerramod:placa_acero"
+    }
+  },
+  "result": {
+    "item": "guerramod:radio_bombardeo",
+    "count": 1
+  }
+}

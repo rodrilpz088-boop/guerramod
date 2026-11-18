@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "guerramod:hormigon_reforzado",
+    "guerramod:bloque_plomo",
+    "guerramod:puerta_bunker"
+  ]
+}

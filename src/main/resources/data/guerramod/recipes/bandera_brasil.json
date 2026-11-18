@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "SAB",
+    "SCD",
+    "S  "
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:stick"
+    },
+    "A": {
+      "item": "minecraft:green_wool"
+    },
+    "B": {
+      "item": "minecraft:yellow_wool"
+    },
+    "C": {
+      "item": "minecraft:blue_wool"
+    },
+    "D": {
+      "item": "minecraft:green_wool"
+    }
+  },
+  "result": {
+    "item": "guerramod:bandera_brasil",
+    "count": 1
+  }
+}

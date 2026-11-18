@@ -1,0 +1,23 @@
+{
+  "replace": false,
+  "values": [
+    "guerramod:hormigon_blindado",
+    "guerramod:cristal_blindado",
+    "guerramod:sacos_terreros",
+    "guerramod:hormigon_reforzado",
+    "guerramod:bloque_plomo",
+    "guerramod:puerta_bunker",
+    "guerramod:muro_fronterizo",
+    "guerramod:barrera_control",
+    "guerramod:valla_fronteriza",
+    "guerramod:puesto_control",
+    "guerramod:lanzador_misiles",
+    "guerramod:bomba_nuclear",
+    "guerramod:purificador_aire",
+    "guerramod:radar",
+    "guerramod:sirena",
+    "minecraft:obsidian",
+    "minecraft:iron_block",
+    "minecraft:crying_obsidian"
+  ]
+}

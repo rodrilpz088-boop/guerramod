@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "top": "guerramod:block/bomba_nuclear_arriba",
+    "side": "guerramod:block/bomba_nuclear_lado",
+    "bottom": "guerramod:block/bomba_nuclear_arriba"
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "particle": "guerramod:block/urna_lado",
+    "s": "guerramod:block/urna_lado",
+    "a": "guerramod:block/urna_arriba"
+  },
+  "elements": [
+    {
+      "from": [
+        3,
+        0,
+        3
+      ],
+      "to": [
+        13,
+        12,
+        13
+      ],
+      "faces": {
+        "north": {
+          "texture": "#s",
+          "uv": [
+            3,
+            4,
+            13,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#s",
+          "uv": [
+            3,
+            4,
+            13,
+            16
+          ]
+        },
+        "east": {
+          "texture": "#s",
+          "uv": [
+            3,
+            4,
+            13,
+            16
+          ]
+        },
+        "west": {
+          "texture": "#s",
+          "uv": [
+            3,
+            4,
+            13,
+            16
+          ]
+        },
+        "up": {
+          "texture": "#a",
+          "uv": [
+            3,
+            3,
+            13,
+            13
+          ]
+        },
+        "down": {
+          "texture": "#a",
+          "uv": [
+            3,
+            3,
+            13,
+            13
+          ]
+        }
+      }
+    }
+  ]
+}

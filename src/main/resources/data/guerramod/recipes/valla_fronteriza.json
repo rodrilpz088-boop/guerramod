@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "PBP",
+    "PBP"
+  ],
+  "key": {
+    "P": {
+      "item": "guerramod:placa_acero"
+    },
+    "B": {
+      "item": "minecraft:iron_bars"
+    }
+  },
+  "result": {
+    "item": "guerramod:valla_fronteriza",
+    "count": 6
+  }
+}

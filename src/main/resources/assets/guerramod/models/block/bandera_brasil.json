@@ -1,0 +1,6 @@
+{
+  "parent": "guerramod:block/plantilla_bandera",
+  "textures": {
+    "bandera": "guerramod:block/bandera_brasil"
+  }
+}

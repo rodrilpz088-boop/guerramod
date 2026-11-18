@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "PGP",
+    "PCP",
+    "SSS"
+  ],
+  "key": {
+    "P": {
+      "item": "guerramod:placa_acero"
+    },
+    "G": {
+      "item": "minecraft:glass"
+    },
+    "C": {
+      "item": "guerramod:circuito"
+    },
+    "S": {
+      "item": "minecraft:stone_bricks"
+    }
+  },
+  "result": {
+    "item": "guerramod:puesto_control",
+    "count": 1
+  }
+}

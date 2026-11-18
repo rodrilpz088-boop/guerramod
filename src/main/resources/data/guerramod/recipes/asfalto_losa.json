@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "AAA"
+  ],
+  "key": {
+    "A": {
+      "item": "guerramod:asfalto"
+    }
+  },
+  "result": {
+    "item": "guerramod:asfalto_losa",
+    "count": 6
+  }
+}

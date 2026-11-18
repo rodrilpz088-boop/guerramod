@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "  G",
+    "PPP",
+    "WC "
+  ],
+  "key": {
+    "G": {
+      "item": "minecraft:glass_pane"
+    },
+    "P": {
+      "item": "guerramod:placa_acero"
+    },
+    "W": {
+      "tag": "minecraft:planks"
+    },
+    "C": {
+      "item": "guerramod:circuito"
+    }
+  },
+  "result": {
+    "item": "guerramod:francotirador",
+    "count": 1
+  }
+}

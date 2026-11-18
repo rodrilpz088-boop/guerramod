@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "GPG",
+    "PGP",
+    "GPG"
+  ],
+  "key": {
+    "G": {
+      "item": "minecraft:glass"
+    },
+    "P": {
+      "item": "guerramod:placa_acero"
+    }
+  },
+  "result": {
+    "item": "guerramod:cristal_blindado",
+    "count": 4
+  }
+}

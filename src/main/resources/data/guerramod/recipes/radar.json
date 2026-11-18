@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "PLP",
+    "PCP",
+    "PPP"
+  ],
+  "key": {
+    "P": {
+      "item": "guerramod:placa_acero"
+    },
+    "L": {
+      "item": "minecraft:lightning_rod"
+    },
+    "C": {
+      "item": "guerramod:circuito"
+    }
+  },
+  "result": {
+    "item": "guerramod:radar",
+    "count": 1
+  }
+}

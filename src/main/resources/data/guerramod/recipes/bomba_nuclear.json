@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "TGT",
+    "GCG",
+    "TGT"
+  ],
+  "key": {
+    "T": {
+      "item": "minecraft:tnt"
+    },
+    "G": {
+      "item": "minecraft:glowstone"
+    },
+    "C": {
+      "item": "guerramod:circuito"
+    }
+  },
+  "result": {
+    "item": "guerramod:bomba_nuclear",
+    "count": 1
+  }
+}

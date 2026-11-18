@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "SAB",
+    "SCD",
+    "S  "
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:stick"
+    },
+    "A": {
+      "item": "minecraft:blue_wool"
+    },
+    "B": {
+      "item": "minecraft:red_wool"
+    },
+    "C": {
+      "item": "minecraft:white_wool"
+    },
+    "D": {
+      "item": "minecraft:blue_wool"
+    }
+  },
+  "result": {
+    "item": "guerramod:bandera_reino_unido",
+    "count": 1
+  }
+}

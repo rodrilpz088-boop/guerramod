@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "AWA"
+  ],
+  "key": {
+    "A": {
+      "item": "guerramod:asfalto"
+    },
+    "W": {
+      "item": "minecraft:white_dye"
+    }
+  },
+  "result": {
+    "item": "guerramod:asfalto_linea",
+    "count": 3
+  }
+}

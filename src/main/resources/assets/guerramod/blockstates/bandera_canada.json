@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "guerramod:block/bandera_canada",
+      "y": 180
+    },
+    "facing=east": {
+      "model": "guerramod:block/bandera_canada",
+      "y": 270
+    },
+    "facing=south": {
+      "model": "guerramod:block/bandera_canada",
+      "y": 0
+    },
+    "facing=west": {
+      "model": "guerramod:block/bandera_canada",
+      "y": 90
+    }
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "disparo": {
+    "subtitle": "subtitles.guerramod.disparo",
+    "sounds": [
+      {
+        "name": "guerramod:disparo"
+      }
+    ]
+  },
+  "disparo_fuerte": {
+    "subtitle": "subtitles.guerramod.disparo_fuerte",
+    "sounds": [
+      {
+        "name": "guerramod:disparo_fuerte"
+      }
+    ]
+  },
+  "sirena": {
+    "subtitle": "subtitles.guerramod.sirena",
+    "sounds": [
+      {
+        "name": "guerramod:sirena"
+      }
+    ]
+  },
+  "geiger": {
+    "subtitle": "subtitles.guerramod.geiger",
+    "sounds": [
+      {
+        "name": "guerramod:geiger"
+      }
+    ]
+  },
+  "alarma": {
+    "subtitle": "subtitles.guerramod.alarma",
+    "sounds": [
+      {
+        "name": "guerramod:alarma"
+      }
+    ]
+  }
+}

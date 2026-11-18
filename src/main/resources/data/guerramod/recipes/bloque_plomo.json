@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "PPP",
+    "PDP",
+    "PPP"
+  ],
+  "key": {
+    "P": {
+      "item": "guerramod:placa_acero"
+    },
+    "D": {
+      "item": "minecraft:deepslate"
+    }
+  },
+  "result": {
+    "item": "guerramod:bloque_plomo",
+    "count": 2
+  }
+}

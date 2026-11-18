@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "R",
+    "S",
+    "S"
+  ],
+  "key": {
+    "R": {
+      "item": "minecraft:red_dye"
+    },
+    "S": {
+      "item": "minecraft:smooth_stone"
+    }
+  },
+  "result": {
+    "item": "guerramod:hito_frontera",
+    "count": 2
+  }
+}

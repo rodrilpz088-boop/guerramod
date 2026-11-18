@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "Y Y",
+    "YLY",
+    "YYY"
+  ],
+  "key": {
+    "Y": {
+      "item": "minecraft:yellow_wool"
+    },
+    "L": {
+      "item": "minecraft:leather"
+    }
+  },
+  "result": {
+    "item": "guerramod:traje_nbq",
+    "count": 1
+  }
+}

@@ -1,0 +1,80 @@
+package es.guerramod.red;
+
+import es.guerramod.GuerraMod;
+import es.guerramod.entidades.AvionEntity;
+import es.guerramod.pais.DatosPaises;
+import es.guerramod.pais.RegistroPaises;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraftforge.network.NetworkDirection;
+import net.minecraftforge.network.NetworkEvent;
+import net.minecraftforge.network.NetworkRegistry;
+import net.minecraftforge.network.PacketDistributor;
+import net.minecraftforge.network.simple.SimpleChannel;
+
+import java.util.function.Supplier;
+
+/** Paquetes de red: sincronizar países al cliente y acciones del avión al servidor. */
+public final class Red {
+    private static final String VERSION = "1";
+    public static final SimpleChannel CANAL = NetworkRegistry.newSimpleChannel(
+            new ResourceLocation(GuerraMod.MODID, "main"), () -> VERSION, VERSION::equals, VERSION::equals);
+
+    private Red() {}
+
+    public static void registrar() {
+        int id = 0;
+        CANAL.messageBuilder(SyncPaises.class, id++, NetworkDirection.PLAY_TO_CLIENT)
+                .encoder(SyncPaises::encode).decoder(SyncPaises::decode).consumerMainThread(SyncPaises::handle).add();
+        CANAL.messageBuilder(AccionAvion.class, id++, NetworkDirection.PLAY_TO_SERVER)
+                .encoder(AccionAvion::encode).decoder(AccionAvion::decode).consumerMainThread(AccionAvion::handle).add();
+    }
+
+    public static void sincronizarTodos(MinecraftServer server) {
+        CANAL.send(PacketDistributor.ALL.noArg(), new SyncPaises(DatosPaises.get(server).registro.guardar()));
+    }
+
+    public static void sincronizar(ServerPlayer p) {
+        CANAL.send(PacketDistributor.PLAYER.with(() -> p), new SyncPaises(DatosPaises.get(p.server).registro.guardar()));
+    }
+
+    /** Servidor -> cliente: lista completa de países y territorios. */
+    public record SyncPaises(CompoundTag datos) {
+        public static void encode(SyncPaises m, FriendlyByteBuf b) {
+            b.writeNbt(m.datos);
+        }
+
+        public static SyncPaises decode(FriendlyByteBuf b) {
+            CompoundTag t = b.readNbt();
+            return new SyncPaises(t == null ? new CompoundTag() : t);
+        }
+
+        public static void handle(SyncPaises m, Supplier<NetworkEvent.Context> ctx) {
+            RegistroPaises.CLIENTE = RegistroPaises.cargar(m.datos);
+            ctx.get().setPacketHandled(true);
+        }
+    }
+
+    /** Cliente -> servidor: 0 = disparar ametralladora, 1 = soltar bomba. */
+    public record AccionAvion(int accion) {
+        public static void encode(AccionAvion m, FriendlyByteBuf b) {
+            b.writeVarInt(m.accion);
+        }
+
+        public static AccionAvion decode(FriendlyByteBuf b) {
+            return new AccionAvion(b.readVarInt());
+        }
+
+        public static void handle(AccionAvion m, Supplier<NetworkEvent.Context> ctx) {
+            ServerPlayer p = ctx.get().getSender();
+            if (p != null && p.getVehicle() instanceof AvionEntity avion) {
+                if (m.accion == 0) avion.disparar(p);
+                else if (m.accion == 1) avion.soltarBomba(p);
+            }
+            ctx.get().setPacketHandled(true);
+        }
+    }
+}

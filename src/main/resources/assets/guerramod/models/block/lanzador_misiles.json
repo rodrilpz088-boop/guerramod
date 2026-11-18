@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "top": "guerramod:block/lanzador_misiles_arriba",
+    "side": "guerramod:block/lanzador_misiles_lado",
+    "bottom": "guerramod:block/hormigon_reforzado"
+  }
+}

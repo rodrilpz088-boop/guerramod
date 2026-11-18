@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "PNP",
+    "PCP",
+    "PRP"
+  ],
+  "key": {
+    "P": {
+      "item": "guerramod:placa_acero"
+    },
+    "N": {
+      "item": "minecraft:note_block"
+    },
+    "C": {
+      "item": "guerramod:circuito"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    }
+  },
+  "result": {
+    "item": "guerramod:sirena",
+    "count": 1
+  }
+}

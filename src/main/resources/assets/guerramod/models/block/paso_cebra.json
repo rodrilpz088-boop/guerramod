@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "top": "guerramod:block/paso_cebra",
+    "side": "guerramod:block/asfalto",
+    "bottom": "guerramod:block/asfalto"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "RWR",
+    "P P"
+  ],
+  "key": {
+    "R": {
+      "item": "minecraft:red_concrete"
+    },
+    "W": {
+      "item": "minecraft:white_concrete"
+    },
+    "P": {
+      "item": "guerramod:placa_acero"
+    }
+  },
+  "result": {
+    "item": "guerramod:barrera_control",
+    "count": 2
+  }
+}

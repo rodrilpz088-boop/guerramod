@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "SAB",
+    "SCD",
+    "S  "
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:stick"
+    },
+    "A": {
+      "item": "minecraft:light_blue_wool"
+    },
+    "B": {
+      "item": "minecraft:white_wool"
+    },
+    "C": {
+      "item": "minecraft:white_wool"
+    },
+    "D": {
+      "item": "minecraft:yellow_wool"
+    }
+  },
+  "result": {
+    "item": "guerramod:bandera_argentina",
+    "count": 1
+  }
+}

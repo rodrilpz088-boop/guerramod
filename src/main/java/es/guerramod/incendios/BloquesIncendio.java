@@ -76,8 +76,8 @@ public final class BloquesIncendio {
             p().mapColor(MapColor.COLOR_BLACK).strength(0.6f).sound(SoundType.ROOTED_DIRT).randomTicks()));
     public static final RegistryObject<Block> CENIZA = ModBloques.reg("ceniza", C, () -> new CenizaBlock(p().mapColor(MapColor.COLOR_GRAY)
             .strength(0.1f).sound(SoundType.SAND).replaceable().noOcclusion().randomTicks().pushReaction(PushReaction.DESTROY)));
-    public static final RegistryObject<Block> TRONCO_QUEMADO = ModBloques.reg("tronco_quemado", C, () -> new RotatedPillarBlock(
-            p().mapColor(MapColor.COLOR_BLACK).strength(1.5f).sound(SoundType.STEM)));
+    public static final RegistryObject<Block> TRONCO_QUEMADO = ModBloques.reg("tronco_quemado", C, () -> new TroncoQuemadoBlock(
+            p().mapColor(MapColor.COLOR_BLACK).strength(1.5f).sound(SoundType.STEM).randomTicks()));
     public static final RegistryObject<Block> MADERA_QUEMADA = ModBloques.reg("madera_quemada", C, () -> new Block(
             p().mapColor(MapColor.COLOR_BLACK).strength(1.2f).sound(SoundType.STEM)));
     public static final RegistryObject<Block> RAMAS_QUEMADAS = ModBloques.reg("ramas_quemadas", C, () -> new RamasQuemadasBlock(

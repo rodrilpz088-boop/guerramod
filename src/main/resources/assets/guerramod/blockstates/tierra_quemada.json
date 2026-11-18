@@ -1,6 +1,6 @@
 {
  "variants": {
-  "": [
+  "fase=0": [
    {
     "model": "guerramod:block/tierra_quemada"
    },
@@ -14,6 +14,57 @@
    },
    {
     "model": "guerramod:block/tierra_quemada",
+    "y": 270
+   }
+  ],
+  "fase=1": [
+   {
+    "model": "guerramod:block/tierra_quemada_1"
+   },
+   {
+    "model": "guerramod:block/tierra_quemada_1",
+    "y": 90
+   },
+   {
+    "model": "guerramod:block/tierra_quemada_1",
+    "y": 180
+   },
+   {
+    "model": "guerramod:block/tierra_quemada_1",
+    "y": 270
+   }
+  ],
+  "fase=2": [
+   {
+    "model": "guerramod:block/tierra_quemada_2"
+   },
+   {
+    "model": "guerramod:block/tierra_quemada_2",
+    "y": 90
+   },
+   {
+    "model": "guerramod:block/tierra_quemada_2",
+    "y": 180
+   },
+   {
+    "model": "guerramod:block/tierra_quemada_2",
+    "y": 270
+   }
+  ],
+  "fase=3": [
+   {
+    "model": "guerramod:block/tierra_quemada_3"
+   },
+   {
+    "model": "guerramod:block/tierra_quemada_3",
+    "y": 90
+   },
+   {
+    "model": "guerramod:block/tierra_quemada_3",
+    "y": 180
+   },
+   {
+    "model": "guerramod:block/tierra_quemada_3",
     "y": 270
    }
   ]

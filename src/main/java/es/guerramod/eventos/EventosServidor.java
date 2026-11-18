@@ -52,6 +52,7 @@ public final class EventosServidor {
     @SubscribeEvent
     public static void comandos(RegisterCommandsEvent e) {
         ComandoPais.registrar(e.getDispatcher());
+        es.guerramod.incendios.ComandoIncendios.registrar(e.getDispatcher());
     }
 
     @SubscribeEvent

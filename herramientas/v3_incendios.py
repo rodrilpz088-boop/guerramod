@@ -143,6 +143,25 @@ lado.save(os.path.join(TB, "tierra_quemada.png"))
 img = textura((118, 116, 112), 12, 22, 2)
 img.save(os.path.join(TB, "ceniza.png"))
 
+# fases de recuperación: de negro a verde (brotes de hierba que van cubriendo)
+negro = np.asarray(Image.open(os.path.join(TB, "tierra_quemada_top.png")).convert("RGB")).astype(np.float32)
+tierra = np.asarray(textura((96, 70, 48), 10, 30, 2).convert("RGB")).astype(np.float32)
+verde = np.asarray(textura((96, 150, 60), 14, 31, 2).convert("RGB")).astype(np.float32)
+manchas = ruido(32, 32, 3, 32)
+for fase in range(4):
+    if fase == 0:
+        top = negro
+    else:
+        mezcla_tierra = min(1.0, fase * 0.45)
+        base_ = negro * (1 - mezcla_tierra) + tierra * mezcla_tierra
+        umbral = {1: 0.82, 2: 0.6, 3: 0.32}[fase]
+        m = (manchas + R.random((32, 32)) * 0.15 > umbral)[:, :, None]
+        top = np.where(m, verde, base_)
+    rgba(top).save(os.path.join(TB, f"tierra_quemada_top_{fase}.png"))
+    lado_ = textura((84, 58, 40), 10, 21, 2)
+    lado_.paste(rgba(top).crop((0, 0, 32, 5)), (0, 0))
+    lado_.save(os.path.join(TB, f"tierra_quemada_lado_{fase}.png"))
+
 y, x = np.mgrid[0:32, 0:32].astype(np.float32)
 corteza = 26 + 16 * (np.sin(x * 0.9 + ruido(32, 32, 4, 23) * 6) > 0.6) + ruido(32, 32, 2, 24) * 14
 grieta = (np.abs(np.sin(y * 0.55 + x * 0.1 + ruido(32, 32, 5, 25) * 3)) < 0.12)
@@ -374,10 +393,30 @@ T = lambda n: f"{MOD}:block/{n}"
 for i in (0, 1):
     mb(f"llama_suelo{i}", {"parent": "minecraft:block/template_fire_floor", "render_type": "minecraft:cutout", "textures": {"fire": T(f"llama_{i}")}})
     mb(f"llama_lado{i}", {"parent": "minecraft:block/template_fire_side", "render_type": "minecraft:cutout", "textures": {"fire": T(f"llama_{i}")}})
-mp = [{"apply": [{"model": G("block/llama_suelo0")}, {"model": G("block/llama_suelo1")}]}]
+
+
+def plano(f, t, cara_a, cara_b):
+    return {"from": f, "to": t, "shade": False, "faces": {cara_a: {"uv": [0, 0, 16, 16], "texture": "#fire"},
+                                                         cara_b: {"uv": [16, 0, 0, 16], "texture": "#fire"}}}
+
+
+for i in (0, 1):
+    # llamas altas: planos cruzados de casi dos bloques de alto y un anillo exterior
+    els = [plano([0, 0, 4], [16, 30, 4], "north", "south"), plano([0, 0, 12], [16, 30, 12], "north", "south"),
+           plano([4, 0, 0], [4, 30, 16], "east", "west"), plano([12, 0, 0], [12, 30, 16], "east", "west"),
+           plano([-2, 0, 0.2], [18, 22, -0.2 + 0.4], "north", "south")]
+    els[4] = plano([0, 0, 0.3], [16, 24, 0.3], "north", "south")
+    els.append(plano([0, 0, 15.7], [16, 24, 15.7], "north", "south"))
+    els.append(plano([0.3, 0, 0], [0.3, 24, 16], "east", "west"))
+    els.append(plano([15.7, 0, 0], [15.7, 24, 16], "east", "west"))
+    mb(f"llama_grande{i}", {"parent": "minecraft:block/block", "render_type": "minecraft:cutout", "ambientocclusion": False,
+                           "textures": {"particle": T(f"llama_{i}"), "fire": T(f"llama_{i}")}, "elements": els})
+mp = [{"when": {"grande": "false"}, "apply": [{"model": G("block/llama_suelo0")}, {"model": G("block/llama_suelo1")}]}]
 for y in (0, 90, 180, 270):
-    mp.append({"apply": [dict({"model": G("block/llama_lado0")}, **({"y": y} if y else {})),
-                         dict({"model": G("block/llama_lado1")}, **({"y": y} if y else {}))]})
+    mp.append({"when": {"grande": "false"}, "apply": [dict({"model": G("block/llama_lado0")}, **({"y": y} if y else {})),
+                                                      dict({"model": G("block/llama_lado1")}, **({"y": y} if y else {}))]})
+mp.append({"when": {"grande": "true"}, "apply": [{"model": G("block/llama_grande0")}, {"model": G("block/llama_grande1")},
+                                                 {"model": G("block/llama_grande0"), "y": 90}, {"model": G("block/llama_grande1"), "y": 90}]})
 bs("llama", {"multipart": mp})
 
 
@@ -406,10 +445,14 @@ capa("rescoldo", "rescoldo", 2)
 capa("ceniza", "ceniza", 1.5)
 mi("ceniza", {"parent": G("block/ceniza")})
 
-mb("tierra_quemada", {"parent": "minecraft:block/cube_bottom_top", "textures": {"top": T("tierra_quemada_top"), "side": T("tierra_quemada"),
-                                                                                 "bottom": "minecraft:block/dirt"}})
-bs("tierra_quemada", {"variants": {"": [{"model": G("block/tierra_quemada")}, {"model": G("block/tierra_quemada"), "y": 90},
-                                        {"model": G("block/tierra_quemada"), "y": 180}, {"model": G("block/tierra_quemada"), "y": 270}]}})
+v = {}
+for fase in range(4):
+    nom = "tierra_quemada" if fase == 0 else f"tierra_quemada_{fase}"
+    mb(nom, {"parent": "minecraft:block/cube_bottom_top", "textures": {"top": T(f"tierra_quemada_top_{fase}"),
+                                                                      "side": T(f"tierra_quemada_lado_{fase}"), "bottom": "minecraft:block/dirt"}})
+    v[f"fase={fase}"] = [{"model": G("block/" + nom)}, {"model": G("block/" + nom), "y": 90},
+                         {"model": G("block/" + nom), "y": 180}, {"model": G("block/" + nom), "y": 270}]
+bs("tierra_quemada", {"variants": v})
 mi("tierra_quemada", {"parent": G("block/tierra_quemada")})
 mb("tierra_rastrillada", {"parent": "minecraft:block/cube_bottom_top", "textures": {"top": T("tierra_rastrillada_top"),
                                                                                      "side": T("tierra_rastrillada"), "bottom": "minecraft:block/dirt"}})

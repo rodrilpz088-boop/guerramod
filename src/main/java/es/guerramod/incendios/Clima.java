@@ -25,6 +25,8 @@ public class Clima extends SavedData {
     /** Velocidad del viento en km/h. */
     public float velocidad = 12;
     public long ultimaLluvia = 0;
+    /** Incendios naturales por rayos secos con riesgo muy alto o extremo. */
+    public boolean naturales = true;
 
     /** Copia en el cliente (para el minimapa). */
     public static float clienteAngulo = 45, clienteVelocidad = 12;
@@ -39,6 +41,7 @@ public class Clima extends SavedData {
         c.angulo = t.getFloat("angulo");
         c.velocidad = t.getFloat("velocidad");
         c.ultimaLluvia = t.getLong("lluvia");
+        c.naturales = !t.contains("naturales") || t.getBoolean("naturales");
         return c;
     }
 
@@ -47,6 +50,7 @@ public class Clima extends SavedData {
         t.putFloat("angulo", angulo);
         t.putFloat("velocidad", velocidad);
         t.putLong("lluvia", ultimaLluvia);
+        t.putBoolean("naturales", naturales);
         return t;
     }
 
@@ -62,6 +66,12 @@ public class Clima extends SavedData {
         velocidad = Mth.clamp(velocidad + (float) r.nextGaussian() * 4.0f + (objetivo - velocidad) * 0.08f, 0.0f, 55.0f);
         setDirty();
         Red.sincronizarClima(server, angulo, velocidad, riesgo(ow, ow.getSharedSpawnPos()));
+        if (naturales && !ow.isRaining() && ow instanceof net.minecraft.server.level.ServerLevel sl) {
+            for (net.minecraft.server.level.ServerPlayer p : sl.players()) {
+                int rg = riesgo(sl, p.blockPosition());
+                if (rg >= 3 && r.nextFloat() < (rg == 4 ? 0.10f : 0.04f)) rayoSeco(sl, p.blockPosition(), r);
+            }
+        }
     }
 
     /** Vector unitario hacia donde sopla (x, z). */
@@ -133,5 +143,37 @@ public class Clima extends SavedData {
         // 0 = este, 90 = sur, 180 = oeste, 270 = norte
         String[] nombres = {"este", "sureste", "sur", "suroeste", "oeste", "noroeste", "norte", "noreste"};
         return nombres[(int) Math.round(desde / 45.0) % 8];
+    }
+
+    /** Tormenta seca: cae un rayo lejos del jugador y, si hay vegetación, empieza un incendio. */
+    public static boolean rayoSeco(net.minecraft.server.level.ServerLevel level, BlockPos cerca, RandomSource r) {
+        double ang = r.nextDouble() * Math.PI * 2, dist = 50 + r.nextDouble() * 60;
+        int x = cerca.getX() + (int) (Math.cos(ang) * dist), z = cerca.getZ() + (int) (Math.sin(ang) * dist);
+        if (!level.isLoaded(new BlockPos(x, cerca.getY(), z))) return false;
+        BlockPos copa = level.getHeightmapPos(net.minecraft.world.level.levelgen.Heightmap.Types.MOTION_BLOCKING, new BlockPos(x, 0, z));
+        BlockPos suelo = level.getHeightmapPos(net.minecraft.world.level.levelgen.Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, new BlockPos(x, 0, z));
+        net.minecraft.world.entity.LightningBolt rayo = net.minecraft.world.entity.EntityType.LIGHTNING_BOLT.create(level);
+        if (rayo == null) return false;
+        rayo.moveTo(net.minecraft.world.phys.Vec3.atBottomCenterOf(copa));
+        rayo.setVisualOnly(true);
+        level.addFreshEntity(rayo);
+        boolean prendio = false;
+        BlockPos hoja = copa.below();
+        if (level.getBlockState(hoja).is(net.minecraft.tags.BlockTags.LEAVES)) {
+            level.setBlock(hoja, BloquesIncendio.LLAMA.get().defaultBlockState().setValue(LlamaBlock.COPA, true)
+                    .setValue(LlamaBlock.GRANDE, true), 3);
+            prendio = true;
+        } else if (Fuego.cabeLlama(level.getBlockState(suelo)) && Fuego.combustible(level, suelo) > 0.05) {
+            level.setBlock(suelo, BloquesIncendio.LLAMA.get().defaultBlockState(), 3);
+            prendio = true;
+        }
+        if (prendio) {
+            net.minecraft.network.chat.Component aviso = net.minecraft.network.chat.Component.literal(
+                    "⚡ Un rayo ha provocado un incendio forestal en " + x + ", " + z).withStyle(net.minecraft.ChatFormatting.GOLD);
+            for (net.minecraft.server.level.ServerPlayer p : level.players()) {
+                if (p.blockPosition().distSqr(copa) < 300 * 300) p.sendSystemMessage(aviso);
+            }
+        }
+        return prendio;
     }
 }

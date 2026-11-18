@@ -1,6 +1,9 @@
 {
  "multipart": [
   {
+   "when": {
+    "grande": "false"
+   },
    "apply": [
     {
      "model": "guerramod:block/llama_suelo0"
@@ -11,6 +14,9 @@
    ]
   },
   {
+   "when": {
+    "grande": "false"
+   },
    "apply": [
     {
      "model": "guerramod:block/llama_lado0"
@@ -21,6 +27,9 @@
    ]
   },
   {
+   "when": {
+    "grande": "false"
+   },
    "apply": [
     {
      "model": "guerramod:block/llama_lado0",
@@ -33,6 +42,9 @@
    ]
   },
   {
+   "when": {
+    "grande": "false"
+   },
    "apply": [
     {
      "model": "guerramod:block/llama_lado0",
@@ -45,6 +57,9 @@
    ]
   },
   {
+   "when": {
+    "grande": "false"
+   },
    "apply": [
     {
      "model": "guerramod:block/llama_lado0",
@@ -53,6 +68,27 @@
     {
      "model": "guerramod:block/llama_lado1",
      "y": 270
+    }
+   ]
+  },
+  {
+   "when": {
+    "grande": "true"
+   },
+   "apply": [
+    {
+     "model": "guerramod:block/llama_grande0"
+    },
+    {
+     "model": "guerramod:block/llama_grande1"
+    },
+    {
+     "model": "guerramod:block/llama_grande0",
+     "y": 90
+    },
+    {
+     "model": "guerramod:block/llama_grande1",
+     "y": 90
     }
    ]
   }

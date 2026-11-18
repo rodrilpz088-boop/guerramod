@@ -155,6 +155,15 @@ En los asientos (sillas, sofás, inodoro, bancos…) te sientas con clic derecho
 * Al pasar el fuego queda **tierra quemada** negra, **ceniza**, **troncos carbonizados**, **ramas quemadas** y
   **rescoldos** que humean durante minutos, queman al pisarlos y **pueden reavivar el incendio** (hay que mojarlos o
   removerlos con el rastrillo). Con el tiempo la hierba vuelve a crecer en la tierra quemada.
+* **El césped arde a toda velocidad** (el fuego avanza varios bloques por segundo, más con viento).
+* **Los árboles hacen crecer el fuego**: las copas y los troncos ardiendo sacan **llamas altas** de casi dos bloques que
+  propagan más y lanzan más pavesas.
+* **Recuperación**: la tierra quemada pasa por 4 fases (negra → brotes → verdea → césped) y al final sale hierba y a
+  veces un árbol joven. La ceniza se va con la lluvia, las ramas quemadas se caen y los troncos carbonizados se pudren
+  con los años (a veces brota un árbol nuevo en su base). **Con lluvia todo se recupera mucho más rápido.**
+* **Rayos secos**: con riesgo MUY ALTO o EXTREMO y sin llover, a veces cae un rayo y empieza un incendio forestal.
+  Comando `/incendios` (info), y para operadores: `/incendios naturales true|false`, `/incendios provocar`,
+  `/incendios rayo`, `/incendios viento <grados> <km/h>`, `/incendios apagar <radio>`.
 * Columnas de humo que se ven desde lejos. El fuego normal (rayos, mecheros, lava) sobre hierba o árboles se convierte
   en fuego forestal.
 

@@ -73,8 +73,10 @@ public final class Fuego {
 
     /** Suelo que arde (la hierba de encima, la paja...). */
     public static double sueloQuemable(BlockState abajo) {
-        if (abajo.is(Blocks.GRASS_BLOCK) || abajo.is(Blocks.PODZOL) || abajo.is(Blocks.MYCELIUM)) return 0.5;
-        if (abajo.is(Blocks.MOSS_BLOCK) || abajo.is(Blocks.MOSS_CARPET)) return 0.6;
+        // el césped arde muy rápido: es el combustible fino que lleva el fuego forestal
+        if (abajo.is(Blocks.GRASS_BLOCK)) return 0.95;
+        if (abajo.is(Blocks.PODZOL) || abajo.is(Blocks.MYCELIUM)) return 0.8;
+        if (abajo.is(Blocks.MOSS_BLOCK) || abajo.is(Blocks.MOSS_CARPET)) return 0.85;
         if (abajo.is(Blocks.HAY_BLOCK)) return 0.95;
         if (abajo.is(BlockTags.LEAVES)) return 0.6;
         if (abajo.is(Blocks.FARMLAND)) return 0.15;
@@ -93,7 +95,7 @@ public final class Fuego {
         double f = sueloQuemable(level.getBlockState(pos.below()));
         if (aqui.is(BloquesIncendio.PASTO_SECO.get())) f += 0.75;
         else if (aqui.is(Blocks.DEAD_BUSH)) f += 0.6;
-        else if (esPasto(aqui)) f += 0.35;
+        else if (esPasto(aqui)) f += 0.45;
         for (Direction d : Direction.values()) {
             if (d == Direction.DOWN) continue;
             BlockPos np = pos.relative(d);
@@ -134,13 +136,14 @@ public final class Fuego {
         if (clima <= 0) return false;
         if (st.is(BlockTags.LEAVES)) {
             if (r.nextDouble() < probBase * 0.75 * clima) {
-                level.setBlock(pos, BloquesIncendio.LLAMA.get().defaultBlockState().setValue(LlamaBlock.COPA, true), Block.UPDATE_ALL);
+                level.setBlock(pos, BloquesIncendio.LLAMA.get().defaultBlockState().setValue(LlamaBlock.COPA, true)
+                        .setValue(LlamaBlock.GRANDE, true), Block.UPDATE_ALL);
                 return true;
             }
             return false;
         }
         if (st.is(BlockTags.LOGS_THAT_BURN)) {
-            if (r.nextDouble() < probBase * 0.22 * clima) {
+            if (r.nextDouble() < probBase * 0.3 * clima) {
                 BlockState t = BloquesIncendio.TRONCO_ARDIENDO.get().defaultBlockState();
                 if (st.hasProperty(RotatedPillarBlock.AXIS)) t = t.setValue(RotatedPillarBlock.AXIS, st.getValue(RotatedPillarBlock.AXIS));
                 level.setBlock(pos, t, Block.UPDATE_ALL);
@@ -152,7 +155,7 @@ public final class Fuego {
         double comb = combustible(level, pos);
         if (comb < 0.05) return false;
         if (r.nextDouble() < probBase * comb * clima) {
-            level.setBlock(pos, BloquesIncendio.LLAMA.get().defaultBlockState(), Block.UPDATE_ALL);
+            level.setBlock(pos, BloquesIncendio.LLAMA.get().defaultBlockState().setValue(LlamaBlock.GRANDE, comb > 1.05), Block.UPDATE_ALL);
             return true;
         }
         return false;
@@ -172,13 +175,15 @@ public final class Fuego {
                 dx += (int) Math.round(c.vx() * r.nextDouble() * alcance);
                 dz += (int) Math.round(c.vz() * r.nextDouble() * alcance);
             }
-            int dy = r.nextInt(4) - 1; // -1..2 (el fuego trepa)
+            // casi siempre a la misma altura (el césped de al lado); a veces sube o baja un escalón
+            float q = r.nextFloat();
+            int dy = q < 0.6f ? 0 : q < 0.82f ? 1 : q < 0.96f ? -1 : 2;
             if (dx == 0 && dz == 0 && dy == 0) dy = 1;
             BlockPos p = origen.offset(dx, dy, dz);
-            if (prender(level, p, r, 0.42 * intensidad, origen)) continue;
+            if (prender(level, p, r, 0.62 * intensidad, origen)) continue;
             // si ahí no hay nada, prueba el hueco de encima (la hierba sobre el bloque de al lado)
             BlockState s = level.getBlockState(p);
-            if (!s.isAir() && !cabeLlama(s) && !s.is(BlockTags.LEAVES)) prender(level, p.above(), r, 0.42 * intensidad, origen);
+            if (!s.isAir() && !cabeLlama(s) && !s.is(BlockTags.LEAVES)) prender(level, p.above(), r, 0.62 * intensidad, origen);
         }
     }
 

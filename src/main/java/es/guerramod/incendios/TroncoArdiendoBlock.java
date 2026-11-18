@@ -43,20 +43,28 @@ public class TroncoArdiendoBlock extends RotatedPillarBlock {
             Fuego.apagar(level, pos);
             return;
         }
-        Fuego.propagar(level, pos, r, 1.0, 3);
+        Fuego.propagar(level, pos, r, 1.3, 4);
+        // el tronco ardiendo saca llamas altas por los lados y por arriba (el árbol entero arde)
+        for (int i = 0; i < 2; i++) {
+            Direction d = r.nextFloat() < 0.4f ? Direction.UP : Direction.Plane.HORIZONTAL.getRandomDirection(r);
+            BlockPos np = pos.relative(d);
+            if (level.getBlockState(np).isAir()) {
+                level.setBlock(np, BloquesIncendio.LLAMA.get().defaultBlockState().setValue(LlamaBlock.COPA, true)
+                        .setValue(LlamaBlock.GRANDE, true), Block.UPDATE_ALL);
+            }
+        }
         if (r.nextFloat() < 0.1f) Fuego.pavesa(level, pos, r);
         if (r.nextFloat() < 0.35f) Fuego.columnaHumo(level, pos.above(), r, true);
         int edad = st.getValue(EDAD) + 1;
         if (edad >= 7) {
             level.setBlock(pos, BloquesIncendio.TRONCO_QUEMADO.get().defaultBlockState().setValue(AXIS, st.getValue(AXIS)), Block.UPDATE_ALL);
             // a veces se queda humeando un rescoldo al pie del árbol
-            BlockPos pie = pos.below();
             if (r.nextFloat() < 0.15f && level.getBlockState(pos.above()).isAir()) {
                 level.setBlock(pos.above(), BloquesIncendio.RESCOLDO.get().defaultBlockState(), Block.UPDATE_ALL);
             }
         } else {
             level.setBlock(pos, st.setValue(EDAD, edad), Block.UPDATE_CLIENTS);
-            level.scheduleTick(pos, this, 40 + r.nextInt(50));
+            level.scheduleTick(pos, this, 30 + r.nextInt(35));
         }
     }
 

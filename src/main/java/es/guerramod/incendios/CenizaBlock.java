@@ -49,7 +49,8 @@ public class CenizaBlock extends Block {
     @Override
     @SuppressWarnings("deprecation")
     public void randomTick(BlockState st, ServerLevel level, BlockPos pos, RandomSource r) {
-        if ((level.isRainingAt(pos) && r.nextInt(3) == 0) || r.nextInt(40) == 0) level.removeBlock(pos, false);
+        // la lluvia se lleva la ceniza enseguida; sin lluvia, el viento poco a poco
+        if ((level.isRainingAt(pos) && r.nextInt(2) == 0) || r.nextInt(30) == 0) level.removeBlock(pos, false);
     }
 
     @Override

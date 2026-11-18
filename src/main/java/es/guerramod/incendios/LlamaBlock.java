@@ -27,16 +27,18 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 public class LlamaBlock extends Block {
     public static final IntegerProperty EDAD = IntegerProperty.create("edad", 0, 7);
     public static final BooleanProperty COPA = BooleanProperty.create("copa");
+    /** Llamas altas (copas de árboles, junto a troncos, mucho combustible). */
+    public static final BooleanProperty GRANDE = BooleanProperty.create("grande");
     private static final VoxelShape FORMA = Block.box(0, 0, 0, 16, 1, 16);
 
     public LlamaBlock(Properties p) {
         super(p);
-        registerDefaultState(stateDefinition.any().setValue(EDAD, 0).setValue(COPA, false));
+        registerDefaultState(stateDefinition.any().setValue(EDAD, 0).setValue(COPA, false).setValue(GRANDE, false));
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> b) {
-        b.add(EDAD, COPA);
+        b.add(EDAD, COPA, GRANDE);
     }
 
     @Override
@@ -52,7 +54,7 @@ public class LlamaBlock extends Block {
     @Override
     @SuppressWarnings("deprecation")
     public void onPlace(BlockState st, Level level, BlockPos pos, BlockState viejo, boolean moviendo) {
-        if (!level.isClientSide && !viejo.is(this)) level.scheduleTick(pos, this, 4 + level.random.nextInt(8));
+        if (!level.isClientSide && !viejo.is(this)) level.scheduleTick(pos, this, 2 + level.random.nextInt(4));
     }
 
     @Override
@@ -70,18 +72,21 @@ public class LlamaBlock extends Block {
             return;
         }
         Clima c = Clima.get(level.getServer());
-        int intentos = 2 + (comb > 0.6 ? 2 : 0) + (int) Math.round(c.fuerza() * 2);
-        Fuego.propagar(level, pos, r, Math.min(1.3, comb + 0.25), intentos);
+        boolean grande = st.getValue(GRANDE);
+        int intentos = 3 + (comb > 0.6 ? 2 : 0) + (grande ? 2 : 0) + (int) Math.round(c.fuerza() * 3);
+        Fuego.propagar(level, pos, r, Math.min(1.5, comb + 0.35 + (grande ? 0.3 : 0)), intentos);
         if (r.nextFloat() < 0.05f * c.fuerza() * (copa ? 3 : 1)) Fuego.pavesa(level, pos, r);
-        if (r.nextFloat() < (copa ? 0.35f : 0.12f)) Fuego.columnaHumo(level, pos, r, copa || comb > 0.8);
+        if (r.nextFloat() < (copa ? 0.35f : 0.08f)) Fuego.columnaHumo(level, pos, r, copa || grande);
 
         int edad = st.getValue(EDAD) + 1 + (comb < 0.4 ? 1 : 0);
         if (edad >= 7) {
             consumir(level, pos, copa, r);
         } else {
-            level.setBlock(pos, st.setValue(EDAD, edad), Block.UPDATE_CLIENTS);
-            // la hierba arde en segundos; las copas y lo que tiene mucho combustible, más
-            int espera = copa ? 14 + r.nextInt(14) : 6 + r.nextInt(8) + (int) (comb * 10);
+            // con mucho combustible al lado (troncos, hojas) la llama crece
+            BlockState nuevo = st.setValue(EDAD, edad).setValue(GRANDE, grande || comb > 1.05);
+            level.setBlock(pos, nuevo, Block.UPDATE_CLIENTS);
+            // el césped arde en un suspiro; las copas y lo que tiene mucho combustible, más
+            int espera = copa ? 12 + r.nextInt(12) : 2 + r.nextInt(4) + (int) (comb * 3);
             level.scheduleTick(pos, this, espera);
         }
     }
@@ -117,6 +122,13 @@ public class LlamaBlock extends Block {
         if (r.nextInt(18) == 0) {
             level.playLocalSound(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, SoundEvents.FIRE_AMBIENT, SoundSource.BLOCKS,
                     1.0f + r.nextFloat(), r.nextFloat() * 0.7f + 0.3f, false);
+        }
+        boolean grande = st.getValue(GRANDE);
+        if (grande) {
+            level.addParticle(ParticleTypes.FLAME, pos.getX() + r.nextDouble(), pos.getY() + 1 + r.nextDouble() * 0.8,
+                    pos.getZ() + r.nextDouble(), 0, 0.06, 0);
+            if (r.nextInt(2) == 0) level.addParticle(ParticleTypes.CAMPFIRE_COSY_SMOKE, pos.getX() + 0.5, pos.getY() + 1.8,
+                    pos.getZ() + 0.5, 0, 0.07, 0);
         }
         for (int i = 0; i < 2; i++) {
             level.addParticle(ParticleTypes.LARGE_SMOKE, pos.getX() + r.nextDouble(), pos.getY() + 0.6 + r.nextDouble() * 0.6,

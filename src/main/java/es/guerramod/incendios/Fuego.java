@@ -204,8 +204,8 @@ public final class Fuego {
         BlockPos up = origen.above();
         BlockState su = level.getBlockState(up);
         if (su.is(BlockTags.LEAVES) && seco(level, up) && llega(r, m.rosCopa(1) * 0.8 * potencia, 1, dt)) encender(level, up, true);
-        else if (su.is(BlockTags.LOGS_THAT_BURN) && seco(level, up) && llega(r, 0.03 * m.factorHumedad * potencia, 1, dt)) encender(level, up, true);
-        return m.rosCabeza;
+        else if (su.is(BlockTags.LOGS_THAT_BURN) && seco(level, up) && llega(r, 0.03 * m.factorHumedad() * potencia, 1, dt)) encender(level, up, true);
+        return m.rosCabeza();
     }
 
     private static void intentar(ServerLevel level, BlockPos t, BlockState st, RandomSource r, Meteo m, double cos, double distH,
@@ -218,7 +218,7 @@ public final class Fuego {
         }
         if (st.is(BlockTags.LOGS_THAT_BURN)) {
             // los troncos tardan en prender (combustible grueso)
-            if (llega(r, 0.025 * m.factorHumedad * potencia * (origenCopa ? 1.5 : 1), dist, dt)) encender(level, t, true);
+            if (llega(r, 0.025 * m.factorHumedad() * potencia * (origenCopa ? 1.5 : 1), dist, dt)) encender(level, t, true);
             return;
         }
         if (!cabeLlama(st)) return;
@@ -226,7 +226,7 @@ public final class Fuego {
         if (comb < 0.05) return;
         double ros = m.rosDireccion(cos) * factorCombustible(comb) * pendiente(dy, distH) * potencia;
         // desde una copa cae material ardiendo al suelo
-        if (origenCopa) ros = Math.max(ros, 0.02 * m.factorHumedad);
+        if (origenCopa) ros = Math.max(ros, 0.02 * m.factorHumedad());
         if (llega(r, ros, dist, dt)) encender(level, t, m.alturaLlama(ros) > 1.6);
     }
 

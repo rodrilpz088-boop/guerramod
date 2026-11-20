@@ -135,8 +135,8 @@ public final class Desastres {
         alerta(l, BlockPos.ZERO, 0, "Granizada", String.format("piedras de %.0f cm: ponte a cubierto", cm));
     }
 
-    public static void riada(ServerLevel l) {
-        Inundacion.provocar(l);
+    public static int riada(ServerLevel l) {
+        return Inundacion.provocar(l);
     }
 
     public static void olaCalor(ServerLevel l, double dias) {

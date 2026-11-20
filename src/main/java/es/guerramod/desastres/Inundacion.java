@@ -51,6 +51,7 @@ public final class Inundacion extends SavedData {
     private final LongOpenHashSet visto = new LongOpenHashSet();
     private final ArrayDeque<Long> retirar = new ArrayDeque<>();
     private boolean migrado = false;
+    private int ultimosCauces = 0;
 
     public static Inundacion get(ServerLevel l) {
         return l.getDataStorage().computeIfAbsent(Inundacion::cargar, Inundacion::new, "guerramod_inundacion");
@@ -90,13 +91,15 @@ public final class Inundacion extends SavedData {
     }
 
     // ------------------------------------------------------------------ control
-    public static void provocar(ServerLevel l) {
+    /** Provoca una inundación ya: devuelve cuántos puntos de río o lago ha encontrado cerca de los jugadores. */
+    public static int provocar(ServerLevel l) {
         Inundacion f = get(l);
         f.lluvia = Math.max(f.lluvia, 9000);
-        l.setWeatherParameters(0, 12000, true, true);
-        f.subir(l);
+        l.setWeatherParameters(0, 18000, true, true);
+        f.nivel = Math.max(f.nivel, 2);
         f.subir(l);
         f.setDirty();
+        return f.ultimosCauces;
     }
 
     public static void parar(ServerLevel l) {
@@ -125,7 +128,7 @@ public final class Inundacion extends SavedData {
         boolean llueve = l.isRaining(), tormenta = l.isThundering();
         if (llueve) f.lluvia = Math.min(30000, f.lluvia + (tormenta ? 3 : 1));
         else f.lluvia = Math.max(0, f.lluvia - 2);
-        int maximo = tormenta ? 5 : 3;
+        int maximo = tormenta ? 7 : 4;
         if (llueve && f.lluvia > 7000) {
             f.ticksNivel += tormenta ? 2 : 1;
             if (f.ticksNivel >= TICKS_SUBIDA && f.nivel < maximo) {
@@ -140,7 +143,7 @@ public final class Inundacion extends SavedData {
         }
         if (f.nivel > 0) {
             if (l.getGameTime() % 200 == 0) f.sembrar(l, r);
-            f.expandir(l, 90);
+            f.expandir(l, 160);
             if (l.getGameTime() % 2 == 0) f.corriente(l);
         }
         if (!f.retirar.isEmpty()) f.quitar(l, r, 160);
@@ -160,7 +163,7 @@ public final class Inundacion extends SavedData {
         nivel++;
         if (nivel == 1) Desastres.alerta(l, BlockPos.ZERO, 0, "Aviso por inundaciones", "los ríos y lagos empiezan a desbordarse");
         else if (nivel == 3) Desastres.alerta(l, BlockPos.ZERO, 0, "Inundación grave", "el agua sigue subiendo e inunda las zonas bajas");
-        else if (nivel == 5) Desastres.alerta(l, BlockPos.ZERO, 0, "Inundación extrema", "evacúa las zonas bajas y sube a lo alto");
+        else if (nivel == 6) Desastres.alerta(l, BlockPos.ZERO, 0, "Inundación extrema", "evacúa las zonas bajas y sube a lo alto");
         // el agua vuelve a avanzar desde el cauce con el nuevo nivel
         visto.clear();
         frente.clear();
@@ -200,25 +203,49 @@ public final class Inundacion extends SavedData {
         if (nivel <= 0) baseColumna.clear();
     }
 
-    /** Puntos de partida: el agua de ríos, lagos y pantanos cerca de los jugadores (y lo ya inundado). */
+    /**
+     * Puntos de partida: el agua de ríos, lagos y pantanos cerca de los jugadores (barrido cada 4 bloques hasta 128 de
+     * distancia) y lo ya inundado. Donde no hay cauce, la lluvia se acumula en los hoyos y zonas bajas.
+     */
     private void sembrar(ServerLevel l, RandomSource r) {
+        int cauces = 0;
         for (ServerPlayer p : l.players()) {
-            for (int i = 0; i < 300; i++) {
-                int x = p.getBlockX() + r.nextInt(145) - 72, z = p.getBlockZ() + r.nextInt(145) - 72;
-                long c = col(x, z);
-                if (visto.contains(c) || !l.hasChunkAt(new BlockPos(x, 64, z))) continue;
-                int y0;
-                if (baseColumna.containsKey(c)) y0 = baseColumna.get(c);
-                else {
+            int px = p.getBlockX(), pz = p.getBlockZ();
+            int off = r.nextInt(4);
+            int hoyos = 0;
+            for (int dx = -128 + off; dx <= 128; dx += 4) {
+                for (int dz = -128 + off; dz <= 128; dz += 4) {
+                    if (dx * dx + dz * dz > 128 * 128) continue;
+                    int x = px + dx, z = pz + dz;
+                    long c = col(x, z);
+                    if (visto.contains(c) || !l.hasChunkAt(new BlockPos(x, 64, z))) continue;
+                    if (baseColumna.containsKey(c)) {
+                        frente.add(new long[]{c, baseColumna.get(c), 99});
+                        continue;
+                    }
                     int ws = l.getHeight(Heightmap.Types.WORLD_SURFACE, x, z) - 1;
                     BlockPos w = new BlockPos(x, ws, z);
-                    if (!l.getFluidState(w).isSource() || !l.getBlockState(w).is(Blocks.WATER)) continue;
-                    if (l.getBiome(w).is(BiomeTags.IS_OCEAN) || l.getBiome(w).is(BiomeTags.IS_DEEP_OCEAN)) continue;
-                    y0 = ws;
+                    if (l.getBlockState(w).is(Blocks.WATER) && l.getFluidState(w).isSource()) {
+                        if (l.getBiome(w).is(BiomeTags.IS_OCEAN) || l.getBiome(w).is(BiomeTags.IS_DEEP_OCEAN)) continue;
+                        frente.add(new long[]{c, ws, 99});
+                        cauces++;
+                    } else if (nivel >= 2 && hoyos < 40) {
+                        // hoyo: casi todo alrededor está más alto -> ahí se junta el agua de lluvia
+                        int h = l.getHeight(Heightmap.Types.OCEAN_FLOOR, x, z) - 1;
+                        int altos = 0;
+                        for (int ox = -2; ox <= 2; ox += 2) for (int oz = -2; oz <= 2; oz += 2) {
+                            if (ox == 0 && oz == 0) continue;
+                            if (l.getHeight(Heightmap.Types.OCEAN_FLOOR, x + ox, z + oz) - 1 > h) altos++;
+                        }
+                        if (altos >= 6 && l.isRainingAt(new BlockPos(x, h + 1, z))) {
+                            frente.add(new long[]{c, h, 1});
+                            hoyos++;
+                        }
+                    }
                 }
-                frente.add(new long[]{c, y0});
             }
         }
+        ultimosCauces = cauces;
     }
 
     private static boolean fragil(BlockState s) {
@@ -241,10 +268,11 @@ public final class Inundacion extends SavedData {
 
     private void expandir(ServerLevel l, int columnas) {
         int puestos = 0;
-        while (columnas > 0 && !frente.isEmpty() && puestos < 320) {
+        while (columnas > 0 && !frente.isEmpty() && puestos < 400) {
             long[] e = frente.poll();
             long c = e[0];
             int y0 = (int) e[1];
+            int tope = e.length > 2 ? (int) e[2] : 99;
             if (visto.contains(c) || visto.size() > MAX_COLUMNAS) continue;
             visto.add(c);
             int x = (int) (c >> 32), z = (int) c;
@@ -252,7 +280,7 @@ public final class Inundacion extends SavedData {
             if (!l.hasChunkAt(ref) || lejos(l, x, z)) continue;
             if (l.getBiome(ref).is(BiomeTags.IS_OCEAN)) continue;
             columnas--;
-            int yF = y0 + nivel;
+            int yF = y0 + Math.min(nivel, tope);
             int g = suelo(l, x, z, yF, y0);
             if (g >= yF) continue; // loma, muro o dique: aquí se para
             for (int y = g + 1; y <= yF && agua.size() < MAX_BLOQUES; y++) {
@@ -274,7 +302,7 @@ public final class Inundacion extends SavedData {
             baseColumna.put(c, y0);
             for (Direction d : Direction.Plane.HORIZONTAL) {
                 long n = col(x + d.getStepX(), z + d.getStepZ());
-                if (!visto.contains(n)) frente.add(new long[]{n, y0});
+                if (!visto.contains(n)) frente.add(new long[]{n, y0, tope});
             }
         }
     }

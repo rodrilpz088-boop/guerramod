@@ -273,9 +273,9 @@ Pasan solos de vez en cuando (`/desastre naturales false` para quitarlos) y avis
   en las laderas y, con magnitud 7 o más, se abre una grieta en el suelo.
 * **Granizo** en tormentas: hace daño a quien esté a la intemperie (menos con casco), destroza cultivos, rompe cristales y deja
   el suelo blanco un rato.
-* **Inundaciones**: con mucha lluvia el nivel de ríos y lagos sube poco a poco (hasta 3 bloques con lluvia y 5 con
-  tormenta) y el agua avanza desde el cauce por todo el terreno más bajo que esté conectado: vegas, campos, caminos, calles y
-  casas con la puerta abierta. Las lomas, los muros y los diques la frenan (puedes hacer barreras). La corriente arrastra
+* **Inundaciones**: con mucha lluvia el nivel de ríos y lagos sube poco a poco (hasta 4 bloques con lluvia y 7 con
+  tormenta; busca ríos y lagos hasta 128 bloques) y el agua avanza desde el cauce por todo el terreno más bajo que esté conectado: vegas, campos, caminos, calles y
+  casas con la puerta abierta; donde no hay cauce, la lluvia se acumula en hoyos y zonas bajas. Las lomas, los muros y los diques la frenan (puedes hacer barreras). La corriente arrastra
   objetos, animales y personas hacia lo más bajo y se lleva cultivos, flores y antorchas. Al dejar de llover el agua baja
   despacio, de arriba abajo, y deja barro en el suelo.
 * **Olas de calor**: varios días con más calor y aire más seco (más riesgo de incendio).

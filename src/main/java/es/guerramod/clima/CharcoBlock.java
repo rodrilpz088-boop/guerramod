@@ -99,6 +99,9 @@ public class CharcoBlock extends Block {
     @Override
     @SuppressWarnings("deprecation")
     public void randomTick(BlockState st, ServerLevel level, BlockPos pos, RandomSource r) {
+        // los charcos-bloque ya no se usan (ahora el suelo se moja con un efecto visual): los que queden se secan
+        secar(level, pos, st);
+        if (true) return;
         int n = st.getValue(NIVEL);
         if (level.isRainingAt(pos)) {
             BlockState nuevo = st.setValue(LLUVIA, true);

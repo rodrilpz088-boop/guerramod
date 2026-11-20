@@ -54,7 +54,6 @@ public final class EfectosClima {
         if (server.getTickCount() % 2 != 0) return;
         ServerLevel ow = server.overworld();
         RandomSource r = ow.random;
-        if (ow.isRaining()) charcos(ow, r);
         for (ServerPlayer p : ow.players()) {
             for (int i = 0; i < 4; i++) {
                 int x = p.getBlockX() + r.nextInt(97) - 48, z = p.getBlockZ() + r.nextInt(97) - 48;

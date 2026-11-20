@@ -241,10 +241,11 @@ El minimapa muestra la temperatura, la humedad y el cielo (despejado, nuboso, ni
 * **Agua realista**: se acabó el azul eléctrico. Cada zona tiene su color de agua: mar profundo azul petróleo, mar tropical
   turquesa, ríos verdosos, pantanos color té, agua helada azul acero. La superficie tiene ondas suaves y brillos del sol, y
   bajo el agua todo se ve más oscuro y verdoso, como en la realidad.
-* **Charcos**: cuando llueve se van formando charcos en el césped, la tierra, los caminos y el asfalto, sobre todo en los
-  huecos del terreno. Crecen y se juntan mientras llueve, tienen ondas de las gotas y, cuando para, se secan poco a poco
-  (más rápido con calor, sol, viento y aire seco). Al pisarlos salpican y apagan el fuego si te estás quemando. Si tapaban
-  una mata de hierba, vuelve a salir al secarse.
+* **Suelo mojado** (como con los shaders, pero sin bloques): con la lluvia todo lo que está al aire libre se va mojando
+  poco a poco, a manchas: los bloques se oscurecen (la arena y la tierra mucho, las hojas poco) y las superficies planas
+  brillan reflejando el cielo, mucho más al mirar en rasante, como el asfalto mojado de verdad, con zonas más encharcadas.
+  El césped y las hojas brillan poco; la piedra, el asfalto, el hormigón y la madera mucho. Bajo techo no se moja.
+  Cuando para de llover se va secando en unos minutos, más rápido con calor, sol, viento y aire seco.
 
 ## Estructura del proyecto
 * `src/main/java/es/guerramod/` — código (pais, bloques, items, entidades, radiacion, cliente, red, eventos)

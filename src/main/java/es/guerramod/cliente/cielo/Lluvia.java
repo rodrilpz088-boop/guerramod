@@ -35,7 +35,7 @@ public final class Lluvia {
         return (h >>> 11) * 0x1.0p-53;
     }
 
-    private static byte precip(ClientLevel level, int x, int y, int z) {
+    static byte precip(ClientLevel level, int x, int y, int z) {
         long k = (((long) (x >> 4)) << 32) ^ ((z >> 4) & 0xFFFFFFFFL);
         byte v = PRECIP.getOrDefault(k, (byte) -1);
         if (v < 0) {

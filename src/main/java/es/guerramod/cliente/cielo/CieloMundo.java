@@ -41,7 +41,7 @@ public class CieloMundo extends DimensionSpecialEffects.OverworldEffects {
     private static final int N_ESTRELLAS = 2600;
 
     public static boolean activo(ClientLevel level) {
-        return !desactivado && level != null && level.effects() instanceof CieloMundo;
+        return !desactivado && !Shaders.activos() && level != null && level.effects() instanceof CieloMundo;
     }
 
     private static boolean cieloNormal(Camera cam) {
@@ -53,7 +53,7 @@ public class CieloMundo extends DimensionSpecialEffects.OverworldEffects {
     @Override
     public boolean renderSky(ClientLevel level, int ticks, float parcial, PoseStack pose, Camera cam, Matrix4f proy, boolean niebla,
                              Runnable prepararNiebla) {
-        if (desactivado || cieloNormal(cam)) return false;
+        if (desactivado || Shaders.activos() || cieloNormal(cam)) return false;
         try {
             prepararNiebla.run();
             if (niebla) return true;
@@ -96,7 +96,7 @@ public class CieloMundo extends DimensionSpecialEffects.OverworldEffects {
     @Override
     public boolean renderClouds(ClientLevel level, int ticks, float parcial, PoseStack pose, double camX, double camY, double camZ,
                                 Matrix4f proy) {
-        if (desactivado) return false;
+        if (desactivado || Shaders.activos()) return false;
         try {
             Atmosfera.actualizar(level, parcial, camY);
             Nubes.dibujar(level, parcial, pose, proy, camX, camY, camZ);
@@ -115,7 +115,7 @@ public class CieloMundo extends DimensionSpecialEffects.OverworldEffects {
     @Override
     public boolean renderSnowAndRain(ClientLevel level, int ticks, float parcial, net.minecraft.client.renderer.LightTexture luz,
                                      double camX, double camY, double camZ) {
-        if (desactivado) return false;
+        if (desactivado || Shaders.activos()) return false;
         try {
             return Lluvia.dibujar(level, parcial, camX, camY, camZ);
         } catch (Throwable t) {

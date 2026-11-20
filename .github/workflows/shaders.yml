@@ -1,0 +1,17 @@
+name: Validar shaders
+on:
+  push:
+    paths:
+      - 'shaderpack/**'
+      - 'herramientas/validar_shaders.py'
+      - '.github/workflows/shaders.yml'
+  workflow_dispatch:
+jobs:
+  validar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Instalar glslang
+        run: sudo apt-get update -q && sudo apt-get install -y -q glslang-tools
+      - name: Compilar todos los programas
+        run: python3 herramientas/validar_shaders.py

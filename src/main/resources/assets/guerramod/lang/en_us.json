@@ -362,5 +362,6 @@
  "block.guerramod.captador_co2": "CO2 Capture Unit",
  "itemGroup.guerramod.ciudad": "City, Industry & Climate",
  "block.guerramod.charco": "Puddle",
- "entity.guerramod.tornado": "Tornado"
+ "entity.guerramod.tornado": "Tornado",
+ "block.guerramod.agua_turbia": "Flood Water"
 }

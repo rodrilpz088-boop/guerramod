@@ -22,6 +22,8 @@ public class GuerraMod {
         ModSonidos.SONIDOS.register(bus);
         ModPestanas.PESTANAS.register(bus);
         es.guerramod.clima.AguaRealista.SERIALIZADORES.register(bus);
+        es.guerramod.desastres.AguaTurbia.TIPOS.register(bus);
+        es.guerramod.desastres.AguaTurbia.FLUIDOS.register(bus);
         Red.registrar();
     }
 }

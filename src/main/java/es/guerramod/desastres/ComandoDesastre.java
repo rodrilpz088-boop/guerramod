@@ -64,8 +64,8 @@ public final class ComandoDesastre {
                         })))
                 .then(Commands.literal("inundacion").executes(c -> {
                     int n = Desastres.riada(mundo(c));
-                    return ok(c, n > 0 ? "Inundación en marcha: " + n + " puntos de río o lago cerca. El agua sube y se extiende por las zonas bajas."
-                            : "No hay ríos ni lagos cerca (hasta 128 bloques): la lluvia se irá acumulando en los hoyos y zonas bajas. Acércate a un río para ver el desbordamiento.");
+                    return ok(c, n > 0 ? "Inundación en marcha: el agua de riada empieza a subir en " + n
+                            + " columnas de terreno a tu alrededor, primero en lo más bajo." : "Ahora mismo no hay terreno bajo cerca donde se acumule el agua.");
                 }))
                 .then(Commands.literal("olacalor")
                         .executes(c -> {

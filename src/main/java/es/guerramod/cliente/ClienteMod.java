@@ -29,6 +29,16 @@ public final class ClienteMod {
     }
 
     @SubscribeEvent
+    public static void prepararCliente(net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent e) {
+        e.enqueueWork(() -> {
+            net.minecraft.client.renderer.ItemBlockRenderTypes.setRenderLayer(es.guerramod.desastres.AguaTurbia.FUENTE.get(),
+                    net.minecraft.client.renderer.RenderType.translucent());
+            net.minecraft.client.renderer.ItemBlockRenderTypes.setRenderLayer(es.guerramod.desastres.AguaTurbia.CORRIENTE.get(),
+                    net.minecraft.client.renderer.RenderType.translucent());
+        });
+    }
+
+    @SubscribeEvent
     public static void teclas(RegisterKeyMappingsEvent e) {
         e.register(Teclas.MINIMAPA);
         e.register(Teclas.DISPARAR);

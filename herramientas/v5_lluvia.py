@@ -160,5 +160,6 @@ for archivo, nombre in (("es_es.json", "Charco"), ("en_us.json", "Puddle")):
     actual = json.load(open(ruta, encoding="utf-8"))
     actual[f"block.{MOD}.charco"] = nombre
     actual[f"entity.{MOD}.tornado"] = "Tornado"
+    actual[f"block.{MOD}.agua_turbia"] = "Agua de riada" if archivo == "es_es.json" else "Flood Water"
     escribir(ruta, actual)
 print("v5 lluvia: recursos listos")

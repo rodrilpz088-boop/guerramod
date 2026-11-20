@@ -40,6 +40,11 @@ public final class BloquesCiudad {
             () -> new CaptadorBlock(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).strength(3.0f, 6.0f)
                     .sound(SoundType.METAL).requiresCorrectToolForDrops().randomTicks()));
 
+    /** Charco de lluvia (sin objeto: lo forma la lluvia). */
+    public static final RegistryObject<Block> CHARCO = ModBloques.BLOQUES.register("charco", () -> new es.guerramod.clima.CharcoBlock(
+            BlockBehaviour.Properties.of().mapColor(MapColor.WATER).replaceable().noCollission().noOcclusion().instabreak()
+                    .sound(SoundType.MUD).randomTicks().noLootTable().pushReaction(net.minecraft.world.level.material.PushReaction.DESTROY)));
+
     /** Fuerza la carga de esta clase (registra todo). */
     public static void iniciar() {
     }

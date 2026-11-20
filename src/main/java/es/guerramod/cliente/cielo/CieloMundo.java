@@ -112,6 +112,21 @@ public class CieloMundo extends DimensionSpecialEffects.OverworldEffects {
         }
     }
 
+    @Override
+    public boolean renderSnowAndRain(ClientLevel level, int ticks, float parcial, net.minecraft.client.renderer.LightTexture luz,
+                                     double camX, double camY, double camZ) {
+        if (desactivado) return false;
+        try {
+            return Lluvia.dibujar(level, parcial, camX, camY, camZ);
+        } catch (Throwable t) {
+            desactivado = true;
+            GuerraMod.LOGGER.error("Lluvia realista desactivada por un error; se usa la normal", t);
+            RenderSystem.enableCull();
+            RenderSystem.disableBlend();
+            return false;
+        }
+    }
+
     // ---------------------------------------------------------------- bóveda
     private static double dirX(int a, int e) {
         return Math.cos(Math.toRadians(ELEV[e])) * Math.cos(2 * Math.PI * a / NA);

@@ -9,3 +9,4 @@ python3 herramientas/v2_catalogo.py
 python3 herramientas/v2_sonidos.py
 python3 herramientas/v3_incendios.py
 python3 herramientas/v4_clima.py
+python3 herramientas/v5_lluvia.py

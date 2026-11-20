@@ -1,0 +1,112 @@
+{
+ "variants": {
+  "lluvia=true,nivel=1": [
+   {
+    "model": "guerramod:block/charco_1_lluvia",
+    "y": 0
+   },
+   {
+    "model": "guerramod:block/charco_1_lluvia",
+    "y": 90
+   },
+   {
+    "model": "guerramod:block/charco_1_lluvia",
+    "y": 180
+   },
+   {
+    "model": "guerramod:block/charco_1_lluvia",
+    "y": 270
+   }
+  ],
+  "lluvia=false,nivel=1": [
+   {
+    "model": "guerramod:block/charco_1_calma",
+    "y": 0
+   },
+   {
+    "model": "guerramod:block/charco_1_calma",
+    "y": 90
+   },
+   {
+    "model": "guerramod:block/charco_1_calma",
+    "y": 180
+   },
+   {
+    "model": "guerramod:block/charco_1_calma",
+    "y": 270
+   }
+  ],
+  "lluvia=true,nivel=2": [
+   {
+    "model": "guerramod:block/charco_2_lluvia",
+    "y": 0
+   },
+   {
+    "model": "guerramod:block/charco_2_lluvia",
+    "y": 90
+   },
+   {
+    "model": "guerramod:block/charco_2_lluvia",
+    "y": 180
+   },
+   {
+    "model": "guerramod:block/charco_2_lluvia",
+    "y": 270
+   }
+  ],
+  "lluvia=false,nivel=2": [
+   {
+    "model": "guerramod:block/charco_2_calma",
+    "y": 0
+   },
+   {
+    "model": "guerramod:block/charco_2_calma",
+    "y": 90
+   },
+   {
+    "model": "guerramod:block/charco_2_calma",
+    "y": 180
+   },
+   {
+    "model": "guerramod:block/charco_2_calma",
+    "y": 270
+   }
+  ],
+  "lluvia=true,nivel=3": [
+   {
+    "model": "guerramod:block/charco_3_lluvia",
+    "y": 0
+   },
+   {
+    "model": "guerramod:block/charco_3_lluvia",
+    "y": 90
+   },
+   {
+    "model": "guerramod:block/charco_3_lluvia",
+    "y": 180
+   },
+   {
+    "model": "guerramod:block/charco_3_lluvia",
+    "y": 270
+   }
+  ],
+  "lluvia=false,nivel=3": [
+   {
+    "model": "guerramod:block/charco_3_calma",
+    "y": 0
+   },
+   {
+    "model": "guerramod:block/charco_3_calma",
+    "y": 90
+   },
+   {
+    "model": "guerramod:block/charco_3_calma",
+    "y": 180
+   },
+   {
+    "model": "guerramod:block/charco_3_calma",
+    "y": 270
+   }
+  ]
+ }
+}

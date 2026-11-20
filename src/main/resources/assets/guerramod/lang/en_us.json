@@ -360,5 +360,6 @@
  "block.guerramod.chimenea_central": "Power Plant Chimney (emits lots of CO2)",
  "block.guerramod.chimenea_vapor": "Steam Outlet (cooling tower)",
  "block.guerramod.captador_co2": "CO2 Capture Unit",
- "itemGroup.guerramod.ciudad": "City, Industry & Climate"
+ "itemGroup.guerramod.ciudad": "City, Industry & Climate",
+ "block.guerramod.charco": "Puddle"
 }

@@ -232,6 +232,20 @@ El minimapa muestra la temperatura, la humedad y el cielo (despejado, nuboso, ni
 * `/incendios temperatura` ahora fija la temperatura de las zonas templadas: las zonas de nieve siguen más frías y los
   desiertos más calurosos.
 
+## Novedades de la versión 5: Lluvia, agua y charcos
+
+* **Lluvia realista**: miles de gotas finas y casi transparentes que caen a unos 9 m/s, inclinadas por el viento, más
+  densas con tormenta y con una cortina de lluvia más difusa a lo lejos. Se quedan fijas en el mundo (no se mueven contigo),
+  se paran en el suelo, los tejados y los árboles, y se iluminan según la hora del día y los relámpagos. En zonas de nieve
+  sigue nevando como siempre.
+* **Agua realista**: se acabó el azul eléctrico. Cada zona tiene su color de agua: mar profundo azul petróleo, mar tropical
+  turquesa, ríos verdosos, pantanos color té, agua helada azul acero. La superficie tiene ondas suaves y brillos del sol, y
+  bajo el agua todo se ve más oscuro y verdoso, como en la realidad.
+* **Charcos**: cuando llueve se van formando charcos en el césped, la tierra, los caminos y el asfalto, sobre todo en los
+  huecos del terreno. Crecen y se juntan mientras llueve, tienen ondas de las gotas y, cuando para, se secan poco a poco
+  (más rápido con calor, sol, viento y aire seco). Al pisarlos salpican y apagan el fuego si te estás quemando. Si tapaban
+  una mata de hierba, vuelve a salir al secarse.
+
 ## Estructura del proyecto
 * `src/main/java/es/guerramod/` — código (pais, bloques, items, entidades, radiacion, cliente, red, eventos)
 * `src/main/resources/` — texturas, modelos, recetas, idioma

@@ -360,5 +360,6 @@
  "block.guerramod.chimenea_central": "Chimenea de central térmica (emite mucho CO2)",
  "block.guerramod.chimenea_vapor": "Salida de vapor (torre de refrigeración)",
  "block.guerramod.captador_co2": "Captador de CO2",
- "itemGroup.guerramod.ciudad": "Ciudad, industria y clima"
+ "itemGroup.guerramod.ciudad": "Ciudad, industria y clima",
+ "block.guerramod.charco": "Charco"
 }

@@ -28,11 +28,33 @@ public final class EfectosClima {
         }
     }
 
+    /** Con lluvia se forman charcos, sobre todo en los huecos y zonas bajas del terreno. */
+    private static void charcos(ServerLevel ow, RandomSource r) {
+        BlockState charco = es.guerramod.ciudad.BloquesCiudad.CHARCO.get().defaultBlockState();
+        int intentos = ow.isThundering() ? 4 : 2;
+        for (ServerPlayer p : ow.players()) {
+            for (int i = 0; i < intentos; i++) {
+                int x = p.getBlockX() + r.nextInt(81) - 40, z = p.getBlockZ() + r.nextInt(81) - 40;
+                if (!ow.hasChunkAt(new BlockPos(x, p.getBlockY(), z))) continue;
+                BlockPos arriba = ow.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING, new BlockPos(x, 0, z));
+                if (!ow.isRainingAt(arriba)) continue;
+                // hueco: los cuatro vecinos están igual o más altos
+                int h = arriba.getY(), altos = 0;
+                for (net.minecraft.core.Direction d : net.minecraft.core.Direction.Plane.HORIZONTAL) {
+                    if (ow.getHeight(Heightmap.Types.MOTION_BLOCKING, x + d.getStepX(), z + d.getStepZ()) >= h) altos++;
+                }
+                float prob = altos == 4 ? 0.22f : altos == 3 ? 0.06f : 0.012f;
+                if (r.nextFloat() < prob) es.guerramod.clima.CharcoBlock.intentar(ow, arriba, charco);
+            }
+        }
+    }
+
     /** Cada tick: algunas columnas al azar alrededor de cada jugador; si hace calor la nieve y el hielo se funden. */
     public static void tick(MinecraftServer server) {
         if (server.getTickCount() % 2 != 0) return;
         ServerLevel ow = server.overworld();
         RandomSource r = ow.random;
+        if (ow.isRaining()) charcos(ow, r);
         for (ServerPlayer p : ow.players()) {
             for (int i = 0; i < 4; i++) {
                 int x = p.getBlockX() + r.nextInt(97) - 48, z = p.getBlockZ() + r.nextInt(97) - 48;

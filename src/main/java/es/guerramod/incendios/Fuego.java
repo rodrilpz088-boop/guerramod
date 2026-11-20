@@ -85,7 +85,7 @@ public final class Fuego {
 
     public static boolean cabeLlama(BlockState s) {
         if (s.isAir()) return true;
-        if (!s.getFluidState().isEmpty()) return false;
+        if (!s.getFluidState().isEmpty() || s.getBlock() instanceof es.guerramod.clima.CharcoBlock) return false;
         return esPasto(s) || (s.canBeReplaced() && !(s.getBlock() instanceof LlamaBlock));
     }
 

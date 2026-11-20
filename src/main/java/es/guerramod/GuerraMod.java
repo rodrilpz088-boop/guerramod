@@ -21,6 +21,7 @@ public class GuerraMod {
         ModEfectos.EFECTOS.register(bus);
         ModSonidos.SONIDOS.register(bus);
         ModPestanas.PESTANAS.register(bus);
+        es.guerramod.clima.AguaRealista.SERIALIZADORES.register(bus);
         Red.registrar();
     }
 }

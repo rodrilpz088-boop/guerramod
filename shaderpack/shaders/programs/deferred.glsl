@@ -38,8 +38,7 @@ vec3 cielo(vec3 d, vec3 estrellas) {
     float noche = smoothstep(0.05, -0.15, s.y);
     c += estrellas * noche * (1.0 - rainStrength);
 #ifdef NUBES_VOLUMETRICAS
-    vec4 nb = nubes(d, cameraPosition + vec3(0.0, 1.62, 0.0), s.y > -0.1 ? s : dirLunaMundo(), especial(1), especial(2),
-                    DENSIDAD_NUBES + 0.38 * rainStrength, gl_FragCoord.xy);
+    vec4 nb = nubes(d, cameraPosition, s.y > -0.1 ? s : dirLunaMundo(), especial(1), especial(2), nubosidad(), gl_FragCoord.xy);
     c = c * nb.a + nb.rgb * (1.0 - 0.55 * rainStrength);
 #endif
     return c;
@@ -79,6 +78,13 @@ void main() {
         vec2 lm = texture(colortex2, uv).rg;
         vec3 n = normalize(c1.rgb * 2.0 - 1.0);
         int mat = int(c1.a * 16.0);
+        if (mat == 15) {
+            // la mano ya viene iluminada
+            /* DRAWBUFFERS:05 */
+            gl_FragData[0] = vec4(c0.rgb, 1.0);
+            gl_FragData[1] = vec4(0.0);
+            return;
+        }
         vec3 alb = lineal(c0.rgb);
         vec3 jug = aJugador(vista);
         float dist = length(vista);
@@ -92,11 +98,17 @@ void main() {
             alb = mix(vec3(lum(alb)), alb, 1.0 + 0.25 * mojado);
 #ifdef CHARCOS
             if (n.y > 0.9 && mat != 2 && mat != 3) {
-                vec2 p = (jug.xz + cameraPosition.xz) / 9.0;
-                float r = texture(noisetex, p / 16.0).r * 0.6 + texture(noisetex, p / 5.0).g * 0.3 + texture(noisetex, p * 0.6).b * 0.1;
-                float charco = smoothstep(0.62 - 0.12 * mojado, 0.70 - 0.12 * mojado, r) * mojado * (1.0 - 0.6 * poroso);
-                alb *= mix(1.0, 0.45, charco);
-                float refl = mix(0.15 * mojado * (1.0 - 0.7 * poroso), 1.0, charco);
+                // charcos: manchas irregulares que crecen con la lluvia y se secan por los bordes
+                vec2 p = (jug.xz + cameraPosition.xz);
+                vec2 w = vec2(texture(noisetex, p / 211.0).g, texture(noisetex, p / 197.0 + 0.5).b) - 0.5;
+                vec2 q = p + w * 14.0;
+                float r = texture(noisetex, q / 160.0).r * 0.55 + texture(noisetex, q / 52.0).g * 0.3 + texture(noisetex, q / 13.0).b * 0.15;
+                float umbral = mix(0.78, 0.56, mojado) + 0.08 * poroso;
+                float charco = smoothstep(umbral, umbral + 0.035, r) * mojado;
+                float orilla = smoothstep(umbral - 0.06, umbral, r) * (1.0 - charco) * mojado;
+                alb *= mix(1.0, 0.82, orilla);
+                alb = mix(alb, alb * vec3(0.55, 0.53, 0.5), charco);
+                float refl = mix(0.12 * mojado * (1.0 - 0.75 * poroso), 1.0, charco);
                 reflejo = vec4(refl, mix(0.35, 0.02, charco), charco, 1.0);
             } else {
                 reflejo = vec4(0.08 * mojado * (1.0 - poroso), 0.4, 0.0, 1.0);
@@ -116,6 +128,7 @@ void main() {
         if (NdotL > 0.0 || trasluz > 0.5) sol = sombra(jug, n * sign(max(NdotL, 0.001)), gl_FragCoord.xy);
         if (dist > shadowDistance) sol = smoothstep(0.85, 0.97, lm.y);
         float difusa = max(NdotL, 0.0) + trasluz * (0.35 + 0.45 * max(-NdotL, 0.0));
+        sol *= sombraNubes(jug + cameraPosition, L, nubosidad());
         vec3 directa = especial(0) * (SOL_K / PI) * difusa * sol;
         vec3 amb = especial(2) * pow(lm.y, 2.5) * (0.55 + 0.45 * n.y);
         vec3 luz = directa + amb;

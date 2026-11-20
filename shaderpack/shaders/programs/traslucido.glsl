@@ -47,6 +47,8 @@ void main() {
         if (n.y > 0.5) {
             float lluvia = rainStrength * float(biome_precipitation == 1) * smoothstep(0.85, 0.95, lm.y);
             n = normalAgua(mundo.xz, frameTimeCounter, lluvia);
+            float lejos = smoothstep(24.0, 140.0, length(mundo - cameraPosition));
+            n = normalize(mix(n, vec3(0.0, 1.0, 0.0), lejos * 0.8));
         }
         gl_FragData[0] = vec4(0.0);
         gl_FragData[1] = vec4(n * 0.5 + 0.5, 1.0);

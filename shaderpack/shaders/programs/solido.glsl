@@ -50,6 +50,10 @@ void main() {
 #endif
 
 #ifdef FSH
+#ifdef MANO_SOLIDA
+#include "/lib/lut.glsl"
+#include "/lib/luz.glsl"
+#endif
 uniform sampler2D gtexture;
 #ifdef ENTIDAD
 uniform vec4 entityColor;
@@ -66,9 +70,17 @@ void main() {
 #ifdef ENTIDAD
     a.rgb = mix(a.rgb, entityColor.rgb, entityColor.a);
 #endif
+#ifdef MANO_SOLIDA
+    /* DRAWBUFFERS:0125 */
+    gl_FragData[0] = vec4(luzAdelante(lineal(a.rgb), normalize(nor), lm), 1.0);
+    gl_FragData[1] = vec4(normalize(nor) * 0.5 + 0.5, 15.5 / 16.0);
+    gl_FragData[2] = vec4(lm, 0.0, 1.0);
+    gl_FragData[3] = vec4(0.0);
+#else
     /* DRAWBUFFERS:012 */
     gl_FragData[0] = vec4(a.rgb, 1.0);
     gl_FragData[1] = vec4(normalize(nor) * 0.5 + 0.5, (mat + 0.5) / 16.0);
     gl_FragData[2] = vec4(lm, 0.0, 1.0);
+#endif
 }
 #endif

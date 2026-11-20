@@ -3,8 +3,11 @@
 // ---------------------------------------------------------------- opciones (menú del shader)
 #define SOMBRAS_SUAVES
 #define NUBES_VOLUMETRICAS
-#define CALIDAD_NUBES 16 // [8 12 16 20 28 36]
-#define DENSIDAD_NUBES 0.42 // [0.25 0.32 0.42 0.5 0.6 0.7]
+#define CALIDAD_NUBES 24 // [12 16 24 32 48]
+#define CANTIDAD_NUBES 1.0 // [0.5 0.75 1.0 1.25 1.5]
+#define TIEMPO 0 // [0 1 2 3]
+#define CIRROS
+#define SOMBRAS_NUBES
 #define RAYOS_DE_LUZ
 #define REFLEJOS_SSR
 #define CHARCOS

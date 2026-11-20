@@ -42,9 +42,10 @@ void main() {
     vec3 m = dirLunaMundo();
     float turb = 1.2 + 1.5 * rainStrength + 0.8 * wetness + 0.6 * rainfall;
     float luna = brilloLuna();
+    float cubierto = max(rainStrength, smoothstep(0.55, 1.0, nubosidad()) * 0.75);
     if (fc.y < 128.0) {
         vec3 d = lutDir(fc / LUT, s);
-        c = nublado(cieloFisico(d, s, m, turb, luna), rainStrength);
+        c = nublado(cieloFisico(d, s, m, turb, luna), cubierto);
     } else {
         int i = int(fc.x);
         vec3 L = dirLuzMundo();
@@ -55,12 +56,12 @@ void main() {
         } else if (i == 1) {
             c = transmitancia(2000.0, s, turb) * E_SOL + transmitancia(2000.0, m, turb) * E_SOL * 0.0016 * luna;
         } else if (i == 2) {
-            vec3 z = nublado(cieloFisico(vec3(0.0, 1.0, 0.0), s, m, turb, luna), rainStrength);
-            vec3 h1 = nublado(cieloFisico(normalize(vec3(s.x, 0.15, s.z) + vec3(0.0001)), s, m, turb, luna), rainStrength);
-            vec3 h2 = nublado(cieloFisico(normalize(vec3(-s.x, 0.15, -s.z) + vec3(0.0001)), s, m, turb, luna), rainStrength);
+            vec3 z = nublado(cieloFisico(vec3(0.0, 1.0, 0.0), s, m, turb, luna), cubierto);
+            vec3 h1 = nublado(cieloFisico(normalize(vec3(s.x, 0.15, s.z) + vec3(0.0001)), s, m, turb, luna), cubierto);
+            vec3 h2 = nublado(cieloFisico(normalize(vec3(-s.x, 0.15, -s.z) + vec3(0.0001)), s, m, turb, luna), cubierto);
             c = z * 0.5 + (h1 + h2) * 0.25;
         } else if (i == 3) {
-            vec3 z = nublado(cieloFisico(vec3(0.0, 1.0, 0.0), s, m, turb, luna), rainStrength);
+            vec3 z = nublado(cieloFisico(vec3(0.0, 1.0, 0.0), s, m, turb, luna), cubierto);
             c = vec3(clamp(0.82 / pow(lum(z) + 0.0034, 0.75), 1.0, 40.0));
         } else if (i == 4) {
             c = transmitancia(300.0, s, turb) * E_SOL;

@@ -21,6 +21,7 @@ uniform float far;
 uniform float rainfall;
 uniform int isEyeInWater;
 uniform int worldTime;
+uniform int worldDay;
 uniform int moonPhase;
 uniform int biome_precipitation;
 uniform ivec2 eyeBrightnessSmooth;
@@ -62,5 +63,35 @@ float brilloLuna() {
 // fracción de "aire libre" del jugador (0 en cuevas, 1 fuera)
 float exterior() {
     return clamp(float(eyeBrightnessSmooth.y) / 240.0, 0.0, 1.0);
+}
+// ---------------------------------------------------------------- tiempo del día: unos días despejados, otros nublados
+float hash1(float n) {
+    return fract(sin(n * 12.9898 + 4.1414) * 43758.5453);
+}
+// cobertura de nubes (0 despejado .. 1 cubierto); cambia poco a poco de un día a otro, y la lluvia lo cubre todo
+float nubosidad() {
+#if TIEMPO == 1
+    float c = 0.0;
+#elif TIEMPO == 2
+    float c = 0.45;
+#elif TIEMPO == 3
+    float c = 0.85;
+#else
+    float t = float(worldDay) + float(worldTime) / 24000.0;
+    float d = floor(t);
+    float f = fract(t);
+    f = f * f * (3.0 - 2.0 * f);
+    float c = mix(hash1(d), hash1(d + 1.0), f);
+    c = pow(c, 1.6) * 0.9;
+#endif
+    c = mix(c, 0.95, rainStrength);
+    return clamp(c * CANTIDAD_NUBES, 0.0, 1.0);
+}
+// cirros altos (velo de buen tiempo) según el día
+float cirros() {
+    float t = float(worldDay) + float(worldTime) / 24000.0;
+    float d = floor(t);
+    float f = fract(t);
+    return mix(hash1(d + 71.0), hash1(d + 72.0), f * f * (3.0 - 2.0 * f));
 }
 #endif

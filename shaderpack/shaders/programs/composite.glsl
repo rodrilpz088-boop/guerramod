@@ -101,7 +101,21 @@ void main() {
                 d1R = d1;
             }
             vec3 fondo = texture(colortex0, uvR).rgb;
-            float prof = d1R >= 1.0 ? 80.0 : distance(v0, vistaDesde(uvR, d1R));
+            vec3 vFondo = vistaDesde(uvR, d1R);
+            float prof = d1R >= 1.0 ? 80.0 : distance(v0, vFondo);
+#if !defined DIM_NETHER && !defined DIM_END
+            // cáusticas: la luz del sol enfocada por las olas dibuja redes brillantes en el fondo
+            if (d1R < 1.0) {
+                vec3 fAbs = aJugador(vFondo) + cameraPosition;
+                vec2 cp = fAbs.xz + dirLuzMundo().xz * (fAbs.y - 62.0) * 0.3;
+                float t = frameTimeCounter;
+                float c1 = texture(noisetex, cp / 9.0 + vec2(t * 0.021, t * 0.013)).r;
+                float c2 = texture(noisetex, cp / 7.0 - vec2(t * 0.017, -t * 0.025)).g;
+                float caus = pow(1.0 - abs(c1 - c2) * 2.0, 8.0);
+                float poca = exp(-prof * 0.35) * smoothstep(0.6, 0.95, cieloL) * max(dirLuzMundo().y, 0.0);
+                fondo *= 1.0 + caus * 2.2 * poca * (1.0 - rainStrength);
+            }
+#endif
             // el agua absorbe primero el rojo: cuanto más honda, más azul verdosa y oscura
             vec3 absorcion = (1.0 - tinte) * 0.32 + vec3(0.02);
             vec3 T = exp(-absorcion * prof);
@@ -116,6 +130,11 @@ void main() {
             vec3 refl = mix(cieloReflejado(rM, cieloL), sr.rgb, sr.a);
             float F = 0.02 + 0.98 * pow(1.0 - max(dot(-dirV, nV), 0.0), 5.0);
             vec3 c = mix(refr, refl, F);
+            // espuma donde el agua es poco profunda (orillas) y con lluvia
+            vec3 wAbs = aJugador(v0) + cameraPosition;
+            float esp = texture(noisetex, wAbs.xz / 6.0 + frameTimeCounter * vec2(0.01, 0.006)).r;
+            float orilla = smoothstep(0.7, 0.0, prof) * smoothstep(0.35, 0.75, esp);
+            c = mix(c, (especial(2) * 1.2 + especial(0) * (SOL_K / PI) * max(dirLuzMundo().y, 0.0)) * 0.9, orilla * 0.55);
             // brillo del sol
 #if !defined DIM_NETHER && !defined DIM_END
             vec3 jug = aJugador(v0);
@@ -140,8 +159,19 @@ void main() {
             if (m.r > 0.01) {
                 vec3 jug = aJugador(v0);
                 vec3 n = vec3(0.0, 1.0, 0.0);
-                if (m.b > 0.05) n = normalAgua((jug.xz + cameraPosition.xz), frameTimeCounter * 0.4, rainStrength * 2.0);
-                n = normalize(mix(vec3(0.0, 1.0, 0.0), n, 0.35));
+                if (m.b > 0.05) {
+                    // charco: casi un espejo; con lluvia, anillos de las gotas
+                    vec2 pa = jug.xz + cameraPosition.xz;
+                    float e = 0.03;
+                    float h0 = anillos(pa, frameTimeCounter) * rainStrength * 3.0 + texture(noisetex, pa / 3.0 + frameTimeCounter * 0.01).r * 0.004;
+                    float hx = anillos(pa + vec2(e, 0.0), frameTimeCounter) * rainStrength * 3.0 + texture(noisetex, (pa + vec2(e, 0.0)) / 3.0 + frameTimeCounter * 0.01).r * 0.004;
+                    float hz = anillos(pa + vec2(0.0, e), frameTimeCounter) * rainStrength * 3.0 + texture(noisetex, (pa + vec2(0.0, e)) / 3.0 + frameTimeCounter * 0.01).r * 0.004;
+                    n = normalize(vec3(h0 - hx, e, h0 - hz));
+                } else {
+                    // suelo mojado: reflejo borroso
+                    vec2 pa = jug.xz + cameraPosition.xz;
+                    n = normalize(vec3(texture(noisetex, pa * 0.7).r - 0.5, 3.0, texture(noisetex, pa * 0.7).g - 0.5));
+                }
                 vec3 nV = normalize(mat3(gbufferModelView) * n);
                 vec3 rV = reflect(dirV, nV);
                 vec3 rM = mat3(gbufferModelViewInverse) * rV;

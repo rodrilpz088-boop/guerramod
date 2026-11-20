@@ -256,7 +256,8 @@ public final class Mojado {
                 int top = alturas[(dx + R + 1) * ancho + dz + R + 1];
                 bp.set(x, top, z);
                 BlockState st = l.getBlockState(bp);
-                if (st.isAir() || !st.getFluidState().isEmpty()) continue;
+                // solo bloques macizos (las hojas o el cristal tienen huecos); bajo los árboles el suelo queda seco
+                if (st.isAir() || !st.getFluidState().isEmpty() || !st.canOcclude()) continue;
                 VoxelShape sh = st.getShape(l, bp);
                 if (sh.isEmpty()) continue;
                 double ytop = top + sh.max(Direction.Axis.Y);

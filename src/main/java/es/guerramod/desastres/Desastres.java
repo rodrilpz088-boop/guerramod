@@ -136,12 +136,7 @@ public final class Desastres {
     }
 
     public static void riada(ServerLevel l) {
-        Riada r = Riada.get(l.getServer());
-        r.nivel = 3;
-        r.lluvia = 12000;
-        r.setDirty();
-        l.setWeatherParameters(0, 9600, true, true);
-        alerta(l, BlockPos.ZERO, 0, "Aviso por inundaciones", "los ríos y lagos se están desbordando");
+        Inundacion.provocar(l);
     }
 
     public static void olaCalor(ServerLevel l, double dias) {
@@ -155,10 +150,7 @@ public final class Desastres {
     public static void parar(ServerLevel l) {
         TERREMOTOS.clear();
         granizoTicks = 0;
-        Riada r = Riada.get(l.getServer());
-        r.nivel = 0;
-        r.lluvia = 0;
-        r.setDirty();
+        Inundacion.parar(l);
         Clima c = Clima.get(l.getServer());
         c.extraCalorTicks = 0;
         c.extraCalor = 0;
@@ -172,7 +164,7 @@ public final class Desastres {
         RandomSource r = l.random;
         tickTerremotos(l, r);
         tickGranizo(l, r);
-        tickRiada(l, r);
+        Inundacion.tick(l);
         Clima c = Clima.get(server);
         if (c.extraCalorTicks > 0 && --c.extraCalorTicks == 0) {
             c.extraCalor = 0;
@@ -338,59 +330,4 @@ public final class Desastres {
         }
     }
 
-    // ------------------------------------------------------------------ riadas
-    private static void tickRiada(ServerLevel l, RandomSource r) {
-        Riada rd = Riada.get(l.getServer());
-        if (l.isRaining()) {
-            rd.lluvia += l.isThundering() ? 3 : 1;
-            int nivel = rd.lluvia > 16000 ? 3 : rd.lluvia > 11000 ? 2 : rd.lluvia > 7000 ? 1 : 0;
-            if (nivel > rd.nivel) {
-                rd.nivel = nivel;
-                if (nivel == 1) alerta(l, BlockPos.ZERO, 0, "Aviso por inundaciones", "tanta lluvia está haciendo crecer los ríos");
-            }
-            if (rd.nivel > 0 && l.getGameTime() % 40 == 0) desbordar(l, r, rd);
-        } else {
-            rd.lluvia = Math.max(0, rd.lluvia - 4);
-            rd.nivel = 0;
-            if (!rd.agua.isEmpty() && l.getGameTime() % 10 == 0) bajar(l, r, rd);
-        }
-        if (l.getGameTime() % 200 == 0) rd.setDirty();
-    }
-
-    private static void desbordar(ServerLevel l, RandomSource r, Riada rd) {
-        if (rd.agua.size() > 6000) return;
-        for (ServerPlayer p : l.players()) {
-            for (int i = 0; i < 50; i++) {
-                int x = p.getBlockX() + r.nextInt(113) - 56, z = p.getBlockZ() + r.nextInt(113) - 56;
-                if (!l.hasChunkAt(new BlockPos(x, 64, z))) continue;
-                int top = l.getHeight(Heightmap.Types.MOTION_BLOCKING, x, z);
-                BlockPos agua = new BlockPos(x, top - 1, z);
-                if (!l.getFluidState(agua).isSource() || !l.getBlockState(agua).is(Blocks.WATER)) continue;
-                if (l.getBiome(agua).is(BiomeTags.IS_OCEAN)) continue;
-                for (Direction d : Direction.Plane.HORIZONTAL) {
-                    int nx = x + d.getStepX(), nz = z + d.getStepZ();
-                    int nh = l.getHeight(Heightmap.Types.MOTION_BLOCKING, nx, nz);
-                    if (nh > agua.getY() + rd.nivel || nh < agua.getY() - 2) continue;
-                    BlockPos q = new BlockPos(nx, nh, nz);
-                    BlockState s = l.getBlockState(q);
-                    if (!(s.isAir() || s.canBeReplaced()) || !s.getFluidState().isEmpty()) continue;
-                    l.setBlock(q, Blocks.WATER.defaultBlockState(), Block.UPDATE_ALL);
-                    rd.agua.add(q.asLong());
-                }
-            }
-        }
-    }
-
-    private static void bajar(ServerLevel l, RandomSource r, Riada rd) {
-        for (int i = 0; i < 40 && !rd.agua.isEmpty(); i++) {
-            BlockPos q = BlockPos.of(rd.agua.removeLong(rd.agua.size() - 1));
-            if (!l.hasChunkAt(q)) continue;
-            if (l.getBlockState(q).is(Blocks.WATER) && l.getFluidState(q).isSource()) {
-                l.setBlock(q, Blocks.AIR.defaultBlockState(), Block.UPDATE_ALL);
-                // el agua deja barro
-                if (r.nextFloat() < 0.15f && l.getBlockState(q.below()).is(Blocks.GRASS_BLOCK)) l.setBlockAndUpdate(q.below(), Blocks.MUD.defaultBlockState());
-            }
-        }
-        rd.setDirty();
-    }
 }

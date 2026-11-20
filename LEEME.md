@@ -273,7 +273,11 @@ Pasan solos de vez en cuando (`/desastre naturales false` para quitarlos) y avis
   en las laderas y, con magnitud 7 o más, se abre una grieta en el suelo.
 * **Granizo** en tormentas: hace daño a quien esté a la intemperie (menos con casco), destroza cultivos, rompe cristales y deja
   el suelo blanco un rato.
-* **Riadas**: tras mucha lluvia los ríos y lagos se desbordan; al parar el agua baja y deja barro.
+* **Inundaciones**: con mucha lluvia el nivel de ríos y lagos sube poco a poco (hasta 3 bloques con lluvia y 5 con
+  tormenta) y el agua avanza desde el cauce por todo el terreno más bajo que esté conectado: vegas, campos, caminos, calles y
+  casas con la puerta abierta. Las lomas, los muros y los diques la frenan (puedes hacer barreras). La corriente arrastra
+  objetos, animales y personas hacia lo más bajo y se lleva cultivos, flores y antorchas. Al dejar de llover el agua baja
+  despacio, de arriba abajo, y deja barro en el suelo.
 * **Olas de calor**: varios días con más calor y aire más seco (más riesgo de incendio).
 * Comandos (operador): `/desastre tornado [0-5]`, `/desastre terremoto [magnitud]`, `/desastre granizo [cm]`,
   `/desastre inundacion`, `/desastre olacalor [días]`, `/desastre parar`.

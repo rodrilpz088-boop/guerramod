@@ -42,4 +42,8 @@ public final class ModEntidades {
                     .sized(3.0f, 1.3f).clientTrackingRange(16).updateInterval(1).build("hidroavion"));
 
     private ModEntidades() {}
+
+    public static final RegistryObject<EntityType<es.guerramod.desastres.TornadoEntity>> TORNADO = ENTIDADES.register("tornado",
+            () -> EntityType.Builder.<es.guerramod.desastres.TornadoEntity>of(es.guerramod.desastres.TornadoEntity::new, MobCategory.MISC)
+                    .sized(4.0f, 30.0f).clientTrackingRange(32).updateInterval(2).fireImmune().build("tornado"));
 }

@@ -361,5 +361,6 @@
  "block.guerramod.chimenea_vapor": "Salida de vapor (torre de refrigeración)",
  "block.guerramod.captador_co2": "Captador de CO2",
  "itemGroup.guerramod.ciudad": "Ciudad, industria y clima",
- "block.guerramod.charco": "Charco"
+ "block.guerramod.charco": "Charco",
+ "entity.guerramod.tornado": "Tornado"
 }

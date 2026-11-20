@@ -159,5 +159,6 @@ for archivo, nombre in (("es_es.json", "Charco"), ("en_us.json", "Puddle")):
     ruta = os.path.join(A, "lang", archivo)
     actual = json.load(open(ruta, encoding="utf-8"))
     actual[f"block.{MOD}.charco"] = nombre
+    actual[f"entity.{MOD}.tornado"] = "Tornado"
     escribir(ruta, actual)
 print("v5 lluvia: recursos listos")

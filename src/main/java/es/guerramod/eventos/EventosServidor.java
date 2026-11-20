@@ -54,6 +54,7 @@ public final class EventosServidor {
         ComandoPais.registrar(e.getDispatcher());
         es.guerramod.incendios.ComandoIncendios.registrar(e.getDispatcher());
         es.guerramod.clima.ComandoClima.registrar(e.getDispatcher());
+        es.guerramod.desastres.ComandoDesastre.registrar(e.getDispatcher());
     }
 
     @SubscribeEvent
@@ -207,6 +208,7 @@ public final class EventosServidor {
         es.guerramod.incendios.Clima.get(server).tick(server);
         es.guerramod.clima.EfectosClima.tick(server);
         es.guerramod.ciudad.Obras.tick(server);
+        es.guerramod.desastres.Desastres.tick(server);
         if (server.getTickCount() % 20 != 0) return;
         DatosRadiacion.get(server).tick(server);
     }

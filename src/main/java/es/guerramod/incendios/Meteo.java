@@ -77,6 +77,7 @@ public record Meteo(double temperatura, double humedad, double viento, double cu
         if (lluvia) t -= 4;
         // calentamiento global (mucho más fuerte en las zonas frías: amplificación polar)
         t += calor * (z.fria() ? 1.8 : 1.0);
+        if (c.extraCalorTicks > 0) t += c.extraCalor * (z.fria() ? 0.6 : 1.0); // ola de calor
         if (!Float.isNaN(c.tempFija)) {
             // /incendios temperatura: es la temperatura de las zonas templadas; las demás guardan su diferencia
             t = Math.min(58, c.tempFija + 0.8 * (z.tMedia() - 15) - alt);
@@ -88,6 +89,7 @@ public record Meteo(double temperatura, double humedad, double viento, double cu
         h += 30 * Math.exp(-dias / 0.8);
         h += 10 * nub;
         h -= 2.5 * Math.max(0, calor);
+        if (c.extraCalorTicks > 0) h -= c.extraCalor * 1.5;
         if (!Float.isNaN(c.humFija)) h = c.humFija; // fijada con /incendios humedad
         if (lluvia) h = 97;
         h = clamp(h, 1, 100);

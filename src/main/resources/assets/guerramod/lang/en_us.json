@@ -361,5 +361,6 @@
  "block.guerramod.chimenea_vapor": "Steam Outlet (cooling tower)",
  "block.guerramod.captador_co2": "CO2 Capture Unit",
  "itemGroup.guerramod.ciudad": "City, Industry & Climate",
- "block.guerramod.charco": "Puddle"
+ "block.guerramod.charco": "Puddle",
+ "entity.guerramod.tornado": "Tornado"
 }

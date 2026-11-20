@@ -20,7 +20,7 @@ import java.util.function.Supplier;
 
 /** Paquetes de red: sincronizar países al cliente y acciones del avión al servidor. */
 public final class Red {
-    private static final String VERSION = "2";
+    private static final String VERSION = "3";
     public static final SimpleChannel CANAL = NetworkRegistry.newSimpleChannel(
             new ResourceLocation(GuerraMod.MODID, "main"), () -> VERSION, VERSION::equals, VERSION::equals);
 
@@ -36,6 +36,8 @@ public final class Red {
                 .encoder(SyncClima::encode).decoder(SyncClima::decode).consumerMainThread(SyncClima::handle).add();
         CANAL.messageBuilder(AccionArma.class, id++, NetworkDirection.PLAY_TO_SERVER)
                 .encoder(AccionArma::encode).decoder(AccionArma::decode).consumerMainThread(AccionArma::handle).add();
+        CANAL.messageBuilder(SyncTemblor.class, id++, NetworkDirection.PLAY_TO_CLIENT)
+                .encoder(SyncTemblor::encode).decoder(SyncTemblor::decode).consumerMainThread(SyncTemblor::handle).add();
         CANAL.messageBuilder(SyncTiempo.class, id++, NetworkDirection.PLAY_TO_CLIENT)
                 .encoder(SyncTiempo::encode).decoder(SyncTiempo::decode).consumerMainThread(SyncTiempo::handle).add();
     }
@@ -55,11 +57,33 @@ public final class Red {
 
     public static void enviarTiempo(ServerPlayer p, es.guerramod.incendios.Meteo m, es.guerramod.incendios.Clima c) {
         CANAL.send(PacketDistributor.PLAYER.with(() -> p), new SyncTiempo((float) m.temperatura(), (float) m.humedad(),
-                (float) m.nubes(), (float) m.niebla(), (float) m.turbidez(), (float) c.calentamiento(), (float) c.co2, c.cambio, m.zona()));
+                (float) m.nubes(), (float) m.niebla(), (float) m.turbidez(), (float) c.calentamiento(), (float) c.co2, c.cambio, m.zona(),
+                es.guerramod.desastres.Desastres.granizoTicks > 0 ? es.guerramod.desastres.Desastres.granizoCm : 0f));
+    }
+
+    public static void enviarTemblor(ServerPlayer p, float intensidad) {
+        CANAL.send(PacketDistributor.PLAYER.with(() -> p), new SyncTemblor(intensidad));
+    }
+
+    /** Servidor -> cliente: cuánto tiembla el suelo donde está el jugador (0..1). */
+    public record SyncTemblor(float intensidad) {
+        public static void encode(SyncTemblor m, FriendlyByteBuf b) {
+            b.writeFloat(m.intensidad);
+        }
+
+        public static SyncTemblor decode(FriendlyByteBuf b) {
+            return new SyncTemblor(b.readFloat());
+        }
+
+        public static void handle(SyncTemblor m, Supplier<NetworkEvent.Context> ctx) {
+            es.guerramod.clima.TiempoCliente.temblor = m.intensidad;
+            ctx.get().setPacketHandled(true);
+        }
     }
 
     /** Servidor -> cliente: tiempo en la posición del jugador (cielo, nubes, niebla, minimapa). */
-    public record SyncTiempo(float t, float h, float nubes, float niebla, float turb, float anom, float co2, boolean cambio, String zona) {
+    public record SyncTiempo(float t, float h, float nubes, float niebla, float turb, float anom, float co2, boolean cambio, String zona,
+                             float granizo) {
         public static void encode(SyncTiempo m, FriendlyByteBuf b) {
             b.writeFloat(m.t);
             b.writeFloat(m.h);
@@ -70,11 +94,12 @@ public final class Red {
             b.writeFloat(m.co2);
             b.writeBoolean(m.cambio);
             b.writeUtf(m.zona, 64);
+            b.writeFloat(m.granizo);
         }
 
         public static SyncTiempo decode(FriendlyByteBuf b) {
             return new SyncTiempo(b.readFloat(), b.readFloat(), b.readFloat(), b.readFloat(), b.readFloat(), b.readFloat(),
-                    b.readFloat(), b.readBoolean(), b.readUtf(64));
+                    b.readFloat(), b.readBoolean(), b.readUtf(64), b.readFloat());
         }
 
         public static void handle(SyncTiempo m, Supplier<NetworkEvent.Context> ctx) {
@@ -87,6 +112,7 @@ public final class Red {
             es.guerramod.clima.TiempoCliente.co2 = m.co2;
             es.guerramod.clima.TiempoCliente.cambio = m.cambio;
             es.guerramod.clima.TiempoCliente.zona = m.zona;
+            es.guerramod.clima.TiempoCliente.granizo = m.granizo;
             es.guerramod.clima.TiempoCliente.recibido = true;
             ctx.get().setPacketHandled(true);
         }

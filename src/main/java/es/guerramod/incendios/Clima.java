@@ -42,6 +42,11 @@ public class Clima extends SavedData {
     /** Nubosidad general (0..1) y nubosidad fijada con /clima nubes (NaN = automática). */
     public double nubes = 0.3;
     public float nubesFija = Float.NaN;
+    /** Desastres naturales automáticos (tornados, terremotos, granizo, riadas, olas de calor). */
+    public boolean desastres = true;
+    /** Ola de calor: grados de más y cuánto le queda (ticks). */
+    public double extraCalor = 0;
+    public int extraCalorTicks = 0;
     /** Sensibilidad climática: °C por cada duplicación de CO2. */
     public static final double SENSIBILIDAD = 3.0;
 
@@ -67,6 +72,9 @@ public class Clima extends SavedData {
         c.aerosol = t.getDouble("aerosol");
         if (t.contains("nubes")) c.nubes = t.getDouble("nubes");
         c.nubesFija = t.contains("nubesFija") ? t.getFloat("nubesFija") : Float.NaN;
+        c.desastres = !t.contains("desastres") || t.getBoolean("desastres");
+        c.extraCalor = t.getDouble("extraCalor");
+        c.extraCalorTicks = t.getInt("extraCalorTicks");
         return c;
     }
 
@@ -84,6 +92,9 @@ public class Clima extends SavedData {
         t.putDouble("aerosol", aerosol);
         t.putDouble("nubes", nubes);
         if (!Float.isNaN(nubesFija)) t.putFloat("nubesFija", nubesFija);
+        t.putBoolean("desastres", desastres);
+        t.putDouble("extraCalor", extraCalor);
+        t.putInt("extraCalorTicks", extraCalorTicks);
         return t;
     }
 
@@ -124,6 +135,20 @@ public class Clima extends SavedData {
         ultimaLluvia = level.getGameTime() - (long) (dias * DIA);
     }
 
+    private static double hash(double n) {
+        double v = Math.sin(n * 12.9898 + 4.1414) * 43758.5453;
+        return v - Math.floor(v);
+    }
+
+    /** Nubosidad del día (la misma fórmula que el shader): hay días despejados y días nublados que cambian poco a poco. */
+    public static double nubosidadDia(long tiempoDia) {
+        double t = tiempoDia / 24000.0;
+        double d = Math.floor(t), f = t - d;
+        f = f * f * (3 - 2 * f);
+        double c = hash(d) + (hash(d + 1) - hash(d)) * f;
+        return Math.pow(c, 1.6) * 0.9;
+    }
+
     /** Calentamiento que se aplica ahora mismo (0 si el cambio climático está desactivado). */
     public double calentamiento() {
         return cambio ? anomalia : 0;
@@ -153,13 +178,13 @@ public class Clima extends SavedData {
         double equilibrio = SENSIBILIDAD * Math.log(co2 / 420.0) / Math.log(2) - 0.6 * aerosol;
         anomalia += (equilibrio - anomalia) * (paso / 1200.0);
         // nubosidad: con lluvia cubierto, antes de llover se va nublando, si no varía poco a poco
-        double objetivo = 0.32;
+        double objetivo = nubosidadDia(ow.getDayTime());
         if (ow.isThundering()) objetivo = 1.0;
         else if (ow.isRaining()) objetivo = 0.95;
         else if (ow.getLevelData() instanceof net.minecraft.world.level.storage.ServerLevelData d && d.getRainTime() < 7200) {
             objetivo = 0.45 + 0.45 * (1 - d.getRainTime() / 7200.0);
         }
-        nubes = Mth.clamp(nubes + (objetivo - nubes) * 0.12 + r.nextGaussian() * 0.06, 0.0, 1.0);
+        nubes = Mth.clamp(nubes + (objetivo - nubes) * 0.15 + r.nextGaussian() * 0.025, 0.0, 1.0);
         setDirty();
     }
 

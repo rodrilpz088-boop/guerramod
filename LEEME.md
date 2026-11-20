@@ -247,6 +247,37 @@ El minimapa muestra la temperatura, la humedad y el cielo (despejado, nuboso, ni
   El césped y las hojas brillan poco; la piedra, el asfalto, el hormigón y la madera mucho. Bajo techo no se moja.
   Cuando para de llover se va secando en unos minutos, más rápido con calor, sol, viento y aire seco.
 
+## Novedades de la versión 6: Shader y desastres naturales
+
+### Naciones en Guerra Shaders (para Oculus)
+Paquete de sombreadores propio (`NacionesEnGuerra_Shaders.zip`). Necesita **Oculus** y **Embeddium** en Forge 1.20.1.
+Se pone en la carpeta `shaderpacks` de Minecraft y se elige en Opciones > Calidad gráfica > Shader Packs.
+Con el shader activo, el mod apaga su propio cielo, nubes, lluvia y suelo mojado para no pisarse.
+* **Cielo físico** (el mismo modelo atmosférico del mod) con sol de color real, luna, estrellas y bruma.
+* **Nubes volumétricas**: cúmulos en 3D con base plana, cimas que crecen, bordes deshilachados, luz que se dispersa dentro
+  de la nube y ribete plateado a contraluz; encima, cirros. **Proyectan sombra en el suelo**.
+* **Tiempo que cambia cada día**: hay días despejados, días de nubes y claros y días cubiertos (el clima del mod usa la misma
+  fórmula). En el menú se puede fijar "Siempre despejado", "Nubes y claros" o "Muy nublado".
+* **Sombras del sol** suaves, **rayos de luz** a contraluz, resplandor y exposición que se adapta (día, noche, cuevas).
+* **Agua realista**: olas, refracción del fondo, absorción del color con la profundidad (el rojo se pierde primero),
+  **reflejos reales** de lo que hay en pantalla, brillo del sol, **cáusticas** en el fondo poco profundo y **espuma** en la orilla.
+* **Lluvia**: el suelo se moja poco a poco, aparecen **charcos** irregulares que reflejan como espejos con los anillos de las
+  gotas, y al parar se secan por los bordes. Plantas y hojas se mecen con el viento.
+
+### Desastres naturales
+Pasan solos de vez en cuando (`/desastre naturales false` para quitarlos) y avisan con un mensaje en pantalla.
+* **Tornados** (escala EF0 a EF5) en tormentas: remolino de viento real que arrastra y levanta a la gente y los animales,
+  arranca plantas, hojas, cristales, vallas, tejados de madera y árboles, y lanza escombros. Avanza con el viento.
+* **Terremotos** (magnitud 3 a 9; los grandes son mucho más raros): la cámara tiembla según la distancia al epicentro, se
+  rompen cristales, se agrietan los ladrillos, se caen las antorchas, se derrumba lo que queda sin apoyo, hay desprendimientos
+  en las laderas y, con magnitud 7 o más, se abre una grieta en el suelo.
+* **Granizo** en tormentas: hace daño a quien esté a la intemperie (menos con casco), destroza cultivos, rompe cristales y deja
+  el suelo blanco un rato.
+* **Riadas**: tras mucha lluvia los ríos y lagos se desbordan; al parar el agua baja y deja barro.
+* **Olas de calor**: varios días con más calor y aire más seco (más riesgo de incendio).
+* Comandos (operador): `/desastre tornado [0-5]`, `/desastre terremoto [magnitud]`, `/desastre granizo [cm]`,
+  `/desastre inundacion`, `/desastre olacalor [días]`, `/desastre parar`.
+
 ## Estructura del proyecto
 * `src/main/java/es/guerramod/` — código (pais, bloques, items, entidades, radiacion, cliente, red, eventos)
 * `src/main/resources/` — texturas, modelos, recetas, idioma

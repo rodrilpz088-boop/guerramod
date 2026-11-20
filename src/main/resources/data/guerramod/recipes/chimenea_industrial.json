@@ -1,0 +1,21 @@
+{
+ "type": "minecraft:crafting_shaped",
+ "category": "building",
+ "pattern": [
+  "B B",
+  "BHB",
+  "BBB"
+ ],
+ "key": {
+  "B": {
+   "item": "minecraft:bricks"
+  },
+  "H": {
+   "item": "minecraft:furnace"
+  }
+ },
+ "result": {
+  "item": "guerramod:chimenea_industrial",
+  "count": 1
+ }
+}

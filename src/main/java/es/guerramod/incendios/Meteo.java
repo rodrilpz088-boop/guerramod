@@ -31,7 +31,8 @@ import net.minecraftforge.common.Tags;
  * @param riesgo             0 bajo, 1 moderado, 2 alto, 3 muy alto, 4 extremo
  */
 public record Meteo(double temperatura, double humedad, double viento, double curado, double humedadCombustible,
-                    double factorHumedad, double factorCurado, double rosCabeza, double excentricidad, double indice, int riesgo) {
+                    double factorHumedad, double factorCurado, double rosCabeza, double excentricidad, double indice, int riesgo,
+                    double nubes, double niebla, double turbidez, double puntoRocio, String zona) {
 
     private static final Long2ObjectOpenHashMap<Meteo> CACHE = new Long2ObjectOpenHashMap<>();
     private static long cacheSegundo = -1;
@@ -56,31 +57,43 @@ public record Meteo(double temperatura, double humedad, double viento, double cu
     public static Meteo calcular(ServerLevel level, BlockPos pos) {
         Clima c = Clima.get(level.getServer());
         Holder<Biome> b = level.getBiome(pos);
-        float bt = b.value().getBaseTemperature();
+        es.guerramod.clima.Zonas.Zona z = es.guerramod.clima.Zonas.de(b);
         boolean lluvia = Fuego.llueve(level, pos);
+        boolean lloviendo = level.isRaining();
         double dias = c.diasSinLluvia(level);
+        double calor = c.calentamiento();
 
-        // ---- temperatura: clima del bioma + ciclo del día (máxima hacia las 14:00) + altitud + lluvia
+        // ---- nubosidad de la zona (los desiertos casi siempre despejados, la selva nublada)
+        double nub = Float.isNaN(c.nubesFija) ? c.nubes : c.nubesFija / 100.0;
+        nub = clamp(nub * z.nubes() + (lloviendo ? 0.4 : 0), 0, 1);
+        if (lloviendo && z.nubes() > 0.2) nub = Math.max(nub, 0.9);
+
+        // ---- temperatura: clima de la zona + ciclo del día (máxima hacia las 14:00, menos con nubes) + altitud
         long hora = level.getDayTime() % 24000; // 0 = 6:00, 6000 = 12:00
         double dia = Math.cos(2 * Math.PI * (hora - 8000) / 24000.0);
-        double t = 5 + 13 * bt + 7 * dia - 0.0065 * Math.max(0, pos.getY() - 63);
+        double alt = pos.getY() > 80 ? (pos.getY() - 80) * 0.02 : 0;
+        double t = z.tMedia() + z.amplitud() * dia * (1 - 0.55 * nub) - alt;
+        if (pos.getY() < 40) t += (13 - t) * Math.min(1, (40 - pos.getY()) / 30.0); // bajo tierra, temperatura estable
         if (lluvia) t -= 4;
-        if (b.is(Tags.Biomes.IS_HOT)) t += 3;
-        if (!Float.isNaN(c.tempFija)) t = c.tempFija; // fijada con /incendios temperatura
+        // calentamiento global (mucho más fuerte en las zonas frías: amplificación polar)
+        t += calor * (z.fria() ? 1.8 : 1.0);
+        if (!Float.isNaN(c.tempFija)) {
+            // /incendios temperatura: es la temperatura de las zonas templadas; las demás guardan su diferencia
+            t = Math.min(58, c.tempFija + 0.8 * (z.tMedia() - 15) - alt);
+        }
 
-        // ---- humedad relativa: el bioma, la hora (de noche sube) y la lluvia reciente
-        double h = 45;
-        if (b.is(BiomeTags.IS_JUNGLE) || b.is(Tags.Biomes.IS_SWAMP)) h = 80;
-        else if (b.is(Tags.Biomes.IS_WET)) h = 70;
-        else if (b.is(Tags.Biomes.IS_DRY) || !b.value().hasPrecipitation()) h = 20;
-        h -= 18 * dia;
+        // ---- humedad relativa: la zona, la hora (de noche sube), la lluvia reciente, las nubes y el calentamiento
+        double h = z.humedad();
+        h -= (z.humedad() < 30 ? 20 : 16) * dia;
         h += 30 * Math.exp(-dias / 0.8);
+        h += 10 * nub;
+        h -= 2.5 * Math.max(0, calor);
         if (!Float.isNaN(c.humFija)) h = c.humFija; // fijada con /incendios humedad
         if (lluvia) h = 97;
         h = clamp(h, 1, 100);
 
         // ---- curado de la hierba (% seca): crece con los días sin llover y el calor
-        double cur = 55 + 18 * dias + 1.2 * (t - 15);
+        double cur = 55 + 18 * dias + 1.2 * (t - 15) + 6 * Math.max(0, calor);
         if (!b.value().hasPrecipitation()) cur += 20;
         if (lluvia) cur = 40;
         cur = clamp(cur, 30, 100);
@@ -116,7 +129,22 @@ public record Meteo(double temperatura, double humedad, double viento, double cu
         double gfdi = Math.exp(-1.523 + 1.027 * Math.log(4.5) - 0.009432 * Math.pow(100 - cur, 1.536)
                 + 0.0276 * t - 0.2205 * Math.sqrt(h) + 0.6422 * Math.sqrt(u));
         int riesgo = lluvia ? 0 : gfdi < 2.5 ? 0 : gfdi < 7.5 ? 1 : gfdi < 20 ? 2 : gfdi < 50 ? 3 : 4;
-        return new Meteo(t, h, u, cur, m, fm, fc, ros, e, gfdi, riesgo);
+
+        // ---- punto de rocío (Magnus) y niebla: aire casi saturado, poco viento; sobre todo de noche y al amanecer,
+        //      en valles, ríos y pantanos; en la montaña, dentro de las nubes
+        double gam = Math.log(h / 100.0) + 17.62 * t / (243.12 + t);
+        double rocio = 243.12 * gam / (17.62 - gam);
+        double dif = t - rocio;
+        double nie = clamp((3.2 - dif) / 3.2, 0, 1) * clamp((14 - u) / 9, 0, 1);
+        if (pos.getY() > 95) nie *= clamp(1 - (pos.getY() - 95) / 30.0, 0, 1);
+        if (pos.getY() > 170 && nub > 0.6) nie = Math.max(nie, clamp((nub - 0.6) * 2.5, 0, 1) * clamp((pos.getY() - 170) / 25.0, 0, 1));
+        if (lluvia) nie = Math.max(nie, 0.3);
+        if (pos.getY() < 40) nie = 0;
+
+        // ---- turbidez del aire (partículas): humedad, polvo del desierto y humo de incendios y fábricas
+        double turb = 1.0 + 1.6 * Math.pow(h / 100.0, 3) + c.aerosol * 6;
+        if (z.humedad() < 25) turb += 1.2;
+        return new Meteo(t, h, u, cur, m, fm, fc, ros, e, gfdi, riesgo, nub, nie, turb, rocio, z.nombre());
     }
 
     /** Velocidad de avance (m/s) en una dirección; coseno = coseno del ángulo con el viento. */

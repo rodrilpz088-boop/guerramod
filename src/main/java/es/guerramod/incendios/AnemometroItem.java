@@ -35,6 +35,10 @@ public class AnemometroItem extends Item {
             Meteo m = Meteo.en((net.minecraft.server.level.ServerLevel) level, pos);
             p.sendSystemMessage(Component.literal(String.format("Temperatura %.0f °C · Humedad %.0f %% · Viento del %s a %.0f km/h",
                     m.temperatura(), m.humedad(), Clima.procedencia(c.angulo), m.viento())));
+            p.sendSystemMessage(Component.literal(String.format("Zona: %s · Cielo: %s · Punto de rocío %.1f °C%s", m.zona(),
+                    es.guerramod.clima.ComandoClima.cielo(m.nubes(), m.niebla(), Fuego.llueve(level, pos)), m.puntoRocio(),
+                    c.calentamiento() >= 0.3 ? String.format(" · Calentamiento global %+.1f °C", c.calentamiento()) : ""))
+                    .withStyle(ChatFormatting.AQUA));
             p.sendSystemMessage(Component.literal(String.format("Días sin llover: %.1f · Hierba seca: %.0f %% · Humedad de la hierba: %.0f %%",
                     c.diasSinLluvia(level), m.curado(), m.humedadCombustible())));
             double ros = m.rosCabeza();

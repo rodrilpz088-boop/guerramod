@@ -1,0 +1,21 @@
+{
+ "type": "minecraft:crafting_shaped",
+ "category": "building",
+ "pattern": [
+  "PPP",
+  "PLP",
+  "PPP"
+ ],
+ "key": {
+  "P": {
+   "item": "minecraft:paper"
+  },
+  "L": {
+   "item": "minecraft:blue_dye"
+  }
+ },
+ "result": {
+  "item": "guerramod:planos_construccion",
+  "count": 1
+ }
+}

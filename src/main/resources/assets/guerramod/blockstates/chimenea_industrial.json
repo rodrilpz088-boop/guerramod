@@ -1,0 +1,10 @@
+{
+ "variants": {
+  "lit=true": {
+   "model": "guerramod:block/chimenea_industrial"
+  },
+  "lit=false": {
+   "model": "guerramod:block/chimenea_industrial"
+  }
+ }
+}

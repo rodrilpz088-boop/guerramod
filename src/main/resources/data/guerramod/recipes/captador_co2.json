@@ -1,0 +1,27 @@
+{
+ "type": "minecraft:crafting_shaped",
+ "category": "building",
+ "pattern": [
+  "IGI",
+  "RVR",
+  "IGI"
+ ],
+ "key": {
+  "I": {
+   "item": "minecraft:iron_ingot"
+  },
+  "G": {
+   "item": "minecraft:iron_bars"
+  },
+  "R": {
+   "item": "minecraft:redstone"
+  },
+  "V": {
+   "item": "minecraft:moss_block"
+  }
+ },
+ "result": {
+  "item": "guerramod:captador_co2",
+  "count": 1
+ }
+}

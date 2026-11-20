@@ -10,6 +10,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 @Mod(GuerraMod.MODID)
 public class GuerraMod {
     public static final String MODID = "guerramod";
+    public static final org.slf4j.Logger LOGGER = com.mojang.logging.LogUtils.getLogger();
 
     public GuerraMod() {
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();

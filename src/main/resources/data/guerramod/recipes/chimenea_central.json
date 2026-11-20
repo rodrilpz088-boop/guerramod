@@ -1,0 +1,24 @@
+{
+ "type": "minecraft:crafting_shaped",
+ "category": "building",
+ "pattern": [
+  "W W",
+  "RHR",
+  "WWW"
+ ],
+ "key": {
+  "W": {
+   "item": "minecraft:white_concrete"
+  },
+  "R": {
+   "item": "minecraft:red_concrete"
+  },
+  "H": {
+   "item": "minecraft:blast_furnace"
+  }
+ },
+ "result": {
+  "item": "guerramod:chimenea_central",
+  "count": 1
+ }
+}

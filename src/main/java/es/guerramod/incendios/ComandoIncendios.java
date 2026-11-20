@@ -24,7 +24,7 @@ import net.minecraft.world.phys.HitResult;
  * /incendios rayo                     tormenta seca cerca (op)
  * /incendios viento <grados> <km/h>   fija el viento (op)
  * /incendios apagar <radio>           apaga todo en el radio (op)
- * /incendios temperatura <°C>|auto    fija la temperatura en todo el mundo (op)
+ * /incendios temperatura <°C>|auto    fija la temperatura de las zonas templadas; las demás guardan su diferencia (op)
  * /incendios humedad <%>|auto         fija la humedad del aire (op)
  * /incendios sequia <días>            días sin llover (lo seca que está la hierba) (op)
  * /incendios oladecalor               42 °C, 10 % de humedad, 30 días de sequía y viento de 35 km/h (op)
@@ -84,7 +84,7 @@ public final class ComandoIncendios {
                             Clima cl = Clima.get(c.getSource().getServer());
                             cl.tempFija = FloatArgumentType.getFloat(c, "grados");
                             cl.cambiado(c.getSource().getServer());
-                            return ok(c, String.format("Temperatura fijada en %.0f °C en todo el mundo", cl.tempFija));
+                            return ok(c, String.format("Temperatura fijada en %.0f °C en las zonas templadas (las zonas frías y de nieve quedan más frescas, los desiertos más calurosos)", cl.tempFija));
                         })))
                 .then(Commands.literal("humedad").requires(s -> s.hasPermission(2))
                         .then(Commands.literal("auto").executes(c -> {

@@ -354,5 +354,11 @@
  "itemGroup.guerramod.incendios": "Incendios y bomberos",
  "subtitles.guerramod.manguera": "Chorro de manguera",
  "subtitles.guerramod.extintor": "Descarga de extintor",
- "subtitles.guerramod.alarma_incendio": "Alarma de incendio"
+ "subtitles.guerramod.alarma_incendio": "Alarma de incendio",
+ "item.guerramod.planos_construccion": "Construction Blueprints",
+ "block.guerramod.chimenea_industrial": "Industrial Chimney (emits CO2)",
+ "block.guerramod.chimenea_central": "Power Plant Chimney (emits lots of CO2)",
+ "block.guerramod.chimenea_vapor": "Steam Outlet (cooling tower)",
+ "block.guerramod.captador_co2": "CO2 Capture Unit",
+ "itemGroup.guerramod.ciudad": "City, Industry & Climate"
 }

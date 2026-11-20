@@ -30,6 +30,21 @@ public class Clima extends SavedData {
     /** Temperatura (°C) y humedad (%) fijadas con /incendios; NaN = automáticas (bioma, hora, lluvia). */
     public float tempFija = Float.NaN, humFija = Float.NaN;
 
+    // ------------------------------------------------ cambio climático
+    /** Activado: las fábricas y los incendios emiten CO2 y el mundo se calienta. */
+    public boolean cambio = true;
+    /** CO2 en la atmósfera (ppm). 420 = clima actual del mundo. */
+    public double co2 = 420;
+    /** Calentamiento (°C) respecto al clima normal; sigue al CO2 con retraso (inercia de los océanos). */
+    public double anomalia = 0;
+    /** Humo y partículas en el aire (0 = limpio). Dan atardeceres rojos y enfrían un poco. */
+    public double aerosol = 0;
+    /** Nubosidad general (0..1) y nubosidad fijada con /clima nubes (NaN = automática). */
+    public double nubes = 0.3;
+    public float nubesFija = Float.NaN;
+    /** Sensibilidad climática: °C por cada duplicación de CO2. */
+    public static final double SENSIBILIDAD = 3.0;
+
     /** Copia en el cliente (para el minimapa). */
     public static float clienteAngulo = 45, clienteVelocidad = 12;
     public static int clienteRiesgo = 1;
@@ -46,6 +61,12 @@ public class Clima extends SavedData {
         c.naturales = !t.contains("naturales") || t.getBoolean("naturales");
         c.tempFija = t.contains("tempFija") ? t.getFloat("tempFija") : Float.NaN;
         c.humFija = t.contains("humFija") ? t.getFloat("humFija") : Float.NaN;
+        c.cambio = !t.contains("cambio") || t.getBoolean("cambio");
+        if (t.contains("co2")) c.co2 = t.getDouble("co2");
+        c.anomalia = t.getDouble("anomalia");
+        c.aerosol = t.getDouble("aerosol");
+        if (t.contains("nubes")) c.nubes = t.getDouble("nubes");
+        c.nubesFija = t.contains("nubesFija") ? t.getFloat("nubesFija") : Float.NaN;
         return c;
     }
 
@@ -57,6 +78,12 @@ public class Clima extends SavedData {
         t.putBoolean("naturales", naturales);
         if (!Float.isNaN(tempFija)) t.putFloat("tempFija", tempFija);
         if (!Float.isNaN(humFija)) t.putFloat("humFija", humFija);
+        t.putBoolean("cambio", cambio);
+        t.putDouble("co2", co2);
+        t.putDouble("anomalia", anomalia);
+        t.putDouble("aerosol", aerosol);
+        t.putDouble("nubes", nubes);
+        if (!Float.isNaN(nubesFija)) t.putFloat("nubesFija", nubesFija);
         return t;
     }
 
@@ -65,8 +92,10 @@ public class Clima extends SavedData {
         Level ow = server.overworld();
         long ahora = ow.getGameTime();
         if (ow.isRaining()) ultimaLluvia = ahora;
+        if (ahora % 20 == 0) es.guerramod.clima.EfectosClima.enviarTiempo(server);
         if (ahora % 600 != 0) return;
         RandomSource r = ow.random;
+        actualizarAtmosfera(ow, r);
         angulo = (angulo + (float) r.nextGaussian() * 14.0f + 360.0f) % 360.0f;
         float objetivo = ow.isThundering() ? 38 : ow.isRaining() ? 22 : 14;
         velocidad = Mth.clamp(velocidad + (float) r.nextGaussian() * 4.0f + (objetivo - velocidad) * 0.08f, 0.0f, 55.0f);
@@ -75,7 +104,10 @@ public class Clima extends SavedData {
         if (naturales && !ow.isRaining() && ow instanceof net.minecraft.server.level.ServerLevel sl) {
             for (net.minecraft.server.level.ServerPlayer p : sl.players()) {
                 int rg = riesgo(sl, p.blockPosition());
-                if (rg >= 3 && r.nextFloat() < (rg == 4 ? 0.10f : 0.04f)) rayoSeco(sl, p.blockPosition(), r);
+                // con el calentamiento hay más tormentas secas y más días de riesgo
+                float extra = 1.0f + (float) Math.max(0, calentamiento()) * 0.5f;
+                float prob = rg == 4 ? 0.10f : rg == 3 ? 0.04f : (rg == 2 && calentamiento() > 1.5 ? 0.01f : 0f);
+                if (prob > 0 && r.nextFloat() < prob * extra) rayoSeco(sl, p.blockPosition(), r);
             }
         }
     }
@@ -90,6 +122,45 @@ public class Clima extends SavedData {
     /** Pone los días que lleva sin llover. */
     public void ponerSequia(Level level, double dias) {
         ultimaLluvia = level.getGameTime() - (long) (dias * DIA);
+    }
+
+    /** Calentamiento que se aplica ahora mismo (0 si el cambio climático está desactivado). */
+    public double calentamiento() {
+        return cambio ? anomalia : 0;
+    }
+
+    /** Emisión de CO2 (fábricas, centrales, incendios). */
+    public void emitir(double ppm, double humo) {
+        if (!cambio) return;
+        co2 = Math.min(3000, co2 + ppm);
+        aerosol = Math.min(3, aerosol + humo);
+        setDirty();
+    }
+
+    /** CO2 capturado (plantas de captura). */
+    public void absorber(double ppm) {
+        if (!cambio) return;
+        co2 = Math.max(280, co2 - ppm);
+        setDirty();
+    }
+
+    /** Cada 30 s: el CO2 se va absorbiendo (océanos y bosques), la temperatura lo sigue y las nubes cambian. */
+    private void actualizarAtmosfera(Level ow, RandomSource r) {
+        final double paso = 30.0; // segundos
+        // sumideros naturales: vuelven al nivel de equilibrio en unos 3 días de juego
+        co2 += (420 - co2) * (paso / 3600.0);
+        aerosol *= Math.exp(-paso / 600.0);
+        double equilibrio = SENSIBILIDAD * Math.log(co2 / 420.0) / Math.log(2) - 0.6 * aerosol;
+        anomalia += (equilibrio - anomalia) * (paso / 1200.0);
+        // nubosidad: con lluvia cubierto, antes de llover se va nublando, si no varía poco a poco
+        double objetivo = 0.32;
+        if (ow.isThundering()) objetivo = 1.0;
+        else if (ow.isRaining()) objetivo = 0.95;
+        else if (ow.getLevelData() instanceof net.minecraft.world.level.storage.ServerLevelData d && d.getRainTime() < 7200) {
+            objetivo = 0.45 + 0.45 * (1 - d.getRainTime() / 7200.0);
+        }
+        nubes = Mth.clamp(nubes + (objetivo - nubes) * 0.12 + r.nextGaussian() * 0.06, 0.0, 1.0);
+        setDirty();
     }
 
     /** Vector unitario hacia donde sopla (x, z). */

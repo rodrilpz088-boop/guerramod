@@ -1,0 +1,21 @@
+{
+ "type": "minecraft:crafting_shaped",
+ "category": "building",
+ "pattern": [
+  "W W",
+  "WAW",
+  "WWW"
+ ],
+ "key": {
+  "W": {
+   "item": "minecraft:white_concrete"
+  },
+  "A": {
+   "item": "minecraft:water_bucket"
+  }
+ },
+ "result": {
+  "item": "guerramod:chimenea_vapor",
+  "count": 1
+ }
+}

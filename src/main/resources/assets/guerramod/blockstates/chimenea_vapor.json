@@ -1,0 +1,10 @@
+{
+ "variants": {
+  "lit=true": {
+   "model": "guerramod:block/chimenea_vapor"
+  },
+  "lit=false": {
+   "model": "guerramod:block/chimenea_vapor"
+  }
+ }
+}

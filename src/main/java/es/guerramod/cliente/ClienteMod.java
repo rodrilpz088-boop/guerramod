@@ -22,6 +22,12 @@ import net.minecraftforge.fml.common.Mod;
 public final class ClienteMod {
     private ClienteMod() {}
 
+    /** Cielo, sol, luna, estrellas y nubes realistas en el mundo normal. */
+    @SubscribeEvent
+    public static void cielo(net.minecraftforge.client.event.RegisterDimensionSpecialEffectsEvent e) {
+        e.register(net.minecraft.world.level.dimension.BuiltinDimensionTypes.OVERWORLD_EFFECTS, new es.guerramod.cliente.cielo.CieloMundo());
+    }
+
     @SubscribeEvent
     public static void teclas(RegisterKeyMappingsEvent e) {
         e.register(Teclas.MINIMAPA);

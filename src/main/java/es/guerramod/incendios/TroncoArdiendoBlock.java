@@ -59,6 +59,7 @@ public class TroncoArdiendoBlock extends RotatedPillarBlock {
         // un tronco arde unos dos minutos y medio
         int edad = st.getValue(EDAD) + (r.nextDouble() < 8 * dt / 150.0 ? 1 : 0);
         if (edad >= 7) {
+            Clima.get(level.getServer()).emitir(0.05, 0.002);
             level.setBlock(pos, BloquesIncendio.TRONCO_QUEMADO.get().defaultBlockState().setValue(AXIS, st.getValue(AXIS)), Block.UPDATE_ALL);
             // a veces se queda humeando un rescoldo al pie del árbol
             if (r.nextFloat() < 0.15f && level.getBlockState(pos.above()).isAir()) {

@@ -189,6 +189,49 @@ En los asientos (sillas, sofás, inodoro, bancos…) te sientas con clic derecho
 * **Equipo de bombero**: cada pieza quita un 20 % del daño por fuego; con el equipo completo no te quemas.
 * **Pasto seco**: hierba agostada que arde muchísimo.
 
+## Novedades de la versión 4: Clima, cielo y ciudad
+
+### Cielo realista
+* El cielo del mundo normal se calcula con **física atmosférica de verdad** (dispersión de Rayleigh y de Mie y la capa de
+  ozono). Por eso el cielo es azul intenso a mediodía, blanquecino en el horizonte, y al amanecer y al atardecer salen solos
+  los **naranjas, rosas y violetas**, la sombra de la Tierra y la **hora azul**.
+* El **sol** cambia de color (blanco a mediodía, naranja y rojo al ponerse) y tiene halo. La **luna** tiene sus fases y un
+  halo suave. De noche hay **2600 estrellas de colores** que titilan, con la **Vía Láctea**.
+* **Nubes nuevas** en dos capas (cúmulos y cirros altos) que se mueven con el viento y se iluminan con el sol: blancas a
+  mediodía, doradas y rosas al atardecer, grises y oscuras con tormenta. A lo lejos se funden con el cielo.
+* Con **humo de incendios, polvo del desierto o humedad** el aire se vuelve más turbio: atardeceres más rojos y cielo lechoso.
+* **Niebla y neblina** de verdad cuando el aire está saturado (temperatura cerca del punto de rocío y poco viento): por la
+  noche y al amanecer en valles, ríos, pantanos y selvas, después de llover, y en lo alto de las montañas cuando están
+  dentro de las nubes. La bruma del horizonte toma el color del cielo.
+* Si otro mod o un paquete de sombreadores da problemas, el mod vuelve solo al cielo normal.
+
+### Clima por zonas
+Cada zona tiene su clima: la tundra y las cumbres nevadas están bajo cero, la taiga es fresca, los desiertos son muy secos
+con mucha diferencia entre el día y la noche, la selva y los pantanos son húmedos y estables, y el mar suaviza las
+temperaturas. Con nubes hace menos calor de día; en altura hace más frío; bajo tierra la temperatura es estable.
+El minimapa muestra la temperatura, la humedad y el cielo (despejado, nuboso, niebla...).
+
+### Cambio climático
+* Las **chimeneas de fábricas y centrales** emiten CO2 (también los incendios). Con más CO2 el mundo **se calienta**
+  (3 °C cada vez que se duplica, y casi el doble en las zonas frías), con retraso, como pasa con los océanos.
+* Con el calentamiento: **más calor y sequía, más tormentas secas y más incendios**, y la nieve y el hielo se derriten.
+* El CO2 se va absorbiendo poco a poco solo (océanos y bosques). Las **plantas de captura de CO2** lo absorben más rápido.
+* Se puede desactivar con `/clima cambio false`.
+
+### Planos de construcción (pestaña "Ciudad, industria y clima")
+* **Clic derecho al aire** para elegir el edificio (agachado, hacia atrás). **Clic en el suelo**: se ve el contorno;
+  **otro clic en el mismo bloque**: el edificio se construye solo, planta a planta, con la fachada mirando hacia ti.
+* Edificios: casa unifamiliar, bloque de pisos con balcones, rascacielos de 22 plantas con helipuerto, nave almacén,
+  **fábrica** (2 chimeneas), **central térmica de carbón** (2 chimeneas de 47 m y torre de refrigeración), aerogenerador y
+  **planta de captura de CO2**.
+* Clic derecho en una chimenea para **apagarla o encenderla** (apagada no emite).
+
+### Comandos de clima
+* `/clima`: temperatura, humedad, punto de rocío, cielo, CO2, calentamiento y humo en el aire.
+* Operador: `/clima cambio true|false`, `/clima co2 <ppm>`, `/clima calentar <°C>`, `/clima nubes <%>|auto`, `/clima reiniciar`.
+* `/incendios temperatura` ahora fija la temperatura de las zonas templadas: las zonas de nieve siguen más frías y los
+  desiertos más calurosos.
+
 ## Estructura del proyecto
 * `src/main/java/es/guerramod/` — código (pais, bloques, items, entidades, radiacion, cliente, red, eventos)
 * `src/main/resources/` — texturas, modelos, recetas, idioma

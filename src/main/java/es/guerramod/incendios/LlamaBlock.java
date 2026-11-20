@@ -100,6 +100,8 @@ public class LlamaBlock extends Block {
     }
 
     private void consumir(ServerLevel level, BlockPos pos, boolean copa, RandomSource r) {
+        // el fuego suelta CO2 y humo a la atmósfera (cambio climático y atardeceres rojos)
+        Clima.get(level.getServer()).emitir(copa ? 0.02 : 0.004, copa ? 0.0008 : 0.0002);
         if (copa) {
             level.setBlock(pos, r.nextFloat() < 0.3f ? BloquesIncendio.RAMAS_QUEMADAS.get().defaultBlockState()
                     : Blocks.AIR.defaultBlockState(), Block.UPDATE_ALL);

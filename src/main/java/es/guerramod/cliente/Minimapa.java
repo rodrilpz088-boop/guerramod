@@ -95,6 +95,19 @@ public class Minimapa implements IGuiOverlay {
         }
         g.drawString(f, px + ", " + pz, x0, ty, 0xFFDDDDDD, true);
         ty += 10;
+        // tiempo: temperatura, humedad y cielo; y el calentamiento global si lo hay
+        String tiempo = String.format("%.0f °C · %.0f %% · %s", es.guerramod.clima.TiempoCliente.temperatura,
+                es.guerramod.clima.TiempoCliente.humedad, es.guerramod.clima.ComandoClima.cielo(es.guerramod.clima.TiempoCliente.nubes,
+                        es.guerramod.clima.TiempoCliente.niebla, mc.level.isRaining() && mc.level.getBiome(mc.player.blockPosition()).value().hasPrecipitation()));
+        float tc = es.guerramod.clima.TiempoCliente.temperatura;
+        int colorT = tc < 0 ? 0xFF9FD4FF : tc < 15 ? 0xFFD8F0FF : tc < 28 ? 0xFFFFF2C0 : tc < 36 ? 0xFFFFB060 : 0xFFFF6040;
+        g.drawString(f, tiempo, x0, ty, colorT, true);
+        ty += 10;
+        if (es.guerramod.clima.TiempoCliente.cambio && Math.abs(es.guerramod.clima.TiempoCliente.anomalia) >= 0.3f) {
+            g.drawString(f, String.format("Calentamiento %+.1f °C", es.guerramod.clima.TiempoCliente.anomalia), x0, ty,
+                    es.guerramod.clima.TiempoCliente.anomalia > 2 ? 0xFFFF4030 : 0xFFFF9040, true);
+            ty += 10;
+        }
         // viento: flecha hacia donde sopla y riesgo de incendio
         String viento = "Viento " + Math.round(es.guerramod.incendios.Clima.clienteVelocidad) + " km/h";
         g.drawString(f, viento, x0, ty, 0xFFBFD8FF, true);

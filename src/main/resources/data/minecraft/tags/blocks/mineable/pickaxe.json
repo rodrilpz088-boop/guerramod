@@ -173,6 +173,10 @@
   "guerramod:bie",
   "guerramod:extintor_pared",
   "guerramod:detector_humo",
-  "guerramod:rociador"
+  "guerramod:rociador",
+  "guerramod:chimenea_industrial",
+  "guerramod:chimenea_central",
+  "guerramod:chimenea_vapor",
+  "guerramod:captador_co2"
  ]
 }

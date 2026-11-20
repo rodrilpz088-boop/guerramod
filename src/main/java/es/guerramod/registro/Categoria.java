@@ -20,7 +20,8 @@ public enum Categoria {
     JARDIN("jardin"),
     ILUMINACION("iluminacion"),
     CONSTRUCCION("construccion"),
-    INCENDIOS("incendios");
+    INCENDIOS("incendios"),
+    CIUDAD("ciudad");
 
     public final String id;
     public final List<Supplier<? extends ItemLike>> lista = new ArrayList<>();

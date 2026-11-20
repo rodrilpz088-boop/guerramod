@@ -245,7 +245,7 @@ public final class Atmosfera {
     /** Color de pantalla del cielo en una dirección, con nubes y lluvia (sin niebla). */
     public static void colorCielo(double dx, double dy, double dz, float[] out, int off) {
         double[] c = new double[3];
-        double ey = Math.max(dy, 0.0);
+        double ey = Math.max(dy, 0.02); // el rayo justo horizontal exagera el enrojecimiento (falta la dispersión múltiple)
         double n = Math.sqrt(dx * dx + ey * ey + dz * dz);
         radiancia(dx / n, ey / n, dz / n, c, true);
         tiempo(c, dy);
@@ -282,7 +282,7 @@ public final class Atmosfera {
         double oscuro = 1 - 0.55 * lluvia;
         double[] c = new double[3];
         for (int i = 0; i < 3; i++) {
-            c[i] = (LUZ_NUBES[i] * 0.12 * fase + LUZ_LUNA_NUBES[i] * 0.12 * fasem + AMBIENTE[i] * 3.2) * oscuro;
+            c[i] = (LUZ_NUBES[i] * 0.065 * fase + LUZ_LUNA_NUBES[i] * 0.06 * fasem + AMBIENTE[i] * 0.75) * oscuro;
         }
         pantalla(c, out, off);
     }

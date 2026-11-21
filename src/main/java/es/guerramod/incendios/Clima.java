@@ -127,8 +127,33 @@ public class Clima extends SavedData {
                 int rg = riesgo(sl, p.blockPosition());
                 // con el calentamiento hay más tormentas secas y más días de riesgo
                 float extra = 1.0f + (float) Math.max(0, calentamiento()) * 0.5f;
-                float prob = rg == 4 ? 0.10f : rg == 3 ? 0.04f : (rg == 2 && calentamiento() > 1.5 ? 0.01f : 0f);
-                if (prob > 0 && r.nextFloat() < prob * extra) rayoSeco(sl, p.blockPosition(), r);
+                float prob = rg == 4 ? 0.08f : rg == 3 ? 0.035f : rg == 2 ? 0.008f : 0f;
+                if (prob > 0 && r.nextFloat() < prob * extra) descuido(sl, p.blockPosition(), r);
+            }
+        }
+    }
+
+    /**
+     * La mayoría de los incendios forestales los provoca la gente (colillas, quemas agrícolas, chispas de máquinas,
+     * barbacoas...). Con riesgo alto, de vez en cuando empieza uno en el campo cerca de los jugadores y se ve la columna de humo.
+     */
+    public static void descuido(net.minecraft.server.level.ServerLevel sl, BlockPos cerca, RandomSource r) {
+        for (int intento = 0; intento < 12; intento++) {
+            double a = r.nextDouble() * Math.PI * 2, d = 45 + r.nextDouble() * 70;
+            int x = cerca.getX() + (int) (Math.cos(a) * d), z = cerca.getZ() + (int) (Math.sin(a) * d);
+            BlockPos top = sl.getHeightmapPos(net.minecraft.world.level.levelgen.Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, new BlockPos(x, 0, z));
+            if (!sl.isLoaded(top) || Fuego.sueloQuemable(sl.getBlockState(top.below())) < 0.5 || !Fuego.seco(sl, top)) continue;
+            if (riesgo(sl, top) < 2) continue;
+            if (Fuego.encender(sl, top, false)) {
+                String rumbo = es.guerramod.desastres.Desastres.rumbo(x - cerca.getX(), z - cerca.getZ());
+                for (net.minecraft.server.level.ServerPlayer p : sl.players()) {
+                    if (p.blockPosition().distSqr(top) < 400 * 400) {
+                        p.sendSystemMessage(net.minecraft.network.chat.Component.literal("Se ve una columna de humo al " + rumbo + " (a unos "
+                                + (int) Math.sqrt(p.blockPosition().distSqr(top)) + " m): ¡incendio forestal!")
+                                .withStyle(net.minecraft.ChatFormatting.RED));
+                    }
+                }
+                return;
             }
         }
     }

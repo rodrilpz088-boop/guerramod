@@ -170,6 +170,7 @@ public final class Fuego {
      */
     public static double extender(ServerLevel level, BlockPos origen, RandomSource r, double dt, boolean origenCopa, double potencia) {
         Meteo m = Meteo.en(level, origen);
+        construcciones(level, origen, r, dt, m);
         Clima c = Clima.get(level.getServer());
         double vx = c.vx(), vz = c.vz();
         for (int dx = -1; dx <= 1; dx++) {
@@ -274,6 +275,22 @@ public final class Fuego {
     }
 
     /** Quema lo de alrededor de una llama que se apaga sola (madera, lana...). */
+    /** Incendio de construcciones: si al lado hay madera, lana, paja... las llamas suben por paredes y techos. */
+    private static void construcciones(ServerLevel level, BlockPos origen, RandomSource r, double dt, Meteo m) {
+        BlockPos arriba = origen.above();
+        if (!level.getBlockState(arriba).isAir()) return;
+        int maxF = 0;
+        for (BlockPos q : new BlockPos[]{origen.north(), origen.south(), origen.east(), origen.west(), arriba.north(), arriba.south(),
+                arriba.east(), arriba.west(), arriba.above()}) {
+            BlockState s = level.getBlockState(q);
+            if (s.isAir() || s.is(BlockTags.LEAVES) || s.getBlock() instanceof LlamaBlock) continue;
+            maxF = Math.max(maxF, s.getFlammability(level, q, Direction.UP));
+        }
+        if (maxF <= 0) return;
+        double p = dt * 0.035 * maxF * Math.max(0.25, m.factorHumedad());
+        if (r.nextDouble() < p && seco(level, arriba)) encender(level, arriba, maxF >= 20);
+    }
+
     public static void carbonizarVecinos(ServerLevel level, BlockPos pos, RandomSource r) {
         for (Direction d : Direction.values()) {
             BlockPos np = pos.relative(d);

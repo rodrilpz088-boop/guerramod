@@ -363,5 +363,21 @@
  "itemGroup.guerramod.ciudad": "City, Industry & Climate",
  "block.guerramod.charco": "Puddle",
  "entity.guerramod.tornado": "Tornado",
- "block.guerramod.agua_turbia": "Flood Water"
+ "block.guerramod.agua_turbia": "Flood Water",
+ "subtitles.guerramod.ambiente.jilguero": "Canta un jilguero",
+ "subtitles.guerramod.ambiente.mirlo": "Canta un mirlo",
+ "subtitles.guerramod.ambiente.gorrion": "Pían gorriones",
+ "subtitles.guerramod.ambiente.ruisenor": "Canta un ruiseñor",
+ "subtitles.guerramod.ambiente.paloma": "Arrulla una paloma",
+ "subtitles.guerramod.ambiente.cuco": "Canta un cuco",
+ "subtitles.guerramod.ambiente.carpintero": "Tamborilea un pájaro carpintero",
+ "subtitles.guerramod.ambiente.gaviota": "Grazna una gaviota",
+ "subtitles.guerramod.ambiente.grillos": "Cantan los grillos",
+ "subtitles.guerramod.ambiente.chicharra": "Cantan las chicharras",
+ "subtitles.guerramod.ambiente.buho": "Ulula un búho",
+ "subtitles.guerramod.ambiente.rana": "Croan las ranas",
+ "subtitles.guerramod.ambiente.olas": "Rompen las olas",
+ "subtitles.guerramod.ambiente.viento_hojas": "El viento mueve las hojas",
+ "subtitles.guerramod.ambiente.arroyo": "Corre un arroyo",
+ "subtitles.guerramod.ambiente.chapoteo": "Chapoteo"
 }

@@ -14,7 +14,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 
 /**
- * /desastre tornado [EF 0-5] · terremoto [magnitud] · granizo [cm] · inundacion · olacalor [días] · parar
+ * /desastre tornado [EF 0-5] · terremoto [magnitud] · granizo [cm] · olacalor [días] · parar
  * /desastre naturales true|false   (que pasen solos)
  */
 public final class ComandoDesastre {
@@ -62,11 +62,6 @@ public final class ComandoDesastre {
                             Desastres.granizo(mundo(c), FloatArgumentType.getFloat(c, "cm"), 2400);
                             return 1;
                         })))
-                .then(Commands.literal("inundacion").executes(c -> {
-                    int n = Desastres.riada(mundo(c));
-                    return ok(c, n > 0 ? "Inundación en marcha: el agua de riada empieza a subir en " + n
-                            + " columnas de terreno a tu alrededor, primero en lo más bajo." : "Ahora mismo no hay terreno bajo cerca donde se acumule el agua.");
-                }))
                 .then(Commands.literal("olacalor")
                         .executes(c -> {
                             Desastres.olaCalor(mundo(c), 3);
@@ -84,7 +79,7 @@ public final class ComandoDesastre {
                     Clima cl = Clima.get(c.getSource().getServer());
                     cl.desastres = BoolArgumentType.getBool(c, "activar");
                     cl.setDirty();
-                    return ok(c, cl.desastres ? "Desastres naturales ACTIVADOS (tornados y granizo en tormentas, terremotos raros, riadas, olas de calor)"
+                    return ok(c, cl.desastres ? "Desastres naturales ACTIVADOS (tornados y granizo en tormentas, terremotos raros, olas de calor)"
                             : "Desastres naturales DESACTIVADOS");
                 }))));
     }

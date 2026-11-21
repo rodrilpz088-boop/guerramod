@@ -19,7 +19,9 @@ public class GuerraMod {
         ModBloqueEntidades.TIPOS.register(bus);
         ModEntidades.ENTIDADES.register(bus);
         ModEfectos.EFECTOS.register(bus);
+        es.guerramod.registro.SonidosAmbiente.iniciar();
         ModSonidos.SONIDOS.register(bus);
+        es.guerramod.registro.ModParticulas.PARTICULAS.register(bus);
         ModPestanas.PESTANAS.register(bus);
         es.guerramod.clima.AguaRealista.SERIALIZADORES.register(bus);
         es.guerramod.desastres.AguaTurbia.TIPOS.register(bus);

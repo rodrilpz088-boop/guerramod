@@ -218,5 +218,253 @@
     "attenuation_distance": 24
    }
   ]
+ },
+ "ambiente.jilguero": {
+  "subtitle": "subtitles.guerramod.ambiente.jilguero",
+  "sounds": [
+   {
+    "name": "guerramod:ambiente/jilguero_0",
+    "attenuation_distance": 28
+   },
+   {
+    "name": "guerramod:ambiente/jilguero_1",
+    "attenuation_distance": 28
+   },
+   {
+    "name": "guerramod:ambiente/jilguero_2",
+    "attenuation_distance": 28
+   },
+   {
+    "name": "guerramod:ambiente/jilguero_3",
+    "attenuation_distance": 28
+   }
+  ]
+ },
+ "ambiente.mirlo": {
+  "subtitle": "subtitles.guerramod.ambiente.mirlo",
+  "sounds": [
+   {
+    "name": "guerramod:ambiente/mirlo_0",
+    "attenuation_distance": 40
+   },
+   {
+    "name": "guerramod:ambiente/mirlo_1",
+    "attenuation_distance": 40
+   },
+   {
+    "name": "guerramod:ambiente/mirlo_2",
+    "attenuation_distance": 40
+   }
+  ]
+ },
+ "ambiente.gorrion": {
+  "subtitle": "subtitles.guerramod.ambiente.gorrion",
+  "sounds": [
+   {
+    "name": "guerramod:ambiente/gorrion_0",
+    "attenuation_distance": 24
+   },
+   {
+    "name": "guerramod:ambiente/gorrion_1",
+    "attenuation_distance": 24
+   },
+   {
+    "name": "guerramod:ambiente/gorrion_2",
+    "attenuation_distance": 24
+   }
+  ]
+ },
+ "ambiente.ruisenor": {
+  "subtitle": "subtitles.guerramod.ambiente.ruisenor",
+  "sounds": [
+   {
+    "name": "guerramod:ambiente/ruisenor_0",
+    "attenuation_distance": 44
+   },
+   {
+    "name": "guerramod:ambiente/ruisenor_1",
+    "attenuation_distance": 44
+   },
+   {
+    "name": "guerramod:ambiente/ruisenor_2",
+    "attenuation_distance": 44
+   }
+  ]
+ },
+ "ambiente.paloma": {
+  "subtitle": "subtitles.guerramod.ambiente.paloma",
+  "sounds": [
+   {
+    "name": "guerramod:ambiente/paloma_0",
+    "attenuation_distance": 36
+   },
+   {
+    "name": "guerramod:ambiente/paloma_1",
+    "attenuation_distance": 36
+   }
+  ]
+ },
+ "ambiente.cuco": {
+  "subtitle": "subtitles.guerramod.ambiente.cuco",
+  "sounds": [
+   {
+    "name": "guerramod:ambiente/cuco_0",
+    "attenuation_distance": 64
+   },
+   {
+    "name": "guerramod:ambiente/cuco_1",
+    "attenuation_distance": 64
+   }
+  ]
+ },
+ "ambiente.carpintero": {
+  "subtitle": "subtitles.guerramod.ambiente.carpintero",
+  "sounds": [
+   {
+    "name": "guerramod:ambiente/carpintero_0",
+    "attenuation_distance": 48
+   },
+   {
+    "name": "guerramod:ambiente/carpintero_1",
+    "attenuation_distance": 48
+   }
+  ]
+ },
+ "ambiente.gaviota": {
+  "subtitle": "subtitles.guerramod.ambiente.gaviota",
+  "sounds": [
+   {
+    "name": "guerramod:ambiente/gaviota_0",
+    "attenuation_distance": 48
+   },
+   {
+    "name": "guerramod:ambiente/gaviota_1",
+    "attenuation_distance": 48
+   },
+   {
+    "name": "guerramod:ambiente/gaviota_2",
+    "attenuation_distance": 48
+   }
+  ]
+ },
+ "ambiente.grillos": {
+  "subtitle": "subtitles.guerramod.ambiente.grillos",
+  "sounds": [
+   {
+    "name": "guerramod:ambiente/grillos_0",
+    "attenuation_distance": 20
+   },
+   {
+    "name": "guerramod:ambiente/grillos_1",
+    "attenuation_distance": 20
+   },
+   {
+    "name": "guerramod:ambiente/grillos_2",
+    "attenuation_distance": 20
+   }
+  ]
+ },
+ "ambiente.chicharra": {
+  "subtitle": "subtitles.guerramod.ambiente.chicharra",
+  "sounds": [
+   {
+    "name": "guerramod:ambiente/chicharra_0",
+    "attenuation_distance": 28
+   },
+   {
+    "name": "guerramod:ambiente/chicharra_1",
+    "attenuation_distance": 28
+   }
+  ]
+ },
+ "ambiente.buho": {
+  "subtitle": "subtitles.guerramod.ambiente.buho",
+  "sounds": [
+   {
+    "name": "guerramod:ambiente/buho_0",
+    "attenuation_distance": 56
+   },
+   {
+    "name": "guerramod:ambiente/buho_1",
+    "attenuation_distance": 56
+   }
+  ]
+ },
+ "ambiente.rana": {
+  "subtitle": "subtitles.guerramod.ambiente.rana",
+  "sounds": [
+   {
+    "name": "guerramod:ambiente/rana_0",
+    "attenuation_distance": 28
+   },
+   {
+    "name": "guerramod:ambiente/rana_1",
+    "attenuation_distance": 28
+   },
+   {
+    "name": "guerramod:ambiente/rana_2",
+    "attenuation_distance": 28
+   }
+  ]
+ },
+ "ambiente.olas": {
+  "subtitle": "subtitles.guerramod.ambiente.olas",
+  "sounds": [
+   {
+    "name": "guerramod:ambiente/olas_0",
+    "attenuation_distance": 40
+   },
+   {
+    "name": "guerramod:ambiente/olas_1",
+    "attenuation_distance": 40
+   },
+   {
+    "name": "guerramod:ambiente/olas_2",
+    "attenuation_distance": 40
+   }
+  ]
+ },
+ "ambiente.viento_hojas": {
+  "subtitle": "subtitles.guerramod.ambiente.viento_hojas",
+  "sounds": [
+   {
+    "name": "guerramod:ambiente/viento_hojas_0",
+    "attenuation_distance": 24
+   },
+   {
+    "name": "guerramod:ambiente/viento_hojas_1",
+    "attenuation_distance": 24
+   },
+   {
+    "name": "guerramod:ambiente/viento_hojas_2",
+    "attenuation_distance": 24
+   }
+  ]
+ },
+ "ambiente.arroyo": {
+  "subtitle": "subtitles.guerramod.ambiente.arroyo",
+  "sounds": [
+   {
+    "name": "guerramod:ambiente/arroyo_0",
+    "attenuation_distance": 20
+   },
+   {
+    "name": "guerramod:ambiente/arroyo_1",
+    "attenuation_distance": 20
+   }
+  ]
+ },
+ "ambiente.chapoteo": {
+  "subtitle": "subtitles.guerramod.ambiente.chapoteo",
+  "sounds": [
+   {
+    "name": "guerramod:ambiente/chapoteo_0",
+    "attenuation_distance": 16
+   },
+   {
+    "name": "guerramod:ambiente/chapoteo_1",
+    "attenuation_distance": 16
+   }
+  ]
  }
 }

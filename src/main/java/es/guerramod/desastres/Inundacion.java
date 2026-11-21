@@ -121,8 +121,14 @@ public final class Inundacion extends SavedData {
         boolean llueve = l.isRaining(), tormenta = l.isThundering();
         if (llueve) f.lluvia = Math.min(30000, f.lluvia + (tormenta ? 3 : 1));
         else f.lluvia = Math.max(0, f.lluvia - 2);
-        int maximo = tormenta ? 7 : 4;
-        if (llueve && f.lluvia > 7000) {
+        int maximo = 0; // las inundaciones ya no forman parte de los desastres: la que quede se retira
+        if (f.nivel > 0) {
+            f.nivel = 0;
+            f.cola.clear();
+            f.prepararRetirada();
+            f.setDirty();
+        }
+        if (false) {
             f.ticksNivel += tormenta ? 2 : 1;
             if (f.ticksNivel >= TICKS_SUBIDA && f.nivel < maximo) {
                 f.ticksNivel = 0;

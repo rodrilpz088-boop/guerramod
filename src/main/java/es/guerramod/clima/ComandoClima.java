@@ -69,6 +69,28 @@ public final class ComandoClima {
                             cl.cambiado(c.getSource().getServer());
                             return ok(c, String.format("Nubosidad fijada en %.0f %%", cl.nubesFija));
                         })))
+                .then(Commands.literal("estacion").requires(s -> s.hasPermission(2))
+                        .then(Commands.argument("cual", com.mojang.brigadier.arguments.StringArgumentType.word())
+                                .suggests((c, b) -> net.minecraft.commands.SharedSuggestionProvider.suggest(new String[]{"primavera", "verano", "otono", "invierno", "navidad"}, b))
+                                .executes(c -> ponerEstacion(c, com.mojang.brigadier.arguments.StringArgumentType.getString(c, "cual"), 1))
+                                .then(Commands.argument("dia", com.mojang.brigadier.arguments.IntegerArgumentType.integer(1, 200))
+                                        .executes(c -> ponerEstacion(c, com.mojang.brigadier.arguments.StringArgumentType.getString(c, "cual"),
+                                                com.mojang.brigadier.arguments.IntegerArgumentType.getInteger(c, "dia"))))))
+                .then(Commands.literal("tiempo").requires(s -> s.hasPermission(2))
+                        .then(Commands.literal("estaciones").executes(c -> {
+                            Clima cl = Clima.get(c.getSource().getServer());
+                            cl.tiempoPropio = true;
+                            cl.setDirty();
+                            return ok(c, "Reloj de las estaciones activado: días largos en verano y cortos en invierno");
+                        }))
+                        .then(Commands.literal("normal").executes(c -> {
+                            Clima cl = Clima.get(c.getSource().getServer());
+                            cl.tiempoPropio = false;
+                            cl.setDirty();
+                            c.getSource().getServer().overworld().getGameRules().getRule(net.minecraft.world.level.GameRules.RULE_DAYLIGHT)
+                                    .set(true, c.getSource().getServer());
+                            return ok(c, "Reloj normal de Minecraft (días y noches iguales todo el año)");
+                        })))
                 .then(Commands.literal("reiniciar").requires(s -> s.hasPermission(2)).executes(c -> {
                     Clima cl = Clima.get(c.getSource().getServer());
                     cl.co2 = 420;
@@ -77,6 +99,23 @@ public final class ComandoClima {
                     cl.cambiado(c.getSource().getServer());
                     return ok(c, "Clima reiniciado: 420 ppm de CO2, sin calentamiento ni humo");
                 })));
+    }
+
+    private static int ponerEstacion(CommandContext<CommandSourceStack> c, String cual, int diaEst) {
+        int base = switch (cual) {
+            case "verano" -> 200;
+            case "otono", "otoño" -> 400;
+            case "invierno" -> 600;
+            case "navidad" -> 607;
+            default -> 0;
+        };
+        int objetivo = base + (cual.equals("navidad") ? 0 : diaEst - 1);
+        Clima cl = Clima.get(c.getSource().getServer());
+        long hoy = c.getSource().getServer().overworld().getDayTime() / 24000L;
+        cl.desfaseDias = (int) Math.floorMod(objetivo - hoy, (long) Estaciones.DIAS_ANIO);
+        cl.cambiado(c.getSource().getServer());
+        int d = Estaciones.dia(c.getSource().getServer().overworld());
+        return ok(c, "Ahora es " + Estaciones.nombre(d).toLowerCase() + ", día " + Estaciones.diaEnEstacion(d) + (Estaciones.navidad(d) ? " (Navidad)" : ""));
     }
 
     private static int ok(CommandContext<CommandSourceStack> c, String texto) {
@@ -101,7 +140,9 @@ public final class ComandoClima {
         ServerLevel l = c.getSource().getLevel();
         BlockPos pos = BlockPos.containing(c.getSource().getPosition());
         Meteo m = Meteo.en(l, pos);
-        c.getSource().sendSuccess(() -> Component.literal("— " + m.zona() + " —").withStyle(ChatFormatting.AQUA), false);
+        int dA = Estaciones.dia(l);
+        c.getSource().sendSuccess(() -> Component.literal("— " + m.zona() + " · " + Estaciones.nombre(dA) + ", día " + Estaciones.diaEnEstacion(dA)
+                + String.format(" (%.1f h de luz)", Estaciones.horasDeLuz(dA)) + " —").withStyle(ChatFormatting.AQUA), false);
         c.getSource().sendSuccess(() -> Component.literal(String.format(
                 "%.1f °C · humedad %.0f %% · punto de rocío %.1f °C · %s · viento %.0f km/h",
                 m.temperatura(), m.humedad(), m.puntoRocio(), cielo(m.nubes(), m.niebla(), llueve(l, pos)), m.viento())), false);

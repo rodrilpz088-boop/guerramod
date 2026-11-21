@@ -44,6 +44,10 @@ public class Clima extends SavedData {
     public float nubesFija = Float.NaN;
     /** Desastres naturales automáticos (tornados, terremotos, granizo, riadas, olas de calor). */
     public boolean desastres = true;
+    /** Estaciones: desfase del calendario (para /clima estacion), reloj propio (días largos en verano) y último aviso. */
+    public int desfaseDias = 0;
+    public boolean tiempoPropio = true;
+    public int ultimoDiaAvisado = -1;
     /** Ola de calor: grados de más y cuánto le queda (ticks). */
     public double extraCalor = 0;
     public int extraCalorTicks = 0;
@@ -73,6 +77,9 @@ public class Clima extends SavedData {
         if (t.contains("nubes")) c.nubes = t.getDouble("nubes");
         c.nubesFija = t.contains("nubesFija") ? t.getFloat("nubesFija") : Float.NaN;
         c.desastres = !t.contains("desastres") || t.getBoolean("desastres");
+        c.desfaseDias = t.getInt("desfaseDias");
+        c.tiempoPropio = !t.contains("tiempoPropio") || t.getBoolean("tiempoPropio");
+        c.ultimoDiaAvisado = t.contains("ultimoDiaAvisado") ? t.getInt("ultimoDiaAvisado") : -1;
         c.extraCalor = t.getDouble("extraCalor");
         c.extraCalorTicks = t.getInt("extraCalorTicks");
         return c;
@@ -93,6 +100,9 @@ public class Clima extends SavedData {
         t.putDouble("nubes", nubes);
         if (!Float.isNaN(nubesFija)) t.putFloat("nubesFija", nubesFija);
         t.putBoolean("desastres", desastres);
+        t.putInt("desfaseDias", desfaseDias);
+        t.putBoolean("tiempoPropio", tiempoPropio);
+        t.putInt("ultimoDiaAvisado", ultimoDiaAvisado);
         t.putDouble("extraCalor", extraCalor);
         t.putInt("extraCalorTicks", extraCalorTicks);
         return t;

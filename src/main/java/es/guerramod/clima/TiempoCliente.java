@@ -13,6 +13,8 @@ public final class TiempoCliente {
     public static volatile String zona = "";
     /** Tamaño del granizo que cae (cm, 0 = no graniza) y cuánto tiembla el suelo (0..1). */
     public static volatile float granizo = 0, temblor = 0;
+    /** Día del año (0..799): 0-199 primavera, 200-399 verano, 400-599 otoño, 600-799 invierno. */
+    public static volatile int dia = 0;
     /** El servidor ya ha mandado datos (si no, el cielo usa valores por defecto). */
     public static volatile boolean recibido = false;
 }

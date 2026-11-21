@@ -82,6 +82,15 @@ public final class Lluvia {
         BufferBuilder bb = Tesselator.getInstance().getBuilder();
         bb.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_COLOR);
 
+        if (nevando()) {
+            // con frío la lluvia es nieve: copos que caen despacio, se mecen y derivan con el viento
+            copos(level, bb, bx, by, bz, cx, cy, cz, intensidad, t, wx, wz, Math.min(1, cr * 1.25f + 0.08f), Math.min(1, cg * 1.25f + 0.08f),
+                    Math.min(1, cb * 1.2f + 0.1f));
+            BufferUploader.drawWithShader(bb.end());
+            RenderSystem.enableCull();
+            RenderSystem.disableBlend();
+            return true;
+        }
         // gotas cercanas: columnas de 1 bloque hasta 15 de distancia
         capa(level, bb, bx, by, bz, cx, cy, cz, 15, 1, 0, 2 + (int) Math.round(3 * intensidad), intensidad, t, wx, wz, cr, cg, cb,
                 0.58, 0.010, 0.0022, 0.30);
@@ -93,6 +102,50 @@ public final class Lluvia {
         RenderSystem.enableCull();
         RenderSystem.disableBlend();
         return true;
+    }
+
+    /** ¿Nieva aquí? (frío suficiente según el tiempo que manda el servidor). */
+    public static boolean nevando() {
+        return es.guerramod.clima.TiempoCliente.recibido && es.guerramod.clima.TiempoCliente.temperatura < 1.0f;
+    }
+
+    private static void copos(ClientLevel level, BufferBuilder bb, int bx, int by, int bz, double cx, double cy, double cz, double intensidad,
+                              double t, double wx, double wz, float cr, float cg, float cb) {
+        final int radio = 18;
+        final double span = 28, lo = cy - 10;
+        for (int dx = -radio; dx <= radio; dx++) {
+            for (int dz = -radio; dz <= radio; dz++) {
+                if (dx * dx + dz * dz > radio * radio) continue;
+                int x = bx + dx, z = bz + dz;
+                if (precip(level, x, by, z) == 0) continue;
+                int suelo = level.getHeight(Heightmap.Types.MOTION_BLOCKING, x, z);
+                int n = 1 + (int) Math.round(3 * intensidad);
+                for (int j = 0; j < n; j++) {
+                    if (hash(x, z, j + 140) > 0.4 + 0.6 * intensidad) continue;
+                    double vel = 0.9 + 0.7 * hash(x, z, j + 120);
+                    double fase = hash(x, z, j + 130) * span;
+                    double yAbs = -(t * vel + fase);
+                    double y = lo + Math.floorMod((long) Math.floor((yAbs - lo) * 64), (long) (span * 64)) / 64.0;
+                    if (y < suelo) continue;
+                    double balanceo = Math.sin(t * (1.1 + hash(x, z, j + 150)) + j * 2.1) * 0.35;
+                    double px = x + hash(x, z, j + 100) + balanceo + wx * 0.15 * (y - suelo) / vel * 0.1;
+                    double pz = z + hash(x, z, j + 110) + Math.cos(t * 0.9 + j) * 0.25 + wz * 0.15 * (y - suelo) / vel * 0.1;
+                    double rx = px - cx, ry = y - cy, rz = pz - cz;
+                    double dist = Math.sqrt(rx * rx + ry * ry + rz * rz);
+                    if (dist < 0.4) continue;
+                    double tam = 0.035 + 0.03 * hash(x, z, j + 160);
+                    // cuadradito mirando a la cámara
+                    double hx = -rz / dist, hz = rx / dist;
+                    double ux = -hx * ry / dist * 0, uy = 1.0, uz = 0;
+                    float a = (float) ((0.55 + 0.35 * hash(x, z, j + 170)) * (1 - Math.min(1, dist / (radio + 1.0))) * Math.sqrt(intensidad));
+                    if (a < 0.02f) continue;
+                    bb.vertex(rx - hx * tam, ry - uy * tam, rz - hz * tam).color(cr, cg, cb, a).endVertex();
+                    bb.vertex(rx + hx * tam, ry - uy * tam, rz + hz * tam).color(cr, cg, cb, a).endVertex();
+                    bb.vertex(rx + hx * tam, ry + uy * tam, rz + hz * tam).color(cr, cg, cb, a).endVertex();
+                    bb.vertex(rx - hx * tam, ry + uy * tam, rz - hz * tam).color(cr, cg, cb, a).endVertex();
+                }
+            }
+        }
     }
 
     private static void capa(ClientLevel level, BufferBuilder bb, int bx, int by, int bz, double cx, double cy, double cz, int radio, int paso,

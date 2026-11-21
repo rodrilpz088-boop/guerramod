@@ -111,10 +111,12 @@ public final class Atmosfera {
         luna = level.getMoonBrightness();
 
         double a = level.getTimeOfDay(parcial) * Math.PI * 2;
+        // el sol no pasa por encima de la cabeza: en Madrid sube 73° en verano y 26° en invierno
+        double incl = Math.toRadians(es.guerramod.clima.Estaciones.inclinacionSol(TiempoCliente.dia));
         sx = -Math.sin(a);
-        sy = Math.cos(a);
-        sz = 0;
-        mx = -sx; my = -sy; mz = 0;
+        sy = Math.cos(a) * Math.cos(incl);
+        sz = Math.cos(a) * Math.sin(incl);
+        mx = -sx; my = -sy; mz = -sz;
         h0 = 200 + Math.max(0, camY - 63) * 8;
         double ax = 0.5 * 21e-6 * turbidez;
         for (int c = 0; c < 3; c++) betaM[c] = ax * ANG[c];

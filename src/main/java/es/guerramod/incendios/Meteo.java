@@ -72,7 +72,13 @@ public record Meteo(double temperatura, double humedad, double viento, double cu
         long hora = level.getDayTime() % 24000; // 0 = 6:00, 6000 = 12:00
         double dia = Math.cos(2 * Math.PI * (hora - 8000) / 24000.0);
         double alt = pos.getY() > 80 ? (pos.getY() - 80) * 0.02 : 0;
-        double t = z.tMedia() + z.amplitud() * dia * (1 - 0.55 * nub) - alt;
+        // estación del año (el máximo a finales de julio, el mínimo a finales de enero) y Navidad fría
+        int diaAnio = es.guerramod.clima.Estaciones.dia(level);
+        double estac = es.guerramod.clima.Estaciones.ciclo(diaAnio);
+        double luzEst = es.guerramod.clima.Estaciones.cicloLuz(diaAnio);
+        double t = z.tMedia() + z.amplitud() * dia * (1 - 0.55 * nub) * (0.85 + 0.15 * luzEst) - alt;
+        t += es.guerramod.clima.Zonas.amplitudAnual(z) * (estac - 1) / 2;
+        if (es.guerramod.clima.Estaciones.navidad(diaAnio)) t -= 4;
         if (pos.getY() < 40) t += (13 - t) * Math.min(1, (40 - pos.getY()) / 30.0); // bajo tierra, temperatura estable
         if (lluvia) t -= 4;
         // calentamiento global (mucho más fuerte en las zonas frías: amplificación polar)
@@ -88,6 +94,7 @@ public record Meteo(double temperatura, double humedad, double viento, double cu
         h -= (z.humedad() < 30 ? 20 : 16) * dia;
         h += 30 * Math.exp(-dias / 0.8);
         h += 10 * nub;
+        h -= 8 * estac; // veranos secos, inviernos húmedos
         h -= 2.5 * Math.max(0, calor);
         if (c.extraCalorTicks > 0) h -= c.extraCalor * 1.5;
         if (!Float.isNaN(c.humFija)) h = c.humFija; // fijada con /incendios humedad
@@ -95,7 +102,7 @@ public record Meteo(double temperatura, double humedad, double viento, double cu
         h = clamp(h, 1, 100);
 
         // ---- curado de la hierba (% seca): crece con los días sin llover y el calor
-        double cur = 55 + 18 * dias + 1.2 * (t - 15) + 6 * Math.max(0, calor);
+        double cur = 55 + 18 * dias + 1.2 * (t - 15) + 6 * Math.max(0, calor) + 25 * estac - 5; // en invierno la hierba está verde
         if (!b.value().hasPrecipitation()) cur += 20;
         if (lluvia) cur = 40;
         cur = clamp(cur, 30, 100);

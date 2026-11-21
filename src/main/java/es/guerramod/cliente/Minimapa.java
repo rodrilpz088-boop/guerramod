@@ -103,6 +103,12 @@ public class Minimapa implements IGuiOverlay {
         int colorT = tc < 0 ? 0xFF9FD4FF : tc < 15 ? 0xFFD8F0FF : tc < 28 ? 0xFFFFF2C0 : tc < 36 ? 0xFFFFB060 : 0xFFFF6040;
         g.drawString(f, tiempo, x0, ty, colorT, true);
         ty += 10;
+        int diaA = es.guerramod.clima.TiempoCliente.dia;
+        String est = es.guerramod.clima.Estaciones.nombre(diaA) + " · día " + es.guerramod.clima.Estaciones.diaEnEstacion(diaA)
+                + (es.guerramod.clima.Estaciones.navidad(diaA) ? " · Navidad" : "");
+        int colorE = new int[]{0xFF9BE07A, 0xFFFFD45A, 0xFFE08A3A, 0xFFBFE4FF}[es.guerramod.clima.Estaciones.estacion(diaA)];
+        g.drawString(f, est, x0, ty, colorE, true);
+        ty += 10;
         if (es.guerramod.clima.TiempoCliente.cambio && Math.abs(es.guerramod.clima.TiempoCliente.anomalia) >= 0.3f) {
             g.drawString(f, String.format("Calentamiento %+.1f °C", es.guerramod.clima.TiempoCliente.anomalia), x0, ty,
                     es.guerramod.clima.TiempoCliente.anomalia > 2 ? 0xFFFF4030 : 0xFFFF9040, true);

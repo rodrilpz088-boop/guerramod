@@ -69,6 +69,7 @@ public class CieloMundo extends DimensionSpecialEffects.OverworldEffects {
                     com.mojang.blaze3d.platform.GlStateManager.SourceFactor.ONE,
                     com.mojang.blaze3d.platform.GlStateManager.DestFactor.ZERO);
             pose.pushPose();
+            pose.mulPose(Axis.XP.rotationDegrees((float) es.guerramod.clima.Estaciones.inclinacionSol(es.guerramod.clima.TiempoCliente.dia)));
             pose.mulPose(Axis.YP.rotationDegrees(-90.0F));
             pose.mulPose(Axis.XP.rotationDegrees(level.getTimeOfDay(parcial) * 360.0F));
             estrellas(pose.last().pose(), level);
@@ -110,6 +111,12 @@ public class CieloMundo extends DimensionSpecialEffects.OverworldEffects {
             RenderSystem.disableBlend();
             return false;
         }
+    }
+
+    /** Si nieva, sin sonido ni salpicaduras de lluvia. */
+    @Override
+    public boolean tickRain(ClientLevel level, int ticks, Camera cam) {
+        return !desactivado && Lluvia.nevando();
     }
 
     @Override

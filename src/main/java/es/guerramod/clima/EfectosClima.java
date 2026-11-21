@@ -18,6 +18,23 @@ import net.minecraft.world.level.levelgen.Heightmap;
 public final class EfectosClima {
     private EfectosClima() {}
 
+    /** Con frío: nieva donde normalmente llovería (cuaja poco a poco) y el agua quieta se hiela. */
+    private static void frio(ServerLevel ow, BlockPos arriba, double t, RandomSource r) {
+        BlockState s = ow.getBlockState(arriba);
+        BlockPos debajo = arriba.below();
+        BlockState sd = ow.getBlockState(debajo);
+        if (ow.isRaining() && ow.isRainingAt(arriba)) {
+            if (s.isAir() && sd.isFaceSturdy(ow, debajo, net.minecraft.core.Direction.UP) && r.nextFloat() < 0.6f) {
+                ow.setBlock(arriba, Blocks.SNOW.defaultBlockState(), Block.UPDATE_ALL);
+            } else if (s.is(Blocks.SNOW) && s.getValue(SnowLayerBlock.LAYERS) < (t < -3 ? 5 : 3) && r.nextFloat() < 0.25f) {
+                ow.setBlock(arriba, s.setValue(SnowLayerBlock.LAYERS, s.getValue(SnowLayerBlock.LAYERS) + 1), Block.UPDATE_ALL);
+            }
+        }
+        if (t < -2 && sd.is(Blocks.WATER) && ow.getFluidState(debajo).isSource() && s.isAir() && r.nextFloat() < 0.3f) {
+            ow.setBlock(debajo, Blocks.ICE.defaultBlockState(), Block.UPDATE_ALL);
+        }
+    }
+
     /** Cada segundo: el tiempo local a cada jugador del mundo normal. */
     public static void enviarTiempo(MinecraftServer server) {
         ServerLevel ow = server.overworld();
@@ -60,6 +77,10 @@ public final class EfectosClima {
                 if (!ow.hasChunkAt(new BlockPos(x, p.getBlockY(), z))) continue;
                 BlockPos arriba = ow.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING, new BlockPos(x, 0, z));
                 double t = Meteo.en(ow, arriba).temperatura();
+                if (t < 1.0) {
+                    frio(ow, arriba, t, r);
+                    continue;
+                }
                 if (t < 4.5) continue;
                 // probabilidad de fundirse: más calor, más rápido; el sol de mediodía también ayuda
                 double prob = Math.min(1.0, (t - 4.5) / 14.0);

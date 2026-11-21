@@ -16,6 +16,21 @@ public final class Zonas {
     /** Datos de una zona. tMedia y amplitud en °C, humedad en %, nubes multiplica la nubosidad general. */
     public record Zona(String nombre, double tMedia, double amplitud, double humedad, double nubes, boolean fria) {}
 
+    /** Diferencia de temperatura media entre pleno verano y pleno invierno (°C). */
+    public static double amplitudAnual(Zona z) {
+        String n = z.nombre();
+        if (n.startsWith("Cueva") || n.startsWith("Oscuridad")) return 0;
+        if (n.startsWith("Selva") || n.startsWith("Manglar")) return 2.5;
+        if (n.startsWith("Sabana") || n.startsWith("Meseta de sabana")) return 6;
+        if (n.startsWith("Isla")) return 6;
+        if (n.startsWith("Mar") || n.startsWith("Océano")) return 7;
+        if (n.startsWith("Playa") || n.startsWith("Costa")) return 9;
+        if (n.startsWith("Pantano")) return 11;
+        if (n.contains("esierto") || n.contains("adlands")) return 16;
+        if (z.fria()) return 13;
+        return 15;
+    }
+
     private static String clave(Holder<Biome> b) {
         return b.unwrapKey().map(k -> k.location().getPath()).orElse("");
     }

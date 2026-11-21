@@ -207,6 +207,7 @@ public final class EventosServidor {
         es.guerramod.incendios.Fuego.procesarCola(server);
         es.guerramod.incendios.Clima.get(server).tick(server);
         es.guerramod.clima.EfectosClima.tick(server);
+        es.guerramod.clima.Estaciones.tick(server);
         es.guerramod.ciudad.Obras.tick(server);
         es.guerramod.desastres.Desastres.tick(server);
         if (server.getTickCount() % 20 != 0) return;

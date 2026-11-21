@@ -302,6 +302,7 @@ public final class Construccion {
         for (int intento = 0; intento < 20; intento++) {
             double ang = r.nextDouble() * Math.PI * 2, rad = 7 + r.nextDouble() * 8;
             int x = pu.centro.getX() + (int) (Math.cos(ang) * rad), z = pu.centro.getZ() + (int) (Math.sin(ang) * rad);
+            if (!cargado(l, x - 6, z - 6) || !cargado(l, x + 6, z + 6)) continue;
             int y = l.getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, x, z) - 1;
             boolean ok = true;
             for (int dx = -5; dx <= 5 && ok; dx++)
@@ -342,8 +343,14 @@ public final class Construccion {
                 || s.is(BlockTags.BASE_STONE_OVERWORLD) || s.is(Blocks.SANDSTONE);
     }
 
+    /** ¿Está cargado el chunk de esa columna? (para no cargar ni generar terreno sin querer) */
+    public static boolean cargado(ServerLevel l, int x, int z) {
+        return l.isLoaded(new BlockPos(x, l.getSeaLevel(), z));
+    }
+
     /** Altura del suelo natural (el bloque de tierra de arriba) o Integer.MIN_VALUE si no vale (agua, construido...). */
     public static int alturaSuelo(ServerLevel l, int x, int z) {
+        if (!cargado(l, x, z)) return Integer.MIN_VALUE;
         int y = l.getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, x, z) - 1;
         BlockPos p = new BlockPos(x, y, z);
         BlockState s = l.getBlockState(p);

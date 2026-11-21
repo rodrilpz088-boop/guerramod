@@ -121,6 +121,72 @@ public final class Ambiente {
         }
         hojas(l, p, r, d);
         estelas(l, p, r);
+        agua(l, p, r, lluvia);
+    }
+
+    private static int esperaCascada = 0;
+
+    /**
+     * Agua viva: las cascadas levantan espuma y vapor donde caen (y suenan), las olas dejan espuma en la orilla y la
+     * lluvia salpica sobre ríos y lagos.
+     */
+    private static void agua(ClientLevel l, Player p, RandomSource r, boolean lluvia) {
+        BlockPos c = p.blockPosition();
+        BlockPos.MutableBlockPos q = new BlockPos.MutableBlockPos();
+        boolean cascadaOida = false;
+        for (int i = 0; i < 70; i++) {
+            q.set(c.getX() + r.nextInt(41) - 20, c.getY() + r.nextInt(25) - 12, c.getZ() + r.nextInt(41) - 20);
+            net.minecraft.world.level.material.FluidState f = l.getFluidState(q);
+            if (!f.is(net.minecraft.tags.FluidTags.WATER)) continue;
+            boolean cae = !f.isSource() && f.getValue(net.minecraft.world.level.material.FlowingFluid.FALLING);
+            if (cae) {
+                // pie de la cascada: agua cayendo con agua quieta (o suelo) debajo
+                BlockPos abajo = q.below();
+                if (!l.getFluidState(abajo).is(net.minecraft.tags.FluidTags.WATER) || l.getFluidState(abajo).isSource()) {
+                    double x = q.getX() + r.nextDouble(), z = q.getZ() + r.nextDouble(), y = q.getY() + 0.1;
+                    for (int k = 0; k < 3; k++) {
+                        l.addParticle(ParticleTypes.SPLASH, x, y + 0.2, z, (r.nextDouble() - 0.5) * 0.3, 0.25, (r.nextDouble() - 0.5) * 0.3);
+                    }
+                    l.addParticle(ParticleTypes.CLOUD, x, y + 0.3, z, (r.nextDouble() - 0.5) * 0.05, 0.03 + r.nextDouble() * 0.03,
+                            (r.nextDouble() - 0.5) * 0.05);
+                    l.addParticle(ParticleTypes.BUBBLE_POP, x, y + 0.05, z, 0, 0.02, 0);
+                    if (!cascadaOida && --esperaCascada <= 0 && q.distSqr(c) < 16 * 16) {
+                        esperaCascada = 30 + r.nextInt(25);
+                        cascadaOida = true;
+                        l.playLocalSound(q.getX() + 0.5, q.getY() + 0.5, q.getZ() + 0.5, SonidosAmbiente.ARROYO.get(),
+                                net.minecraft.sounds.SoundSource.AMBIENT, 0.9f, 0.7f + r.nextFloat() * 0.2f, false);
+                    }
+                } else if (r.nextInt(3) == 0) {
+                    l.addParticle(ParticleTypes.FALLING_WATER, q.getX() + r.nextDouble(), q.getY() + r.nextDouble(), q.getZ() + r.nextDouble(), 0, 0, 0);
+                }
+                continue;
+            }
+            // superficie
+            if (!l.getFluidState(q.above()).isEmpty() || !l.getBlockState(q.above()).isAir()) continue;
+            double y = q.getY() + f.getHeight(l, q) + 0.02;
+            // espuma de las olas en la orilla
+            boolean orilla = false;
+            for (net.minecraft.core.Direction dd : net.minecraft.core.Direction.Plane.HORIZONTAL) {
+                net.minecraft.world.level.block.state.BlockState b = l.getBlockState(q.relative(dd));
+                if (b.is(net.minecraft.tags.BlockTags.SAND) || b.is(net.minecraft.world.level.block.Blocks.GRAVEL)
+                        || b.is(net.minecraft.world.level.block.Blocks.STONE) || b.is(net.minecraft.tags.BlockTags.DIRT)) {
+                    orilla = true;
+                    break;
+                }
+            }
+            double ola = Math.sin((l.getGameTime() + q.getX() * 3 + q.getZ() * 2) * 0.08);
+            if (orilla && ola > 0.6 && aguaGrande(l, q)) {
+                for (int k = 0; k < 2; k++) {
+                    l.addParticle(ParticleTypes.SPLASH, q.getX() + r.nextDouble(), y, q.getZ() + r.nextDouble(), 0, 0.05, 0);
+                }
+                l.addParticle(ParticleTypes.CLOUD, q.getX() + r.nextDouble(), y, q.getZ() + r.nextDouble(), 0, 0.004, 0);
+            }
+            // gotas de lluvia en el agua
+            if (lluvia && l.canSeeSky(q.above())) {
+                l.addParticle(ParticleTypes.BUBBLE_POP, q.getX() + r.nextDouble(), y, q.getZ() + r.nextDouble(), 0, 0, 0);
+                l.addParticle(ParticleTypes.SPLASH, q.getX() + r.nextDouble(), y, q.getZ() + r.nextDouble(), 0, 0.04, 0);
+            }
+        }
     }
 
     private static boolean aguaCerca(ClientLevel l, BlockPos p, RandomSource r) {

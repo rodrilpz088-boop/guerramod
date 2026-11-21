@@ -466,18 +466,46 @@ guardar(img, "radiador")
 ASF = (54, 55, 58)
 
 
-def asfalto(semilla=100, color=ASF, desgaste=False):
+def ruido_periodico(n, escala, semilla):
+    """Ruido suave que se repite sin costuras (para que el asfalto no haga cuadrícula)."""
     r = rng(semilla)
-    arr = np.array(color, np.float32)[None, None, :] + r.normal(0, 7, (32, 32))[:, :, None]
+    f = np.fft.fft2(r.normal(0, 1, (n, n)))
+    ky, kx = np.meshgrid(np.fft.fftfreq(n), np.fft.fftfreq(n), indexing="ij")
+    f *= np.exp(-(kx ** 2 + ky ** 2) * (escala ** 2) * 20)
+    a = np.real(np.fft.ifft2(f))
+    return (a - a.mean()) / (a.std() + 1e-9)
+
+
+def asfalto(semilla=100, color=ASF, desgaste=False):
+    """Aglomerado asfáltico: betún oscuro con grava de varios tamaños y tonos, manchas suaves y polvo claro."""
+    r = rng(semilla)
+    arr = np.array(color, np.float32)[None, None, :] + r.normal(0, 4.5, (32, 32))[:, :, None]
+    arr += (ruido_periodico(32, 0.9, semilla + 7) * 5.5)[:, :, None]
     m = r.random((32, 32))
-    arr[m < 0.05] += 28
-    arr[m > 0.97] -= 16
+    # grava: granos claros (cuarcita), grises y alguno rojizo
+    claros = m < 0.075
+    arr[claros] = np.array([118, 118, 116], np.float32) + r.normal(0, 14, (claros.sum(), 1))
+    grises = (m >= 0.075) & (m < 0.16)
+    arr[grises] += 14 + r.normal(0, 5, (grises.sum(), 1))
+    rojizos = (m >= 0.16) & (m < 0.175)
+    arr[rojizos] = np.array([96, 82, 74], np.float32) + r.normal(0, 6, (rojizos.sum(), 1))
+    # huecos del árido (sombras)
+    arr[m > 0.955] -= 20
+    # piedras de 2×2
+    for _ in range(9):
+        x0, y0 = r.integers(0, 31, 2)
+        t = 92 + r.normal(0, 16)
+        arr[y0:y0 + 2, x0:x0 + 2] = np.array([t, t, t - 2], np.float32)
+        arr[min(31, y0 + 2), x0:x0 + 2] -= 12
     if desgaste:
-        n = ruido_suave(32, 32, 6, semilla + 1)
-        arr += ((n - 0.5) * 30)[:, :, None]
-        for _ in range(3):
-            x0, y0 = r.integers(0, 28), r.integers(0, 28)
-            arr[y0:y0 + 1, x0:x0 + r.integers(3, 8)] -= 25
+        n = ruido_periodico(32, 1.6, semilla + 1)
+        arr += (n * 9)[:, :, None]
+        for _ in range(4):  # grietas finas
+            x, y = r.integers(0, 32, 2)
+            for _k in range(r.integers(5, 12)):
+                arr[y % 32, x % 32] -= 30
+                x += r.integers(-1, 2)
+                y += 1
     return a_img(arr)
 
 

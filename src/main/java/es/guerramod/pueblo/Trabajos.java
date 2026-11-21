@@ -356,6 +356,7 @@ public final class Trabajos {
     }
 
     private static void pavimentar(ServerLevel l, Pueblos.Pueblo p, int x, int z, boolean ciudad, boolean acera) {
+        if (!Construccion.cargado(l, x, z)) return;
         int y = l.getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, x, z) - 1;
         BlockPos q = new BlockPos(x, y, z);
         BlockState s = l.getBlockState(q);
@@ -437,6 +438,7 @@ public final class Trabajos {
             if (!l.isLoaded(q) || farolaCerca(p, q, 10)) continue;
             for (Direction d : Direction.Plane.HORIZONTAL) {
                 int x = q.getX() + d.getStepX(), z = q.getZ() + d.getStepZ();
+                if (!Construccion.cargado(l, x, z)) continue;
                 int y = l.getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, x, z) - 1;
                 BlockPos s = new BlockPos(x, y, z);
                 BlockState st = l.getBlockState(s);
@@ -496,6 +498,7 @@ public final class Trabajos {
         for (int k = 0; k < 12; k++) {
             int z = p.centro.getZ() - R + fila;
             for (int x = p.centro.getX() - R; x <= p.centro.getX() + R; x++) {
+                if (!Construccion.cargado(l, x, z)) continue;
                 int h = l.getHeight(Heightmap.Types.MOTION_BLOCKING, x, z);
                 for (int y = h - 2; y <= h + 1; y++) {
                     BlockPos q = new BlockPos(x, y, z);
@@ -602,6 +605,7 @@ public final class Trabajos {
         for (int i = 0; i < 30; i++) {
             double ang = r.nextDouble() * Math.PI * 2, rad = 4 + r.nextDouble() * 9;
             int x = p.centro.getX() + (int) Math.round(Math.cos(ang) * rad), z = p.centro.getZ() + (int) Math.round(Math.sin(ang) * rad);
+            if (!Construccion.cargado(l, x, z)) continue;
             int y = l.getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, x, z);
             BlockPos q = new BlockPos(x, y, z);
             if (!l.getBlockState(q.below()).isSolid() || !l.getBlockState(q).canBeReplaced() || !l.getBlockState(q.above()).isAir()) continue;
@@ -699,9 +703,11 @@ public final class Trabajos {
                 if (dist > 6) {
                     Vec3 paso = v.position().add(dir.normalize().scale(Math.min(20, dist)));
                     int x = (int) Math.floor(paso.x), z = (int) Math.floor(paso.z);
-                    int y = l.getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, x, z);
-                    b.eraseMemory(MemoryModuleType.NEAREST_HOSTILE);
-                    b.setMemory(MemoryModuleType.WALK_TARGET, new WalkTarget(new BlockPos(x, y, z), 0.7f, 2));
+                    if (Construccion.cargado(l, x, z)) {
+                        int y = l.getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, x, z);
+                        b.eraseMemory(MemoryModuleType.NEAREST_HOSTILE);
+                        b.setMemory(MemoryModuleType.WALK_TARGET, new WalkTarget(new BlockPos(x, y, z), 0.7f, 2));
+                    }
                 }
             }
         } else if (v.tickCount % 100 == 0 && v.distanceToSqr(Vec3.atCenterOf(p.centro)) > 50 * 50) {

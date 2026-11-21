@@ -15,9 +15,11 @@ out float mat;
 
 vec2 viento(vec3 p, float cielo) {
     float t = frameTimeCounter;
-    float fuerza = (0.035 + 0.09 * rainStrength) * cielo;
-    return vec2(sin(t * 1.7 + p.x * 0.55 + p.z * 0.31) + 0.4 * sin(t * 3.1 + p.z * 1.3),
-                sin(t * 1.3 + p.z * 0.63 + p.x * 0.22) + 0.4 * sin(t * 2.7 + p.x * 1.1)) * fuerza;
+    // rachas: el viento sube y baja despacio y recorre el paisaje como una ola
+    float racha = 0.55 + 0.45 * sin(t * 0.37 + p.x * 0.045 + p.z * 0.031) * sin(t * 0.21 + p.z * 0.027);
+    float fuerza = (0.045 + 0.11 * rainStrength) * cielo * (0.6 + 0.8 * racha);
+    return vec2(sin(t * 1.7 + p.x * 0.55 + p.z * 0.31) + 0.4 * sin(t * 3.1 + p.z * 1.3) + 0.25 * sin(t * 7.3 + p.x * 2.9 + p.y * 1.7),
+                sin(t * 1.3 + p.z * 0.63 + p.x * 0.22) + 0.4 * sin(t * 2.7 + p.x * 1.1) + 0.25 * sin(t * 6.1 + p.z * 3.1 + p.y * 1.3)) * fuerza;
 }
 
 void main() {
@@ -40,7 +42,7 @@ void main() {
         vec3 pa = jug + cameraPosition;
         bool arriba = gl_MultiTexCoord0.t < mc_midTexCoord.t || abs(id - 10004.0) < 0.5;
         if (mat < 2.5 && arriba) jug.xz += viento(pa, lm.y);
-        if (mat > 2.5) jug += vec3(viento(pa, lm.y).x, viento(pa.zyx, lm.y).y * 0.3, viento(pa, lm.y).y) * 0.4;
+        if (mat > 2.5) jug += vec3(viento(pa, lm.y).x, viento(pa.zyx, lm.y).y * 0.35, viento(pa, lm.y).y) * 0.9;
         vista = gbufferModelView * vec4(jug, 1.0);
     }
 #endif

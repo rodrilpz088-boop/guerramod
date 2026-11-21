@@ -273,15 +273,84 @@ Pasan solos de vez en cuando (`/desastre naturales false` para quitarlos) y avis
   en las laderas y, con magnitud 7 o más, se abre una grieta en el suelo.
 * **Granizo** en tormentas: hace daño a quien esté a la intemperie (menos con casco), destroza cultivos, rompe cristales y deja
   el suelo blanco un rato.
-* **Inundaciones**: con lluvia fuerte el agua sube en todas partes, no solo en los ríos. Se acumula primero en lo más bajo
-  de cada zona (hoyos, vaguadas, calles, campos llanos, cauces y la costa) y va subiendo poco a poco, hasta 4 bloques con
-  lluvia y 7 con tormenta en las zonas bajas; en lo alto apenas se encharca porque el agua escurre por las laderas.
-  Es **agua de riada**: marrón y turbia, bajo ella casi no se ve, se nada como en el agua normal. La corriente arrastra
-  objetos, animales y personas hacia lo más bajo y se lleva cultivos, flores y antorchas. Al parar de llover baja despacio,
-  de arriba abajo, y deja barro.
 * **Olas de calor**: varios días con más calor y aire más seco (más riesgo de incendio).
 * Comandos (operador): `/desastre tornado [0-5]`, `/desastre terremoto [magnitud]`, `/desastre granizo [cm]`,
-  `/desastre inundacion`, `/desastre olacalor [días]`, `/desastre parar`.
+  `/desastre olacalor [días]`, `/desastre parar`. (Las inundaciones se quitaron en la versión 1.0.0.)
+
+## Versión 1.0.0: la gran reforma
+
+### Aldeanos con DNI y oficios (pestaña "Ciudad, industria y clima" → **Tablet municipal**)
+Cada aldeano tiene su **DNI**: nombre y dos apellidos, número con su letra, sexo, fecha de nacimiento (calendario de 800 días
+por año), edad y pueblo. El nombre se ve encima de la cabeza junto a su oficio. Los pueblos se registran solos, con nombre
+propio ("Villanueva del Río", "Torrejón de la Sierra"...).
+
+**Clic derecho a un aldeano con la tablet**: ves su DNI con su foto y le das un oficio. **Clic derecho al aire**: el panel
+del pueblo (vecinos, camas, casas, huertos, farolas, obras en marcha y cuántos hay de cada oficio).
+
+| Oficio | Qué hace |
+|---|---|
+| Representante | Organiza el pueblo: da trabajo a los que no tienen según lo que haga falta (más constructores si faltan camas, más defensas en guerra...) |
+| Constructor | Construye casas iguales que las de los pueblos de Minecraft (llanura, desierto, sabana, taiga, nieve, según el bioma), con la puerta mirando a la plaza. Cuando el pueblo es una ciudad (16 vecinos o 14 construcciones) también bloques de pisos y rascacielos con sus camas. Cuantos más constructores, más rápido y más obras a la vez |
+| Agricultor | Hace huertos de 9×9 con su acequia, cultivos y compostador, y los cultiva |
+| Peón caminero | Hace caminos de tierra desde cada casa nueva hasta la plaza; en las ciudades, calles de asfalto con aceras y asfalta los caminos viejos |
+| Electricista | Pone farolas junto a las calles (de farol en los pueblos, fernandinas en las ciudades). En Navidad adorna las farolas y monta el árbol de luces de la plaza; después de Navidad lo desmonta |
+| Bombero | Vigila el pueblo, corre al fuego y lo apaga con agua |
+| Defensa | Lleva espada, no huye: protege el pueblo de los monstruos y va a la guerra |
+| Comerciante | Pone su puesto en el mercado de la plaza y comercia |
+
+El pueblo crece solo: **cuantos más vecinos, más casas necesita**, y los constructores las hacen cuando faltan camas; con
+camas nuevas los aldeanos tienen más hijos, y así se va formando una ciudad completa con calles, aceras y farolas.
+
+**Guerra entre pueblos, sin comandos**: en un pueblo pulsa **Elegir pueblo** en la tablet; ve a otro pueblo y pulsa
+**Declarar guerra**. Suena el cuerno, los dos pueblos reclutan soldados y salen a pelear. Cuando un pueblo se queda sin
+soldados se rinde y pasa a pertenecer al ganador. **Firmar la paz** la termina; **Independencia** libera un pueblo
+conquistado.
+
+### Estaciones de 200 días y Navidad
+Cada estación dura **200 días** (200 puestas de sol): primavera, verano, otoño e invierno. Los días son más largos en verano
+y más cortos en invierno, el sol va más alto o más bajo, la hierba y las hojas cambian de color (otoño rojo y amarillo), y la
+temperatura, la lluvia y el riesgo de incendio cambian con la estación. En **Navidad** (días 600 a 639 del año) hace más frío y
+**nieva también donde normalmente no nieva**. `/clima estacion <primavera|verano|otono|invierno|navidad>` para saltar.
+
+### Sonidos de la naturaleza y agua viva
+Jilgueros, mirlos, gorriones, ruiseñores, palomas, cucos y pájaros carpinteros de día (más en primavera y al amanecer);
+grillos, búhos y ranas de noche; chicharras en verano; olas y gaviotas en la costa; viento en los árboles y arroyos. Caen
+hojas de los árboles (en otoño muchas más). Las cascadas levantan espuma y vapor y suenan, las olas dejan espuma en la
+orilla, la lluvia salpica sobre el agua y al nadar o ir en barca se deja estela. Con el shader las hojas y las plantas se
+mecen con el viento (con rachas).
+
+### Fuego
+Los rayos de las tormentas ya **no** prenden fuego: los incendios empiezan por descuidos humanos (colillas, barbacoas,
+quemas), con su columna de humo. Las llamas trepan por paredes y tejados que arden.
+
+### Vivienda (pestaña "Vivienda")
+* **Ascensor**: pon un bloque de ascensor en cada planta, en la misma columna. Encima de uno, **salta para subir** o
+  **agáchate para bajar**. Suena el timbre y sale el número de planta. Con su **panel de botones** y su **puerta**.
+* **Escaleras mecánicas** de subida y de bajada: te llevan solas.
+* Placa solar, termo, caldera, portero automático, buzones de la comunidad, ventilador de techo, barandillas de cristal y de
+  forja, toldo, aire acondicionado exterior, antena de TV y parabólica, contador de la luz, cuadro eléctrico, enchufe,
+  extractor, puerta de garaje, felpudo, cámara de seguridad, alarma y aplique de portal.
+
+### Metro de Madrid (pestaña "Metro de Madrid")
+Azulejos biselados (blanco, azul, rojo y verde), suelo de andén de terrazo, borde de andén con franja amarilla podotáctil,
+carteles de estación (Sol, Gran Vía, Callao, Ópera, Atocha, Chamartín, Nuevos Ministerios, Plaza de Castilla, Moncloa,
+Príncipe Pío, Retiro, Banco de España, Tribunal, Argüelles, Cuatro Caminos, Legazpi, Ventas, Lavapiés, Bilbao y Tirso de
+Molina, con los círculos de sus líneas), carteles de las 12 líneas con sus colores, cartel de entrada, panel de próximos
+trenes, reloj de andén, **máquina de billetes** (clic derecho: billete sencillo) y **tornos** (pasa el billete y se abren).
+
+**Vagón de metro**: ponlo en una vía de raíles y arranca solo hacia donde miras. Pon una **señal de parada** debajo de la
+vía en cada estación: el tren para 6 segundos, abre puertas y anuncia la estación según el cartel más cercano. Al final de la
+línea da la vuelta. Clic derecho para subir.
+
+### Luces de Navidad al estilo de Madrid (pestaña "Navidad")
+Mallas de luces que parpadean (cálidas, azules y de colores) para hacer el **árbol cónico de la Puerta del Sol**, estrella,
+lluvia de luces, cortinas, guirnaldas, adornos de farola, **arcos de luces** y **cartel "Feliz Navidad"** de 3 bloques de
+ancho para cruzar las calles, y bolas gigantes. En casa: árbol de Navidad, regalos, corona para la puerta y muñeco de nieve.
+
+### Carreteras (más realistas)
+Asfalto nuevo con grava de verdad (sin cuadrícula) y marcas viales gastadas. Nuevo mobiliario urbano: marquesina de
+autobús, poste de parada, parquímetro, fuente de agua potable, alcorque, boca de riego, valla de obra, aparcabicis, panel
+informativo con el plano, radar, espejo de tráfico y reductor de velocidad.
 
 ## Estructura del proyecto
 * `src/main/java/es/guerramod/` — código (pais, bloques, items, entidades, radiacion, cliente, red, eventos)

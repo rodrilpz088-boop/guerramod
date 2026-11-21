@@ -54,7 +54,7 @@ public class TornoBlock extends HorizontalDirectionalBlock {
     @Override
     public VoxelShape getShape(BlockState s, BlockGetter l, BlockPos p, CollisionContext c) {
         VoxelShape col = ns(s) ? COLUMNA_NS : COLUMNA_EO;
-        return s.getValue(OPEN) ? col : Shapes.or(col, ns(s) ? PUERTA_EO : PUERTA_NS);
+        return s.getValue(OPEN) ? col : Shapes.or(col, ns(s) ? PUERTA_NS : PUERTA_EO);
     }
 
     @Override

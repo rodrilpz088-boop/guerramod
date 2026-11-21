@@ -1,0 +1,21 @@
+{
+ "type": "minecraft:crafting_shaped",
+ "category": "building",
+ "pattern": [
+  "SSS",
+  "SGS",
+  "SGS"
+ ],
+ "key": {
+  "S": {
+   "item": "minecraft:string"
+  },
+  "G": {
+   "item": "minecraft:glowstone_dust"
+  }
+ },
+ "result": {
+  "item": "guerramod:cortina_luces",
+  "count": 4
+ }
+}

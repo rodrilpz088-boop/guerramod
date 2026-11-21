@@ -1,0 +1,108 @@
+{
+ "parent": "minecraft:block/block",
+ "textures": {
+  "t0": "guerramod:block/mat_metal_negro",
+  "t1": "guerramod:block/farol_cristal",
+  "t2": "guerramod:block/farol_luz",
+  "particle": "guerramod:block/mat_metal_negro"
+ },
+ "elements": [
+  {
+   "from": [
+    6,
+    4,
+    14
+   ],
+   "to": [
+    10,
+    12,
+    16
+   ],
+   "faces": {
+    "north": {
+     "texture": "#t0"
+    },
+    "south": {
+     "texture": "#t0"
+    },
+    "east": {
+     "texture": "#t0"
+    },
+    "west": {
+     "texture": "#t0"
+    },
+    "up": {
+     "texture": "#t0"
+    },
+    "down": {
+     "texture": "#t0"
+    }
+   }
+  },
+  {
+   "from": [
+    6.5,
+    5,
+    10
+   ],
+   "to": [
+    9.5,
+    11,
+    14
+   ],
+   "faces": {
+    "north": {
+     "texture": "#t1"
+    },
+    "south": {
+     "texture": "#t1"
+    },
+    "east": {
+     "texture": "#t1"
+    },
+    "west": {
+     "texture": "#t1"
+    },
+    "up": {
+     "texture": "#t1"
+    },
+    "down": {
+     "texture": "#t1"
+    }
+   }
+  },
+  {
+   "from": [
+    7,
+    6,
+    11
+   ],
+   "to": [
+    9,
+    10,
+    13
+   ],
+   "faces": {
+    "north": {
+     "texture": "#t2"
+    },
+    "south": {
+     "texture": "#t2"
+    },
+    "east": {
+     "texture": "#t2"
+    },
+    "west": {
+     "texture": "#t2"
+    },
+    "up": {
+     "texture": "#t2"
+    },
+    "down": {
+     "texture": "#t2"
+    }
+   }
+  }
+ ],
+ "render_type": "minecraft:translucent"
+}

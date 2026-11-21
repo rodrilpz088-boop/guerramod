@@ -1,0 +1,43 @@
+{
+ "parent": "minecraft:block/block",
+ "textures": {
+  "t0": "guerramod:block/extractor",
+  "t1": "guerramod:block/mat_plastico_blanco",
+  "particle": "guerramod:block/extractor"
+ },
+ "elements": [
+  {
+   "from": [
+    3,
+    3,
+    15
+   ],
+   "to": [
+    13,
+    13,
+    16
+   ],
+   "faces": {
+    "north": {
+     "texture": "#t0"
+    },
+    "south": {
+     "texture": "#t1"
+    },
+    "east": {
+     "texture": "#t1"
+    },
+    "west": {
+     "texture": "#t1"
+    },
+    "up": {
+     "texture": "#t1"
+    },
+    "down": {
+     "texture": "#t1"
+    }
+   }
+  }
+ ],
+ "render_type": "minecraft:cutout"
+}

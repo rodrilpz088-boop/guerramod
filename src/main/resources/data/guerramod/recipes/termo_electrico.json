@@ -1,0 +1,19 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "building",
+ "ingredients": [
+  {
+   "item": "minecraft:cauldron"
+  },
+  {
+   "item": "minecraft:redstone"
+  },
+  {
+   "item": "minecraft:white_dye"
+  }
+ ],
+ "result": {
+  "item": "guerramod:termo_electrico",
+  "count": 1
+ }
+}

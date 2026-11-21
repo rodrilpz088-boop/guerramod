@@ -1,0 +1,80 @@
+{
+ "parent": "minecraft:block/block",
+ "render_type": "minecraft:cutout",
+ "textures": {
+  "frente": "guerramod:block/adorno_farola",
+  "lado": "guerramod:block/mat_metal_negro",
+  "particle": "guerramod:block/adorno_farola"
+ },
+ "elements": [
+  {
+   "from": [
+    0,
+    0,
+    15.5
+   ],
+   "to": [
+    16,
+    16,
+    16
+   ],
+   "faces": {
+    "north": {
+     "texture": "#frente",
+     "uv": [
+      0,
+      0,
+      16,
+      16
+     ]
+    },
+    "south": {
+     "texture": "#lado",
+     "uv": [
+      0,
+      0,
+      16,
+      16
+     ]
+    },
+    "east": {
+     "texture": "#lado",
+     "uv": [
+      0,
+      0,
+      1,
+      16
+     ]
+    },
+    "west": {
+     "texture": "#lado",
+     "uv": [
+      0,
+      0,
+      1,
+      16
+     ]
+    },
+    "up": {
+     "texture": "#lado",
+     "uv": [
+      0,
+      0,
+      16,
+      1
+     ]
+    },
+    "down": {
+     "texture": "#lado",
+     "uv": [
+      0,
+      0,
+      16,
+      1
+     ]
+    }
+   },
+   "shade": false
+  }
+ ]
+}

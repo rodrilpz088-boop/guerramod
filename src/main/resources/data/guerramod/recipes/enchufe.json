@@ -1,0 +1,19 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "building",
+ "ingredients": [
+  {
+   "item": "minecraft:redstone"
+  },
+  {
+   "item": "minecraft:white_dye"
+  },
+  {
+   "item": "minecraft:iron_nugget"
+  }
+ ],
+ "result": {
+  "item": "guerramod:enchufe",
+  "count": 4
+ }
+}

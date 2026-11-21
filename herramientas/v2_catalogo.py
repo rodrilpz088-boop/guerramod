@@ -641,6 +641,127 @@ E("farola_fernandina", "Farola fernandina", "CARRETERAS", "luz_fija", "metal", l
        B(6.5, 5, 6.5, 9.5, 12, 9.5, "farol_luz"), B(4.5, 13, 4.5, 11.5, 14, 11.5, "forja"), B(6, 14, 6, 10, 15.5, 10, "forja"),
        B(7.5, 15.5, 7.5, 8.5, 16, 8.5, "forja")], receta=[mc("lantern"), mc("iron_ingot"), mc("black_dye")])
 
+# ===================================================================== VERSIÓN 1.0.0: vivienda, calle y Navidad
+# ------------------------------------------------------------------ VIVIENDA
+E("puerta_ascensor", "Puerta de ascensor", "VIVIENDA", "puerta", "metal", receta=[mc("iron_door"), mc("iron_ingot"), mc("orange_dye")])
+E("placa_solar", "Placa solar", "VIVIENDA", "mueble", "metal",
+  geo=[B(0, 0, 0, 16, 2, 16, "mat_aluminio", {"up": "placa_solar"}), B(1, 2, 1, 15, 2.2, 15, "placa_solar")],
+  receta=[mc("daylight_detector"), mc("blue_stained_glass_pane"), mc("iron_ingot")])
+E("termo_electrico", "Termo eléctrico", "VIVIENDA", "mueble", "metal",
+  geo=[B(3, 1, 9, 13, 15, 16, "mat_plastico_blanco", {"north": "termo_frente"}), B(6, 0, 11, 7, 1, 13, "mat_cromo"),
+       B(9, 0, 11, 10, 1, 13, "mat_cromo")], receta=[mc("cauldron"), mc("redstone"), mc("white_dye")])
+E("caldera_gas", "Caldera de gas", "VIVIENDA", "mueble", "metal",
+  geo=[B(2, 0, 9, 14, 16, 16, "mat_plastico_blanco", {"north": "caldera_frente"})], receta=[mc("furnace"), mc("white_dye"), mc("copper_ingot")])
+E("portero_automatico", "Portero automático", "VIVIENDA", "mueble", "metal",
+  geo=[B(5, 3, 15, 11, 13, 16, "mat_aluminio", {"north": "portero_frente"})], receta=[mc("note_block"), mc("stone_button"), mc("iron_nugget")])
+E("buzones_comunidad", "Buzones de la comunidad", "VIVIENDA", "mueble", "madera", huecos=27,
+  geo=[B(0, 0, 10, 16, 16, 16, "mat_roble", {"north": "buzones_frente"})], receta=[mc("barrel"), mc("paper"), mc("iron_nugget")])
+E("ventilador_techo", "Ventilador de techo", "VIVIENDA", "luz_fija", "metal", luz=12,
+  geo=[B(7.5, 12, 7.5, 8.5, 16, 8.5, "mat_cromo"), B(6, 10, 6, 10, 12, 10, "mat_lacado_blanco"), B(6.5, 9, 6.5, 9.5, 10, 9.5, "mat_luz_calida"),
+       B(0, 11, 7, 6, 11.5, 9, "mat_roble"), B(10, 11, 7, 16, 11.5, 9, "mat_roble"), B(7, 11, 0, 9, 11.5, 6, "mat_roble"),
+       B(7, 11, 10, 9, 11.5, 16, "mat_roble")], receta=[mc("lightning_rod"), mc("oak_slab"), mc("glowstone_dust")])
+E("barandilla_cristal", "Barandilla de cristal", "VIVIENDA", "mueble", "cristal",
+  geo=[B(0, 0, 14, 16, 1, 16, "mat_inox"), B(0, 1, 14.6, 16, 14, 15.4, "mat_cristal"), B(0, 14, 14, 16, 15, 16, "mat_inox")],
+  receta=[mc("glass_pane"), mc("iron_bars"), mc("quartz")], cantidad=4)
+E("barandilla_forja", "Barandilla de forja (balcón)", "VIVIENDA", "mueble", "metal",
+  geo=[B(0, 0, 14.5, 16, 1, 15.5, "forja"), B(0, 13, 14.5, 16, 14, 15.5, "forja"), B(1, 1, 14.75, 2, 13, 15.25, "forja"),
+       B(5, 1, 14.75, 6, 13, 15.25, "forja"), B(9, 1, 14.75, 10, 13, 15.25, "forja"), B(13, 1, 14.75, 14, 13, 15.25, "forja"),
+       B(3, 5, 14.75, 13, 6, 15.25, "forja")], receta=[mc("iron_bars"), mc("black_dye"), mc("iron_nugget")], cantidad=4)
+E("toldo", "Toldo de rayas", "VIVIENDA", "mueble", "tela",
+  geo=[B(0, 14, 12, 16, 15, 16, "toldo_rayas"), B(0, 12, 8, 16, 13, 12, "toldo_rayas"), B(0, 10, 4, 16, 11, 8, "toldo_rayas"),
+       B(0, 8, 0, 16, 9, 4, "toldo_rayas"), B(0, 6, 0, 16, 8, 0.5, "toldo_rayas")], receta=[mc("green_wool"), mc("white_wool"), mc("stick")], cantidad=2)
+E("split_exterior", "Aire acondicionado (unidad exterior)", "VIVIENDA", "mueble", "metal",
+  geo=[B(0, 2, 6, 16, 13, 16, "mat_plastico_blanco", {"north": "split_frente"}), B(2, 0, 8, 3, 2, 15, "mat_metal_negro"),
+       B(13, 0, 8, 14, 2, 15, "mat_metal_negro")], receta=[mc("iron_bars"), mc("blue_ice"), mc("redstone"), mc("white_dye")])
+E("antena_tv", "Antena de televisión", "VIVIENDA", "mueble", "metal",
+  geo=[B(7.5, 0, 7.5, 8.5, 16, 8.5, "mat_aluminio"), B(1, 14, 7.5, 15, 14.6, 8.5, "mat_aluminio"), B(3, 11, 7.5, 13, 11.6, 8.5, "mat_aluminio"),
+       B(5, 8, 7.5, 11, 8.6, 8.5, "mat_aluminio"), B(7.5, 14, 2, 8.5, 14.6, 14, "mat_aluminio")],
+  receta=[mc("lightning_rod"), mc("iron_nugget"), mc("iron_nugget")])
+E("antena_parabolica", "Antena parabólica", "VIVIENDA", "mueble", "metal",
+  geo=[B(7, 0, 12, 9, 6, 16, "mat_gris"), B(2, 4, 9, 14, 14, 11, "mat_lacado_blanco"), B(3, 3, 9.5, 13, 15, 10.5, "mat_lacado_blanco"),
+       B(7.5, 8, 2, 8.5, 9, 9, "mat_gris"), B(7, 7.5, 1, 9, 9.5, 2, "mat_metal_negro")],
+  receta=[mc("iron_ingot"), mc("white_dye"), mc("redstone"), mc("bowl")])
+E("contador_luz", "Contador de la luz", "VIVIENDA", "mueble", "metal",
+  geo=[B(3, 2, 12, 13, 14, 16, "mat_gris", {"north": "contador_frente"})], receta=[mc("clock"), mc("iron_ingot"), mc("redstone")])
+E("cuadro_electrico", "Cuadro eléctrico", "VIVIENDA", "mueble", "plastico",
+  geo=[B(2, 3, 14, 14, 13, 16, "mat_plastico_blanco", {"north": "cuadro_electrico_frente"})],
+  receta=[mc("lever"), mc("redstone"), mc("white_dye"), mc("iron_nugget")])
+E("enchufe", "Enchufe", "VIVIENDA", "mueble", "plastico",
+  geo=[B(5, 5, 15.5, 11, 11, 16, "mat_plastico_blanco", {"north": "enchufe"})], receta=[mc("redstone"), mc("white_dye"), mc("iron_nugget")], cantidad=4)
+E("extractor_bano", "Extractor de baño", "VIVIENDA", "mueble", "plastico",
+  geo=[B(3, 3, 15, 13, 13, 16, "mat_plastico_blanco", {"north": "extractor"})], receta=[mc("iron_bars"), mc("white_dye"), mc("feather")])
+E("puerta_garaje", "Puerta de garaje", "VIVIENDA", "mueble", "metal",
+  geo=[B(0, 0, 14, 16, 16, 16, "mat_gris", {"north": "puerta_garaje", "south": "puerta_garaje"})],
+  receta=[mc("iron_trapdoor"), mc("iron_trapdoor"), mc("white_dye")], cantidad=2)
+E("felpudo", "Felpudo", "VIVIENDA", "alfombra", "tela", textura="felpudo", receta=[mc("brown_carpet"), mc("wheat")], cantidad=2)
+E("camara_seguridad", "Cámara de seguridad", "VIVIENDA", "mueble", "metal",
+  geo=[B(6, 10, 14, 10, 13, 16, "mat_plastico_blanco"), B(5, 8, 6, 11, 12, 14, "mat_plastico_blanco", {"north": "camara_frente"})],
+  receta=[mc("spyglass"), mc("redstone"), mc("white_dye")])
+E("alarma_casa", "Alarma de la casa", "VIVIENDA", "mueble", "plastico",
+  geo=[B(3, 3, 14, 13, 13, 16, "mat_plastico_blanco", {"north": "alarma_frente"})], receta=[mc("note_block"), mc("red_dye"), mc("redstone")])
+E("aplique_portal", "Aplique de portal", "VIVIENDA", "luz_fija", "metal", luz=14,
+  geo=[B(6, 4, 14, 10, 12, 16, "mat_metal_negro"), B(6.5, 5, 10, 9.5, 11, 14, "farol_cristal"), B(7, 6, 11, 9, 10, 13, "farol_luz")],
+  receta=[mc("lantern"), mc("black_dye"), mc("glass_pane")])
+
+# ------------------------------------------------------------------ CALLE (más mobiliario urbano)
+E("marquesina_bus", "Marquesina de autobús", "CARRETERAS", "alto", "metal",
+  geo=[B(0, 0, 13, 16, 26, 14, "mat_cristal", {"north": "marquesina_cartel", "south": "marquesina_cartel"}),
+       B(0, 26, 0, 16, 27.5, 16, "mat_lacado_gris"), B(0, 0, 14, 1, 26, 15, "mat_inox"), B(15, 0, 14, 16, 26, 15, "mat_inox"),
+       B(1, 7, 9, 15, 8, 13, "mat_inox"), B(2, 0, 11, 3, 7, 12, "mat_inox"), B(13, 0, 11, 14, 7, 12, "mat_inox")],
+  receta=[mc("glass"), mc("iron_ingot"), mc("smooth_stone_slab"), mc("painting")])
+E("parada_bus", "Poste de parada de autobús", "CARRETERAS", "mueble", "metal",
+  geo=[B(7.5, 0, 7.5, 8.5, 10, 8.5, "mat_inox"), B(4, 10, 7, 12, 16, 9, "mat_rojo", {"north": "parada_bus_cartel", "south": "parada_bus_cartel"})],
+  receta=[G("poste_senal"), mc("red_dye"), mc("paper")])
+E("parquimetro", "Parquímetro", "CARRETERAS", "mueble", "metal",
+  geo=[B(7, 0, 7, 9, 8, 9, "mat_gris"), B(5, 8, 6, 11, 16, 10, "mat_azul", {"north": "parquimetro_frente"})],
+  receta=[mc("iron_ingot"), mc("gold_nugget"), mc("blue_dye"), mc("redstone")])
+E("fuente_agua", "Fuente de agua potable", "CARRETERAS", "mueble", "metal", accion="GRIFO",
+  geo=[B(5, 0, 5, 11, 2, 11, "mat_verde_oscuro"), B(6, 2, 6, 10, 12, 10, "mat_verde_oscuro"), B(4, 12, 4, 12, 13, 12, "mat_verde_oscuro"),
+       B(5, 13, 5, 11, 14, 11, "mat_cromo"), B(7.5, 14, 7.5, 8.5, 15.5, 8.5, "mat_cromo")],
+  receta=[mc("water_bucket"), mc("iron_ingot"), mc("green_dye")])
+E("alcorque", "Alcorque (rejilla de árbol)", "CARRETERAS", "vial", "piedra", textura="alcorque", lado="acera",
+  receta=[mc("iron_bars"), mc("dirt"), mc("smooth_stone")], cantidad=4)
+E("boca_riego", "Boca de riego", "CARRETERAS", "vial", "piedra", textura="boca_riego", lado="acera",
+  receta=[mc("iron_ingot"), mc("smooth_stone"), mc("water_bucket"), mc("stone_button")], cantidad=2)
+E("valla_obra", "Valla de obra", "CARRETERAS", "mueble", "plastico",
+  geo=[B(0, 6, 7.5, 16, 12, 8.5, "valla_obra"), B(1, 0, 6, 2, 12, 10, "mat_gris"), B(14, 0, 6, 15, 12, 10, "mat_gris"),
+       B(0, 0, 5, 3, 1, 11, "mat_naranja"), B(13, 0, 5, 16, 1, 11, "mat_naranja")],
+  receta=[mc("red_dye"), mc("white_dye"), mc("stick"), mc("iron_nugget")], cantidad=4)
+E("aparcabicis", "Aparcabicis", "CARRETERAS", "mueble", "metal",
+  geo=[B(1, 0, 7.5, 2, 9, 8.5, "mat_inox"), B(14, 0, 7.5, 15, 9, 8.5, "mat_inox"), B(1, 9, 7.5, 15, 10, 8.5, "mat_inox"),
+       B(5, 0, 7.5, 6, 6, 8.5, "mat_inox"), B(10, 0, 7.5, 11, 6, 8.5, "mat_inox"), B(5, 6, 7.5, 11, 7, 8.5, "mat_inox")],
+  receta=[mc("iron_bars"), mc("iron_ingot"), mc("chain")], cantidad=2)
+E("panel_informativo", "Panel informativo (plano de la ciudad)", "CARRETERAS", "luz_fija", "metal", luz=8,
+  geo=[B(1, 0, 7, 3, 16, 9, "mat_lacado_gris"), B(13, 0, 7, 15, 16, 9, "mat_lacado_gris"),
+       B(3, 4, 7.5, 13, 15, 8.5, "mat_lacado_gris", {"north": "panel_info", "south": "panel_info"})],
+  receta=[mc("map"), mc("iron_ingot"), mc("glowstone_dust")])
+E("radar_trafico", "Radar de tráfico", "CARRETERAS", "mueble", "metal",
+  geo=[B(7, 0, 7, 9, 9, 9, "mat_gris"), B(4, 9, 5, 12, 16, 11, "mat_gris", {"north": "radar_frente"})],
+  receta=[mc("observer"), mc("iron_ingot"), mc("gray_dye")])
+E("espejo_trafico", "Espejo de tráfico", "CARRETERAS", "mueble", "metal",
+  geo=[B(7.5, 0, 9, 8.5, 9, 10, "mat_gris"), B(3, 7, 7, 13, 16, 8, "mat_naranja", {"north": "espejo_trafico"})],
+  receta=[mc("glass_pane"), mc("orange_dye"), mc("iron_ingot"), mc("stick")])
+E("reductor_velocidad", "Reductor de velocidad", "CARRETERAS", "mueble", "asfalto",
+  geo=[B(0, 0, 0, 16, 1, 16, "reductor"), B(0, 1, 3, 16, 2, 13, "reductor"), B(0, 2, 6, 16, 2.5, 10, "reductor")],
+  receta=[mc("yellow_dye"), mc("black_dye"), mc("slime_ball"), mc("smooth_stone_slab")], cantidad=4)
+
+# ------------------------------------------------------------------ NAVIDAD (decoración de casa)
+for col, nom, tinte in (("rojo", "rojo", "red_dye"), ("azul", "azul", "blue_dye"), ("dorado", "dorado", "yellow_dye")):
+    E(f"regalo_{col}", f"Regalo {nom}", "NAVIDAD", "mueble", "tela",
+      geo=[B(3, 0, 3, 13, 9, 13, f"regalo_{col}"), B(2.5, 9, 2.5, 13.5, 10, 13.5, f"regalo_{col}"),
+           B(6, 10, 7, 10, 12, 9, f"regalo_{col}")], receta=[mc("paper"), mc(tinte), mc("string"), mc("chest")])
+E("munieco_nieve", "Muñeco de nieve", "NAVIDAD", "alto", "tela",
+  geo=[B(1, 0, 1, 15, 13, 15, "nieve_munieco"), B(3, 13, 3, 13, 23, 13, "nieve_munieco", {"north": "munieco_cara"}),
+       B(2, 23, 2, 14, 24, 14, "mat_negro"), B(4, 24, 4, 12, 30, 12, "mat_negro"), B(2, 13, 2, 14, 14.5, 14, "mat_rojo")],
+  receta=[mc("snow_block"), mc("snow_block"), mc("carrot"), mc("coal")])
+E("corona_navidad", "Corona de Navidad (puerta)", "NAVIDAD", "mueble", "tela",
+  geo=[B(1, 1, 15.5, 15, 15, 16, "corona_navidad")], receta=[mc("spruce_leaves"), mc("red_dye"), mc("string")])
+E("arbol_navidad", "Árbol de Navidad de casa", "NAVIDAD", "alto", "hojas",
+  geo=[B(6, 0, 6, 10, 3, 10, "mat_rojo"), B(1, 3, 1, 15, 9, 15, "arbol_navidad_ramas"), B(2.5, 9, 2.5, 13.5, 15, 13.5, "arbol_navidad_ramas"),
+       B(4, 15, 4, 12, 21, 12, "arbol_navidad_ramas"), B(5.5, 21, 5.5, 10.5, 26, 10.5, "arbol_navidad_ramas"),
+       B(7, 26, 7, 9, 29, 9, "mat_luz_calida")],
+  receta=[mc("spruce_sapling"), mc("glowstone_dust"), mc("red_dye"), mc("yellow_dye")])
+
 # ===================================================================== generación de recursos
 
 java = []

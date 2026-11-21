@@ -1,0 +1,19 @@
+{
+ "variants": {
+  "facing=north": {
+   "model": "guerramod:block/ventilador_techo"
+  },
+  "facing=east": {
+   "model": "guerramod:block/ventilador_techo",
+   "y": 90
+  },
+  "facing=south": {
+   "model": "guerramod:block/ventilador_techo",
+   "y": 180
+  },
+  "facing=west": {
+   "model": "guerramod:block/ventilador_techo",
+   "y": 270
+  }
+ }
+}

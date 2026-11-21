@@ -1,0 +1,19 @@
+{
+ "variants": {
+  "facing=north": {
+   "model": "guerramod:block/reductor_velocidad"
+  },
+  "facing=east": {
+   "model": "guerramod:block/reductor_velocidad",
+   "y": 90
+  },
+  "facing=south": {
+   "model": "guerramod:block/reductor_velocidad",
+   "y": 180
+  },
+  "facing=west": {
+   "model": "guerramod:block/reductor_velocidad",
+   "y": 270
+  }
+ }
+}

@@ -1,0 +1,19 @@
+{
+ "variants": {
+  "facing=north": {
+   "model": "guerramod:block/boca_metro"
+  },
+  "facing=east": {
+   "model": "guerramod:block/boca_metro",
+   "y": 90
+  },
+  "facing=south": {
+   "model": "guerramod:block/boca_metro",
+   "y": 180
+  },
+  "facing=west": {
+   "model": "guerramod:block/boca_metro",
+   "y": 270
+  }
+ }
+}

@@ -1,0 +1,202 @@
+{
+ "parent": "minecraft:block/block",
+ "textures": {
+  "t0": "guerramod:block/mat_inox",
+  "particle": "guerramod:block/mat_inox"
+ },
+ "elements": [
+  {
+   "from": [
+    1,
+    0,
+    7.5
+   ],
+   "to": [
+    2,
+    9,
+    8.5
+   ],
+   "faces": {
+    "north": {
+     "texture": "#t0"
+    },
+    "south": {
+     "texture": "#t0"
+    },
+    "east": {
+     "texture": "#t0"
+    },
+    "west": {
+     "texture": "#t0"
+    },
+    "up": {
+     "texture": "#t0"
+    },
+    "down": {
+     "texture": "#t0"
+    }
+   }
+  },
+  {
+   "from": [
+    14,
+    0,
+    7.5
+   ],
+   "to": [
+    15,
+    9,
+    8.5
+   ],
+   "faces": {
+    "north": {
+     "texture": "#t0"
+    },
+    "south": {
+     "texture": "#t0"
+    },
+    "east": {
+     "texture": "#t0"
+    },
+    "west": {
+     "texture": "#t0"
+    },
+    "up": {
+     "texture": "#t0"
+    },
+    "down": {
+     "texture": "#t0"
+    }
+   }
+  },
+  {
+   "from": [
+    1,
+    9,
+    7.5
+   ],
+   "to": [
+    15,
+    10,
+    8.5
+   ],
+   "faces": {
+    "north": {
+     "texture": "#t0"
+    },
+    "south": {
+     "texture": "#t0"
+    },
+    "east": {
+     "texture": "#t0"
+    },
+    "west": {
+     "texture": "#t0"
+    },
+    "up": {
+     "texture": "#t0"
+    },
+    "down": {
+     "texture": "#t0"
+    }
+   }
+  },
+  {
+   "from": [
+    5,
+    0,
+    7.5
+   ],
+   "to": [
+    6,
+    6,
+    8.5
+   ],
+   "faces": {
+    "north": {
+     "texture": "#t0"
+    },
+    "south": {
+     "texture": "#t0"
+    },
+    "east": {
+     "texture": "#t0"
+    },
+    "west": {
+     "texture": "#t0"
+    },
+    "up": {
+     "texture": "#t0"
+    },
+    "down": {
+     "texture": "#t0"
+    }
+   }
+  },
+  {
+   "from": [
+    10,
+    0,
+    7.5
+   ],
+   "to": [
+    11,
+    6,
+    8.5
+   ],
+   "faces": {
+    "north": {
+     "texture": "#t0"
+    },
+    "south": {
+     "texture": "#t0"
+    },
+    "east": {
+     "texture": "#t0"
+    },
+    "west": {
+     "texture": "#t0"
+    },
+    "up": {
+     "texture": "#t0"
+    },
+    "down": {
+     "texture": "#t0"
+    }
+   }
+  },
+  {
+   "from": [
+    5,
+    6,
+    7.5
+   ],
+   "to": [
+    11,
+    7,
+    8.5
+   ],
+   "faces": {
+    "north": {
+     "texture": "#t0"
+    },
+    "south": {
+     "texture": "#t0"
+    },
+    "east": {
+     "texture": "#t0"
+    },
+    "west": {
+     "texture": "#t0"
+    },
+    "up": {
+     "texture": "#t0"
+    },
+    "down": {
+     "texture": "#t0"
+    }
+   }
+  }
+ ],
+ "render_type": "minecraft:cutout"
+}

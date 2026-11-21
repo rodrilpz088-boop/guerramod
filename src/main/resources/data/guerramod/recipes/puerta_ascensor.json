@@ -1,0 +1,19 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "building",
+ "ingredients": [
+  {
+   "item": "minecraft:iron_door"
+  },
+  {
+   "item": "minecraft:iron_ingot"
+  },
+  {
+   "item": "minecraft:orange_dye"
+  }
+ ],
+ "result": {
+  "item": "guerramod:puerta_ascensor",
+  "count": 1
+ }
+}

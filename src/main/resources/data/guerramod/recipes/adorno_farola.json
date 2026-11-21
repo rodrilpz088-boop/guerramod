@@ -1,0 +1,21 @@
+{
+ "type": "minecraft:crafting_shaped",
+ "category": "building",
+ "pattern": [
+  "G G",
+  " W ",
+  "G G"
+ ],
+ "key": {
+  "G": {
+   "item": "minecraft:glowstone_dust"
+  },
+  "W": {
+   "item": "minecraft:white_dye"
+  }
+ },
+ "result": {
+  "item": "guerramod:adorno_farola",
+  "count": 2
+ }
+}

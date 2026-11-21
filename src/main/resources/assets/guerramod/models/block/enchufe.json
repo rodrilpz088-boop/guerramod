@@ -1,0 +1,43 @@
+{
+ "parent": "minecraft:block/block",
+ "textures": {
+  "t0": "guerramod:block/enchufe",
+  "t1": "guerramod:block/mat_plastico_blanco",
+  "particle": "guerramod:block/enchufe"
+ },
+ "elements": [
+  {
+   "from": [
+    5,
+    5,
+    15.5
+   ],
+   "to": [
+    11,
+    11,
+    16
+   ],
+   "faces": {
+    "north": {
+     "texture": "#t0"
+    },
+    "south": {
+     "texture": "#t1"
+    },
+    "east": {
+     "texture": "#t1"
+    },
+    "west": {
+     "texture": "#t1"
+    },
+    "up": {
+     "texture": "#t1"
+    },
+    "down": {
+     "texture": "#t1"
+    }
+   }
+  }
+ ],
+ "render_type": "minecraft:cutout"
+}

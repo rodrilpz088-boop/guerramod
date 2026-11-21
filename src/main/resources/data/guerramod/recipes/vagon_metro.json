@@ -1,0 +1,30 @@
+{
+ "type": "minecraft:crafting_shaped",
+ "category": "building",
+ "pattern": [
+  "IGI",
+  "IMI",
+  "RCR"
+ ],
+ "key": {
+  "I": {
+   "item": "minecraft:iron_ingot"
+  },
+  "G": {
+   "item": "minecraft:glass_pane"
+  },
+  "M": {
+   "item": "minecraft:minecart"
+  },
+  "R": {
+   "item": "minecraft:red_dye"
+  },
+  "C": {
+   "item": "minecraft:redstone_block"
+  }
+ },
+ "result": {
+  "item": "guerramod:vagon_metro",
+  "count": 1
+ }
+}

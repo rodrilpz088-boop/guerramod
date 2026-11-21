@@ -1,0 +1,21 @@
+{
+ "type": "minecraft:crafting_shaped",
+ "category": "building",
+ "pattern": [
+  "GGG",
+  "S S",
+  "S S"
+ ],
+ "key": {
+  "G": {
+   "item": "minecraft:glowstone_dust"
+  },
+  "S": {
+   "item": "minecraft:string"
+  }
+ },
+ "result": {
+  "item": "guerramod:arco_luces",
+  "count": 2
+ }
+}

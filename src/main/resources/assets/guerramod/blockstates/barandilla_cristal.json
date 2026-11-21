@@ -1,0 +1,19 @@
+{
+ "variants": {
+  "facing=north": {
+   "model": "guerramod:block/barandilla_cristal"
+  },
+  "facing=east": {
+   "model": "guerramod:block/barandilla_cristal",
+   "y": 90
+  },
+  "facing=south": {
+   "model": "guerramod:block/barandilla_cristal",
+   "y": 180
+  },
+  "facing=west": {
+   "model": "guerramod:block/barandilla_cristal",
+   "y": 270
+  }
+ }
+}

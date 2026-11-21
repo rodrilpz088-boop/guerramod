@@ -1,0 +1,19 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "building",
+ "ingredients": [
+  {
+   "item": "minecraft:glass_pane"
+  },
+  {
+   "item": "minecraft:iron_bars"
+  },
+  {
+   "item": "minecraft:quartz"
+  }
+ ],
+ "result": {
+  "item": "guerramod:barandilla_cristal",
+  "count": 4
+ }
+}

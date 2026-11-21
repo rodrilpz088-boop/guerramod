@@ -48,7 +48,7 @@ public final class BloquesMetro {
                 .lightLevel(s -> luz);
     }
 
-    public static final RegistryObject<Block> AZULEJO_METRO = ModBloques.reg("azulejo_metro", C, () -> new Block(azulejo()));
+    public static final RegistryObject<Block> AZULEJO_METRO = ModBloques.reg("azulejo_metro_biselado", C, () -> new Block(azulejo()));
     public static final RegistryObject<Block> AZULEJO_METRO_AZUL = ModBloques.reg("azulejo_metro_azul", C, () -> new Block(azulejo()));
     public static final RegistryObject<Block> AZULEJO_METRO_ROJO = ModBloques.reg("azulejo_metro_rojo", C, () -> new Block(azulejo()));
     public static final RegistryObject<Block> AZULEJO_METRO_VERDE = ModBloques.reg("azulejo_metro_verde", C, () -> new Block(azulejo()));

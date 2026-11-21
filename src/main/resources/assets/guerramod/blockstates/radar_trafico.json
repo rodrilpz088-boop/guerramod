@@ -1,0 +1,19 @@
+{
+ "variants": {
+  "facing=north": {
+   "model": "guerramod:block/radar_trafico"
+  },
+  "facing=east": {
+   "model": "guerramod:block/radar_trafico",
+   "y": 90
+  },
+  "facing=south": {
+   "model": "guerramod:block/radar_trafico",
+   "y": 180
+  },
+  "facing=west": {
+   "model": "guerramod:block/radar_trafico",
+   "y": 270
+  }
+ }
+}

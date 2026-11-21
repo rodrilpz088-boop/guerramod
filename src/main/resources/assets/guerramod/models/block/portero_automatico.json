@@ -1,0 +1,43 @@
+{
+ "parent": "minecraft:block/block",
+ "textures": {
+  "t0": "guerramod:block/portero_frente",
+  "t1": "guerramod:block/mat_aluminio",
+  "particle": "guerramod:block/portero_frente"
+ },
+ "elements": [
+  {
+   "from": [
+    5,
+    3,
+    15
+   ],
+   "to": [
+    11,
+    13,
+    16
+   ],
+   "faces": {
+    "north": {
+     "texture": "#t0"
+    },
+    "south": {
+     "texture": "#t1"
+    },
+    "east": {
+     "texture": "#t1"
+    },
+    "west": {
+     "texture": "#t1"
+    },
+    "up": {
+     "texture": "#t1"
+    },
+    "down": {
+     "texture": "#t1"
+    }
+   }
+  }
+ ],
+ "render_type": "minecraft:cutout"
+}

@@ -1,0 +1,26 @@
+{
+ "type": "minecraft:crafting_shaped",
+ "category": "building",
+ "pattern": [
+  "S S",
+  "RGB"
+ ],
+ "key": {
+  "S": {
+   "item": "minecraft:string"
+  },
+  "G": {
+   "item": "minecraft:glowstone_dust"
+  },
+  "R": {
+   "item": "minecraft:red_dye"
+  },
+  "B": {
+   "item": "minecraft:blue_dye"
+  }
+ },
+ "result": {
+  "item": "guerramod:guirnalda_luces",
+  "count": 6
+ }
+}

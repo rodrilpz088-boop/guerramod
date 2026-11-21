@@ -1,0 +1,19 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "building",
+ "ingredients": [
+  {
+   "item": "minecraft:lightning_rod"
+  },
+  {
+   "item": "minecraft:oak_slab"
+  },
+  {
+   "item": "minecraft:glowstone_dust"
+  }
+ ],
+ "result": {
+  "item": "guerramod:ventilador_techo",
+  "count": 1
+ }
+}

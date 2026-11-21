@@ -1,0 +1,19 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "building",
+ "ingredients": [
+  {
+   "item": "minecraft:observer"
+  },
+  {
+   "item": "minecraft:iron_ingot"
+  },
+  {
+   "item": "minecraft:gray_dye"
+  }
+ ],
+ "result": {
+  "item": "guerramod:radar_trafico",
+  "count": 1
+ }
+}

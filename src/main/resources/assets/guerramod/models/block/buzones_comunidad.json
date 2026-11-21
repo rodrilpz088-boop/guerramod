@@ -1,0 +1,43 @@
+{
+ "parent": "minecraft:block/block",
+ "textures": {
+  "t0": "guerramod:block/buzones_frente",
+  "t1": "guerramod:block/mat_roble",
+  "particle": "guerramod:block/buzones_frente"
+ },
+ "elements": [
+  {
+   "from": [
+    0,
+    0,
+    10
+   ],
+   "to": [
+    16,
+    16,
+    16
+   ],
+   "faces": {
+    "north": {
+     "texture": "#t0"
+    },
+    "south": {
+     "texture": "#t1"
+    },
+    "east": {
+     "texture": "#t1"
+    },
+    "west": {
+     "texture": "#t1"
+    },
+    "up": {
+     "texture": "#t1"
+    },
+    "down": {
+     "texture": "#t1"
+    }
+   }
+  }
+ ],
+ "render_type": "minecraft:cutout"
+}

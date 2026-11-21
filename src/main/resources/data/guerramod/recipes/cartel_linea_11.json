@@ -1,0 +1,22 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "building",
+ "ingredients": [
+  {
+   "item": "minecraft:white_dye"
+  },
+  {
+   "item": "minecraft:iron_nugget"
+  },
+  {
+   "item": "minecraft:paper"
+  },
+  {
+   "item": "minecraft:brick"
+  }
+ ],
+ "result": {
+  "item": "guerramod:cartel_linea_11",
+  "count": 1
+ }
+}

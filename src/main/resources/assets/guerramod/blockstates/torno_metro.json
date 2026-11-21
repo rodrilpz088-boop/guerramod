@@ -1,0 +1,32 @@
+{
+ "variants": {
+  "facing=north,open=false": {
+   "model": "guerramod:block/torno_metro_cerrado"
+  },
+  "facing=north,open=true": {
+   "model": "guerramod:block/torno_metro_abierto"
+  },
+  "facing=south,open=false": {
+   "model": "guerramod:block/torno_metro_cerrado"
+  },
+  "facing=south,open=true": {
+   "model": "guerramod:block/torno_metro_abierto"
+  },
+  "facing=east,open=false": {
+   "model": "guerramod:block/torno_metro_cerrado",
+   "y": 90
+  },
+  "facing=east,open=true": {
+   "model": "guerramod:block/torno_metro_abierto",
+   "y": 90
+  },
+  "facing=west,open=false": {
+   "model": "guerramod:block/torno_metro_cerrado",
+   "y": 90
+  },
+  "facing=west,open=true": {
+   "model": "guerramod:block/torno_metro_abierto",
+   "y": 90
+  }
+ }
+}

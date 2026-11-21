@@ -1,0 +1,105 @@
+{
+ "parent": "minecraft:block/block",
+ "textures": {
+  "t0": "guerramod:block/munieco_cara",
+  "t1": "guerramod:block/nieve_munieco",
+  "t2": "guerramod:block/mat_negro",
+  "particle": "guerramod:block/munieco_cara"
+ },
+ "elements": [
+  {
+   "from": [
+    3,
+    0,
+    3
+   ],
+   "to": [
+    13,
+    7,
+    13
+   ],
+   "faces": {
+    "north": {
+     "texture": "#t0"
+    },
+    "south": {
+     "texture": "#t1"
+    },
+    "east": {
+     "texture": "#t1"
+    },
+    "west": {
+     "texture": "#t1"
+    },
+    "up": {
+     "texture": "#t1"
+    }
+   }
+  },
+  {
+   "from": [
+    2,
+    7,
+    2
+   ],
+   "to": [
+    14,
+    8,
+    14
+   ],
+   "faces": {
+    "north": {
+     "texture": "#t2"
+    },
+    "south": {
+     "texture": "#t2"
+    },
+    "east": {
+     "texture": "#t2"
+    },
+    "west": {
+     "texture": "#t2"
+    },
+    "up": {
+     "texture": "#t2"
+    },
+    "down": {
+     "texture": "#t2"
+    }
+   }
+  },
+  {
+   "from": [
+    4,
+    8,
+    4
+   ],
+   "to": [
+    12,
+    14,
+    12
+   ],
+   "faces": {
+    "north": {
+     "texture": "#t2"
+    },
+    "south": {
+     "texture": "#t2"
+    },
+    "east": {
+     "texture": "#t2"
+    },
+    "west": {
+     "texture": "#t2"
+    },
+    "up": {
+     "texture": "#t2"
+    },
+    "down": {
+     "texture": "#t2"
+    }
+   }
+  }
+ ],
+ "render_type": "minecraft:cutout"
+}

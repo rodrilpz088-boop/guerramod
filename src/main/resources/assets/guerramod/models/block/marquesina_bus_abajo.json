@@ -1,0 +1,195 @@
+{
+ "parent": "minecraft:block/block",
+ "textures": {
+  "t0": "guerramod:block/marquesina_cartel",
+  "t1": "guerramod:block/mat_cristal",
+  "t2": "guerramod:block/mat_inox",
+  "particle": "guerramod:block/marquesina_cartel"
+ },
+ "elements": [
+  {
+   "from": [
+    0,
+    0,
+    13
+   ],
+   "to": [
+    16,
+    16,
+    14
+   ],
+   "faces": {
+    "north": {
+     "texture": "#t0"
+    },
+    "south": {
+     "texture": "#t0"
+    },
+    "east": {
+     "texture": "#t1"
+    },
+    "west": {
+     "texture": "#t1"
+    },
+    "down": {
+     "texture": "#t1"
+    }
+   }
+  },
+  {
+   "from": [
+    0,
+    0,
+    14
+   ],
+   "to": [
+    1,
+    16,
+    15
+   ],
+   "faces": {
+    "north": {
+     "texture": "#t2"
+    },
+    "south": {
+     "texture": "#t2"
+    },
+    "east": {
+     "texture": "#t2"
+    },
+    "west": {
+     "texture": "#t2"
+    },
+    "down": {
+     "texture": "#t2"
+    }
+   }
+  },
+  {
+   "from": [
+    15,
+    0,
+    14
+   ],
+   "to": [
+    16,
+    16,
+    15
+   ],
+   "faces": {
+    "north": {
+     "texture": "#t2"
+    },
+    "south": {
+     "texture": "#t2"
+    },
+    "east": {
+     "texture": "#t2"
+    },
+    "west": {
+     "texture": "#t2"
+    },
+    "down": {
+     "texture": "#t2"
+    }
+   }
+  },
+  {
+   "from": [
+    1,
+    7,
+    9
+   ],
+   "to": [
+    15,
+    8,
+    13
+   ],
+   "faces": {
+    "north": {
+     "texture": "#t2"
+    },
+    "south": {
+     "texture": "#t2"
+    },
+    "east": {
+     "texture": "#t2"
+    },
+    "west": {
+     "texture": "#t2"
+    },
+    "up": {
+     "texture": "#t2"
+    },
+    "down": {
+     "texture": "#t2"
+    }
+   }
+  },
+  {
+   "from": [
+    2,
+    0,
+    11
+   ],
+   "to": [
+    3,
+    7,
+    12
+   ],
+   "faces": {
+    "north": {
+     "texture": "#t2"
+    },
+    "south": {
+     "texture": "#t2"
+    },
+    "east": {
+     "texture": "#t2"
+    },
+    "west": {
+     "texture": "#t2"
+    },
+    "up": {
+     "texture": "#t2"
+    },
+    "down": {
+     "texture": "#t2"
+    }
+   }
+  },
+  {
+   "from": [
+    13,
+    0,
+    11
+   ],
+   "to": [
+    14,
+    7,
+    12
+   ],
+   "faces": {
+    "north": {
+     "texture": "#t2"
+    },
+    "south": {
+     "texture": "#t2"
+    },
+    "east": {
+     "texture": "#t2"
+    },
+    "west": {
+     "texture": "#t2"
+    },
+    "up": {
+     "texture": "#t2"
+    },
+    "down": {
+     "texture": "#t2"
+    }
+   }
+  }
+ ],
+ "render_type": "minecraft:translucent"
+}

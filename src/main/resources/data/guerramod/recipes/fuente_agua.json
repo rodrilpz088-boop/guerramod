@@ -1,0 +1,19 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "building",
+ "ingredients": [
+  {
+   "item": "minecraft:water_bucket"
+  },
+  {
+   "item": "minecraft:iron_ingot"
+  },
+  {
+   "item": "minecraft:green_dye"
+  }
+ ],
+ "result": {
+  "item": "guerramod:fuente_agua",
+  "count": 1
+ }
+}

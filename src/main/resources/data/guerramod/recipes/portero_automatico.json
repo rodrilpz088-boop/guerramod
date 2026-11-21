@@ -1,0 +1,19 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "building",
+ "ingredients": [
+  {
+   "item": "minecraft:note_block"
+  },
+  {
+   "item": "minecraft:stone_button"
+  },
+  {
+   "item": "minecraft:iron_nugget"
+  }
+ ],
+ "result": {
+  "item": "guerramod:portero_automatico",
+  "count": 1
+ }
+}

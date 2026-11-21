@@ -5,9 +5,11 @@ cd "$(dirname "$0")/.."
 python3 herramientas/generar_datos.py
 python3 herramientas/generar_texturas.py
 python3 herramientas/v2_texturas.py
+python3 herramientas/v7_texturas.py
 python3 herramientas/v2_catalogo.py
 python3 herramientas/v2_sonidos.py
 python3 herramientas/v3_incendios.py
 python3 herramientas/v4_clima.py
 python3 herramientas/v5_lluvia.py
 python3 herramientas/v6_ambiente.py
+python3 herramientas/v7_ciudad.py

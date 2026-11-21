@@ -1,0 +1,19 @@
+{
+ "variants": {
+  "facing=north": {
+   "model": "guerramod:block/regalo_dorado"
+  },
+  "facing=east": {
+   "model": "guerramod:block/regalo_dorado",
+   "y": 90
+  },
+  "facing=south": {
+   "model": "guerramod:block/regalo_dorado",
+   "y": 180
+  },
+  "facing=west": {
+   "model": "guerramod:block/regalo_dorado",
+   "y": 270
+  }
+ }
+}

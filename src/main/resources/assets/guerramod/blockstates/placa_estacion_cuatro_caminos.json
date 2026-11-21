@@ -1,0 +1,19 @@
+{
+ "variants": {
+  "facing=north": {
+   "model": "guerramod:block/placa_estacion_cuatro_caminos"
+  },
+  "facing=east": {
+   "model": "guerramod:block/placa_estacion_cuatro_caminos",
+   "y": 90
+  },
+  "facing=south": {
+   "model": "guerramod:block/placa_estacion_cuatro_caminos",
+   "y": 180
+  },
+  "facing=west": {
+   "model": "guerramod:block/placa_estacion_cuatro_caminos",
+   "y": 270
+  }
+ }
+}

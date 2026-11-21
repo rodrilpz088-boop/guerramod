@@ -1,0 +1,24 @@
+{
+ "type": "minecraft:crafting_shaped",
+ "category": "building",
+ "pattern": [
+  " I ",
+  "YGY",
+  " Y "
+ ],
+ "key": {
+  "I": {
+   "item": "minecraft:iron_nugget"
+  },
+  "Y": {
+   "item": "minecraft:gold_nugget"
+  },
+  "G": {
+   "item": "minecraft:glass"
+  }
+ },
+ "result": {
+  "item": "guerramod:bola_navidad_dorada",
+  "count": 2
+ }
+}

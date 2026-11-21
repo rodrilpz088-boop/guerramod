@@ -1,0 +1,21 @@
+{
+ "type": "minecraft:crafting_shaped",
+ "category": "building",
+ "pattern": [
+  "SSS",
+  "G G",
+  "G G"
+ ],
+ "key": {
+  "S": {
+   "item": "minecraft:string"
+  },
+  "G": {
+   "item": "minecraft:glowstone_dust"
+  }
+ },
+ "result": {
+  "item": "guerramod:lluvia_luces",
+  "count": 6
+ }
+}

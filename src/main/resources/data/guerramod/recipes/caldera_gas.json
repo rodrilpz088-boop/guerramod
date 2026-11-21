@@ -1,0 +1,19 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "building",
+ "ingredients": [
+  {
+   "item": "minecraft:furnace"
+  },
+  {
+   "item": "minecraft:white_dye"
+  },
+  {
+   "item": "minecraft:copper_ingot"
+  }
+ ],
+ "result": {
+  "item": "guerramod:caldera_gas",
+  "count": 1
+ }
+}

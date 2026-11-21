@@ -1,0 +1,19 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "building",
+ "ingredients": [
+  {
+   "item": "minecraft:lantern"
+  },
+  {
+   "item": "minecraft:black_dye"
+  },
+  {
+   "item": "minecraft:glass_pane"
+  }
+ ],
+ "result": {
+  "item": "guerramod:aplique_portal",
+  "count": 1
+ }
+}

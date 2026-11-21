@@ -1,0 +1,19 @@
+{
+ "variants": {
+  "facing=north": {
+   "model": "guerramod:block/placa_estacion_tirso_de_molina"
+  },
+  "facing=east": {
+   "model": "guerramod:block/placa_estacion_tirso_de_molina",
+   "y": 90
+  },
+  "facing=south": {
+   "model": "guerramod:block/placa_estacion_tirso_de_molina",
+   "y": 180
+  },
+  "facing=west": {
+   "model": "guerramod:block/placa_estacion_tirso_de_molina",
+   "y": 270
+  }
+ }
+}

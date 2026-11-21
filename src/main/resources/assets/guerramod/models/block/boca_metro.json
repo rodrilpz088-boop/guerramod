@@ -1,0 +1,80 @@
+{
+ "parent": "minecraft:block/block",
+ "render_type": "minecraft:cutout",
+ "textures": {
+  "frente": "guerramod:block/boca_metro",
+  "lado": "guerramod:block/mat_lacado_gris",
+  "particle": "guerramod:block/boca_metro"
+ },
+ "elements": [
+  {
+   "from": [
+    0,
+    2,
+    12
+   ],
+   "to": [
+    16,
+    14,
+    16
+   ],
+   "faces": {
+    "north": {
+     "texture": "#frente",
+     "uv": [
+      0,
+      0,
+      16,
+      16
+     ]
+    },
+    "south": {
+     "texture": "#lado",
+     "uv": [
+      0,
+      0,
+      16,
+      16
+     ]
+    },
+    "east": {
+     "texture": "#lado",
+     "uv": [
+      0,
+      0,
+      1,
+      16
+     ]
+    },
+    "west": {
+     "texture": "#lado",
+     "uv": [
+      0,
+      0,
+      1,
+      16
+     ]
+    },
+    "up": {
+     "texture": "#lado",
+     "uv": [
+      0,
+      0,
+      16,
+      1
+     ]
+    },
+    "down": {
+     "texture": "#lado",
+     "uv": [
+      0,
+      0,
+      16,
+      1
+     ]
+    }
+   },
+   "shade": false
+  }
+ ]
+}

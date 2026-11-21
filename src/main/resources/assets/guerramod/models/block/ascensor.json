@@ -1,0 +1,8 @@
+{
+ "parent": "minecraft:block/cube_bottom_top",
+ "textures": {
+  "top": "guerramod:block/ascensor_arriba",
+  "side": "guerramod:block/ascensor_lado",
+  "bottom": "guerramod:block/ascensor_lado"
+ }
+}

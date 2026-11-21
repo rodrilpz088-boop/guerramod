@@ -1,0 +1,173 @@
+{
+ "parent": "minecraft:block/block",
+ "ambientocclusion": false,
+ "textures": {
+  "lado": "guerramod:block/metro_lado",
+  "frente": "guerramod:block/metro_frente",
+  "techo": "guerramod:block/metro_techo",
+  "bajos": "guerramod:block/metro_bajos",
+  "particle": "guerramod:block/metro_lado"
+ },
+ "elements": [
+  {
+   "from": [
+    0,
+    3,
+    -16
+   ],
+   "to": [
+    16,
+    23,
+    32
+   ],
+   "faces": {
+    "east": {
+     "texture": "#lado"
+    },
+    "west": {
+     "texture": "#lado"
+    },
+    "north": {
+     "texture": "#frente"
+    },
+    "south": {
+     "texture": "#frente"
+    },
+    "up": {
+     "texture": "#techo"
+    },
+    "down": {
+     "texture": "#bajos"
+    }
+   }
+  },
+  {
+   "from": [
+    2,
+    0,
+    -13
+   ],
+   "to": [
+    14,
+    3,
+    -3
+   ],
+   "faces": {
+    "north": {
+     "texture": "#bajos"
+    },
+    "south": {
+     "texture": "#bajos"
+    },
+    "east": {
+     "texture": "#bajos"
+    },
+    "west": {
+     "texture": "#bajos"
+    },
+    "up": {
+     "texture": "#bajos"
+    },
+    "down": {
+     "texture": "#bajos"
+    }
+   }
+  },
+  {
+   "from": [
+    2,
+    0,
+    19
+   ],
+   "to": [
+    14,
+    3,
+    29
+   ],
+   "faces": {
+    "north": {
+     "texture": "#bajos"
+    },
+    "south": {
+     "texture": "#bajos"
+    },
+    "east": {
+     "texture": "#bajos"
+    },
+    "west": {
+     "texture": "#bajos"
+    },
+    "up": {
+     "texture": "#bajos"
+    },
+    "down": {
+     "texture": "#bajos"
+    }
+   }
+  },
+  {
+   "from": [
+    3,
+    23,
+    -5
+   ],
+   "to": [
+    13,
+    24.5,
+    9
+   ],
+   "faces": {
+    "north": {
+     "texture": "#techo"
+    },
+    "south": {
+     "texture": "#techo"
+    },
+    "east": {
+     "texture": "#techo"
+    },
+    "west": {
+     "texture": "#techo"
+    },
+    "up": {
+     "texture": "#techo"
+    },
+    "down": {
+     "texture": "#techo"
+    }
+   }
+  },
+  {
+   "from": [
+    3,
+    23,
+    15
+   ],
+   "to": [
+    13,
+    24.5,
+    27
+   ],
+   "faces": {
+    "north": {
+     "texture": "#techo"
+    },
+    "south": {
+     "texture": "#techo"
+    },
+    "east": {
+     "texture": "#techo"
+    },
+    "west": {
+     "texture": "#techo"
+    },
+    "up": {
+     "texture": "#techo"
+    },
+    "down": {
+     "texture": "#techo"
+    }
+   }
+  }
+ ]
+}

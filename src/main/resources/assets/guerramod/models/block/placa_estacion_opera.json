@@ -1,0 +1,49 @@
+{
+ "parent": "minecraft:block/block",
+ "render_type": "minecraft:solid",
+ "textures": {
+  "frente": "guerramod:block/placa_estacion_opera",
+  "lado": "guerramod:block/mat_lacado_gris",
+  "particle": "guerramod:block/mat_lacado_gris"
+ },
+ "elements": [
+  {
+   "from": [
+    -16,
+    4,
+    15
+   ],
+   "to": [
+    32,
+    12,
+    16
+   ],
+   "faces": {
+    "north": {
+     "texture": "#frente",
+     "uv": [
+      0,
+      0,
+      16,
+      16
+     ]
+    },
+    "south": {
+     "texture": "#lado"
+    },
+    "east": {
+     "texture": "#lado"
+    },
+    "west": {
+     "texture": "#lado"
+    },
+    "up": {
+     "texture": "#lado"
+    },
+    "down": {
+     "texture": "#lado"
+    }
+   }
+  }
+ ]
+}

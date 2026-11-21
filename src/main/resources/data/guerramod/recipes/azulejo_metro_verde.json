@@ -1,0 +1,19 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "building",
+ "ingredients": [
+  {
+   "item": "guerramod:azulejo_metro_biselado"
+  },
+  {
+   "item": "guerramod:azulejo_metro_biselado"
+  },
+  {
+   "item": "minecraft:green_dye"
+  }
+ ],
+ "result": {
+  "item": "guerramod:azulejo_metro_verde",
+  "count": 2
+ }
+}

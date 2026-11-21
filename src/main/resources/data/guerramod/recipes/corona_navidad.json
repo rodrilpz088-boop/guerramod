@@ -1,0 +1,19 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "building",
+ "ingredients": [
+  {
+   "item": "minecraft:spruce_leaves"
+  },
+  {
+   "item": "minecraft:red_dye"
+  },
+  {
+   "item": "minecraft:string"
+  }
+ ],
+ "result": {
+  "item": "guerramod:corona_navidad",
+  "count": 1
+ }
+}

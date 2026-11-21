@@ -1,0 +1,19 @@
+{
+ "variants": {
+  "facing=north": {
+   "model": "guerramod:block/camara_seguridad"
+  },
+  "facing=east": {
+   "model": "guerramod:block/camara_seguridad",
+   "y": 90
+  },
+  "facing=south": {
+   "model": "guerramod:block/camara_seguridad",
+   "y": 180
+  },
+  "facing=west": {
+   "model": "guerramod:block/camara_seguridad",
+   "y": 270
+  }
+ }
+}

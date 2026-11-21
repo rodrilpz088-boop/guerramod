@@ -1,0 +1,19 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "building",
+ "ingredients": [
+  {
+   "item": "minecraft:daylight_detector"
+  },
+  {
+   "item": "minecraft:blue_stained_glass_pane"
+  },
+  {
+   "item": "minecraft:iron_ingot"
+  }
+ ],
+ "result": {
+  "item": "guerramod:placa_solar",
+  "count": 1
+ }
+}

@@ -1,0 +1,19 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "building",
+ "ingredients": [
+  {
+   "item": "minecraft:iron_trapdoor"
+  },
+  {
+   "item": "minecraft:iron_trapdoor"
+  },
+  {
+   "item": "minecraft:white_dye"
+  }
+ ],
+ "result": {
+  "item": "guerramod:puerta_garaje",
+  "count": 2
+ }
+}

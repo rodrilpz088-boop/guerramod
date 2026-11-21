@@ -1,0 +1,24 @@
+{
+ "type": "minecraft:crafting_shaped",
+ "category": "building",
+ "pattern": [
+  "YBY",
+  "BRB",
+  "YBY"
+ ],
+ "key": {
+  "Y": {
+   "item": "minecraft:yellow_dye"
+  },
+  "B": {
+   "item": "minecraft:stone_bricks"
+  },
+  "R": {
+   "item": "minecraft:redstone"
+  }
+ },
+ "result": {
+  "item": "guerramod:senal_parada",
+  "count": 4
+ }
+}

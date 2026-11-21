@@ -1,0 +1,19 @@
+{
+ "variants": {
+  "facing=north": {
+   "model": "guerramod:block/alarma_casa"
+  },
+  "facing=east": {
+   "model": "guerramod:block/alarma_casa",
+   "y": 90
+  },
+  "facing=south": {
+   "model": "guerramod:block/alarma_casa",
+   "y": 180
+  },
+  "facing=west": {
+   "model": "guerramod:block/alarma_casa",
+   "y": 270
+  }
+ }
+}

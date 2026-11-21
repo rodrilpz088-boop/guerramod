@@ -1,0 +1,76 @@
+{
+ "parent": "minecraft:block/block",
+ "textures": {
+  "t0": "guerramod:block/mat_gris",
+  "t1": "guerramod:block/espejo_trafico",
+  "t2": "guerramod:block/mat_naranja",
+  "particle": "guerramod:block/mat_gris"
+ },
+ "elements": [
+  {
+   "from": [
+    7.5,
+    0,
+    9
+   ],
+   "to": [
+    8.5,
+    9,
+    10
+   ],
+   "faces": {
+    "north": {
+     "texture": "#t0"
+    },
+    "south": {
+     "texture": "#t0"
+    },
+    "east": {
+     "texture": "#t0"
+    },
+    "west": {
+     "texture": "#t0"
+    },
+    "up": {
+     "texture": "#t0"
+    },
+    "down": {
+     "texture": "#t0"
+    }
+   }
+  },
+  {
+   "from": [
+    3,
+    7,
+    7
+   ],
+   "to": [
+    13,
+    16,
+    8
+   ],
+   "faces": {
+    "north": {
+     "texture": "#t1"
+    },
+    "south": {
+     "texture": "#t2"
+    },
+    "east": {
+     "texture": "#t2"
+    },
+    "west": {
+     "texture": "#t2"
+    },
+    "up": {
+     "texture": "#t2"
+    },
+    "down": {
+     "texture": "#t2"
+    }
+   }
+  }
+ ],
+ "render_type": "minecraft:cutout"
+}

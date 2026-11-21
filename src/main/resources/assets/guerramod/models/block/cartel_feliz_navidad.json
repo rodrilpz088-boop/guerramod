@@ -1,0 +1,50 @@
+{
+ "parent": "minecraft:block/block",
+ "render_type": "minecraft:cutout",
+ "textures": {
+  "frente": "guerramod:block/cartel_feliz_navidad",
+  "lado": "guerramod:block/mat_metal_negro",
+  "particle": "guerramod:block/mat_metal_negro"
+ },
+ "elements": [
+  {
+   "from": [
+    -16,
+    2,
+    15.5
+   ],
+   "to": [
+    32,
+    14,
+    16
+   ],
+   "faces": {
+    "north": {
+     "texture": "#frente",
+     "uv": [
+      0,
+      0,
+      16,
+      16
+     ]
+    },
+    "south": {
+     "texture": "#lado"
+    },
+    "east": {
+     "texture": "#lado"
+    },
+    "west": {
+     "texture": "#lado"
+    },
+    "up": {
+     "texture": "#lado"
+    },
+    "down": {
+     "texture": "#lado"
+    }
+   },
+   "shade": false
+  }
+ ]
+}

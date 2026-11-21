@@ -1,0 +1,22 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "building",
+ "ingredients": [
+  {
+   "item": "minecraft:lever"
+  },
+  {
+   "item": "minecraft:redstone"
+  },
+  {
+   "item": "minecraft:white_dye"
+  },
+  {
+   "item": "minecraft:iron_nugget"
+  }
+ ],
+ "result": {
+  "item": "guerramod:cuadro_electrico",
+  "count": 1
+ }
+}

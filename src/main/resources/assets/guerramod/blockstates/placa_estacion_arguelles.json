@@ -1,0 +1,19 @@
+{
+ "variants": {
+  "facing=north": {
+   "model": "guerramod:block/placa_estacion_arguelles"
+  },
+  "facing=east": {
+   "model": "guerramod:block/placa_estacion_arguelles",
+   "y": 90
+  },
+  "facing=south": {
+   "model": "guerramod:block/placa_estacion_arguelles",
+   "y": 180
+  },
+  "facing=west": {
+   "model": "guerramod:block/placa_estacion_arguelles",
+   "y": 270
+  }
+ }
+}

@@ -1,0 +1,19 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "building",
+ "ingredients": [
+  {
+   "item": "minecraft:iron_bars"
+  },
+  {
+   "item": "minecraft:dirt"
+  },
+  {
+   "item": "minecraft:smooth_stone"
+  }
+ ],
+ "result": {
+  "item": "guerramod:alcorque",
+  "count": 4
+ }
+}

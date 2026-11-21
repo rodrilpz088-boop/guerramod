@@ -1,0 +1,22 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "building",
+ "ingredients": [
+  {
+   "item": "minecraft:spruce_sapling"
+  },
+  {
+   "item": "minecraft:glowstone_dust"
+  },
+  {
+   "item": "minecraft:red_dye"
+  },
+  {
+   "item": "minecraft:yellow_dye"
+  }
+ ],
+ "result": {
+  "item": "guerramod:arbol_navidad",
+  "count": 1
+ }
+}

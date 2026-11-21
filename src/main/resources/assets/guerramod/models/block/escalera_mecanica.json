@@ -1,0 +1,189 @@
+{
+ "parent": "minecraft:block/block",
+ "textures": {
+  "peldano": "guerramod:block/escalera_mecanica_peldano",
+  "lado": "guerramod:block/escalera_mecanica_lado",
+  "particle": "guerramod:block/escalera_mecanica_lado"
+ },
+ "elements": [
+  {
+   "from": [
+    0,
+    0,
+    0
+   ],
+   "to": [
+    16,
+    8,
+    16
+   ],
+   "faces": {
+    "up": {
+     "texture": "#peldano",
+     "uv": [
+      0,
+      8,
+      16,
+      16
+     ]
+    },
+    "down": {
+     "texture": "#lado"
+    },
+    "south": {
+     "texture": "#peldano",
+     "uv": [
+      0,
+      0,
+      16,
+      8
+     ]
+    },
+    "north": {
+     "texture": "#lado",
+     "uv": [
+      0,
+      8,
+      16,
+      16
+     ]
+    },
+    "east": {
+     "texture": "#lado",
+     "uv": [
+      0,
+      8,
+      16,
+      16
+     ]
+    },
+    "west": {
+     "texture": "#lado",
+     "uv": [
+      0,
+      8,
+      16,
+      16
+     ]
+    }
+   }
+  },
+  {
+   "from": [
+    0,
+    8,
+    0
+   ],
+   "to": [
+    16,
+    16,
+    8
+   ],
+   "faces": {
+    "up": {
+     "texture": "#peldano",
+     "uv": [
+      0,
+      0,
+      16,
+      8
+     ]
+    },
+    "south": {
+     "texture": "#peldano",
+     "uv": [
+      0,
+      0,
+      16,
+      8
+     ]
+    },
+    "north": {
+     "texture": "#lado",
+     "uv": [
+      0,
+      0,
+      16,
+      8
+     ]
+    },
+    "east": {
+     "texture": "#lado",
+     "uv": [
+      8,
+      0,
+      16,
+      8
+     ]
+    },
+    "west": {
+     "texture": "#lado",
+     "uv": [
+      0,
+      0,
+      8,
+      8
+     ]
+    }
+   }
+  },
+  {
+   "from": [
+    -0.5,
+    0,
+    0
+   ],
+   "to": [
+    0,
+    20,
+    16
+   ],
+   "faces": {
+    "west": {
+     "texture": "#lado"
+    },
+    "east": {
+     "texture": "#lado"
+    },
+    "up": {
+     "texture": "#lado"
+    },
+    "north": {
+     "texture": "#lado"
+    },
+    "south": {
+     "texture": "#lado"
+    }
+   }
+  },
+  {
+   "from": [
+    16,
+    0,
+    0
+   ],
+   "to": [
+    16.5,
+    20,
+    16
+   ],
+   "faces": {
+    "west": {
+     "texture": "#lado"
+    },
+    "east": {
+     "texture": "#lado"
+    },
+    "up": {
+     "texture": "#lado"
+    },
+    "north": {
+     "texture": "#lado"
+    },
+    "south": {
+     "texture": "#lado"
+    }
+   }
+  }
+ ]
+}

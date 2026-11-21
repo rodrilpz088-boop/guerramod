@@ -1,0 +1,22 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "building",
+ "ingredients": [
+  {
+   "item": "minecraft:glass_pane"
+  },
+  {
+   "item": "minecraft:orange_dye"
+  },
+  {
+   "item": "minecraft:iron_ingot"
+  },
+  {
+   "item": "minecraft:stick"
+  }
+ ],
+ "result": {
+  "item": "guerramod:espejo_trafico",
+  "count": 1
+ }
+}

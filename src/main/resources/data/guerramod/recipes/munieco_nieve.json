@@ -1,0 +1,22 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "building",
+ "ingredients": [
+  {
+   "item": "minecraft:snow_block"
+  },
+  {
+   "item": "minecraft:snow_block"
+  },
+  {
+   "item": "minecraft:carrot"
+  },
+  {
+   "item": "minecraft:coal"
+  }
+ ],
+ "result": {
+  "item": "guerramod:munieco_nieve",
+  "count": 1
+ }
+}

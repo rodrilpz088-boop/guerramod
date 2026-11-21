@@ -1,0 +1,27 @@
+{
+ "type": "minecraft:crafting_shaped",
+ "category": "building",
+ "pattern": [
+  "GPG",
+  "RSR",
+  "GPG"
+ ],
+ "key": {
+  "G": {
+   "item": "minecraft:glowstone_dust"
+  },
+  "P": {
+   "item": "minecraft:paper"
+  },
+  "R": {
+   "item": "minecraft:red_dye"
+  },
+  "S": {
+   "item": "minecraft:string"
+  }
+ },
+ "result": {
+  "item": "guerramod:cartel_feliz_navidad",
+  "count": 2
+ }
+}

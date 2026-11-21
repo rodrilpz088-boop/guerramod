@@ -1,0 +1,19 @@
+{
+ "variants": {
+  "facing=north": {
+   "model": "guerramod:block/enchufe"
+  },
+  "facing=east": {
+   "model": "guerramod:block/enchufe",
+   "y": 90
+  },
+  "facing=south": {
+   "model": "guerramod:block/enchufe",
+   "y": 180
+  },
+  "facing=west": {
+   "model": "guerramod:block/enchufe",
+   "y": 270
+  }
+ }
+}

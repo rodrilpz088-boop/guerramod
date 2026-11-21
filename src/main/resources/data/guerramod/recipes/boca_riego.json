@@ -1,0 +1,22 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "building",
+ "ingredients": [
+  {
+   "item": "minecraft:iron_ingot"
+  },
+  {
+   "item": "minecraft:smooth_stone"
+  },
+  {
+   "item": "minecraft:water_bucket"
+  },
+  {
+   "item": "minecraft:stone_button"
+  }
+ ],
+ "result": {
+  "item": "guerramod:boca_riego",
+  "count": 2
+ }
+}

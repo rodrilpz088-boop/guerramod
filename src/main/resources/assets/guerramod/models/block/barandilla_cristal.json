@@ -1,0 +1,107 @@
+{
+ "parent": "minecraft:block/block",
+ "textures": {
+  "t0": "guerramod:block/mat_inox",
+  "t1": "guerramod:block/mat_cristal",
+  "particle": "guerramod:block/mat_inox"
+ },
+ "elements": [
+  {
+   "from": [
+    0,
+    0,
+    14
+   ],
+   "to": [
+    16,
+    1,
+    16
+   ],
+   "faces": {
+    "north": {
+     "texture": "#t0"
+    },
+    "south": {
+     "texture": "#t0"
+    },
+    "east": {
+     "texture": "#t0"
+    },
+    "west": {
+     "texture": "#t0"
+    },
+    "up": {
+     "texture": "#t0"
+    },
+    "down": {
+     "texture": "#t0"
+    }
+   }
+  },
+  {
+   "from": [
+    0,
+    1,
+    14.6
+   ],
+   "to": [
+    16,
+    14,
+    15.4
+   ],
+   "faces": {
+    "north": {
+     "texture": "#t1"
+    },
+    "south": {
+     "texture": "#t1"
+    },
+    "east": {
+     "texture": "#t1"
+    },
+    "west": {
+     "texture": "#t1"
+    },
+    "up": {
+     "texture": "#t1"
+    },
+    "down": {
+     "texture": "#t1"
+    }
+   }
+  },
+  {
+   "from": [
+    0,
+    14,
+    14
+   ],
+   "to": [
+    16,
+    15,
+    16
+   ],
+   "faces": {
+    "north": {
+     "texture": "#t0"
+    },
+    "south": {
+     "texture": "#t0"
+    },
+    "east": {
+     "texture": "#t0"
+    },
+    "west": {
+     "texture": "#t0"
+    },
+    "up": {
+     "texture": "#t0"
+    },
+    "down": {
+     "texture": "#t0"
+    }
+   }
+  }
+ ],
+ "render_type": "minecraft:translucent"
+}

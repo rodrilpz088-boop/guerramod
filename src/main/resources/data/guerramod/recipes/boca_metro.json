@@ -1,0 +1,27 @@
+{
+ "type": "minecraft:crafting_shaped",
+ "category": "building",
+ "pattern": [
+  "BBB",
+  "WGW",
+  "BRB"
+ ],
+ "key": {
+  "B": {
+   "item": "minecraft:blue_dye"
+  },
+  "W": {
+   "item": "minecraft:white_dye"
+  },
+  "G": {
+   "item": "minecraft:glowstone"
+  },
+  "R": {
+   "item": "minecraft:red_dye"
+  }
+ },
+ "result": {
+  "item": "guerramod:boca_metro",
+  "count": 1
+ }
+}

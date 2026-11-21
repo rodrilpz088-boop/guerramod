@@ -1,0 +1,22 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "building",
+ "ingredients": [
+  {
+   "item": "minecraft:blue_dye"
+  },
+  {
+   "item": "minecraft:white_dye"
+  },
+  {
+   "item": "minecraft:iron_ingot"
+  },
+  {
+   "item": "minecraft:leather"
+  }
+ ],
+ "result": {
+  "item": "guerramod:placa_estacion_ventas",
+  "count": 1
+ }
+}

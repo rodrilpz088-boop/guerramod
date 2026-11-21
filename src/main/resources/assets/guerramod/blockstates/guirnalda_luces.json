@@ -1,0 +1,19 @@
+{
+ "variants": {
+  "facing=north": {
+   "model": "guerramod:block/guirnalda_luces"
+  },
+  "facing=east": {
+   "model": "guerramod:block/guirnalda_luces",
+   "y": 90
+  },
+  "facing=south": {
+   "model": "guerramod:block/guirnalda_luces",
+   "y": 180
+  },
+  "facing=west": {
+   "model": "guerramod:block/guirnalda_luces",
+   "y": 270
+  }
+ }
+}

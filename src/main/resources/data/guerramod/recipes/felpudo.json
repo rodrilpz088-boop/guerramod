@@ -1,0 +1,16 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "building",
+ "ingredients": [
+  {
+   "item": "minecraft:brown_carpet"
+  },
+  {
+   "item": "minecraft:wheat"
+  }
+ ],
+ "result": {
+  "item": "guerramod:felpudo",
+  "count": 2
+ }
+}

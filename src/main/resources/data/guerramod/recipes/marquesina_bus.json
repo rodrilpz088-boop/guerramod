@@ -1,0 +1,22 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "building",
+ "ingredients": [
+  {
+   "item": "minecraft:glass"
+  },
+  {
+   "item": "minecraft:iron_ingot"
+  },
+  {
+   "item": "minecraft:smooth_stone_slab"
+  },
+  {
+   "item": "minecraft:painting"
+  }
+ ],
+ "result": {
+  "item": "guerramod:marquesina_bus",
+  "count": 1
+ }
+}

@@ -1,0 +1,19 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "building",
+ "ingredients": [
+  {
+   "item": "guerramod:suelo_anden"
+  },
+  {
+   "item": "guerramod:suelo_anden"
+  },
+  {
+   "item": "minecraft:yellow_dye"
+  }
+ ],
+ "result": {
+  "item": "guerramod:borde_anden",
+  "count": 2
+ }
+}

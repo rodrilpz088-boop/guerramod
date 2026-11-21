@@ -1,0 +1,20 @@
+{
+ "type": "minecraft:crafting_shaped",
+ "category": "building",
+ "pattern": [
+  "SD",
+  "DS"
+ ],
+ "key": {
+  "S": {
+   "item": "minecraft:smooth_stone"
+  },
+  "D": {
+   "item": "minecraft:diorite"
+  }
+ },
+ "result": {
+  "item": "guerramod:suelo_anden",
+  "count": 4
+ }
+}

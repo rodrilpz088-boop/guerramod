@@ -1,0 +1,108 @@
+{
+ "parent": "minecraft:block/block",
+ "textures": {
+  "t0": "guerramod:block/split_frente",
+  "t1": "guerramod:block/mat_plastico_blanco",
+  "t2": "guerramod:block/mat_metal_negro",
+  "particle": "guerramod:block/split_frente"
+ },
+ "elements": [
+  {
+   "from": [
+    0,
+    2,
+    6
+   ],
+   "to": [
+    16,
+    13,
+    16
+   ],
+   "faces": {
+    "north": {
+     "texture": "#t0"
+    },
+    "south": {
+     "texture": "#t1"
+    },
+    "east": {
+     "texture": "#t1"
+    },
+    "west": {
+     "texture": "#t1"
+    },
+    "up": {
+     "texture": "#t1"
+    },
+    "down": {
+     "texture": "#t1"
+    }
+   }
+  },
+  {
+   "from": [
+    2,
+    0,
+    8
+   ],
+   "to": [
+    3,
+    2,
+    15
+   ],
+   "faces": {
+    "north": {
+     "texture": "#t2"
+    },
+    "south": {
+     "texture": "#t2"
+    },
+    "east": {
+     "texture": "#t2"
+    },
+    "west": {
+     "texture": "#t2"
+    },
+    "up": {
+     "texture": "#t2"
+    },
+    "down": {
+     "texture": "#t2"
+    }
+   }
+  },
+  {
+   "from": [
+    13,
+    0,
+    8
+   ],
+   "to": [
+    14,
+    2,
+    15
+   ],
+   "faces": {
+    "north": {
+     "texture": "#t2"
+    },
+    "south": {
+     "texture": "#t2"
+    },
+    "east": {
+     "texture": "#t2"
+    },
+    "west": {
+     "texture": "#t2"
+    },
+    "up": {
+     "texture": "#t2"
+    },
+    "down": {
+     "texture": "#t2"
+    }
+   }
+  }
+ ],
+ "render_type": "minecraft:cutout"
+}

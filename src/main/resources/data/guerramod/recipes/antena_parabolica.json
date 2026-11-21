@@ -1,0 +1,22 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "building",
+ "ingredients": [
+  {
+   "item": "minecraft:iron_ingot"
+  },
+  {
+   "item": "minecraft:white_dye"
+  },
+  {
+   "item": "minecraft:redstone"
+  },
+  {
+   "item": "minecraft:bowl"
+  }
+ ],
+ "result": {
+  "item": "guerramod:antena_parabolica",
+  "count": 1
+ }
+}

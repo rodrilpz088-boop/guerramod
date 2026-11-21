@@ -1,0 +1,17 @@
+{
+ "type": "minecraft:crafting_shaped",
+ "category": "building",
+ "pattern": [
+  "QQ",
+  "QQ"
+ ],
+ "key": {
+  "Q": {
+   "item": "minecraft:quartz_block"
+  }
+ },
+ "result": {
+  "item": "guerramod:azulejo_metro_biselado",
+  "count": 8
+ }
+}

@@ -1,0 +1,19 @@
+{
+ "variants": {
+  "facing=north": {
+   "model": "guerramod:block/escalera_mecanica"
+  },
+  "facing=east": {
+   "model": "guerramod:block/escalera_mecanica",
+   "y": 90
+  },
+  "facing=south": {
+   "model": "guerramod:block/escalera_mecanica",
+   "y": 180
+  },
+  "facing=west": {
+   "model": "guerramod:block/escalera_mecanica",
+   "y": 270
+  }
+ }
+}

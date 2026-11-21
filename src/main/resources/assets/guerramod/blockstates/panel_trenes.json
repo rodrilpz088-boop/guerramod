@@ -1,0 +1,19 @@
+{
+ "variants": {
+  "facing=north": {
+   "model": "guerramod:block/panel_trenes"
+  },
+  "facing=east": {
+   "model": "guerramod:block/panel_trenes",
+   "y": 90
+  },
+  "facing=south": {
+   "model": "guerramod:block/panel_trenes",
+   "y": 180
+  },
+  "facing=west": {
+   "model": "guerramod:block/panel_trenes",
+   "y": 270
+  }
+ }
+}

@@ -16,6 +16,7 @@ public final class CatalogoGenerado {
         parte2();
         parte3();
         parte4();
+        parte5();
     }
 
     private static void parte0() {
@@ -219,5 +220,48 @@ public final class CatalogoGenerado {
         ModBloques.ALMACENES.add(ModBloques.reg("buzon", Categoria.CARRETERAS, () -> new MuebleBlock(Fabrica.mueble("metal"), new double[][]{{6, 0, 7, 10, 5, 9}, {3, 5, 4, 13, 16, 12}}, -1, 9, MuebleBlock.Accion.NINGUNA)));
         ModBloques.reg("farola_moderna", Categoria.CARRETERAS, () -> new MuebleBlock(Fabrica.luzFija(Fabrica.mueble("metal"), 15), new double[][]{{7, 0, 7, 9, 12, 9}, {2, 12, 2, 14, 14, 14}, {3, 11.5, 3, 13, 12, 13}}, -1, 0, MuebleBlock.Accion.NINGUNA));
         ModBloques.reg("farola_fernandina", Categoria.CARRETERAS, () -> new MuebleBlock(Fabrica.luzFija(Fabrica.mueble("metal"), 15), new double[][]{{6, 0, 6, 10, 4, 10}, {5, 4, 5, 11, 5, 11}, {5.3, 5, 5.3, 10.7, 13, 10.7}, {6.5, 5, 6.5, 9.5, 12, 9.5}, {4.5, 13, 4.5, 11.5, 14, 11.5}, {6, 14, 6, 10, 15.5, 10}, {7.5, 15.5, 7.5, 8.5, 16, 8.5}}, -1, 0, MuebleBlock.Accion.NINGUNA));
+        ModBloques.regAlto("puerta_ascensor", Categoria.VIVIENDA, () -> new DoorBlock(Fabrica.mueble("metal"), BlockSetType.OAK));
+        ModBloques.reg("placa_solar", Categoria.VIVIENDA, () -> new MuebleBlock(Fabrica.mueble("metal"), new double[][]{{0, 0, 0, 16, 2, 16}, {1, 2, 1, 15, 2.2, 15}}, -1, 0, MuebleBlock.Accion.NINGUNA));
+        ModBloques.reg("termo_electrico", Categoria.VIVIENDA, () -> new MuebleBlock(Fabrica.mueble("metal"), new double[][]{{3, 1, 9, 13, 15, 16}, {6, 0, 11, 7, 1, 13}, {9, 0, 11, 10, 1, 13}}, -1, 0, MuebleBlock.Accion.NINGUNA));
+        ModBloques.reg("caldera_gas", Categoria.VIVIENDA, () -> new MuebleBlock(Fabrica.mueble("metal"), new double[][]{{2, 0, 9, 14, 16, 16}}, -1, 0, MuebleBlock.Accion.NINGUNA));
+        ModBloques.reg("portero_automatico", Categoria.VIVIENDA, () -> new MuebleBlock(Fabrica.mueble("metal"), new double[][]{{5, 3, 15, 11, 13, 16}}, -1, 0, MuebleBlock.Accion.NINGUNA));
+        ModBloques.ALMACENES.add(ModBloques.reg("buzones_comunidad", Categoria.VIVIENDA, () -> new MuebleBlock(Fabrica.mueble("madera"), new double[][]{{0, 0, 10, 16, 16, 16}}, -1, 27, MuebleBlock.Accion.NINGUNA)));
+        ModBloques.reg("ventilador_techo", Categoria.VIVIENDA, () -> new MuebleBlock(Fabrica.luzFija(Fabrica.mueble("metal"), 12), new double[][]{{7.5, 12, 7.5, 8.5, 16, 8.5}, {6, 10, 6, 10, 12, 10}, {6.5, 9, 6.5, 9.5, 10, 9.5}, {0, 11, 7, 6, 11.5, 9}, {10, 11, 7, 16, 11.5, 9}, {7, 11, 0, 9, 11.5, 6}, {7, 11, 10, 9, 11.5, 16}}, -1, 0, MuebleBlock.Accion.NINGUNA));
+        ModBloques.reg("barandilla_cristal", Categoria.VIVIENDA, () -> new MuebleBlock(Fabrica.mueble("cristal"), new double[][]{{0, 0, 14, 16, 1, 16}, {0, 1, 14.6, 16, 14, 15.4}, {0, 14, 14, 16, 15, 16}}, -1, 0, MuebleBlock.Accion.NINGUNA));
+        ModBloques.reg("barandilla_forja", Categoria.VIVIENDA, () -> new MuebleBlock(Fabrica.mueble("metal"), new double[][]{{0, 0, 14.5, 16, 1, 15.5}, {0, 13, 14.5, 16, 14, 15.5}, {1, 1, 14.75, 2, 13, 15.25}, {5, 1, 14.75, 6, 13, 15.25}, {9, 1, 14.75, 10, 13, 15.25}, {13, 1, 14.75, 14, 13, 15.25}, {3, 5, 14.75, 13, 6, 15.25}}, -1, 0, MuebleBlock.Accion.NINGUNA));
+        ModBloques.reg("toldo", Categoria.VIVIENDA, () -> new MuebleBlock(Fabrica.mueble("tela"), new double[][]{{0, 14, 12, 16, 15, 16}, {0, 12, 8, 16, 13, 12}, {0, 10, 4, 16, 11, 8}, {0, 8, 0, 16, 9, 4}, {0, 6, 0, 16, 8, 0.5}}, -1, 0, MuebleBlock.Accion.NINGUNA));
+        ModBloques.reg("split_exterior", Categoria.VIVIENDA, () -> new MuebleBlock(Fabrica.mueble("metal"), new double[][]{{0, 2, 6, 16, 13, 16}, {2, 0, 8, 3, 2, 15}, {13, 0, 8, 14, 2, 15}}, -1, 0, MuebleBlock.Accion.NINGUNA));
+        ModBloques.reg("antena_tv", Categoria.VIVIENDA, () -> new MuebleBlock(Fabrica.mueble("metal"), new double[][]{{7.5, 0, 7.5, 8.5, 16, 8.5}, {1, 14, 7.5, 15, 14.6, 8.5}, {3, 11, 7.5, 13, 11.6, 8.5}, {5, 8, 7.5, 11, 8.6, 8.5}, {7.5, 14, 2, 8.5, 14.6, 14}}, -1, 0, MuebleBlock.Accion.NINGUNA));
+    }
+
+    private static void parte5() {
+        ModBloques.reg("antena_parabolica", Categoria.VIVIENDA, () -> new MuebleBlock(Fabrica.mueble("metal"), new double[][]{{7, 0, 12, 9, 6, 16}, {2, 4, 9, 14, 14, 11}, {3, 3, 9.5, 13, 15, 10.5}, {7.5, 8, 2, 8.5, 9, 9}, {7, 7.5, 1, 9, 9.5, 2}}, -1, 0, MuebleBlock.Accion.NINGUNA));
+        ModBloques.reg("contador_luz", Categoria.VIVIENDA, () -> new MuebleBlock(Fabrica.mueble("metal"), new double[][]{{3, 2, 12, 13, 14, 16}}, -1, 0, MuebleBlock.Accion.NINGUNA));
+        ModBloques.reg("cuadro_electrico", Categoria.VIVIENDA, () -> new MuebleBlock(Fabrica.mueble("plastico"), new double[][]{{2, 3, 14, 14, 13, 16}}, -1, 0, MuebleBlock.Accion.NINGUNA));
+        ModBloques.reg("enchufe", Categoria.VIVIENDA, () -> new MuebleBlock(Fabrica.mueble("plastico"), new double[][]{{5, 5, 15.5, 11, 11, 16}}, -1, 0, MuebleBlock.Accion.NINGUNA));
+        ModBloques.reg("extractor_bano", Categoria.VIVIENDA, () -> new MuebleBlock(Fabrica.mueble("plastico"), new double[][]{{3, 3, 15, 13, 13, 16}}, -1, 0, MuebleBlock.Accion.NINGUNA));
+        ModBloques.reg("puerta_garaje", Categoria.VIVIENDA, () -> new MuebleBlock(Fabrica.mueble("metal"), new double[][]{{0, 0, 14, 16, 16, 16}}, -1, 0, MuebleBlock.Accion.NINGUNA));
+        ModBloques.reg("felpudo", Categoria.VIVIENDA, () -> new CarpetBlock(Fabrica.props("tela").noOcclusion()));
+        ModBloques.reg("camara_seguridad", Categoria.VIVIENDA, () -> new MuebleBlock(Fabrica.mueble("metal"), new double[][]{{6, 10, 14, 10, 13, 16}, {5, 8, 6, 11, 12, 14}}, -1, 0, MuebleBlock.Accion.NINGUNA));
+        ModBloques.reg("alarma_casa", Categoria.VIVIENDA, () -> new MuebleBlock(Fabrica.mueble("plastico"), new double[][]{{3, 3, 14, 13, 13, 16}}, -1, 0, MuebleBlock.Accion.NINGUNA));
+        ModBloques.reg("aplique_portal", Categoria.VIVIENDA, () -> new MuebleBlock(Fabrica.luzFija(Fabrica.mueble("metal"), 14), new double[][]{{6, 4, 14, 10, 12, 16}, {6.5, 5, 10, 9.5, 11, 14}, {7, 6, 11, 9, 10, 13}}, -1, 0, MuebleBlock.Accion.NINGUNA));
+        ModBloques.regAlto("marquesina_bus", Categoria.CARRETERAS, () -> new MuebleAltoBlock(Fabrica.mueble("metal"), new double[][]{{0, 0, 13, 16, 16, 14}, {0, 0, 14, 1, 16, 15}, {15, 0, 14, 16, 16, 15}, {1, 7, 9, 15, 8, 13}, {2, 0, 11, 3, 7, 12}, {13, 0, 11, 14, 7, 12}}, new double[][]{{0, 0, 13, 16, 10, 14}, {0, 10, 0, 16, 11.5, 16}, {0, 0, 14, 1, 10, 15}, {15, 0, 14, 16, 10, 15}}, 0));
+        ModBloques.reg("parada_bus", Categoria.CARRETERAS, () -> new MuebleBlock(Fabrica.mueble("metal"), new double[][]{{7.5, 0, 7.5, 8.5, 10, 8.5}, {4, 10, 7, 12, 16, 9}}, -1, 0, MuebleBlock.Accion.NINGUNA));
+        ModBloques.reg("parquimetro", Categoria.CARRETERAS, () -> new MuebleBlock(Fabrica.mueble("metal"), new double[][]{{7, 0, 7, 9, 8, 9}, {5, 8, 6, 11, 16, 10}}, -1, 0, MuebleBlock.Accion.NINGUNA));
+        ModBloques.reg("fuente_agua", Categoria.CARRETERAS, () -> new MuebleBlock(Fabrica.mueble("metal"), new double[][]{{5, 0, 5, 11, 2, 11}, {6, 2, 6, 10, 12, 10}, {4, 12, 4, 12, 13, 12}, {5, 13, 5, 11, 14, 11}, {7.5, 14, 7.5, 8.5, 15.5, 8.5}}, -1, 0, MuebleBlock.Accion.GRIFO));
+        ModBloques.reg("alcorque", Categoria.CARRETERAS, () -> new Block(Fabrica.props("piedra")));
+        ModBloques.reg("boca_riego", Categoria.CARRETERAS, () -> new Block(Fabrica.props("piedra")));
+        ModBloques.reg("valla_obra", Categoria.CARRETERAS, () -> new MuebleBlock(Fabrica.mueble("plastico"), new double[][]{{0, 6, 7.5, 16, 12, 8.5}, {1, 0, 6, 2, 12, 10}, {14, 0, 6, 15, 12, 10}, {0, 0, 5, 3, 1, 11}, {13, 0, 5, 16, 1, 11}}, -1, 0, MuebleBlock.Accion.NINGUNA));
+        ModBloques.reg("aparcabicis", Categoria.CARRETERAS, () -> new MuebleBlock(Fabrica.mueble("metal"), new double[][]{{1, 0, 7.5, 2, 9, 8.5}, {14, 0, 7.5, 15, 9, 8.5}, {1, 9, 7.5, 15, 10, 8.5}, {5, 0, 7.5, 6, 6, 8.5}, {10, 0, 7.5, 11, 6, 8.5}, {5, 6, 7.5, 11, 7, 8.5}}, -1, 0, MuebleBlock.Accion.NINGUNA));
+        ModBloques.reg("panel_informativo", Categoria.CARRETERAS, () -> new MuebleBlock(Fabrica.luzFija(Fabrica.mueble("metal"), 8), new double[][]{{1, 0, 7, 3, 16, 9}, {13, 0, 7, 15, 16, 9}, {3, 4, 7.5, 13, 15, 8.5}}, -1, 0, MuebleBlock.Accion.NINGUNA));
+        ModBloques.reg("radar_trafico", Categoria.CARRETERAS, () -> new MuebleBlock(Fabrica.mueble("metal"), new double[][]{{7, 0, 7, 9, 9, 9}, {4, 9, 5, 12, 16, 11}}, -1, 0, MuebleBlock.Accion.NINGUNA));
+        ModBloques.reg("espejo_trafico", Categoria.CARRETERAS, () -> new MuebleBlock(Fabrica.mueble("metal"), new double[][]{{7.5, 0, 9, 8.5, 9, 10}, {3, 7, 7, 13, 16, 8}}, -1, 0, MuebleBlock.Accion.NINGUNA));
+        ModBloques.reg("reductor_velocidad", Categoria.CARRETERAS, () -> new MuebleBlock(Fabrica.mueble("asfalto"), new double[][]{{0, 0, 0, 16, 1, 16}, {0, 1, 3, 16, 2, 13}, {0, 2, 6, 16, 2.5, 10}}, -1, 0, MuebleBlock.Accion.NINGUNA));
+        ModBloques.reg("regalo_rojo", Categoria.NAVIDAD, () -> new MuebleBlock(Fabrica.mueble("tela"), new double[][]{{3, 0, 3, 13, 9, 13}, {2.5, 9, 2.5, 13.5, 10, 13.5}, {6, 10, 7, 10, 12, 9}}, -1, 0, MuebleBlock.Accion.NINGUNA));
+        ModBloques.reg("regalo_azul", Categoria.NAVIDAD, () -> new MuebleBlock(Fabrica.mueble("tela"), new double[][]{{3, 0, 3, 13, 9, 13}, {2.5, 9, 2.5, 13.5, 10, 13.5}, {6, 10, 7, 10, 12, 9}}, -1, 0, MuebleBlock.Accion.NINGUNA));
+        ModBloques.reg("regalo_dorado", Categoria.NAVIDAD, () -> new MuebleBlock(Fabrica.mueble("tela"), new double[][]{{3, 0, 3, 13, 9, 13}, {2.5, 9, 2.5, 13.5, 10, 13.5}, {6, 10, 7, 10, 12, 9}}, -1, 0, MuebleBlock.Accion.NINGUNA));
+        ModBloques.regAlto("munieco_nieve", Categoria.NAVIDAD, () -> new MuebleAltoBlock(Fabrica.mueble("tela"), new double[][]{{1, 0, 1, 15, 13, 15}, {3, 13, 3, 13, 16, 13}, {2, 13, 2, 14, 14.5, 14}}, new double[][]{{3, 0, 3, 13, 7, 13}, {2, 7, 2, 14, 8, 14}, {4, 8, 4, 12, 14, 12}}, 0));
+        ModBloques.reg("corona_navidad", Categoria.NAVIDAD, () -> new MuebleBlock(Fabrica.mueble("tela"), new double[][]{{1, 1, 15.5, 15, 15, 16}}, -1, 0, MuebleBlock.Accion.NINGUNA));
+        ModBloques.regAlto("arbol_navidad", Categoria.NAVIDAD, () -> new MuebleAltoBlock(Fabrica.mueble("hojas"), new double[][]{{6, 0, 6, 10, 3, 10}, {1, 3, 1, 15, 9, 15}, {2.5, 9, 2.5, 13.5, 15, 13.5}, {4, 15, 4, 12, 16, 12}}, new double[][]{{4, 0, 4, 12, 5, 12}, {5.5, 5, 5.5, 10.5, 10, 10.5}, {7, 10, 7, 9, 13, 9}}, 0));
     }
 }

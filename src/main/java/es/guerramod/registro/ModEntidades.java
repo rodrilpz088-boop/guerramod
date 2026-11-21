@@ -46,4 +46,8 @@ public final class ModEntidades {
     public static final RegistryObject<EntityType<es.guerramod.desastres.TornadoEntity>> TORNADO = ENTIDADES.register("tornado",
             () -> EntityType.Builder.<es.guerramod.desastres.TornadoEntity>of(es.guerramod.desastres.TornadoEntity::new, MobCategory.MISC)
                     .sized(4.0f, 30.0f).clientTrackingRange(32).updateInterval(2).fireImmune().build("tornado"));
+
+    public static final RegistryObject<EntityType<es.guerramod.metro.MetroEntity>> METRO = ENTIDADES.register("metro",
+            () -> EntityType.Builder.<es.guerramod.metro.MetroEntity>of(es.guerramod.metro.MetroEntity::new, MobCategory.MISC)
+                    .sized(0.98f, 0.7f).clientTrackingRange(10).build("metro"));
 }

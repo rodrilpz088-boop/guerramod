@@ -119,6 +119,11 @@ public final class Plano {
         return origen.offset(new BlockPos(x, y, -z).rotate(rot));
     }
 
+    /** Todos los bloques del plano (coordenadas locales). */
+    public Map<BlockPos, BlockState> bloques() {
+        return bloques;
+    }
+
     public int ancho() {
         return maxX - minX + 1;
     }

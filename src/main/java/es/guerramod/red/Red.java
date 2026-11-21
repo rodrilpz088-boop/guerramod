@@ -20,7 +20,7 @@ import java.util.function.Supplier;
 
 /** Paquetes de red: sincronizar países al cliente y acciones del avión al servidor. */
 public final class Red {
-    private static final String VERSION = "4";
+    private static final String VERSION = "5";
     public static final SimpleChannel CANAL = NetworkRegistry.newSimpleChannel(
             new ResourceLocation(GuerraMod.MODID, "main"), () -> VERSION, VERSION::equals, VERSION::equals);
 
@@ -40,6 +40,12 @@ public final class Red {
                 .encoder(SyncTemblor::encode).decoder(SyncTemblor::decode).consumerMainThread(SyncTemblor::handle).add();
         CANAL.messageBuilder(SyncTiempo.class, id++, NetworkDirection.PLAY_TO_CLIENT)
                 .encoder(SyncTiempo::encode).decoder(SyncTiempo::decode).consumerMainThread(SyncTiempo::handle).add();
+        CANAL.messageBuilder(AbrirFicha.class, id++, NetworkDirection.PLAY_TO_CLIENT)
+                .encoder(AbrirFicha::encode).decoder(AbrirFicha::decode).consumerMainThread(AbrirFicha::handle).add();
+        CANAL.messageBuilder(AccionPueblo.class, id++, NetworkDirection.PLAY_TO_SERVER)
+                .encoder(AccionPueblo::encode).decoder(AccionPueblo::decode).consumerMainThread(AccionPueblo::handle).add();
+        CANAL.messageBuilder(Ascensor.class, id++, NetworkDirection.PLAY_TO_SERVER)
+                .encoder(Ascensor::encode).decoder(Ascensor::decode).consumerMainThread(Ascensor::handle).add();
     }
 
     public static void sincronizarTodos(MinecraftServer server) {
@@ -60,6 +66,64 @@ public final class Red {
                 (float) m.nubes(), (float) m.niebla(), (float) m.turbidez(), (float) c.calentamiento(), (float) c.co2, c.cambio, m.zona(),
                 es.guerramod.desastres.Desastres.granizoTicks > 0 ? es.guerramod.desastres.Desastres.granizoCm : 0f,
                 es.guerramod.clima.Estaciones.dia(p.serverLevel())));
+    }
+
+    public static void abrirFicha(ServerPlayer p, int entidad, CompoundTag datos) {
+        CANAL.send(PacketDistributor.PLAYER.with(() -> p), new AbrirFicha(entidad, datos));
+    }
+
+    /** Servidor -> cliente: abre la tablet con el DNI del aldeano y los datos de su pueblo. */
+    public record AbrirFicha(int entidad, CompoundTag datos) {
+        public static void encode(AbrirFicha m, FriendlyByteBuf b) {
+            b.writeInt(m.entidad);
+            b.writeNbt(m.datos);
+        }
+
+        public static AbrirFicha decode(FriendlyByteBuf b) {
+            return new AbrirFicha(b.readInt(), b.readNbt());
+        }
+
+        public static void handle(AbrirFicha m, Supplier<NetworkEvent.Context> ctx) {
+            net.minecraftforge.fml.DistExecutor.unsafeRunWhenOn(net.minecraftforge.api.distmarker.Dist.CLIENT,
+                    () -> () -> es.guerramod.cliente.FichaScreen.abrir(m.entidad, m.datos));
+            ctx.get().setPacketHandled(true);
+        }
+    }
+
+    /** Cliente -> servidor: botón pulsado en la tablet (oficio, elegir pueblo, guerra, paz). */
+    public record AccionPueblo(int entidad, int accion, int valor) {
+        public static void encode(AccionPueblo m, FriendlyByteBuf b) {
+            b.writeInt(m.entidad);
+            b.writeVarInt(m.accion);
+            b.writeVarInt(m.valor);
+        }
+
+        public static AccionPueblo decode(FriendlyByteBuf b) {
+            return new AccionPueblo(b.readInt(), b.readVarInt(), b.readVarInt());
+        }
+
+        public static void handle(AccionPueblo m, Supplier<NetworkEvent.Context> ctx) {
+            ServerPlayer p = ctx.get().getSender();
+            if (p != null) es.guerramod.pueblo.Tablet.accion(p, m.entidad, m.accion, m.valor);
+            ctx.get().setPacketHandled(true);
+        }
+    }
+
+    /** Cliente -> servidor: subir (saltar) o bajar (agacharse) en un ascensor. */
+    public record Ascensor(boolean subir) {
+        public static void encode(Ascensor m, FriendlyByteBuf b) {
+            b.writeBoolean(m.subir);
+        }
+
+        public static Ascensor decode(FriendlyByteBuf b) {
+            return new Ascensor(b.readBoolean());
+        }
+
+        public static void handle(Ascensor m, Supplier<NetworkEvent.Context> ctx) {
+            ServerPlayer p = ctx.get().getSender();
+            if (p != null) es.guerramod.vivienda.Ascensores.mover(p, m.subir);
+            ctx.get().setPacketHandled(true);
+        }
     }
 
     public static void enviarTemblor(ServerPlayer p, float intensidad) {

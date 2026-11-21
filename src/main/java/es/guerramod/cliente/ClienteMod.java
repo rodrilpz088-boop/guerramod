@@ -58,11 +58,13 @@ public final class ClienteMod {
         e.registerEntityRenderer(ModEntidades.HIDROAVION.get(), ctx -> new AvionRenderer<>(ctx, 2.4f, AvionRenderer.TEXTURA_HIDROAVION));
         e.registerEntityRenderer(ModEntidades.AVION.get(), ctx -> new AvionRenderer<>(ctx, 1.6f, AvionRenderer.TEXTURA_CAZA));
         e.registerEntityRenderer(ModEntidades.BOMBARDERO.get(), ctx -> new AvionRenderer<>(ctx, 2.2f, AvionRenderer.TEXTURA_BOMBARDERO));
+        e.registerEntityRenderer(ModEntidades.METRO.get(), MetroRenderer::new);
     }
 
     @SubscribeEvent
     public static void capas(EntityRenderersEvent.RegisterLayerDefinitions e) {
         e.registerLayerDefinition(AvionModel.CAPA, AvionModel::crearCapa);
+        e.registerLayerDefinition(MetroRenderer.CAPA, MetroRenderer::crearCapa);
     }
 
     @SubscribeEvent

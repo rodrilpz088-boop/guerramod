@@ -131,6 +131,10 @@ public final class ModBloques {
         CatalogoGenerado.registrar();
         es.guerramod.incendios.BloquesIncendio.iniciar();
         es.guerramod.ciudad.BloquesCiudad.iniciar();
+        es.guerramod.vivienda.BloquesVivienda.iniciar();
+        es.guerramod.metro.BloquesMetro.iniciar();
+        es.guerramod.navidad.BloquesNavidad.iniciar();
+        es.guerramod.pueblo.Tablet.iniciar();
     }
 
     private ModBloques() {}

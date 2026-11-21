@@ -1,0 +1,21 @@
+{
+ "type": "minecraft:crafting_shaped",
+ "category": "building",
+ "pattern": [
+  "I I",
+  "IKI",
+  "III"
+ ],
+ "key": {
+  "I": {
+   "item": "minecraft:iron_ingot"
+  },
+  "K": {
+   "item": "minecraft:black_dye"
+  }
+ },
+ "result": {
+  "item": "guerramod:chaleco_geo",
+  "count": 1
+ }
+}

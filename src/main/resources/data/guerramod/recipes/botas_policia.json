@@ -1,0 +1,20 @@
+{
+ "type": "minecraft:crafting_shaped",
+ "category": "building",
+ "pattern": [
+  "L L",
+  "B B"
+ ],
+ "key": {
+  "L": {
+   "item": "minecraft:leather"
+  },
+  "B": {
+   "item": "minecraft:black_dye"
+  }
+ },
+ "result": {
+  "item": "guerramod:botas_policia",
+  "count": 1
+ }
+}

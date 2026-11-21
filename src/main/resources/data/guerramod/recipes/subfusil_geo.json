@@ -1,0 +1,24 @@
+{
+ "type": "minecraft:crafting_shaped",
+ "category": "building",
+ "pattern": [
+  "III",
+  "KIB",
+  "  K"
+ ],
+ "key": {
+  "I": {
+   "item": "minecraft:iron_ingot"
+  },
+  "K": {
+   "item": "minecraft:black_dye"
+  },
+  "B": {
+   "item": "minecraft:blue_dye"
+  }
+ },
+ "result": {
+  "item": "guerramod:subfusil_geo",
+  "count": 1
+ }
+}

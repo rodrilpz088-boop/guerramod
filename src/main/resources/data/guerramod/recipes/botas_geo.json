@@ -1,0 +1,20 @@
+{
+ "type": "minecraft:crafting_shaped",
+ "category": "building",
+ "pattern": [
+  "K K",
+  "I I"
+ ],
+ "key": {
+  "K": {
+   "item": "minecraft:black_wool"
+  },
+  "I": {
+   "item": "minecraft:iron_ingot"
+  }
+ },
+ "result": {
+  "item": "guerramod:botas_geo",
+  "count": 1
+ }
+}

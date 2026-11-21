@@ -1,0 +1,21 @@
+{
+ "type": "minecraft:crafting_shaped",
+ "category": "building",
+ "pattern": [
+  "KIK",
+  "K K",
+  "K K"
+ ],
+ "key": {
+  "K": {
+   "item": "minecraft:black_wool"
+  },
+  "I": {
+   "item": "minecraft:iron_ingot"
+  }
+ },
+ "result": {
+  "item": "guerramod:pantalon_geo",
+  "count": 1
+ }
+}

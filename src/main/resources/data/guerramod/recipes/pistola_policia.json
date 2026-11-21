@@ -1,0 +1,23 @@
+{
+ "type": "minecraft:crafting_shaped",
+ "category": "building",
+ "pattern": [
+  "III",
+  " KB"
+ ],
+ "key": {
+  "I": {
+   "item": "minecraft:iron_ingot"
+  },
+  "K": {
+   "item": "minecraft:black_dye"
+  },
+  "B": {
+   "item": "minecraft:blue_dye"
+  }
+ },
+ "result": {
+  "item": "guerramod:pistola_policia",
+  "count": 1
+ }
+}

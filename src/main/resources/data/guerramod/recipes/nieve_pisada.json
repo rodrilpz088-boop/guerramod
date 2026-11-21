@@ -1,0 +1,17 @@
+{
+ "type": "minecraft:crafting_shaped",
+ "category": "building",
+ "pattern": [
+  "SS",
+  "SS"
+ ],
+ "key": {
+  "S": {
+   "item": "minecraft:snow_block"
+  }
+ },
+ "result": {
+  "item": "guerramod:nieve_pisada",
+  "count": 3
+ }
+}

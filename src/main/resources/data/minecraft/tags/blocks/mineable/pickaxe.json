@@ -268,6 +268,15 @@
   "guerramod:cartel_linea_10",
   "guerramod:cartel_linea_11",
   "guerramod:cartel_linea_12",
-  "guerramod:azulejo_metro_biselado"
+  "guerramod:azulejo_metro_biselado",
+  "guerramod:ladrillo_hielo",
+  "guerramod:nieve_pisada",
+  "guerramod:canon_nieve",
+  "guerramod:cinta_policial",
+  "guerramod:luz_emergencia",
+  "guerramod:rotulo_comisaria",
+  "guerramod:valla_policial",
+  "guerramod:coche_patrulla",
+  "guerramod:furgon_geo"
  ]
 }

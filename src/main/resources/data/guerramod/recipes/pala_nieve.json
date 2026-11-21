@@ -1,0 +1,21 @@
+{
+ "type": "minecraft:crafting_shaped",
+ "category": "building",
+ "pattern": [
+  " PP",
+  " SP",
+  "S  "
+ ],
+ "key": {
+  "P": {
+   "item": "minecraft:red_dye"
+  },
+  "S": {
+   "item": "minecraft:stick"
+  }
+ },
+ "result": {
+  "item": "guerramod:pala_nieve",
+  "count": 1
+ }
+}

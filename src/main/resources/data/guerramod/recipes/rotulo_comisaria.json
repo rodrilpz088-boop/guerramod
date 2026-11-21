@@ -1,0 +1,23 @@
+{
+ "type": "minecraft:crafting_shaped",
+ "category": "building",
+ "pattern": [
+  "BWB",
+  "BGB"
+ ],
+ "key": {
+  "B": {
+   "item": "minecraft:blue_concrete"
+  },
+  "W": {
+   "item": "minecraft:white_dye"
+  },
+  "G": {
+   "item": "minecraft:glowstone"
+  }
+ },
+ "result": {
+  "item": "guerramod:rotulo_comisaria",
+  "count": 1
+ }
+}

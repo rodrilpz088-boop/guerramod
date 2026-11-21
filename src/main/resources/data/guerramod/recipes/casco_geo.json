@@ -1,0 +1,20 @@
+{
+ "type": "minecraft:crafting_shaped",
+ "category": "building",
+ "pattern": [
+  "III",
+  "IKI"
+ ],
+ "key": {
+  "I": {
+   "item": "minecraft:iron_ingot"
+  },
+  "K": {
+   "item": "minecraft:black_dye"
+  }
+ },
+ "result": {
+  "item": "guerramod:casco_geo",
+  "count": 1
+ }
+}

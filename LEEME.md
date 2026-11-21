@@ -347,6 +347,36 @@ Mallas de luces que parpadean (cálidas, azules y de colores) para hacer el **á
 lluvia de luces, cortinas, guirnaldas, adornos de farola, **arcos de luces** y **cartel "Feliz Navidad"** de 3 bloques de
 ancho para cruzar las calles, y bolas gigantes. En casa: árbol de Navidad, regalos, corona para la puerta y muñeco de nieve.
 
+### Clima realista por zonas (actualización)
+Cada zona tiene temperaturas de verdad y límites que no se pueden pasar: en la nieve el verano no pasa de 0–3 °C y el
+invierno baja de -15 °C; en la llanura templada los veranos rondan 20–28 °C y en Navidad hiela por la noche y nieva; el
+desierto llega a 40 °C de día y refresca mucho de noche. La altura enfría (unos 0,6 °C cada 10 bloques), la nieve refleja
+el sol y el calentamiento global y las olas de calor tienen un tope (en la nieve casi no se notan). `/incendios oladecalor`
+ya no deja la temperatura fija para siempre: dura 5 días. Al cargar el mundo se borran las temperaturas que se quedaron
+fijadas con versiones anteriores.
+
+### Nieve que se acumula y cosas para la nieve (pestaña "Invierno")
+Mientras nieva la nieve cuaja capa a capa: **cuanto más fuerte y más tiempo nieva, más se acumula** (hasta 2 bloques en
+zonas templadas, 3 en las frías y 4 en las de nieve). Rellena primero los huecos, el viento la amontona detrás de los
+obstáculos (ventisqueros) y en las ramas solo aguanta un poco. Con calor se funde de arriba abajo, más rápido al sol y con
+lluvia. Andar por nieve profunda cuesta.
+* **Pala quitanieves**: despeja 3×3 y te da bolas de nieve. **Sal gruesa**: funde la nieve y el hielo de alrededor.
+* **Raquetas de nieve** (andas normal por la nieve profunda) y **esquís** (vas más rápido por la nieve).
+* **Trineo**: se pone como una barca, desliza por la nieve y el hielo y cuesta abajo acelera.
+* **Cañón de nieve** (clic derecho para encenderlo): con menos de 2 °C fabrica nieve delante de él.
+* Ladrillos de hielo para iglús y nieve pisada (no se derrite).
+
+### Policía Nacional y GEO (pestaña "Policía Nacional y GEO")
+* Uniforme de patrulla (gorra, chaqueta, pantalón y botas) y equipo del **GEO** (casco balístico, chaleco táctico, pantalón y
+  botas; mucha más protección).
+* **Placa**: «¡Policía Nacional! ¡Alto!» y los que estén cerca se quedan quietos unos segundos. **Esposas**: clic derecho a
+  alguien y queda detenido un minuto. **Defensa** (porra) que aturde, **escudo antidisturbios**, pistola reglamentaria y
+  subfusil del GEO.
+* Cinta policial, rotativo azul, rótulo de comisaría, valla de contención, **coche patrulla** y **furgón del GEO**
+  (clic derecho: luces azules y sirena).
+* Oficio nuevo para los aldeanos en la tablet: **Policía Nacional**. Patrulla las calles con su defensa y se enfrenta a
+  los monstruos.
+
 ### Carreteras (más realistas)
 Asfalto nuevo con grava de verdad (sin cuadrícula) y marcas viales gastadas. Nuevo mobiliario urbano: marquesina de
 autobús, poste de parada, parquímetro, fuente de agua potable, alcorque, boca de riego, valla de obra, aparcabicis, panel

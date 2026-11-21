@@ -1,0 +1,20 @@
+{
+ "type": "minecraft:crafting_shaped",
+ "category": "building",
+ "pattern": [
+  "SLS",
+  "S S"
+ ],
+ "key": {
+  "S": {
+   "item": "minecraft:stick"
+  },
+  "L": {
+   "item": "minecraft:leather"
+  }
+ },
+ "result": {
+  "item": "guerramod:raquetas_nieve",
+  "count": 1
+ }
+}

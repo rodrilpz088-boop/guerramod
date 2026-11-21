@@ -1,0 +1,21 @@
+{
+ "type": "minecraft:crafting_shaped",
+ "category": "building",
+ "pattern": [
+  "BLB",
+  "B B",
+  "B B"
+ ],
+ "key": {
+  "B": {
+   "item": "minecraft:blue_wool"
+  },
+  "L": {
+   "item": "minecraft:leather"
+  }
+ },
+ "result": {
+  "item": "guerramod:pantalon_policia",
+  "count": 1
+ }
+}

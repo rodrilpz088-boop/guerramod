@@ -1,0 +1,236 @@
+{
+ "parent": "minecraft:block/block",
+ "ambientocclusion": false,
+ "textures": {
+  "lado": "guerramod:block/coche_policia_lado",
+  "frente": "guerramod:block/coche_policia_frente",
+  "trasera": "guerramod:block/coche_policia_trasera",
+  "techo": "guerramod:block/coche_policia_techo",
+  "bajos": "guerramod:block/metro_bajos",
+  "ventana": "guerramod:block/metro_bajos",
+  "rueda": "guerramod:block/mat_metal_negro",
+  "luz": "guerramod:block/barra_luces_on",
+  "particle": "guerramod:block/coche_policia_lado"
+ },
+ "elements": [
+  {
+   "from": [
+    -4,
+    3,
+    -14
+   ],
+   "to": [
+    20,
+    13,
+    30
+   ],
+   "faces": {
+    "east": {
+     "texture": "#lado"
+    },
+    "west": {
+     "texture": "#lado"
+    },
+    "north": {
+     "texture": "#frente"
+    },
+    "south": {
+     "texture": "#trasera"
+    },
+    "up": {
+     "texture": "#techo"
+    },
+    "down": {
+     "texture": "#bajos"
+    }
+   }
+  },
+  {
+   "from": [
+    -3,
+    13,
+    -2
+   ],
+   "to": [
+    19,
+    21,
+    22
+   ],
+   "faces": {
+    "east": {
+     "texture": "#ventana"
+    },
+    "west": {
+     "texture": "#ventana"
+    },
+    "north": {
+     "texture": "#ventana"
+    },
+    "south": {
+     "texture": "#ventana"
+    },
+    "up": {
+     "texture": "#techo"
+    }
+   }
+  },
+  {
+   "from": [
+    0,
+    21,
+    6
+   ],
+   "to": [
+    16,
+    23,
+    10
+   ],
+   "shade": false,
+   "faces": {
+    "north": {
+     "texture": "#luz"
+    },
+    "south": {
+     "texture": "#luz"
+    },
+    "east": {
+     "texture": "#luz"
+    },
+    "west": {
+     "texture": "#luz"
+    },
+    "up": {
+     "texture": "#luz"
+    }
+   }
+  },
+  {
+   "from": [
+    -4.5,
+    0,
+    -10
+   ],
+   "to": [
+    -0.5,
+    6,
+    -4
+   ],
+   "faces": {
+    "north": {
+     "texture": "#rueda"
+    },
+    "south": {
+     "texture": "#rueda"
+    },
+    "east": {
+     "texture": "#rueda"
+    },
+    "west": {
+     "texture": "#rueda"
+    },
+    "up": {
+     "texture": "#rueda"
+    },
+    "down": {
+     "texture": "#rueda"
+    }
+   }
+  },
+  {
+   "from": [
+    16.5,
+    0,
+    -10
+   ],
+   "to": [
+    20.5,
+    6,
+    -4
+   ],
+   "faces": {
+    "north": {
+     "texture": "#rueda"
+    },
+    "south": {
+     "texture": "#rueda"
+    },
+    "east": {
+     "texture": "#rueda"
+    },
+    "west": {
+     "texture": "#rueda"
+    },
+    "up": {
+     "texture": "#rueda"
+    },
+    "down": {
+     "texture": "#rueda"
+    }
+   }
+  },
+  {
+   "from": [
+    -4.5,
+    0,
+    20
+   ],
+   "to": [
+    -0.5,
+    6,
+    26
+   ],
+   "faces": {
+    "north": {
+     "texture": "#rueda"
+    },
+    "south": {
+     "texture": "#rueda"
+    },
+    "east": {
+     "texture": "#rueda"
+    },
+    "west": {
+     "texture": "#rueda"
+    },
+    "up": {
+     "texture": "#rueda"
+    },
+    "down": {
+     "texture": "#rueda"
+    }
+   }
+  },
+  {
+   "from": [
+    16.5,
+    0,
+    20
+   ],
+   "to": [
+    20.5,
+    6,
+    26
+   ],
+   "faces": {
+    "north": {
+     "texture": "#rueda"
+    },
+    "south": {
+     "texture": "#rueda"
+    },
+    "east": {
+     "texture": "#rueda"
+    },
+    "west": {
+     "texture": "#rueda"
+    },
+    "up": {
+     "texture": "#rueda"
+    },
+    "down": {
+     "texture": "#rueda"
+    }
+   }
+  }
+ ]
+}

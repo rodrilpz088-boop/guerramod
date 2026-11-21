@@ -1,0 +1,27 @@
+{
+ "type": "minecraft:crafting_shaped",
+ "category": "building",
+ "pattern": [
+  " L ",
+  "KKK",
+  "IRI"
+ ],
+ "key": {
+  "L": {
+   "item": "guerramod:luz_emergencia"
+  },
+  "K": {
+   "item": "minecraft:black_concrete"
+  },
+  "I": {
+   "item": "minecraft:iron_block"
+  },
+  "R": {
+   "item": "minecraft:redstone"
+  }
+ },
+ "result": {
+  "item": "guerramod:furgon_geo",
+  "count": 1
+ }
+}

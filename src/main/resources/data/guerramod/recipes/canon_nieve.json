@@ -1,0 +1,24 @@
+{
+ "type": "minecraft:crafting_shaped",
+ "category": "building",
+ "pattern": [
+  "III",
+  "FWF",
+  " I "
+ ],
+ "key": {
+  "I": {
+   "item": "minecraft:iron_ingot"
+  },
+  "F": {
+   "item": "minecraft:iron_bars"
+  },
+  "W": {
+   "item": "minecraft:powder_snow_bucket"
+  }
+ },
+ "result": {
+  "item": "guerramod:canon_nieve",
+  "count": 1
+ }
+}

@@ -1,0 +1,17 @@
+{
+ "type": "minecraft:crafting_shaped",
+ "category": "building",
+ "pattern": [
+  "II",
+  "II"
+ ],
+ "key": {
+  "I": {
+   "item": "minecraft:packed_ice"
+  }
+ },
+ "result": {
+  "item": "guerramod:ladrillo_hielo",
+  "count": 4
+ }
+}

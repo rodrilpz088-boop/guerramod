@@ -1,0 +1,30 @@
+{
+ "type": "minecraft:crafting_shaped",
+ "category": "building",
+ "pattern": [
+  " L ",
+  "WBW",
+  "IRI"
+ ],
+ "key": {
+  "L": {
+   "item": "guerramod:luz_emergencia"
+  },
+  "W": {
+   "item": "minecraft:white_concrete"
+  },
+  "B": {
+   "item": "minecraft:blue_concrete"
+  },
+  "I": {
+   "item": "minecraft:iron_block"
+  },
+  "R": {
+   "item": "minecraft:redstone"
+  }
+ },
+ "result": {
+  "item": "guerramod:coche_patrulla",
+  "count": 1
+ }
+}

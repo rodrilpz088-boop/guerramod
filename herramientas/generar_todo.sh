@@ -13,3 +13,4 @@ python3 herramientas/v4_clima.py
 python3 herramientas/v5_lluvia.py
 python3 herramientas/v6_ambiente.py
 python3 herramientas/v7_ciudad.py
+python3 herramientas/v8_invierno_policia.py

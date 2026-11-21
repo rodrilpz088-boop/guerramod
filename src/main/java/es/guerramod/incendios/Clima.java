@@ -143,7 +143,7 @@ public class Clima extends SavedData {
             int x = cerca.getX() + (int) (Math.cos(a) * d), z = cerca.getZ() + (int) (Math.sin(a) * d);
             BlockPos top = sl.getHeightmapPos(net.minecraft.world.level.levelgen.Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, new BlockPos(x, 0, z));
             if (!sl.isLoaded(top) || Fuego.sueloQuemable(sl.getBlockState(top.below())) < 0.5 || !Fuego.seco(sl, top)) continue;
-            if (riesgo(sl, top) < 2) continue;
+            if (es.guerramod.incendios.Meteo.en(sl, top).riesgo() < 2) continue;
             if (Fuego.encender(sl, top, false)) {
                 String rumbo = es.guerramod.desastres.Desastres.rumbo(x - cerca.getX(), z - cerca.getZ());
                 for (net.minecraft.server.level.ServerPlayer p : sl.players()) {

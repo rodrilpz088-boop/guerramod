@@ -14,7 +14,11 @@ import java.util.function.Supplier;
 public enum MaterialArmadura implements ArmorMaterial {
     MILITAR("militar", 30, new int[]{3, 6, 8, 3}, 10, 1.5f, 0.1f, () -> Ingredient.of(ModItems.PLACA_ACERO.get())),
     NBQ("nbq", 18, new int[]{1, 3, 4, 1}, 8, 0.0f, 0.0f, () -> Ingredient.of(net.minecraft.world.item.Items.LEATHER)),
-    BOMBERO("bombero", 25, new int[]{2, 5, 6, 2}, 10, 1.0f, 0.0f, () -> Ingredient.of(net.minecraft.world.item.Items.LEATHER));
+    BOMBERO("bombero", 25, new int[]{2, 5, 6, 2}, 10, 1.0f, 0.0f, () -> Ingredient.of(net.minecraft.world.item.Items.LEATHER)),
+    RAQUETAS("raquetas", 12, new int[]{1, 1, 1, 1}, 8, 0.0f, 0.0f, () -> Ingredient.of(net.minecraft.world.item.Items.STICK)),
+    ESQUIS("esquis", 14, new int[]{1, 1, 1, 1}, 8, 0.0f, 0.0f, () -> Ingredient.of(net.minecraft.world.item.Items.IRON_INGOT)),
+    POLICIA("policia", 22, new int[]{2, 4, 5, 2}, 12, 0.5f, 0.0f, () -> Ingredient.of(net.minecraft.world.item.Items.BLUE_WOOL)),
+    GEO("geo", 38, new int[]{3, 7, 9, 3}, 10, 2.5f, 0.15f, () -> Ingredient.of(net.minecraft.world.item.Items.IRON_INGOT));
 
     // orden de defensa: botas, pantalón, pecho, casco
     private static final int[] DURABILIDAD_BASE = {13, 15, 16, 11};

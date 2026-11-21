@@ -135,6 +135,8 @@ public final class ModBloques {
         es.guerramod.metro.BloquesMetro.iniciar();
         es.guerramod.navidad.BloquesNavidad.iniciar();
         es.guerramod.pueblo.Tablet.iniciar();
+        es.guerramod.invierno.ItemsInvierno.iniciar();
+        es.guerramod.policia.ItemsPolicia.iniciar();
     }
 
     private ModBloques() {}

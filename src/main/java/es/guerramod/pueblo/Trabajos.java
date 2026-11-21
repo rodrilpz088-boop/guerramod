@@ -553,9 +553,10 @@ public final class Trabajos {
         objetivo.put(Rol.FAROLERO, pob >= 6 ? 1 + pob / 30 : 0);
         objetivo.put(Rol.BOMBERO, pob >= 7 ? 1 + pob / 20 : 0);
         objetivo.put(Rol.VENDEDOR, pob >= 5 ? Math.max(1, pob / 6) : 0);
+        objetivo.put(Rol.POLICIA, pob >= 8 ? 1 + pob / 12 : 0);
         Rol[] prioridad = guerra
-                ? new Rol[]{Rol.DEFENSA, Rol.CONSTRUCTOR, Rol.AGRICULTOR, Rol.BOMBERO, Rol.CAMINERO, Rol.FAROLERO, Rol.VENDEDOR}
-                : new Rol[]{Rol.CONSTRUCTOR, Rol.AGRICULTOR, Rol.DEFENSA, Rol.CAMINERO, Rol.BOMBERO, Rol.FAROLERO, Rol.VENDEDOR};
+                ? new Rol[]{Rol.DEFENSA, Rol.CONSTRUCTOR, Rol.AGRICULTOR, Rol.BOMBERO, Rol.CAMINERO, Rol.FAROLERO, Rol.POLICIA, Rol.VENDEDOR}
+                : new Rol[]{Rol.CONSTRUCTOR, Rol.AGRICULTOR, Rol.DEFENSA, Rol.CAMINERO, Rol.BOMBERO, Rol.POLICIA, Rol.FAROLERO, Rol.VENDEDOR};
         Villager rep = c.de(Rol.REPRESENTANTE).get(0);
         for (Rol r : prioridad) {
             int falta = objetivo.get(r) - c.de(r).size();
@@ -621,6 +622,7 @@ public final class Trabajos {
         // herramienta en la mano (los aldeanos la llevan con los brazos cruzados)
         ItemStack mano = switch (r) {
             case DEFENSA -> new ItemStack(Items.IRON_SWORD);
+            case POLICIA -> new ItemStack(es.guerramod.policia.ItemsPolicia.PORRA.get());
             case CONSTRUCTOR -> new ItemStack(Items.IRON_SHOVEL);
             case AGRICULTOR -> new ItemStack(Items.IRON_HOE);
             case CAMINERO -> new ItemStack(Items.IRON_PICKAXE);
@@ -666,13 +668,15 @@ public final class Trabajos {
     @SubscribeEvent
     public static void vivir(LivingEvent.LivingTickEvent e) {
         if (!(e.getEntity() instanceof Villager v) || v.level().isClientSide() || v.isBaby()) return;
-        if (Dni.rol(v) != Rol.DEFENSA) return;
+        Rol rol = Dni.rol(v);
+        if (rol != Rol.DEFENSA && rol != Rol.POLICIA) return;
+        boolean policia = rol == Rol.POLICIA;
         ServerLevel l = (ServerLevel) v.level();
         Pueblos.Pueblo p = Pueblos.get(l).pueblo(Dni.pueblo(v));
         if (p == null) return;
         LivingEntity obj = OBJETIVO.get(v.getUUID());
         if (v.tickCount % 10 == 0 || (obj != null && !obj.isAlive())) {
-            obj = buscarObjetivo(l, v, p);
+            obj = buscarObjetivo(l, v, p, policia);
             if (obj == null) OBJETIVO.remove(v.getUUID());
             else OBJETIVO.put(v.getUUID(), obj);
         }
@@ -688,11 +692,20 @@ public final class Trabajos {
             if (v.distanceToSqr(obj) < 2.6 * 2.6 && ahora - GOLPE.getOrDefault(v.getUUID(), 0L) >= 18) {
                 GOLPE.put(v.getUUID(), ahora);
                 v.swing(InteractionHand.MAIN_HAND);
-                float dano = v.getMainHandItem().is(Items.IRON_SWORD) ? 6f : 3f;
+                float dano = v.getMainHandItem().is(Items.IRON_SWORD) ? 6f : policia ? 5f : 3f;
+                if (policia) obj.addEffect(new net.minecraft.world.effect.MobEffectInstance(net.minecraft.world.effect.MobEffects.MOVEMENT_SLOWDOWN, 50, 2));
                 if (obj.hurt(v.damageSources().mobAttack(v), dano)) {
                     obj.knockback(0.45, v.getX() - obj.getX(), v.getZ() - obj.getZ());
                     l.playSound(null, obj.blockPosition(), SoundEvents.PLAYER_ATTACK_STRONG, SoundSource.NEUTRAL, 0.8f, 1f);
                 }
+            }
+        } else if (policia) {
+            // patrulla: de calle en calle por el pueblo (de día)
+            if (v.tickCount % 160 == 0 && (l.getDayTime() % 24000L) < 12300L) {
+                BlockPos destino;
+                if (!p.calles.isEmpty()) destino = BlockPos.of(p.calles.getLong(l.random.nextInt(p.calles.size()))).above();
+                else destino = p.centro.offset(l.random.nextInt(41) - 20, 0, l.random.nextInt(41) - 20);
+                if (Construccion.cargado(l, destino.getX(), destino.getZ())) ir(v, destino, 0.55f);
             }
         } else if (p.enemigo != null && v.tickCount % 20 == 0) {
             // en guerra: marchan hacia el pueblo enemigo por etapas
@@ -715,14 +728,14 @@ public final class Trabajos {
         }
     }
 
-    private static LivingEntity buscarObjetivo(ServerLevel l, Villager v, Pueblos.Pueblo p) {
+    private static LivingEntity buscarObjetivo(ServerLevel l, Villager v, Pueblos.Pueblo p, boolean policia) {
         LivingEntity mejor = null;
         double md = Double.MAX_VALUE;
         AABB caja = v.getBoundingBox().inflate(18, 6, 18);
         for (LivingEntity e : l.getEntitiesOfClass(LivingEntity.class, caja, e -> e.isAlive() && e != v)) {
             boolean enemigo = false;
             if (e instanceof Enemy && !(e instanceof Creeper)) enemigo = e.distanceToSqr(Vec3.atCenterOf(p.centro)) < 70 * 70 || p.enemigo != null;
-            else if (p.enemigo != null && e instanceof Villager o && Dni.tiene(o) && p.enemigo.equals(Dni.pueblo(o)) && !o.isBaby()) {
+            else if (!policia && p.enemigo != null && e instanceof Villager o && Dni.tiene(o) && p.enemigo.equals(Dni.pueblo(o)) && !o.isBaby()) {
                 enemigo = Dni.rol(o) == Rol.DEFENSA || o.distanceToSqr(Vec3.atCenterOf(p.centro)) > 60 * 60;
             }
             if (!enemigo) continue;

@@ -31,6 +31,9 @@ public final class ClienteMod {
     @SubscribeEvent
     public static void prepararCliente(net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent e) {
         e.enqueueWork(() -> {
+            net.minecraft.client.renderer.item.ItemProperties.register(es.guerramod.policia.ItemsPolicia.ESCUDO.get(),
+                    new net.minecraft.resources.ResourceLocation("blocking"),
+                    (st, l, ent, s) -> ent != null && ent.isUsingItem() && ent.getUseItem() == st ? 1.0f : 0.0f);
             net.minecraft.client.renderer.ItemBlockRenderTypes.setRenderLayer(es.guerramod.desastres.AguaTurbia.FUENTE.get(),
                     net.minecraft.client.renderer.RenderType.translucent());
             net.minecraft.client.renderer.ItemBlockRenderTypes.setRenderLayer(es.guerramod.desastres.AguaTurbia.CORRIENTE.get(),
@@ -59,6 +62,7 @@ public final class ClienteMod {
         e.registerEntityRenderer(ModEntidades.AVION.get(), ctx -> new AvionRenderer<>(ctx, 1.6f, AvionRenderer.TEXTURA_CAZA));
         e.registerEntityRenderer(ModEntidades.BOMBARDERO.get(), ctx -> new AvionRenderer<>(ctx, 2.2f, AvionRenderer.TEXTURA_BOMBARDERO));
         e.registerEntityRenderer(ModEntidades.METRO.get(), MetroRenderer::new);
+        e.registerEntityRenderer(ModEntidades.TRINEO.get(), TrineoRenderer::new);
     }
 
     @SubscribeEvent

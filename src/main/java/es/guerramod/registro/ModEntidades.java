@@ -50,4 +50,8 @@ public final class ModEntidades {
     public static final RegistryObject<EntityType<es.guerramod.metro.MetroEntity>> METRO = ENTIDADES.register("metro",
             () -> EntityType.Builder.<es.guerramod.metro.MetroEntity>of(es.guerramod.metro.MetroEntity::new, MobCategory.MISC)
                     .sized(0.98f, 0.7f).clientTrackingRange(10).build("metro"));
+
+    public static final RegistryObject<EntityType<es.guerramod.invierno.TrineoEntity>> TRINEO = ENTIDADES.register("trineo",
+            () -> EntityType.Builder.<es.guerramod.invierno.TrineoEntity>of(es.guerramod.invierno.TrineoEntity::new, MobCategory.MISC)
+                    .sized(1.375f, 0.5625f).clientTrackingRange(10).build("trineo"));
 }

@@ -10,7 +10,8 @@ public enum Rol {
     FAROLERO("Electricista", "pone farolas por las calles y, en Navidad, luces", 0xFFF08A),
     BOMBERO("Bombero", "apaga los incendios cerca del pueblo", 0xFF5A4A),
     DEFENSA("Defensa", "protege el pueblo de monstruos y va a la guerra", 0x6A8AFF),
-    VENDEDOR("Comerciante", "vende y compra (comercio de aldeano)", 0x5AD0C0);
+    VENDEDOR("Comerciante", "vende y compra (comercio de aldeano)", 0x5AD0C0),
+    POLICIA("Policía Nacional", "patrulla las calles, detiene a los monstruos y protege a los vecinos", 0x3A7BFF);
 
     public final String nombre, descripcion;
     public final int color;

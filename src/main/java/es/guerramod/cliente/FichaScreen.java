@@ -95,6 +95,7 @@ public class FichaScreen extends Screen {
             case BOMBERO -> "Bombero";
             case DEFENSA -> "Defensa";
             case VENDEDOR -> "Comerciante";
+            case POLICIA -> "Policía";
         };
     }
 

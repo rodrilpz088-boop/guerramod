@@ -71,23 +71,35 @@ public record Meteo(double temperatura, double humedad, double viento, double cu
         // ---- temperatura: clima de la zona + ciclo del día (máxima hacia las 14:00, menos con nubes) + altitud
         long hora = level.getDayTime() % 24000; // 0 = 6:00, 6000 = 12:00
         double dia = Math.cos(2 * Math.PI * (hora - 8000) / 24000.0);
-        double alt = pos.getY() > 80 ? (pos.getY() - 80) * 0.02 : 0;
+        // altitud: unos 0,6 °C menos cada 10 bloques por encima de 70 (gradiente del aire, algo exagerado como el relieve)
+        double alt = pos.getY() > 70 ? (pos.getY() - 70) * 0.055 : 0;
         // estación del año (el máximo a finales de julio, el mínimo a finales de enero) y Navidad fría
         int diaAnio = es.guerramod.clima.Estaciones.dia(level);
         double estac = es.guerramod.clima.Estaciones.ciclo(diaAnio);
         double luzEst = es.guerramod.clima.Estaciones.cicloLuz(diaAnio);
-        double t = z.tMedia() + z.amplitud() * dia * (1 - 0.55 * nub) * (0.85 + 0.15 * luzEst) - alt;
+        boolean nieve = z.fria() && z.tMedia() < 2; // zonas de nieve perpetua (tundra, taiga nevada, glaciares, cumbres)
+        // la nieve refleja el sol: el día calienta mucho menos donde todo está blanco
+        double oscil = z.amplitud() * (nieve ? 0.6 : 1.0);
+        double t = z.tMedia() + oscil * dia * (1 - 0.55 * nub) * (0.85 + 0.15 * luzEst) - alt;
         t += es.guerramod.clima.Zonas.amplitudAnual(z) * (estac - 1) / 2;
         if (es.guerramod.clima.Estaciones.navidad(diaAnio)) t -= 4;
-        if (pos.getY() < 40) t += (13 - t) * Math.min(1, (40 - pos.getY()) / 30.0); // bajo tierra, temperatura estable
-        if (lluvia) t -= 4;
-        // calentamiento global (mucho más fuerte en las zonas frías: amplificación polar)
-        t += calor * (z.fria() ? 1.8 : 1.0);
-        if (c.extraCalorTicks > 0) t += c.extraCalor * (z.fria() ? 0.6 : 1.0); // ola de calor
+        if (lluvia) t -= nieve ? 1.5 : 4;
+        // calentamiento global (algo más fuerte en las zonas frías: amplificación polar), con límite realista
+        double cal = Math.max(-3, Math.min(4.5, calor));
+        t += cal * (z.fria() ? 1.4 : 1.0);
+        // ola de calor: en la nieve casi no se nota
+        if (c.extraCalorTicks > 0) t += c.extraCalor * (nieve ? 0.15 : z.fria() ? 0.4 : 1.0);
         if (!Float.isNaN(c.tempFija)) {
-            // /incendios temperatura: es la temperatura de las zonas templadas; las demás guardan su diferencia
-            t = Math.min(58, c.tempFija + 0.8 * (z.tMedia() - 15) - alt);
+            // /incendios temperatura: fija la de las zonas templadas; el resto cambia en proporción (la nieve muy poco)
+            double delta = c.tempFija - 20.0;
+            t += delta * (nieve ? 0.25 : z.fria() ? 0.55 : 1.0);
         }
+        // límites de cada zona: ni en la nieve hace 26 °C ni en el desierto -30 °C
+        double anual = es.guerramod.clima.Zonas.amplitudAnual(z);
+        double max = z.tMedia() + z.amplitud() + (nieve ? 3 : 7) + Math.max(0, cal);
+        double min = z.tMedia() - anual - z.amplitud() - 14 - alt;
+        t = clamp(t, min, Math.min(max - alt, 50));
+        if (pos.getY() < 40) t += (12 - t) * Math.min(1, (40 - pos.getY()) / 30.0); // bajo tierra, temperatura estable
 
         // ---- humedad relativa: la zona, la hora (de noche sube), la lluvia reciente, las nubes y el calentamiento
         double h = z.humedad();

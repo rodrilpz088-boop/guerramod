@@ -84,7 +84,7 @@ public final class ComandoIncendios {
                             Clima cl = Clima.get(c.getSource().getServer());
                             cl.tempFija = FloatArgumentType.getFloat(c, "grados");
                             cl.cambiado(c.getSource().getServer());
-                            return ok(c, String.format("Temperatura fijada en %.0f °C en las zonas templadas (las zonas frías y de nieve quedan más frescas, los desiertos más calurosos)", cl.tempFija));
+                            return ok(c, String.format("Las zonas templadas pasan a unos %.0f °C de media; las frías cambian la mitad y las de nieve muy poco (cada zona tiene sus límites reales). /incendios temperatura auto para volver a lo normal", cl.tempFija));
                         })))
                 .then(Commands.literal("humedad").requires(s -> s.hasPermission(2))
                         .then(Commands.literal("auto").executes(c -> {
@@ -110,19 +110,21 @@ public final class ComandoIncendios {
                 .then(Commands.literal("oladecalor").requires(s -> s.hasPermission(2)).executes(c -> {
                     var srv = c.getSource().getServer();
                     Clima cl = Clima.get(srv);
-                    cl.tempFija = 42;
-                    cl.humFija = 10;
+                    cl.extraCalor = 12;
+                    cl.extraCalorTicks = 24000 * 5;
                     cl.velocidad = Math.max(cl.velocidad, 35);
                     cl.ponerSequia(srv.overworld(), 30);
                     srv.overworld().setWeatherParameters(24000 * 5, 0, false, false);
                     cl.cambiado(srv);
-                    return ok(c, "Ola de calor: 42 °C, 10 % de humedad, 30 días sin llover y viento de "
+                    return ok(c, "Ola de calor durante 5 días: +12 °C (en la nieve casi nada), 30 días sin llover y viento de "
                             + Math.round(cl.velocidad) + " km/h. Peligro extremo de incendio.");
                 }))
                 .then(Commands.literal("normal").requires(s -> s.hasPermission(2)).executes(c -> {
                     Clima cl = Clima.get(c.getSource().getServer());
                     cl.tempFija = Float.NaN;
                     cl.humFija = Float.NaN;
+                    cl.extraCalor = 0;
+                    cl.extraCalorTicks = 0;
                     cl.cambiado(c.getSource().getServer());
                     return ok(c, "Tiempo automático otra vez (temperatura y humedad según bioma, hora y lluvia)");
                 })));

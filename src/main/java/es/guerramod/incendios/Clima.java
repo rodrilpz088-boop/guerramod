@@ -70,9 +70,18 @@ public class Clima extends SavedData {
         c.naturales = !t.contains("naturales") || t.getBoolean("naturales");
         c.tempFija = t.contains("tempFija") ? t.getFloat("tempFija") : Float.NaN;
         c.humFija = t.contains("humFija") ? t.getFloat("humFija") : Float.NaN;
+        if (t.getInt("versionClima") < 2) {
+            // las temperaturas fijadas antes (p. ej. la ola de calor a 42 °C) se quedaban para siempre: vuelven a ser automáticas
+            c.tempFija = Float.NaN;
+            c.humFija = Float.NaN;
+        }
         c.cambio = !t.contains("cambio") || t.getBoolean("cambio");
         if (t.contains("co2")) c.co2 = t.getDouble("co2");
         c.anomalia = t.getDouble("anomalia");
+        if (t.getInt("versionClima") < 2) {
+            c.anomalia = Math.min(c.anomalia, 1.5);
+            c.co2 = Math.min(c.co2, 560);
+        }
         c.aerosol = t.getDouble("aerosol");
         if (t.contains("nubes")) c.nubes = t.getDouble("nubes");
         c.nubesFija = t.contains("nubesFija") ? t.getFloat("nubesFija") : Float.NaN;
@@ -91,6 +100,7 @@ public class Clima extends SavedData {
         t.putFloat("velocidad", velocidad);
         t.putLong("lluvia", ultimaLluvia);
         t.putBoolean("naturales", naturales);
+        t.putInt("versionClima", 2);
         if (!Float.isNaN(tempFija)) t.putFloat("tempFija", tempFija);
         if (!Float.isNaN(humFija)) t.putFloat("humFija", humFija);
         t.putBoolean("cambio", cambio);
@@ -192,7 +202,7 @@ public class Clima extends SavedData {
     /** Emisión de CO2 (fábricas, centrales, incendios). */
     public void emitir(double ppm, double humo) {
         if (!cambio) return;
-        co2 = Math.min(3000, co2 + ppm);
+        co2 = Math.min(1200, co2 + ppm);
         aerosol = Math.min(3, aerosol + humo);
         setDirty();
     }
@@ -210,7 +220,7 @@ public class Clima extends SavedData {
         // sumideros naturales: vuelven al nivel de equilibrio en unos 3 días de juego
         co2 += (420 - co2) * (paso / 3600.0);
         aerosol *= Math.exp(-paso / 600.0);
-        double equilibrio = SENSIBILIDAD * Math.log(co2 / 420.0) / Math.log(2) - 0.6 * aerosol;
+        double equilibrio = Math.min(4.5, SENSIBILIDAD * Math.log(co2 / 420.0) / Math.log(2) - 0.6 * aerosol);
         anomalia += (equilibrio - anomalia) * (paso / 1200.0);
         // nubosidad: con lluvia cubierto, antes de llover se va nublando, si no varía poco a poco
         double objetivo = nubosidadDia(ow.getDayTime());

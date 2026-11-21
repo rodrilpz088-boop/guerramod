@@ -24,7 +24,9 @@ public enum Categoria {
     CIUDAD("ciudad"),
     VIVIENDA("vivienda"),
     METRO("metro"),
-    NAVIDAD("navidad");
+    NAVIDAD("navidad"),
+    INVIERNO("invierno"),
+    POLICIA("policia");
 
     public final String id;
     public final List<Supplier<? extends ItemLike>> lista = new ArrayList<>();

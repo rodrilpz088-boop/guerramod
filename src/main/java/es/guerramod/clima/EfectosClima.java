@@ -18,23 +18,6 @@ import net.minecraft.world.level.levelgen.Heightmap;
 public final class EfectosClima {
     private EfectosClima() {}
 
-    /** Con frío: nieva donde normalmente llovería (cuaja poco a poco) y el agua quieta se hiela. */
-    private static void frio(ServerLevel ow, BlockPos arriba, double t, RandomSource r) {
-        BlockState s = ow.getBlockState(arriba);
-        BlockPos debajo = arriba.below();
-        BlockState sd = ow.getBlockState(debajo);
-        if (ow.isRaining() && ow.isRainingAt(arriba)) {
-            if (s.isAir() && sd.isFaceSturdy(ow, debajo, net.minecraft.core.Direction.UP) && r.nextFloat() < 0.6f) {
-                ow.setBlock(arriba, Blocks.SNOW.defaultBlockState(), Block.UPDATE_ALL);
-            } else if (s.is(Blocks.SNOW) && s.getValue(SnowLayerBlock.LAYERS) < (t < -3 ? 5 : 3) && r.nextFloat() < 0.25f) {
-                ow.setBlock(arriba, s.setValue(SnowLayerBlock.LAYERS, s.getValue(SnowLayerBlock.LAYERS) + 1), Block.UPDATE_ALL);
-            }
-        }
-        if (t < -2 && sd.is(Blocks.WATER) && ow.getFluidState(debajo).isSource() && s.isAir() && r.nextFloat() < 0.3f) {
-            ow.setBlock(debajo, Blocks.ICE.defaultBlockState(), Block.UPDATE_ALL);
-        }
-    }
-
     /** Cada segundo: el tiempo local a cada jugador del mundo normal. */
     public static void enviarTiempo(MinecraftServer server) {
         ServerLevel ow = server.overworld();
@@ -66,39 +49,20 @@ public final class EfectosClima {
         }
     }
 
-    /** Cada tick: algunas columnas al azar alrededor de cada jugador; si hace calor la nieve y el hielo se funden. */
+    /**
+     * Cada tick: columnas al azar alrededor de cada jugador (muchas más mientras nieva, para que se vea cuajar). En cada
+     * una la nieve cuaja, se funde o el agua se hiela (ver {@link Nieve}).
+     */
     public static void tick(MinecraftServer server) {
-        if (server.getTickCount() % 2 != 0) return;
         ServerLevel ow = server.overworld();
         RandomSource r = ow.random;
+        int n = ow.isRaining() ? 28 : 8;
         for (ServerPlayer p : ow.players()) {
-            for (int i = 0; i < 4; i++) {
+            for (int i = 0; i < n; i++) {
                 int x = p.getBlockX() + r.nextInt(97) - 48, z = p.getBlockZ() + r.nextInt(97) - 48;
                 if (!ow.hasChunkAt(new BlockPos(x, p.getBlockY(), z))) continue;
                 BlockPos arriba = ow.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING, new BlockPos(x, 0, z));
-                double t = Meteo.en(ow, arriba).temperatura();
-                if (t < 1.0) {
-                    frio(ow, arriba, t, r);
-                    continue;
-                }
-                if (t < 4.5) continue;
-                // probabilidad de fundirse: más calor, más rápido; el sol de mediodía también ayuda
-                double prob = Math.min(1.0, (t - 4.5) / 14.0);
-                if (r.nextDouble() > prob) continue;
-                BlockState s = ow.getBlockState(arriba);
-                BlockPos debajo = arriba.below();
-                BlockState sd = ow.getBlockState(debajo);
-                if (s.is(Blocks.SNOW)) {
-                    int capas = s.getValue(SnowLayerBlock.LAYERS);
-                    ow.setBlock(arriba, capas > 1 ? s.setValue(SnowLayerBlock.LAYERS, capas - 1) : Blocks.AIR.defaultBlockState(),
-                            Block.UPDATE_ALL);
-                } else if (sd.is(Blocks.SNOW_BLOCK) || sd.is(Blocks.POWDER_SNOW)) {
-                    if (t > 8) ow.setBlock(debajo, Blocks.SNOW.defaultBlockState().setValue(SnowLayerBlock.LAYERS, 7), Block.UPDATE_ALL);
-                } else if (sd.is(Blocks.ICE) || sd.is(Blocks.FROSTED_ICE)) {
-                    if (t > 6) ow.setBlock(debajo, Blocks.WATER.defaultBlockState(), Block.UPDATE_ALL);
-                } else if (sd.is(Blocks.PACKED_ICE) && t > 14 && r.nextInt(6) == 0) {
-                    ow.setBlock(debajo, Blocks.ICE.defaultBlockState(), Block.UPDATE_ALL);
-                }
+                Nieve.columna(ow, arriba, Meteo.en(ow, arriba), r);
             }
         }
     }

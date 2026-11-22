@@ -103,8 +103,14 @@ public class Minimapa implements IGuiOverlay {
         int colorT = tc < 0 ? 0xFF9FD4FF : tc < 15 ? 0xFFD8F0FF : tc < 28 ? 0xFFFFF2C0 : tc < 36 ? 0xFFFFB060 : 0xFFFF6040;
         g.drawString(f, tiempo, x0, ty, colorT, true);
         ty += 10;
+        float tin = es.guerramod.clima.TiempoCliente.interior;
+        if (!Float.isNaN(tin)) {
+            int ci = tin < 12 ? 0xFF9FD4FF : tin < 18 ? 0xFFD8F0FF : tin < 26 ? 0xFFB8F0B0 : 0xFFFFB060;
+            g.drawString(f, String.format("En casa: %.0f °C", tin), x0, ty, ci, true);
+            ty += 10;
+        }
         float sens = es.guerramod.clima.TiempoCliente.sensacion;
-        if (sens < tc - 2 || es.guerramod.clima.TiempoCliente.ventisca > 0) {
+        if (Float.isNaN(tin) && sens < tc - 2 || es.guerramod.clima.TiempoCliente.ventisca > 0) {
             boolean vent = es.guerramod.clima.TiempoCliente.ventisca > 0;
             String s2 = (vent ? "❄ VENTISCA · " : "") + String.format("Sensación %.0f °C", sens)
                     + (sens < -27 ? " · ¡congelación!" : sens < -10 ? " · peligro" : "");

@@ -518,5 +518,8 @@
  "block.guerramod.coche_patrulla": "National Police Patrol Car (3 long)",
  "block.guerramod.furgon_geo": "GEO Van (3 long)",
  "itemGroup.guerramod.invierno": "Winter: Snow & Skiing",
- "itemGroup.guerramod.policia": "National Police & GEO"
+ "itemGroup.guerramod.policia": "National Police & GEO",
+ "block.guerramod.termostato": "Thermostat",
+ "block.guerramod.termometro_exterior": "Outdoor Thermometer",
+ "item.guerramod.termometro_digital": "Digital Thermometer"
 }

@@ -1,0 +1,42 @@
+{
+ "parent": "minecraft:block/block",
+ "textures": {
+  "f": "guerramod:block/termostato_17",
+  "l": "guerramod:block/mat_plastico_blanco",
+  "particle": "guerramod:block/mat_plastico_blanco"
+ },
+ "elements": [
+  {
+   "from": [
+    4,
+    4,
+    15
+   ],
+   "to": [
+    12,
+    12,
+    16
+   ],
+   "faces": {
+    "north": {
+     "texture": "#f"
+    },
+    "south": {
+     "texture": "#l"
+    },
+    "east": {
+     "texture": "#l"
+    },
+    "west": {
+     "texture": "#l"
+    },
+    "up": {
+     "texture": "#l"
+    },
+    "down": {
+     "texture": "#l"
+    }
+   }
+  }
+ ]
+}

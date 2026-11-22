@@ -331,6 +331,16 @@ quemas), con su columna de humo. Las llamas trepan por paredes y tejados que ard
   forja, toldo, aire acondicionado exterior, antena de TV y parabólica, contador de la luz, cuadro eléctrico, enchufe,
   extractor, puerta de garaje, felpudo, cámara de seguridad, alarma y aplique de portal.
 
+### Temperatura de la casa: termostato y termómetros (pestaña "Vivienda")
+* **Termostato** de pared: clic derecho para ver la temperatura de dentro y de fuera y qué hacen la calefacción y el aire;
+  agachado + clic derecho cambia la temperatura deseada (16 a 28 °C, se ve en su pantalla).
+* La casa amortigua el tiempo de fuera. **Calientan**: radiadores (más con caldera de gas cerca), toalleros, chimenea
+  encendida, hogueras y hornos encendidos. **Enfría**: el aire acondicionado encendido. Con termostato se paran al
+  llegar a la temperatura marcada.
+* Dentro de casa la pantalla muestra «En casa: X °C», y es esa temperatura la que cuenta para congelarse: en una ventisca,
+  una casa con radiadores o chimenea te salva.
+* **Termómetro de exterior** para la fachada y **termómetro digital** de mano (mide donde estés).
+
 ### Metro de Madrid (pestaña "Metro de Madrid")
 Azulejos biselados (blanco, azul, rojo y verde), suelo de andén de terrazo, borde de andén con franja amarilla podotáctil,
 carteles de estación (Sol, Gran Vía, Callao, Ópera, Atocha, Chamartín, Nuevos Ministerios, Plaza de Castilla, Moncloa,

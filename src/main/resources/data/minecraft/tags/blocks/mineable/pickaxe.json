@@ -277,6 +277,8 @@
   "guerramod:rotulo_comisaria",
   "guerramod:valla_policial",
   "guerramod:coche_patrulla",
-  "guerramod:furgon_geo"
+  "guerramod:furgon_geo",
+  "guerramod:termostato",
+  "guerramod:termometro_exterior"
  ]
 }

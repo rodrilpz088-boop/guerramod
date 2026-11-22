@@ -577,6 +577,67 @@ V.receta("coche_patrulla", [" L ", "WBW", "IRI"], {"L": G("luz_emergencia"), "W"
                                                   "I": mc("iron_block"), "R": mc("redstone")})
 V.receta("furgon_geo", [" L ", "KKK", "IRI"], {"L": G("luz_emergencia"), "K": mc("black_concrete"), "I": mc("iron_block"), "R": mc("redstone")})
 
+# ---------------------------------------------------------------------- termostato y termómetros
+for c in range(16, 29):
+    im = Image.new("RGBA", (64, 64), (0, 0, 0, 0))
+    d = ImageDraw.Draw(im)
+    d.rounded_rectangle((4, 4, 59, 59), 8, fill=(246, 246, 242, 255), outline=(180, 180, 176, 255), width=2)
+    d.rounded_rectangle((12, 12, 51, 38), 4, fill=(18, 30, 40, 255))
+    d.text((31, 25), f"{c}°", font=fuente(16), fill=(120, 220, 255, 255), anchor="mm")
+    d.ellipse((14, 44, 22, 52), fill=(230, 80, 40, 255))   # calor
+    d.ellipse((41, 44, 49, 52), fill=(60, 140, 230, 255))  # frío
+    d.rectangle((26, 46, 37, 50), fill=(200, 200, 196, 255))
+    guardar(im, TB, f"termostato_{c}")
+    m = {"parent": "minecraft:block/block", "textures": {"f": G(f"block/termostato_{c}"), "l": G("block/mat_plastico_blanco"),
+                                                         "particle": G("block/mat_plastico_blanco")},
+         "elements": [{"from": [4, 4, 15], "to": [12, 12, 16], "faces": {"north": {"texture": "#f"}, "south": {"texture": "#l"},
+                                                                          "east": {"texture": "#l"}, "west": {"texture": "#l"},
+                                                                          "up": {"texture": "#l"}, "down": {"texture": "#l"}}}]}
+    escribir(os.path.join(A, "models", "block", f"termostato_{c}.json"), m)
+variantes = {}
+for f, y in V.ROT.items():
+    for c in range(16, 29):
+        dd = {"model": G(f"block/termostato_{c}")}
+        if y:
+            dd["y"] = y
+        variantes[f"consigna={c},facing={f}"] = dd
+escribir(os.path.join(A, "blockstates", "termostato.json"), {"variants": variantes})
+escribir(os.path.join(A, "models", "item", "termostato.json"), {"parent": "minecraft:item/generated", "textures": {"layer0": G("block/termostato_21")}})
+nombre(f"block.{MOD}.termostato", "Termostato (clic: temperatura de casa · agachado: cambiar)", "Thermostat")
+botin("termostato")
+V.receta("termostato", ["QRQ", "QGQ"], {"Q": mc("quartz"), "R": mc("redstone"), "G": mc("glass_pane")}, 2)
+
+im = Image.new("RGBA", (64, 64), (0, 0, 0, 0))
+d = ImageDraw.Draw(im)
+d.ellipse((2, 2, 61, 61), fill=(60, 64, 70, 255))
+d.ellipse((6, 6, 57, 57), fill=(248, 248, 244, 255))
+for i in range(-50, 51, 10):
+    t = np.radians(225 - (i + 50) * 2.7)
+    col = (40, 90, 220, 255) if i < 0 else (220, 50, 40, 255)
+    d.line((32 + 21 * np.cos(t), 32 - 21 * np.sin(t), 32 + 25 * np.cos(t), 32 - 25 * np.sin(t)), fill=col, width=2)
+d.text((32, 44), "°C", font=fuente(9), fill=(40, 40, 40, 255), anchor="mm")
+t = np.radians(150)
+d.line((32, 32, 32 + 20 * np.cos(t), 32 - 20 * np.sin(t)), fill=(20, 20, 20, 255), width=2)
+d.ellipse((29, 29, 35, 35), fill=(20, 20, 20, 255))
+guardar(im, TB, "termometro_exterior")
+V.placa("termometro_exterior", "Termómetro de exterior (fachada)", "Outdoor Thermometer", G("block/termometro_exterior"),
+        G("block/mat_metal_negro"), 2, 2, 14, 14, 1)
+botin("termometro_exterior")
+V.receta("termometro_exterior", [" I ", "IGI", " I "], {"I": mc("iron_nugget"), "G": mc("glass_pane")})
+
+
+def d_termo(d, im):
+    d.rounded_rectangle((4, 1, 11, 14), 2, fill=(240, 240, 236, 255), outline=(120, 120, 120, 255))
+    d.rectangle((5, 3, 10, 7), fill=(18, 30, 40, 255))
+    d.point((7, 5), fill=(120, 220, 255, 255))
+    d.point((8, 5), fill=(120, 220, 255, 255))
+    d.line((7, 9, 7, 13), fill=(200, 40, 40, 255))
+    d.point((8, 13), fill=(200, 40, 40, 255))
+
+
+icono("termometro_digital", d_termo, "Termómetro digital", "Digital Thermometer")
+V.receta("termometro_digital", ["G", "R", "I"], {"G": mc("glass_pane"), "R": mc("redstone"), "I": mc("iron_ingot")})
+
 # pestañas
 nombre(f"itemGroup.{MOD}.invierno", "Invierno: nieve y esquí", "Winter: Snow & Skiing")
 nombre(f"itemGroup.{MOD}.policia", "Policía Nacional y GEO", "National Police & GEO")

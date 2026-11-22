@@ -90,11 +90,14 @@ public final class Congelacion {
         Meteo m = Meteo.en(l, pos);
         Clima c = Clima.get(l.getServer());
         boolean fuera = !refugio(l, e);
-        double viento = fuera ? c.velocidad : 0;
-        double sens = Meteo.sensacion(m.temperatura(), viento);
-        if (!fuera) sens += 12; // dentro de casa se está bastante mejor
-        boolean calor = calorCerca(l, pos);
-        if (calor) sens += 25;
+        double sens;
+        if (fuera) {
+            sens = Meteo.sensacion(m.temperatura(), c.velocidad);
+            if (calorCerca(l, pos)) sens += 25;
+        } else {
+            // dentro de casa: la temperatura de la casa (cuentan radiadores, chimenea, aire acondicionado...)
+            sens = es.guerramod.vivienda.Interior.leer(l, BlockPos.containing(e.getEyePosition())).interior();
+        }
         int req = e.getTicksRequiredToFreeze();
         int f = e.getTicksFrozen();
         if (sens < -10) {

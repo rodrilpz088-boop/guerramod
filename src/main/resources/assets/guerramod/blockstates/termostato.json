@@ -1,0 +1,199 @@
+{
+ "variants": {
+  "consigna=16,facing=north": {
+   "model": "guerramod:block/termostato_16"
+  },
+  "consigna=17,facing=north": {
+   "model": "guerramod:block/termostato_17"
+  },
+  "consigna=18,facing=north": {
+   "model": "guerramod:block/termostato_18"
+  },
+  "consigna=19,facing=north": {
+   "model": "guerramod:block/termostato_19"
+  },
+  "consigna=20,facing=north": {
+   "model": "guerramod:block/termostato_20"
+  },
+  "consigna=21,facing=north": {
+   "model": "guerramod:block/termostato_21"
+  },
+  "consigna=22,facing=north": {
+   "model": "guerramod:block/termostato_22"
+  },
+  "consigna=23,facing=north": {
+   "model": "guerramod:block/termostato_23"
+  },
+  "consigna=24,facing=north": {
+   "model": "guerramod:block/termostato_24"
+  },
+  "consigna=25,facing=north": {
+   "model": "guerramod:block/termostato_25"
+  },
+  "consigna=26,facing=north": {
+   "model": "guerramod:block/termostato_26"
+  },
+  "consigna=27,facing=north": {
+   "model": "guerramod:block/termostato_27"
+  },
+  "consigna=28,facing=north": {
+   "model": "guerramod:block/termostato_28"
+  },
+  "consigna=16,facing=east": {
+   "model": "guerramod:block/termostato_16",
+   "y": 90
+  },
+  "consigna=17,facing=east": {
+   "model": "guerramod:block/termostato_17",
+   "y": 90
+  },
+  "consigna=18,facing=east": {
+   "model": "guerramod:block/termostato_18",
+   "y": 90
+  },
+  "consigna=19,facing=east": {
+   "model": "guerramod:block/termostato_19",
+   "y": 90
+  },
+  "consigna=20,facing=east": {
+   "model": "guerramod:block/termostato_20",
+   "y": 90
+  },
+  "consigna=21,facing=east": {
+   "model": "guerramod:block/termostato_21",
+   "y": 90
+  },
+  "consigna=22,facing=east": {
+   "model": "guerramod:block/termostato_22",
+   "y": 90
+  },
+  "consigna=23,facing=east": {
+   "model": "guerramod:block/termostato_23",
+   "y": 90
+  },
+  "consigna=24,facing=east": {
+   "model": "guerramod:block/termostato_24",
+   "y": 90
+  },
+  "consigna=25,facing=east": {
+   "model": "guerramod:block/termostato_25",
+   "y": 90
+  },
+  "consigna=26,facing=east": {
+   "model": "guerramod:block/termostato_26",
+   "y": 90
+  },
+  "consigna=27,facing=east": {
+   "model": "guerramod:block/termostato_27",
+   "y": 90
+  },
+  "consigna=28,facing=east": {
+   "model": "guerramod:block/termostato_28",
+   "y": 90
+  },
+  "consigna=16,facing=south": {
+   "model": "guerramod:block/termostato_16",
+   "y": 180
+  },
+  "consigna=17,facing=south": {
+   "model": "guerramod:block/termostato_17",
+   "y": 180
+  },
+  "consigna=18,facing=south": {
+   "model": "guerramod:block/termostato_18",
+   "y": 180
+  },
+  "consigna=19,facing=south": {
+   "model": "guerramod:block/termostato_19",
+   "y": 180
+  },
+  "consigna=20,facing=south": {
+   "model": "guerramod:block/termostato_20",
+   "y": 180
+  },
+  "consigna=21,facing=south": {
+   "model": "guerramod:block/termostato_21",
+   "y": 180
+  },
+  "consigna=22,facing=south": {
+   "model": "guerramod:block/termostato_22",
+   "y": 180
+  },
+  "consigna=23,facing=south": {
+   "model": "guerramod:block/termostato_23",
+   "y": 180
+  },
+  "consigna=24,facing=south": {
+   "model": "guerramod:block/termostato_24",
+   "y": 180
+  },
+  "consigna=25,facing=south": {
+   "model": "guerramod:block/termostato_25",
+   "y": 180
+  },
+  "consigna=26,facing=south": {
+   "model": "guerramod:block/termostato_26",
+   "y": 180
+  },
+  "consigna=27,facing=south": {
+   "model": "guerramod:block/termostato_27",
+   "y": 180
+  },
+  "consigna=28,facing=south": {
+   "model": "guerramod:block/termostato_28",
+   "y": 180
+  },
+  "consigna=16,facing=west": {
+   "model": "guerramod:block/termostato_16",
+   "y": 270
+  },
+  "consigna=17,facing=west": {
+   "model": "guerramod:block/termostato_17",
+   "y": 270
+  },
+  "consigna=18,facing=west": {
+   "model": "guerramod:block/termostato_18",
+   "y": 270
+  },
+  "consigna=19,facing=west": {
+   "model": "guerramod:block/termostato_19",
+   "y": 270
+  },
+  "consigna=20,facing=west": {
+   "model": "guerramod:block/termostato_20",
+   "y": 270
+  },
+  "consigna=21,facing=west": {
+   "model": "guerramod:block/termostato_21",
+   "y": 270
+  },
+  "consigna=22,facing=west": {
+   "model": "guerramod:block/termostato_22",
+   "y": 270
+  },
+  "consigna=23,facing=west": {
+   "model": "guerramod:block/termostato_23",
+   "y": 270
+  },
+  "consigna=24,facing=west": {
+   "model": "guerramod:block/termostato_24",
+   "y": 270
+  },
+  "consigna=25,facing=west": {
+   "model": "guerramod:block/termostato_25",
+   "y": 270
+  },
+  "consigna=26,facing=west": {
+   "model": "guerramod:block/termostato_26",
+   "y": 270
+  },
+  "consigna=27,facing=west": {
+   "model": "guerramod:block/termostato_27",
+   "y": 270
+  },
+  "consigna=28,facing=west": {
+   "model": "guerramod:block/termostato_28",
+   "y": 270
+  }
+ }
+}

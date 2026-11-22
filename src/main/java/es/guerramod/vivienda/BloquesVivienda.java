@@ -27,6 +27,20 @@ public final class BloquesVivienda {
     public static final RegistryObject<Block> PANEL_ASCENSOR = ModBloques.reg("panel_ascensor", C,
             () -> new PlacaBlock(metal().noOcclusion().lightLevel(s -> 4), 1, 2, 14, false));
 
+    public static final RegistryObject<Block> TERMOSTATO = ModBloques.reg("termostato", C,
+            () -> new TermostatoBlock(BlockBehaviour.Properties.of().mapColor(MapColor.QUARTZ).strength(0.5f).sound(SoundType.STONE).noOcclusion()
+                    .lightLevel(s -> 3)));
+    public static final RegistryObject<Block> TERMOMETRO_EXTERIOR = ModBloques.reg("termometro_exterior", C,
+            () -> new Termometros.Exterior(metal().noOcclusion()));
+    public static final RegistryObject<net.minecraft.world.item.Item> TERMOMETRO = registrarItem();
+
+    private static RegistryObject<net.minecraft.world.item.Item> registrarItem() {
+        RegistryObject<net.minecraft.world.item.Item> r = es.guerramod.registro.ModItems.ITEMS.register("termometro_digital",
+                () -> new Termometros.Digital(new net.minecraft.world.item.Item.Properties().stacksTo(1)));
+        C.lista.add(r);
+        return r;
+    }
+
     public static void iniciar() {
     }
 }

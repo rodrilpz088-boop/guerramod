@@ -518,5 +518,8 @@
  "block.guerramod.coche_patrulla": "Coche patrulla de la Policía Nacional (3 de largo)",
  "block.guerramod.furgon_geo": "Furgón del GEO (3 de largo)",
  "itemGroup.guerramod.invierno": "Invierno: nieve y esquí",
- "itemGroup.guerramod.policia": "Policía Nacional y GEO"
+ "itemGroup.guerramod.policia": "Policía Nacional y GEO",
+ "block.guerramod.termostato": "Termostato (clic: temperatura de casa · agachado: cambiar)",
+ "block.guerramod.termometro_exterior": "Termómetro de exterior (fachada)",
+ "item.guerramod.termometro_digital": "Termómetro digital"
 }

@@ -38,7 +38,9 @@ public final class Nieve {
 
     /** ¿Está nevando ahora mismo en esa columna? */
     public static boolean nievaEn(ServerLevel l, BlockPos arriba, double t) {
-        if (!l.isRaining() || t >= 1.0 || !l.canSeeSky(arriba)) return false;
+        // se mira el cielo desde el bloque de encima: una capa de nieve llena (8 capas) ya no deja pasar la luz y si se
+        // mirase desde ella misma la nieve dejaría de crecer al llegar a un bloque
+        if (!l.isRaining() || t >= 1.0 || !l.canSeeSky(arriba.above())) return false;
         Biome b = l.getBiome(arriba).value();
         return b.hasPrecipitation();
     }
@@ -71,9 +73,16 @@ public final class Nieve {
         return Integer.MAX_VALUE;
     }
 
+    /** Lo más alto de la columna: el sitio de la capa de nieve de arriba (o el aire encima del suelo). */
+    public static BlockPos cima(Level l, int x, int z) {
+        BlockPos p = l.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING, new BlockPos(x, 0, z));
+        while (l.getBlockState(p).isAir() && l.getBlockState(p.below()).is(Blocks.SNOW) && p.getY() > l.getMinBuildHeight()) p = p.below();
+        return p;
+    }
+
     /** Superficie de la columna en capas (altura*8 + capas de nieve), para comparar con los vecinos. */
     private static int superficie(ServerLevel l, int x, int z) {
-        BlockPos a = l.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING, new BlockPos(x, 0, z));
+        BlockPos a = cima(l, x, z);
         BlockState s = l.getBlockState(a);
         return a.getY() * 8 + (s.is(Blocks.SNOW) ? s.getValue(SnowLayerBlock.LAYERS) : 0);
     }
@@ -102,8 +111,9 @@ public final class Nieve {
                 l.setBlock(arriba, s.setValue(SnowLayerBlock.LAYERS, c + 1), Block.UPDATE_ALL);
                 return true;
             }
-            // capa llena: se compacta en un bloque de nieve y sigue cuajando encima
-            if (l.getBlockState(arriba.above()).isAir()) {
+            // capa llena: se compacta en un bloque de nieve y sigue cuajando encima (sin límite de altura)
+            BlockState encima = l.getBlockState(arriba.above());
+            if (arriba.getY() + 1 < l.getMaxBuildHeight() && (encima.isAir() || encima.canBeReplaced() && encima.getFluidState().isEmpty())) {
                 l.setBlock(arriba, Blocks.SNOW_BLOCK.defaultBlockState(), Block.UPDATE_ALL);
                 l.setBlock(arriba.above(), Blocks.SNOW.defaultBlockState(), Block.UPDATE_ALL);
                 return true;
@@ -170,7 +180,7 @@ public final class Nieve {
         double prob = (t - 1.0) / 9.0;
         long hora = l.getDayTime() % 24000;
         if (hora > 1000 && hora < 11000 && !l.isRaining()) prob += 0.12 * (1 - m.nubes());
-        if (l.isRaining() && l.canSeeSky(arriba)) prob += 0.2;
+        if (l.isRaining() && l.canSeeSky(arriba.above())) prob += 0.2;
         if (r.nextDouble() > Math.min(1.0, prob)) return;
         BlockState s = l.getBlockState(arriba);
         BlockPos debajo = arriba.below();

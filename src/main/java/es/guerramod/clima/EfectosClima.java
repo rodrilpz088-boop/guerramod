@@ -56,12 +56,12 @@ public final class EfectosClima {
     public static void tick(MinecraftServer server) {
         ServerLevel ow = server.overworld();
         RandomSource r = ow.random;
-        int n = es.guerramod.incendios.Clima.get(server).ventisca() > 0 ? 90 : ow.isRaining() ? 28 : 8;
+        int n = es.guerramod.incendios.Clima.get(server).ventisca() > 0 ? 90 : ow.isRaining() ? 45 : 8;
         for (ServerPlayer p : ow.players()) {
             for (int i = 0; i < n; i++) {
                 int x = p.getBlockX() + r.nextInt(97) - 48, z = p.getBlockZ() + r.nextInt(97) - 48;
                 if (!ow.hasChunkAt(new BlockPos(x, p.getBlockY(), z))) continue;
-                BlockPos arriba = ow.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING, new BlockPos(x, 0, z));
+                BlockPos arriba = Nieve.cima(ow, x, z);
                 Nieve.columna(ow, arriba, Meteo.en(ow, arriba), r);
             }
         }

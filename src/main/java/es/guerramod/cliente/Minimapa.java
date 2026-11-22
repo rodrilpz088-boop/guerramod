@@ -112,6 +112,16 @@ public class Minimapa implements IGuiOverlay {
             g.drawString(f, s2, x0, ty, sens < -27 ? parpadeo : vent ? 0xFF9FD4FF : 0xFFD8F0FF, true);
             ty += 10;
         }
+        // nieve acumulada bajo los pies
+        int capasNieve = 0;
+        net.minecraft.core.BlockPos pn = mc.player.blockPosition();
+        net.minecraft.world.level.block.state.BlockState sn = mc.level.getBlockState(pn);
+        if (sn.is(net.minecraft.world.level.block.Blocks.SNOW)) capasNieve += sn.getValue(net.minecraft.world.level.block.SnowLayerBlock.LAYERS);
+        for (int k = 1; k < 200 && mc.level.getBlockState(pn.below(k)).is(net.minecraft.world.level.block.Blocks.SNOW_BLOCK); k++) capasNieve += 8;
+        if (capasNieve > 0) {
+            g.drawString(f, String.format("Nieve: %.2f m", capasNieve / 8.0), x0, ty, 0xFFEAF6FF, true);
+            ty += 10;
+        }
         int diaA = es.guerramod.clima.TiempoCliente.dia;
         String est = es.guerramod.clima.Estaciones.nombre(diaA) + " · día " + es.guerramod.clima.Estaciones.diaEnEstacion(diaA)
                 + (es.guerramod.clima.Estaciones.navidad(diaA) ? " · Navidad" : "");

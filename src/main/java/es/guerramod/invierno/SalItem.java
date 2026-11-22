@@ -42,7 +42,7 @@ public class SalItem extends Item {
                     if (dx * dx + dz * dz > r * r + 1) continue;
                     BlockPos a = sl.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING, p.offset(dx, 0, dz));
                     if (Math.abs(a.getY() - p.getY()) > 4) continue;
-                    for (int k = 0; k < 24 && Nieve.quitarCapa(sl, sl.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING, a), true); k++) hechos++;
+                    for (int k = 0; k < 24 && Nieve.quitarCapa(sl, Nieve.cima(sl, a.getX(), a.getZ()), true); k++) hechos++;
                     BlockPos b = sl.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING, a).below();
                     if (sl.getBlockState(b).is(Blocks.ICE) || sl.getBlockState(b).is(Blocks.FROSTED_ICE)) {
                         sl.setBlockAndUpdate(b, Blocks.WATER.defaultBlockState());

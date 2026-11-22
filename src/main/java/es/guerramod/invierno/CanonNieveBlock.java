@@ -92,7 +92,7 @@ public class CanonNieveBlock extends HorizontalDirectionalBlock {
             double dist = 2 + r.nextDouble() * 11, lado = (r.nextDouble() - 0.5) * dist * 0.7;
             int x = (int) Math.floor(p.getX() + 0.5 + d.getStepX() * dist + d.getClockWise().getStepX() * lado);
             int z = (int) Math.floor(p.getZ() + 0.5 + d.getStepZ() * dist + d.getClockWise().getStepZ() * lado);
-            BlockPos a = l.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING, new BlockPos(x, 0, z));
+            BlockPos a = Nieve.cima(l, x, z);
             if (!l.isLoaded(a)) continue;
             Nieve.anadirCapa(l, a, 24);
         }

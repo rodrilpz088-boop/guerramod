@@ -94,10 +94,18 @@ public record Meteo(double temperatura, double humedad, double viento, double cu
             double delta = c.tempFija - 20.0;
             t += delta * (nieve ? 0.25 : z.fria() ? 0.55 : 1.0);
         }
+        // ventisca: el aire polar desploma la temperatura (en la selva y el desierto llega más templado)
+        double vent = c.ventisca();
+        double bajada = 0;
+        if (vent > 0) {
+            double f = z.tMedia() > 25 ? 0.45 : z.tMedia() > 22 ? 0.75 : 1.0;
+            bajada = c.ventiscaFrio * f * vent;
+            t -= bajada;
+        }
         // límites de cada zona: ni en la nieve hace 26 °C ni en el desierto -30 °C
         double anual = es.guerramod.clima.Zonas.amplitudAnual(z);
         double max = z.tMedia() + z.amplitud() + (nieve ? 3 : 7) + Math.max(0, cal);
-        double min = z.tMedia() - anual - z.amplitud() - 14 - alt;
+        double min = z.tMedia() - anual - z.amplitud() - 14 - alt - bajada;
         t = clamp(t, min, Math.min(max - alt, 50));
         if (pos.getY() < 40) t += (12 - t) * Math.min(1, (40 - pos.getY()) / 30.0); // bajo tierra, temperatura estable
 
@@ -192,5 +200,15 @@ public record Meteo(double temperatura, double humedad, double viento, double cu
 
     private static double clamp(double v, double a, double b) {
         return Math.max(a, Math.min(b, v));
+    }
+
+    /**
+     * Sensación térmica por el viento (fórmula del índice de enfriamiento, °C y km/h): con -20 °C y 80 km/h el cuerpo
+     * pierde calor como a -38 °C.
+     */
+    public static double sensacion(double t, double vientoKmh) {
+        if (t > 10 || vientoKmh < 4.8) return t;
+        double v = Math.pow(vientoKmh, 0.16);
+        return 13.12 + 0.6215 * t - 11.37 * v + 0.3965 * t * v;
     }
 }

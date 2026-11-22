@@ -51,6 +51,17 @@ public class Clima extends SavedData {
     /** Ola de calor: grados de más y cuánto le queda (ticks). */
     public double extraCalor = 0;
     public int extraCalorTicks = 0;
+    /** Ventisca (tormenta de nieve): grados que baja la temperatura, ticks que quedan, duración total y viento. */
+    public double ventiscaFrio = 0;
+    public int ventiscaTicks = 0, ventiscaTotal = 0, ventiscaPausa = 0;
+    public float ventiscaViento = 0;
+
+    /** Fuerza de la ventisca ahora (0..1): sube y baja poco a poco al empezar y al terminar. */
+    public double ventisca() {
+        if (ventiscaTicks <= 0) return 0;
+        double entra = (ventiscaTotal - ventiscaTicks) / 1200.0, sale = ventiscaTicks / 1200.0;
+        return Math.max(0, Math.min(1, Math.min(entra, sale)));
+    }
     /** Sensibilidad climática: °C por cada duplicación de CO2. */
     public static final double SENSIBILIDAD = 3.0;
 
@@ -91,6 +102,11 @@ public class Clima extends SavedData {
         c.ultimoDiaAvisado = t.contains("ultimoDiaAvisado") ? t.getInt("ultimoDiaAvisado") : -1;
         c.extraCalor = t.getDouble("extraCalor");
         c.extraCalorTicks = t.getInt("extraCalorTicks");
+        c.ventiscaFrio = t.getDouble("ventiscaFrio");
+        c.ventiscaTicks = t.getInt("ventiscaTicks");
+        c.ventiscaTotal = t.getInt("ventiscaTotal");
+        c.ventiscaPausa = t.getInt("ventiscaPausa");
+        c.ventiscaViento = t.getFloat("ventiscaViento");
         return c;
     }
 
@@ -115,6 +131,11 @@ public class Clima extends SavedData {
         t.putInt("ultimoDiaAvisado", ultimoDiaAvisado);
         t.putDouble("extraCalor", extraCalor);
         t.putInt("extraCalorTicks", extraCalorTicks);
+        t.putDouble("ventiscaFrio", ventiscaFrio);
+        t.putInt("ventiscaTicks", ventiscaTicks);
+        t.putInt("ventiscaTotal", ventiscaTotal);
+        t.putInt("ventiscaPausa", ventiscaPausa);
+        t.putFloat("ventiscaViento", ventiscaViento);
         return t;
     }
 
@@ -130,6 +151,7 @@ public class Clima extends SavedData {
         angulo = (angulo + (float) r.nextGaussian() * 14.0f + 360.0f) % 360.0f;
         float objetivo = ow.isThundering() ? 38 : ow.isRaining() ? 22 : 14;
         velocidad = Mth.clamp(velocidad + (float) r.nextGaussian() * 4.0f + (objetivo - velocidad) * 0.08f, 0.0f, 55.0f);
+        if (ventisca() > 0) velocidad = Math.max(velocidad, ventiscaViento * (float) ventisca() + (float) r.nextGaussian() * 6.0f);
         setDirty();
         Red.sincronizarClima(server, angulo, velocidad, riesgo(ow, ow.getSharedSpawnPos()));
         if (naturales && !ow.isRaining() && ow instanceof net.minecraft.server.level.ServerLevel sl) {

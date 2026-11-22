@@ -20,7 +20,7 @@ import java.util.function.Supplier;
 
 /** Paquetes de red: sincronizar países al cliente y acciones del avión al servidor. */
 public final class Red {
-    private static final String VERSION = "5";
+    private static final String VERSION = "6";
     public static final SimpleChannel CANAL = NetworkRegistry.newSimpleChannel(
             new ResourceLocation(GuerraMod.MODID, "main"), () -> VERSION, VERSION::equals, VERSION::equals);
 
@@ -65,7 +65,8 @@ public final class Red {
         CANAL.send(PacketDistributor.PLAYER.with(() -> p), new SyncTiempo((float) m.temperatura(), (float) m.humedad(),
                 (float) m.nubes(), (float) m.niebla(), (float) m.turbidez(), (float) c.calentamiento(), (float) c.co2, c.cambio, m.zona(),
                 es.guerramod.desastres.Desastres.granizoTicks > 0 ? es.guerramod.desastres.Desastres.granizoCm : 0f,
-                es.guerramod.clima.Estaciones.dia(p.serverLevel())));
+                es.guerramod.clima.Estaciones.dia(p.serverLevel()), (float) c.ventisca(),
+                (float) es.guerramod.incendios.Meteo.sensacion(m.temperatura(), c.velocidad)));
     }
 
     public static void abrirFicha(ServerPlayer p, int entidad, CompoundTag datos) {
@@ -148,7 +149,7 @@ public final class Red {
 
     /** Servidor -> cliente: tiempo en la posición del jugador (cielo, nubes, niebla, minimapa). */
     public record SyncTiempo(float t, float h, float nubes, float niebla, float turb, float anom, float co2, boolean cambio, String zona,
-                             float granizo, int dia) {
+                             float granizo, int dia, float ventisca, float sensacion) {
         public static void encode(SyncTiempo m, FriendlyByteBuf b) {
             b.writeFloat(m.t);
             b.writeFloat(m.h);
@@ -161,11 +162,13 @@ public final class Red {
             b.writeUtf(m.zona, 64);
             b.writeFloat(m.granizo);
             b.writeVarInt(m.dia);
+            b.writeFloat(m.ventisca);
+            b.writeFloat(m.sensacion);
         }
 
         public static SyncTiempo decode(FriendlyByteBuf b) {
             return new SyncTiempo(b.readFloat(), b.readFloat(), b.readFloat(), b.readFloat(), b.readFloat(), b.readFloat(),
-                    b.readFloat(), b.readBoolean(), b.readUtf(64), b.readFloat(), b.readVarInt());
+                    b.readFloat(), b.readBoolean(), b.readUtf(64), b.readFloat(), b.readVarInt(), b.readFloat(), b.readFloat());
         }
 
         public static void handle(SyncTiempo m, Supplier<NetworkEvent.Context> ctx) {
@@ -178,6 +181,8 @@ public final class Red {
             es.guerramod.clima.TiempoCliente.co2 = m.co2;
             es.guerramod.clima.TiempoCliente.cambio = m.cambio;
             es.guerramod.clima.TiempoCliente.zona = m.zona;
+            es.guerramod.clima.TiempoCliente.ventisca = m.ventisca;
+            es.guerramod.clima.TiempoCliente.sensacion = m.sensacion;
             es.guerramod.clima.TiempoCliente.granizo = m.granizo;
             es.guerramod.clima.TiempoCliente.dia = m.dia;
             es.guerramod.clima.TiempoCliente.recibido = true;

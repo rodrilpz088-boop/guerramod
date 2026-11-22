@@ -14,7 +14,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 
 /**
- * /desastre tornado [EF 0-5] · terremoto [magnitud] · granizo [cm] · olacalor [días] · parar
+ * /desastre tornado [EF 0-5] · terremoto [magnitud] · granizo [cm] · olacalor [días] · ventisca [horas] [grados] · parar
  * /desastre naturales true|false   (que pasen solos)
  */
 public final class ComandoDesastre {
@@ -71,6 +71,20 @@ public final class ComandoDesastre {
                             Desastres.olaCalor(mundo(c), FloatArgumentType.getFloat(c, "dias"));
                             return 1;
                         })))
+                .then(Commands.literal("ventisca")
+                        .executes(c -> {
+                            Desastres.ventisca(mundo(c), 12, 22);
+                            return 1;
+                        })
+                        .then(Commands.argument("horas", FloatArgumentType.floatArg(1, 240))
+                                .executes(c -> {
+                                    Desastres.ventisca(mundo(c), FloatArgumentType.getFloat(c, "horas"), 22);
+                                    return 1;
+                                })
+                                .then(Commands.argument("grados", FloatArgumentType.floatArg(5, 45)).executes(c -> {
+                                    Desastres.ventisca(mundo(c), FloatArgumentType.getFloat(c, "horas"), FloatArgumentType.getFloat(c, "grados"));
+                                    return 1;
+                                }))))
                 .then(Commands.literal("parar").executes(c -> {
                     Desastres.parar(mundo(c));
                     return ok(c, "Todos los desastres detenidos (el agua de las riadas irá bajando)");

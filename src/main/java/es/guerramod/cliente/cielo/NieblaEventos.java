@@ -40,6 +40,13 @@ public final class NieblaEventos {
             Atmosfera.actualizar(level, (float) e.getPartialTick(), cam.getPosition().y);
             Vector3f mira = cam.getLookVector();
             float[] c = Atmosfera.colorNiebla(mira.x(), mira.z());
+            float v = ventisca(cam);
+            if (v > 0) {
+                // ventisca: todo blanco grisáceo (más oscuro de noche)
+                float luz = (float) Math.max(0.12, Math.min(1, (Atmosfera.sy + 0.08) / 0.35));
+                float b = 0.78f * luz + 0.05f;
+                c = new float[]{c[0] + (b - c[0]) * v, c[1] + (b * 1.02f - c[1]) * v, c[2] + (b * 1.07f - c[2]) * v};
+            }
             e.setRed(c[0]);
             e.setGreen(c[1]);
             e.setBlue(c[2]);
@@ -52,6 +59,17 @@ public final class NieblaEventos {
     @SubscribeEvent
     public static void distancia(ViewportEvent.RenderFog e) {
         if (e.getMode() != FogRenderer.FogMode.FOG_TERRAIN || !aplica(e.getCamera())) return;
+        float v = ventisca(e.getCamera());
+        if (v > 0) {
+            // ventisca: apenas se ve a 15-25 bloques
+            float lejos = e.getFarPlaneDistance();
+            float objetivo = 14f + 14f * (1 - v);
+            float nuevo = lejos + (objetivo - lejos) * v;
+            e.setFarPlaneDistance(nuevo);
+            e.setNearPlaneDistance(0f);
+            e.setCanceled(true);
+            return;
+        }
         float n = Atmosfera.niebla;
         if (n < 0.02f) return;
         float lejos = e.getFarPlaneDistance();
@@ -60,5 +78,16 @@ public final class NieblaEventos {
         e.setFarPlaneDistance(nuevo);
         e.setNearPlaneDistance(nuevo * (0.02f + 0.25f * (1 - n)));
         e.setCanceled(true);
+    }
+
+    /** Fuerza de la ventisca donde está la cámara (0 si está bajo techo o no nieva). */
+    static float ventisca(Camera cam) {
+        float v = es.guerramod.clima.TiempoCliente.ventisca;
+        if (v <= 0 || !Lluvia.nevando()) return 0;
+        ClientLevel l = Minecraft.getInstance().level;
+        if (l == null) return 0;
+        net.minecraft.core.BlockPos p = net.minecraft.core.BlockPos.containing(cam.getPosition());
+        int cielo = l.getBrightness(net.minecraft.world.level.LightLayer.SKY, p);
+        return v * Math.min(1f, cielo / 12f);
     }
 }

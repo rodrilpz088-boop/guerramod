@@ -119,17 +119,20 @@ public final class Lluvia {
                 int x = bx + dx, z = bz + dz;
                 if (precip(level, x, by, z) == 0) continue;
                 int suelo = level.getHeight(Heightmap.Types.MOTION_BLOCKING, x, z);
-                int n = 1 + (int) Math.round(3 * intensidad);
+                float vent = es.guerramod.clima.TiempoCliente.ventisca;
+                int n = 1 + (int) Math.round(3 * intensidad) + (int) Math.round(4 * vent);
                 for (int j = 0; j < n; j++) {
-                    if (hash(x, z, j + 140) > 0.4 + 0.6 * intensidad) continue;
+                    if (hash(x, z, j + 140) > 0.4 + 0.6 * intensidad + vent) continue;
                     double vel = 0.9 + 0.7 * hash(x, z, j + 120);
                     double fase = hash(x, z, j + 130) * span;
                     double yAbs = -(t * vel + fase);
                     double y = lo + Math.floorMod((long) Math.floor((yAbs - lo) * 64), (long) (span * 64)) / 64.0;
                     if (y < suelo) continue;
                     double balanceo = Math.sin(t * (1.1 + hash(x, z, j + 150)) + j * 2.1) * 0.35;
-                    double px = x + hash(x, z, j + 100) + balanceo + wx * 0.15 * (y - suelo) / vel * 0.1;
-                    double pz = z + hash(x, z, j + 110) + Math.cos(t * 0.9 + j) * 0.25 + wz * 0.15 * (y - suelo) / vel * 0.1;
+                    // con ventisca la nieve viaja casi en horizontal
+                    double arrastre = 0.015 * (1 + 14 * vent);
+                    double px = x + hash(x, z, j + 100) + balanceo + wx * arrastre * (y - suelo) / vel;
+                    double pz = z + hash(x, z, j + 110) + Math.cos(t * 0.9 + j) * 0.25 + wz * arrastre * (y - suelo) / vel;
                     double rx = px - cx, ry = y - cy, rz = pz - cz;
                     double dist = Math.sqrt(rx * rx + ry * ry + rz * rz);
                     if (dist < 0.4) continue;

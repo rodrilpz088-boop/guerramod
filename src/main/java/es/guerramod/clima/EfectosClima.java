@@ -56,7 +56,7 @@ public final class EfectosClima {
     public static void tick(MinecraftServer server) {
         ServerLevel ow = server.overworld();
         RandomSource r = ow.random;
-        int n = ow.isRaining() ? 28 : 8;
+        int n = es.guerramod.incendios.Clima.get(server).ventisca() > 0 ? 90 : ow.isRaining() ? 28 : 8;
         for (ServerPlayer p : ow.players()) {
             for (int i = 0; i < n; i++) {
                 int x = p.getBlockX() + r.nextInt(97) - 48, z = p.getBlockZ() + r.nextInt(97) - 48;

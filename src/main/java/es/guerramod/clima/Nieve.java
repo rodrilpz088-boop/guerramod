@@ -27,7 +27,7 @@ import net.minecraftforge.fml.common.Mod;
 
 /**
  * Nieve que se acumula de verdad: mientras nieva va cuajando capa a capa, cuanto más fuerte y más tiempo nieva más
- * gruesa se hace (hasta 2 bloques en las zonas templadas, 3 en las frías y 4 en las de nieve perpetua), rellena primero
+ * gruesa se hace (sin límite: puede enterrar casas enteras), rellena primero
  * los huecos, el viento la amontona detrás de los obstáculos (ventisqueros) y en las ramas solo aguanta un poco. Con
  * calor se funde de arriba abajo (más rápido al sol y con lluvia). Andar por nieve profunda cuesta (salvo con raquetas)
  * y con esquís se va más rápido.
@@ -48,6 +48,8 @@ public final class Nieve {
         double i = l.isThundering() ? 1.0 : 0.6;
         if (t < -15) i *= 0.7; // con mucho frío la nieve es fina y seca
         if (Estaciones.navidad(Estaciones.dia(l))) i *= 1.2;
+        double v = Clima.get(l.getServer()).ventisca();
+        if (v > 0) i = Math.max(i, 1.0) * (1 + 1.2 * v); // ventisca: nieva a lo bestia
         return i;
     }
 
@@ -64,11 +66,9 @@ public final class Nieve {
         return capas;
     }
 
+    /** Sin límite: mientras siga nevando la nieve sigue creciendo (metros y metros). */
     private static int maximo(Meteo m) {
-        String z = m.zona();
-        if (z.contains("nev") || z.contains("Glaciar") || z.contains("helad") || z.contains("Tundra") || z.contains("Cumbres")) return 32;
-        if (z.contains("Taiga") || z.contains("ventos") || z.contains("Picos") || z.contains("montaña")) return 24;
-        return 16;
+        return Integer.MAX_VALUE;
     }
 
     /** Superficie de la columna en capas (altura*8 + capas de nieve), para comparar con los vecinos. */

@@ -103,6 +103,15 @@ public class Minimapa implements IGuiOverlay {
         int colorT = tc < 0 ? 0xFF9FD4FF : tc < 15 ? 0xFFD8F0FF : tc < 28 ? 0xFFFFF2C0 : tc < 36 ? 0xFFFFB060 : 0xFFFF6040;
         g.drawString(f, tiempo, x0, ty, colorT, true);
         ty += 10;
+        float sens = es.guerramod.clima.TiempoCliente.sensacion;
+        if (sens < tc - 2 || es.guerramod.clima.TiempoCliente.ventisca > 0) {
+            boolean vent = es.guerramod.clima.TiempoCliente.ventisca > 0;
+            String s2 = (vent ? "❄ VENTISCA · " : "") + String.format("Sensación %.0f °C", sens)
+                    + (sens < -27 ? " · ¡congelación!" : sens < -10 ? " · peligro" : "");
+            int parpadeo = (mc.level.getGameTime() / 10) % 2 == 0 ? 0xFFFF5050 : 0xFFFFFFFF;
+            g.drawString(f, s2, x0, ty, sens < -27 ? parpadeo : vent ? 0xFF9FD4FF : 0xFFD8F0FF, true);
+            ty += 10;
+        }
         int diaA = es.guerramod.clima.TiempoCliente.dia;
         String est = es.guerramod.clima.Estaciones.nombre(diaA) + " · día " + es.guerramod.clima.Estaciones.diaEnEstacion(diaA)
                 + (es.guerramod.clima.Estaciones.navidad(diaA) ? " · Navidad" : "");

@@ -356,8 +356,8 @@ ya no deja la temperatura fija para siempre: dura 5 días. Al cargar el mundo se
 fijadas con versiones anteriores.
 
 ### Nieve que se acumula y cosas para la nieve (pestaña "Invierno")
-Mientras nieva la nieve cuaja capa a capa: **cuanto más fuerte y más tiempo nieva, más se acumula** (hasta 2 bloques en
-zonas templadas, 3 en las frías y 4 en las de nieve). Rellena primero los huecos, el viento la amontona detrás de los
+Mientras nieva la nieve cuaja capa a capa: **cuanto más fuerte y más tiempo nieva, más se acumula, sin límite** (puede
+enterrar casas enteras). Rellena primero los huecos, el viento la amontona detrás de los
 obstáculos (ventisqueros) y en las ramas solo aguanta un poco. Con calor se funde de arriba abajo, más rápido al sol y con
 lluvia. Andar por nieve profunda cuesta.
 * **Pala quitanieves**: despeja 3×3 y te da bolas de nieve. **Sal gruesa**: funde la nieve y el hielo de alrededor.
@@ -365,6 +365,18 @@ lluvia. Andar por nieve profunda cuesta.
 * **Trineo**: se pone como una barca, desliza por la nieve y el hielo y cuesta abajo acelera.
 * **Cañón de nieve** (clic derecho para encenderlo): con menos de 2 °C fabrica nieve delante de él.
 * Ladrillos de hielo para iglús y nieve pisada (no se derrite).
+
+### Ventiscas (desastre natural)
+Tormentas de nieve muy frecuentes en invierno y en Navidad (también en otoño y primavera, y en verano en las zonas frías).
+Duran de 6 a 36 horas del juego: la temperatura se desploma de 12 a 30 °C de golpe, el viento sopla a 60–110 km/h, nieva
+sin parar y la nieve se amontona a toda velocidad. Apenas se ve a 15–25 bloques, el viento aúlla y la nieve viaja casi en
+horizontal. En pantalla sale la **sensación térmica** (temperatura + viento).
+* Por debajo de **-10 °C** de sensación a la intemperie te vas congelando (escarcha en la pantalla y lentitud); por debajo de
+  **-27 °C** la congelación hace daño y puede matarte.
+* Te salvas **bajo techo**, **junto a un fuego** (hoguera, horno encendido, chimenea, lava) o **abrigado** con ropa de cuero
+  (cada pieza abriga; el equipo de policía y de bombero abriga algo).
+* Los aldeanos corren a su casa y los animales también sufren.
+* `/desastre ventisca [horas] [grados]` para provocar una; `/desastre parar` la termina.
 
 ### Policía Nacional y GEO (pestaña "Policía Nacional y GEO")
 * Uniforme de patrulla (gorra, chaqueta, pantalón y botas) y equipo del **GEO** (casco balístico, chaleco táctico, pantalón y

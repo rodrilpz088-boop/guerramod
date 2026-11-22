@@ -147,8 +147,36 @@ public final class Desastres {
         alerta(l, BlockPos.ZERO, 0, "Ola de calor", String.format("+%.0f °C durante %.0f días: riesgo extremo de incendio", c.extraCalor, dias));
     }
 
+    /**
+     * Ventisca: tormenta de nieve con viento de 60 a 110 km/h y una bajada brutal de la temperatura (de 12 a 30 °C).
+     * Nieva sin parar, la nieve se amontona sin límite y la sensación térmica puede pasar de -40 °C: a la intemperie te
+     * congelas (busca refugio bajo techo o junto a un fuego).
+     */
+    public static void ventisca(ServerLevel l, double horas, double frio) {
+        Clima c = Clima.get(l.getServer());
+        RandomSource r = l.random;
+        int ticks = (int) (horas * 1000);
+        c.ventiscaFrio = frio;
+        c.ventiscaTicks = ticks;
+        c.ventiscaTotal = ticks;
+        c.ventiscaViento = 60 + r.nextFloat() * 50;
+        c.setDirty();
+        l.setWeatherParameters(0, ticks + 1200, true, true);
+        alerta(l, BlockPos.ZERO, 0, "⚠ VENTISCA", String.format("Hasta -%.0f °C de golpe y viento de %.0f km/h durante %.0f horas. Peligro de congelación: refúgiate",
+                frio, c.ventiscaViento, horas));
+        for (ServerPlayer p : l.players()) {
+            p.sendSystemMessage(Component.literal(String.format("❄ ALERTA ROJA: ventisca. La temperatura bajará unos %.0f °C, viento de %.0f km/h "
+                    + "y nieve sin parar durante %.0f horas. A la intemperie te congelarás: quédate bajo techo, junto a un fuego, o abrígate "
+                    + "con ropa de cuero.", frio, c.ventiscaViento, horas)).withStyle(ChatFormatting.AQUA, ChatFormatting.BOLD));
+            l.playSound(null, p.blockPosition(), SoundEvents.ELDER_GUARDIAN_CURSE, SoundSource.WEATHER, 0.4f, 0.5f);
+        }
+    }
+
     public static void parar(ServerLevel l) {
         TERREMOTOS.clear();
+        Clima cv = Clima.get(l.getServer());
+        cv.ventiscaTicks = 0;
+        cv.ventiscaFrio = 0;
         granizoTicks = 0;
         Inundacion.parar(l);
         Clima c = Clima.get(l.getServer());
@@ -170,6 +198,18 @@ public final class Desastres {
             c.extraCalor = 0;
             c.setDirty();
         }
+        if (c.ventiscaTicks > 0) {
+            c.ventiscaTicks--;
+            if (c.ventiscaTicks % 2400 == 0) c.setDirty();
+            if (c.ventiscaTicks == 0) {
+                c.ventiscaFrio = 0;
+                c.ventiscaPausa = 12000; // al menos medio día entre ventiscas
+                c.setDirty();
+                for (ServerPlayer p : l.players()) {
+                    p.sendSystemMessage(Component.literal("❄ La ventisca ha pasado. Cuidado con la nieve acumulada.").withStyle(ChatFormatting.AQUA));
+                }
+            }
+        } else if (c.ventiscaPausa > 0) c.ventiscaPausa--;
         if (server.getTickCount() % 600 == 0 && c.desastres && !l.players().isEmpty()) naturales(l, r, c);
     }
 
@@ -194,6 +234,18 @@ public final class Desastres {
             double mag = Math.min(8.6, 3.0 - Math.log10(1 - r.nextDouble()) * 1.0);
             double a = r.nextDouble() * Math.PI * 2, d = 50 + r.nextDouble() * 400;
             terremoto(l, pos.offset((int) (Math.cos(a) * d), 0, (int) (Math.sin(a) * d)), mag);
+        }
+        // ventiscas: muy frecuentes en invierno (y en Navidad), a veces en otoño y primavera; en verano solo en zonas frías
+        if (c.ventiscaTicks <= 0 && c.ventiscaPausa <= 0) {
+            int dia = es.guerramod.clima.Estaciones.dia(l);
+            int est = es.guerramod.clima.Estaciones.estacion(dia);
+            float prob = es.guerramod.clima.Estaciones.navidad(dia) ? 0.07f : est == 3 ? 0.05f : est == 1 ? (z.fria() ? 0.01f : 0.0015f) : 0.015f;
+            if (z.fria()) prob *= 1.5f;
+            if (m.temperatura() < 20 && r.nextFloat() < prob) {
+                double horas = 6 + r.nextDouble() * 30;
+                double frio = 12 + r.nextDouble() * 18;
+                ventisca(l, horas, frio);
+            }
         }
         if (!l.isRaining() && c.extraCalorTicks <= 0 && c.diasSinLluvia(l) > 2 && m.temperatura() > 24 && r.nextFloat() < 1f / 400f) {
             olaCalor(l, 2 + r.nextInt(3));

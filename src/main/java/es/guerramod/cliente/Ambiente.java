@@ -122,6 +122,34 @@ public final class Ambiente {
         hojas(l, p, r, d);
         estelas(l, p, r);
         agua(l, p, r, lluvia);
+        ventisca(l, p, r);
+    }
+
+    private static int esperaVentisca = 0;
+
+    /** Ventisca: aullido del viento y ráfagas de nieve alrededor. */
+    private static void ventisca(ClientLevel l, Player p, RandomSource r) {
+        float v = es.guerramod.clima.TiempoCliente.ventisca;
+        if (v <= 0 || !es.guerramod.cliente.cielo.Lluvia.nevando()) return;
+        boolean fuera = l.canSeeSky(p.blockPosition().above());
+        if (--esperaVentisca <= 0) {
+            esperaVentisca = 18 + r.nextInt(20);
+            float vol = (fuera ? 1.0f : 0.35f) * (0.5f + 0.5f * v);
+            l.playLocalSound(p.getX() + r.nextGaussian() * 6, p.getEyeY() + 2, p.getZ() + r.nextGaussian() * 6, SonidosAmbiente.VIENTO_HOJAS.get(),
+                    net.minecraft.sounds.SoundSource.WEATHER, vol, 0.45f + r.nextFloat() * 0.25f, false);
+            if (r.nextInt(3) == 0) {
+                l.playLocalSound(p.getX(), p.getEyeY(), p.getZ(), net.minecraft.sounds.SoundEvents.ELYTRA_FLYING,
+                        net.minecraft.sounds.SoundSource.WEATHER, 0.12f * vol, 0.5f, false);
+            }
+        }
+        if (fuera) {
+            double ang = Math.toRadians(es.guerramod.incendios.Clima.clienteAngulo);
+            double vv = es.guerramod.incendios.Clima.clienteVelocidad / 3.6 * 0.05;
+            for (int i = 0; i < (int) (30 * v); i++) {
+                l.addParticle(ParticleTypes.SNOWFLAKE, p.getX() + r.nextGaussian() * 8, p.getY() + r.nextDouble() * 4, p.getZ() + r.nextGaussian() * 8,
+                        Math.cos(ang) * vv, -0.02, Math.sin(ang) * vv);
+            }
+        }
     }
 
     private static int esperaCascada = 0;
